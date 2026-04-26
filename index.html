@@ -373,7 +373,7 @@
 
     .leistungen-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
       max-width: 1200px;
       margin: 0 auto;
@@ -1096,9 +1096,9 @@
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">Frankfurt am Main &amp; Umgebung · bis 150 km</div>
+      <div class="hero-badge">Photovoltaik · Planung · Installation</div>
       <h1>Solarenergie für<br><span>Ihre Zukunft</span></h1>
-      <p>Professionelle Photovoltaik-Installation in Frankfurt und Umgebung. Sparen Sie Energiekosten und werden Sie unabhängig vom Stromnetz.</p>
+      <p>Professionelle Photovoltaik-Installation für Privat- und Gewerbekunden. Sparen Sie Energiekosten und werden Sie unabhängig vom Stromnetz.</p>
       <div class="hero-buttons">
         <a href="#kontakt" class="btn-primary">Kostenloses Angebot</a>
         <a href="#projekte" class="btn-secondary">Unsere Projekte</a>
@@ -1124,8 +1124,8 @@
     <span class="stat-label">Installierte Anlagen</span>
   </div>
   <div class="stat">
-    <span class="stat-number">150 km</span>
-    <span class="stat-label">Serviceradius</span>
+    <span class="stat-number">5 J.</span>
+    <span class="stat-label">Gewährleistung</span>
   </div>
   <div class="stat">
     <span class="stat-number">0%</span>
@@ -1133,7 +1133,7 @@
   </div>
   <div class="stat">
     <span class="stat-number">25 J.</span>
-    <span class="stat-label">Produktgarantie</span>
+    <span class="stat-label">Modulgarantie</span>
   </div>
 </div>
 
@@ -1148,12 +1148,12 @@
     <div class="about-text">
       <span class="section-label">Über uns</span>
       <h2>Ihr Spezialist für <span>Photovoltaik</span> in Frankfurt</h2>
-      <p style="color: var(--gris); margin-bottom: 16px;">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für die Installation von Photovoltaikanlagen in Frankfurt am Main und Umgebung.</p>
+      <p style="color: var(--gris); margin-bottom: 16px;">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für die Installation von Photovoltaikanlagen — für Privat- und Gewerbekunden deutschlandweit.</p>
       <p style="color: var(--gris);">Wir begleiten Sie von der ersten Beratung über die Planung bis zur schlüsselfertigen Installation — kompetent, transparent und termingerecht.</p>
       <ul class="about-list">
         <li>Individuelle Beratung und Planung</li>
-        <li>Installation in Frankfurt und bis 150 km Umkreis</li>
-        <li>Qualitätsmodule mit 25 Jahren Produktgarantie</li>
+        <li>Installation für Privat- und Gewerbekunden</li>
+        <li>Qualitätsmodule mit 25 Jahren Modulgarantie · 5 Jahre Gewährleistung</li>
         <li>Komplette Anmeldung beim Netzbetreiber & MaStR</li>
         <li>0% MwSt. auf Wohngebäude (seit 2023)</li>
       </ul>
@@ -1200,6 +1200,30 @@
         <span class="leistung-icon">🔧</span>
         <h3>Wartung &amp; Reparatur</h3>
         <p>Regelmäßige Wartung und schnelle Reparatur für eine lange Lebensdauer und maximalen Ertrag Ihrer Anlage.</p>
+      </div>
+    </div>
+    <div class="leistung-card">
+      <img class="leistung-img" src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt="Erweiterung">
+      <div class="leistung-body">
+        <span class="leistung-icon">➕</span>
+        <h3>Anlagenerweiterung</h3>
+        <p>Bestehende PV-Anlage vergrößern? Wir erweitern Ihr System mit zusätzlichen Modulen und Speichern — effizient und herstellerkompatibel.</p>
+      </div>
+    </div>
+    <div class="leistung-card">
+      <img class="leistung-img" src="https://www.ambiente-solar.de/wp-content/uploads/2023/12/energy-efficiency-house.jpg" alt="Fassadenmontage">
+      <div class="leistung-body">
+        <span class="leistung-icon">🏢</span>
+        <h3>Fassadenmontage</h3>
+        <p>Solarmodule direkt an der Gebäudefassade — ideal für Gebäude ohne geeignete Dachfläche oder zur Maximierung der Solarproduktion.</p>
+      </div>
+    </div>
+    <div class="leistung-card">
+      <img class="leistung-img" src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg" alt="Vogelschutz">
+      <div class="leistung-body">
+        <span class="leistung-icon">🐦</span>
+        <h3>Vogelschutz</h3>
+        <p>Schutzgitter und -systeme verhindern, dass Vögel unter Ihre Module gelangen — schützt die Anlage und die Tiere gleichermaßen.</p>
       </div>
     </div>
   </div>
@@ -1413,6 +1437,9 @@
             <option>Mehrfamilienhaus</option>
             <option>Gewerbe</option>
             <option>Balkonkraftwerk</option>
+            <option>Anlagenerweiterung</option>
+            <option>Fassadenmontage</option>
+            <option>Vogelschutz</option>
           </select>
         </div>
         <div class="form-group"><label>Ihre Nachricht</label><textarea placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
@@ -1436,6 +1463,9 @@
             <button class="option-btn" onclick="select(this,'gebaude')">🏘️ Doppelhaus</button>
             <button class="option-btn" onclick="select(this,'gebaude')">🏚️ Reihenhaus</button>
             <button class="option-btn" onclick="select(this,'gebaude')">🏭 Gewerbeobjekt</button>
+            <button class="option-btn" onclick="select(this,'gebaude')">➕ Anlagenerweiterung</button>
+            <button class="option-btn" onclick="select(this,'gebaude')">🏢 Fassadenmontage</button>
+            <button class="option-btn" onclick="select(this,'gebaude')">🐦 Vogelschutz</button>
           </div>
         </div>
 
@@ -1509,6 +1539,67 @@
         </div>
         <button class="btn-form" style="background:var(--amarillo);color:var(--azul-dark);" onclick="sendeKonzept()">☀️ Solar-Konzept erhalten →</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO DROHNE -->
+<section style="background:var(--azul-dark);padding:70px 60px;text-align:center;">
+  <span class="section-label" style="color:var(--amarillo);">Drohnenaufnahmen</span>
+  <h2 style="color:white;margin-bottom:16px;">Unsere Anlagen aus <span style="color:var(--amarillo);">der Vogelperspektive</span></h2>
+  <p style="color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 40px;">Sehen Sie unsere installierten Photovoltaikanlagen live — aufgenommen mit der Drohne direkt nach der Fertigstellung.</p>
+  <video controls style="max-width:860px;width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+    <source src="drone-video.mp4" type="video/mp4">
+  </video>
+</section>
+
+<!-- BEWERTUNGEN & SOCIAL MEDIA -->
+<section style="background:var(--gris-claro);padding:70px 60px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:50px;">
+      <span class="section-label">Bewertungen &amp; Social Media</span>
+      <h2>Was Kunden sagen &amp; <span>wo wir sind</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start;">
+
+      <!-- Google -->
+      <a href="https://g.page/r/CSzMrBTg2Et_EAE/review" target="_blank" rel="noopener"
+         style="background:white;border-radius:20px;padding:32px;text-align:center;text-decoration:none;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.07);transition:transform 0.3s,box-shadow 0.3s;"
+         onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.12)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)'">
+        <div style="font-size:2.5rem;margin-bottom:12px;">⭐</div>
+        <div style="font-size:1.1rem;font-weight:800;color:var(--azul-dark);margin-bottom:8px;">Google Bewertung</div>
+        <div style="color:var(--gris);font-size:0.9rem;margin-bottom:16px;">Bewerten Sie uns auf Google</div>
+        <div style="background:var(--turquesa);color:white;padding:10px 20px;border-radius:30px;font-size:0.85rem;font-weight:700;display:inline-block;">Jetzt bewerten →</div>
+      </a>
+
+      <!-- MyHammer -->
+      <a href="https://www.my-hammer.de/auftragnehmer/ambiente-solar" target="_blank" rel="noopener"
+         style="background:white;border-radius:20px;padding:32px;text-align:center;text-decoration:none;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.07);transition:transform 0.3s,box-shadow 0.3s;"
+         onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.12)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)'">
+        <div style="font-size:2.5rem;margin-bottom:12px;">🔨</div>
+        <div style="font-size:1.1rem;font-weight:800;color:var(--azul-dark);margin-bottom:8px;">MyHammer Profil</div>
+        <div style="color:var(--gris);font-size:0.9rem;margin-bottom:16px;">Unser Profil &amp; Bewertungen</div>
+        <div style="background:var(--amarillo);color:var(--azul-dark);padding:10px 20px;border-radius:30px;font-size:0.85rem;font-weight:700;display:inline-block;">Profil ansehen →</div>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/ambiente_solar_montage" target="_blank" rel="noopener"
+         style="background:white;border-radius:20px;padding:32px;text-align:center;text-decoration:none;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.07);transition:transform 0.3s,box-shadow 0.3s;"
+         onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.12)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.07)'">
+        <div style="font-size:2.5rem;margin-bottom:12px;">📸</div>
+        <div style="font-size:1.1rem;font-weight:800;color:var(--azul-dark);margin-bottom:8px;">Instagram</div>
+        <div style="color:var(--gris);font-size:0.9rem;margin-bottom:12px;">@ambiente_solar_montage</div>
+        <!-- QR generado con el link de Instagram -->
+        <div style="margin:0 auto 16px;width:120px;height:120px;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.instagram.com/ambiente_solar_montage&color=0D3B4F&bgcolor=ffffff"
+               alt="QR Instagram Ambiente Solar" style="width:120px;height:120px;border-radius:8px;">
+        </div>
+        <div style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:white;padding:10px 20px;border-radius:30px;font-size:0.85rem;font-weight:700;display:inline-block;">Folgen Sie uns →</div>
+      </a>
+
     </div>
   </div>
 </section>

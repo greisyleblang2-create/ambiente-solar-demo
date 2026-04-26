@@ -951,37 +951,58 @@
       margin: 0 auto;
     }
 
+    .partner-grid {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
     .partner-card {
       background: white;
-      border-radius: 16px;
-      padding: 28px 36px;
+      border-radius: 14px;
+      padding: 20px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      min-width: 160px;
+      gap: 10px;
+      min-width: 130px;
+      max-width: 160px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-      transition: box-shadow 0.3s;
+      transition: box-shadow 0.3s, transform 0.3s;
     }
 
-    .partner-card:hover { box-shadow: 0 6px 24px rgba(27,140,166,0.15); }
-
-    .partner-icon {
-      font-size: 2.2rem;
+    .partner-card:hover {
+      box-shadow: 0 6px 24px rgba(27,140,166,0.15);
+      transform: translateY(-3px);
     }
+
+    .partner-logo {
+      height: 40px;
+      width: auto;
+      max-width: 110px;
+      object-fit: contain;
+      filter: grayscale(30%);
+      transition: filter 0.3s;
+    }
+
+    .partner-card:hover .partner-logo { filter: grayscale(0%); }
 
     .partner-name {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--azul-dark);
       text-align: center;
     }
 
     .partner-tag {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--turquesa);
       text-transform: uppercase;
       letter-spacing: 1px;
+      text-align: center;
     }
 
     /* ===== GOOGLE MAP ===== */
@@ -1130,7 +1151,7 @@
 <!-- STATS -->
 <div class="stats">
   <div class="stat">
-    <span class="stat-number">50+</span>
+    <span class="stat-number">200+</span>
     <span class="stat-label">Installierte Anlagen</span>
   </div>
   <div class="stat">
@@ -1627,31 +1648,72 @@
     <h2>Geschäftspartner &amp; <span>Marken</span></h2>
     <p class="section-subtitle" style="margin:0 auto;">Wir arbeiten mit führenden Herstellern und Partnern der Solarbranche zusammen.</p>
   </div>
-  <div class="partner-grid">
+  <!-- Módulos -->
+  <p style="text-align:center;font-size:0.8rem;font-weight:700;color:var(--turquesa);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">PV-Module</p>
+  <div class="partner-grid" style="margin-bottom:32px;">
     <div class="partner-card">
-      <div class="partner-icon">🔆</div>
-      <div class="partner-name">Hersteller 1</div>
+      <img class="partner-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/AIKO_logo.svg/320px-AIKO_logo.svg.png" alt="Aiko" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔆</span>
+      <div class="partner-name">Aiko</div>
       <div class="partner-tag">PV-Module</div>
     </div>
     <div class="partner-card">
-      <div class="partner-icon">⚡</div>
-      <div class="partner-name">Hersteller 2</div>
+      <img class="partner-logo" src="https://logo.clearbit.com/trinasolar.com" alt="Trina Solar" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔆</span>
+      <div class="partner-name">Trina Solar</div>
+      <div class="partner-tag">PV-Module</div>
+    </div>
+    <div class="partner-card">
+      <img class="partner-logo" src="https://logo.clearbit.com/longi-solar.com" alt="LONGi" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔆</span>
+      <div class="partner-name">LONGi</div>
+      <div class="partner-tag">PV-Module</div>
+    </div>
+    <div class="partner-card">
+      <img class="partner-logo" src="https://logo.clearbit.com/anker.com" alt="Anker" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔆</span>
+      <div class="partner-name">Anker</div>
+      <div class="partner-tag">PV-Module</div>
+    </div>
+  </div>
+  <!-- Wechselrichter & Speicher -->
+  <p style="text-align:center;font-size:0.8rem;font-weight:700;color:var(--turquesa);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Wechselrichter &amp; Speicher</p>
+  <div class="partner-grid">
+    <div class="partner-card">
+      <img class="partner-logo" src="https://logo.clearbit.com/sungrowpower.com" alt="Sungrow" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">⚡</span>
+      <div class="partner-name">Sungrow</div>
       <div class="partner-tag">Wechselrichter</div>
     </div>
     <div class="partner-card">
-      <div class="partner-icon">🔋</div>
-      <div class="partner-name">Hersteller 3</div>
+      <img class="partner-logo" src="https://logo.clearbit.com/huawei.com" alt="Huawei" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">⚡</span>
+      <div class="partner-name">Huawei</div>
+      <div class="partner-tag">Wechselrichter</div>
+    </div>
+    <div class="partner-card">
+      <img class="partner-logo" src="https://logo.clearbit.com/sma.de" alt="SMA" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">⚡</span>
+      <div class="partner-name">SMA</div>
+      <div class="partner-tag">Wechselrichter</div>
+    </div>
+    <div class="partner-card">
+      <img class="partner-logo" src="https://logo.clearbit.com/goodwe.com" alt="GoodWe" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔋</span>
+      <div class="partner-name">GoodWe</div>
+      <div class="partner-tag">Wechselrichter</div>
+    </div>
+    <div class="partner-card">
+      <img class="partner-logo" src="https://logo.clearbit.com/byd.com" alt="BYD" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔋</span>
+      <div class="partner-name">BYD</div>
       <div class="partner-tag">Batteriespeicher</div>
     </div>
     <div class="partner-card">
-      <div class="partner-icon">🏗️</div>
-      <div class="partner-name">Partner 4</div>
-      <div class="partner-tag">Montagesysteme</div>
-    </div>
-    <div class="partner-card">
-      <div class="partner-icon">📡</div>
-      <div class="partner-name">Partner 5</div>
-      <div class="partner-tag">Monitoring</div>
+      <img class="partner-logo" src="https://logo.clearbit.com/anker.com" alt="Anker" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none;font-size:1.8rem;">🔋</span>
+      <div class="partner-name">Anker</div>
+      <div class="partner-tag">Batteriespeicher</div>
     </div>
   </div>
 </section>

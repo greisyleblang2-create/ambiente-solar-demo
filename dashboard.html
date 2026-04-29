@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jhonatan Solartechnik – CRM Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --slate: #2d3f50;
+            --slate-light: #3d5166;
+            --sage: #5a8a6e;
+            --sage-light: #7aad8f;
+            --cream: #f7f8f5;
+            --border: #e4e8e3;
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--cream); }
+        .btn-primary { background: var(--slate); color: white; transition: background 0.2s; }
+        .btn-primary:hover { background: var(--slate-light); }
+        .badge-neu { background: #e8f0fe; color: #3d5a99; }
+        .badge-angebot { background: #fff8e1; color: #8a6a00; }
+        .badge-auftrag { background: #e6f4ea; color: #2d6a4f; }
+        .badge-rechnung { background: #f3e8ff; color: #6b3fa0; }
+        .badge-bezahlt { background: #d1fae5; color: #065f46; }
+        .stat-card { border-top: 3px solid; }
+        .stat-blue { border-color: #5b7fa6; }
+        .stat-green { border-color: var(--sage); }
+        .stat-amber { border-color: #b8860b; }
+        .stat-purple { border-color: #8b6ab0; }
+        .fade-in { animation: fadeIn 0.25s ease; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+        .row-hover:hover { background: #f0f4f8; }
+        .modal-overlay { backdrop-filter: blur(2px); }
+    </style>
+</head>
+<body class="min-h-screen">
+
+<!-- HEADER -->
+<header style="background: var(--slate);">
+    <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: var(--sage);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-white font-semibold text-base leading-tight">Jhonatan Solartechnik</h1>
+                <p class="text-xs" style="color: #8fa8c0;">Frankfurt am Main · 150 km Servicegebiet</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1.5 text-xs px-3 py-1 rounded-full" style="background: rgba(90,138,110,0.25); color: #a8d5ba;">
+                <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: #7aad8f;"></span>
+                Bot aktiv
+            </span>
+            <button onclick="loadLeads()" class="btn-primary text-xs px-3 py-1.5 rounded-lg font-medium border border-white/10">
+                ↻ Aktualisieren
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-5 py-6 space-y-5">
+
+    <!-- STATS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-blue fade-in">
+            <p class="text-gray-400 text-xs uppercase tracking-wide">Gesamt Leads</p>
+            <p id="stat-total" class="text-3xl font-bold mt-1" style="color: var(--slate);">–</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-green fade-in">
+            <p class="text-gray-400 text-xs uppercase tracking-wide">Neu</p>
+            <p id="stat-neu" class="text-3xl font-bold mt-1" style="color: var(--sage);">–</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-amber fade-in">
+            <p class="text-gray-400 text-xs uppercase tracking-wide">Angebote offen</p>
+            <p id="stat-angebote" class="text-3xl font-bold mt-1 text-amber-700">–</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-purple fade-in">
+            <p class="text-gray-400 text-xs uppercase tracking-wide">Rechnungen offen</p>
+            <p id="stat-rechnungen" class="text-3xl font-bold mt-1 text-purple-700">–</p>
+        </div>
+    </div>
+
+    <!-- LEADS TABLE -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden fade-in">
+        <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color: var(--border);">
+            <h2 class="font-semibold text-sm" style="color: var(--slate);">Kundenanfragen</h2>
+            <select id="filter-status" onchange="filterLeads()"
+                class="text-xs border rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1"
+                style="border-color: var(--border); color: #6b7280;">
+                <option value="">Alle Status</option>
+                <option value="Neu">Neu</option>
+                <option value="Angebot gesendet">Angebot gesendet</option>
+                <option value="Auftrag bestätigt">Auftrag bestätigt</option>
+                <option value="Rechnung gesendet">Rechnung gesendet</option>
+                <option value="Bezahlt">Bezahlt</option>
+            </select>
+        </div>
+
+        <div id="leads-loading" class="p-12 text-center text-gray-400">
+            <div class="text-2xl mb-2">⏳</div>
+            <p class="text-sm">Leads werden geladen...</p>
+        </div>
+        <div id="leads-empty" class="hidden p-12 text-center text-gray-400">
+            <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: var(--cream);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <p class="text-sm font-medium text-gray-500">Noch keine Leads vorhanden</p>
+            <p class="text-xs text-gray-400 mt-1">Sobald ein Kunde den Bot kontaktiert, erscheinen die Daten hier.</p>
+        </div>
+        <div id="leads-error" class="hidden p-12 text-center text-red-400">
+            <div class="text-2xl mb-2">⚠️</div>
+            <p id="leads-error-msg" class="text-sm">Fehler beim Laden.</p>
+        </div>
+
+        <div id="leads-table" class="hidden overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead style="background: var(--cream);">
+                    <tr class="text-left" style="border-bottom: 1px solid var(--border);">
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Name</th>
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Datum</th>
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Immobilie</th>
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Fläche</th>
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Sprache</th>
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
+                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Aktion</th>
+                    </tr>
+                </thead>
+                <tbody id="leads-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden fade-in">
+        <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color: var(--border);">
+            <h2 class="font-semibold text-sm" style="color: var(--slate);">FAQ – Häufige Fragen</h2>
+            <span class="text-xs text-gray-400">Referenz für Beratungsgespräche</span>
+        </div>
+        <div id="faq-list" class="divide-y" style="border-color: var(--border);"></div>
+    </div>
+
+</main>
+
+<!-- MODAL -->
+<div id="modal" class="hidden fixed inset-0 bg-black/40 modal-overlay flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto fade-in">
+        <div class="p-6">
+            <div class="flex items-start justify-between mb-5">
+                <div>
+                    <h3 class="font-bold text-gray-800" id="modal-name">–</h3>
+                    <p id="modal-date" class="text-xs text-gray-400 mt-0.5">–</p>
+                </div>
+                <button onclick="closeModal()" class="text-gray-300 hover:text-gray-500 text-2xl leading-none">×</button>
+            </div>
+            <div id="modal-content" class="grid grid-cols-2 gap-3 text-sm mb-5"></div>
+            <div id="modal-notas" class="mb-5 hidden">
+                <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Notizen</p>
+                <p id="modal-notas-text" class="text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2"></p>
+            </div>
+            <div class="border-t pt-4" style="border-color: var(--border);">
+                <p class="text-xs text-gray-400 uppercase tracking-wide mb-3">Nächste Aktion</p>
+                <div id="modal-actions" class="flex gap-2 flex-wrap"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="hidden fixed bottom-6 right-6 text-white px-5 py-3 rounded-xl shadow-lg text-sm fade-in z-50" style="background: var(--sage);">
+    ✓ Status erfolgreich aktualisiert
+</div>
+
+<script>
+const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTEM5KHgXyt8nM9CwSWWUVthl-t_2rlSQkYfGXC7X77bkR-tQ2glh5C3vwiTDqSSFUu5FHe2N7JYzve/pub?output=csv';
+const WEBHOOK_BASE = 'https://gleblang.app.n8n.cloud/webhook';
+let allLeads = [];
+let currentLeadIndex = null;
+
+const FAQ = [
+    { q: 'Was kostet eine PV-Anlage?', a: 'Balkonkraftwerk ab 600 €, bis 5 kWp ab 8.000 €, 5–10 kWp ab 14.000 €, 10–20 kWp ab 22.000 €. Batteriespeicher ab 4.000 € extra. Preise für Wohngebäude inkl. 0% MwSt. Für Gewerbeobjekte gilt 19% MwSt.', cat: 'Preise' },
+    { q: 'Wie lange dauert die Installation?', a: 'Einfamilienhaus 5–10 kWp: 1–2 Tage. Größere Anlagen: 3–5 Tage. Balkonkraftwerk: halber Tag.', cat: 'Installation' },
+    { q: 'Servicegebiet', a: 'Ausschließlich im 150 km Umkreis um Frankfurt am Main: Wiesbaden, Darmstadt, Mainz, Mannheim, Heidelberg, Koblenz, Gießen, Fulda, Würzburg u.a.', cat: 'Servicegebiet' },
+    { q: 'Baugenehmigung erforderlich?', a: 'In Hessen keine Baugenehmigung für Anlagen bis 30 kWp auf Wohngebäuden. Wir kümmern uns um Netzbetreiber-Anmeldung und MaStR-Eintragung.', cat: 'Rechtliches' },
+    { q: 'Staatliche Förderungen', a: 'KfW-Kredit 270, mögliche BAFA-Zuschüsse, Steuerbefreiung seit 2023, MwSt. 0% auf PV-Anlagen für Wohngebäude seit 2023.', cat: 'Förderungen' },
+    { q: 'Amortisation', a: 'Bei normalem Verbrauch und guter Ausrichtung ca. 8–12 Jahre. Einsparung ca. 800–1.500 €/Jahr.', cat: 'Wirtschaftlichkeit' },
+    { q: 'Batteriespeicher', a: 'Erhöht den Eigenverbrauch von ca. 30% auf 60–80%. Überschüssiger Solarstrom für Nacht und bewölkte Tage.', cat: 'Technik' },
+    { q: '¿Trabajan en toda Alemania?', a: 'No, solo en un radio de 150 km alrededor de Frankfurt: Wiesbaden, Darmstadt, Mainz, Mannheim, Heidelberg, Koblenz, Gießen, Fulda, Würzburg.', cat: 'Español' },
+    { q: '¿Cuánto cuesta una instalación solar?', a: 'Balcón 800W desde 600€, hasta 5 kWp desde 8.000€ (IVA 0% viviendas), 5–10 kWp desde 14.000€, 10–20 kWp desde 22.000€. Para locales comerciales aplica 19% IVA.', cat: 'Español' },
+];
+
+function renderFAQ() {
+    document.getElementById('faq-list').innerHTML = FAQ.map(f => `
+        <div class="px-5 py-3.5 hover:bg-gray-50 transition flex items-start gap-3">
+            <span class="text-xs px-2 py-0.5 rounded-md whitespace-nowrap mt-0.5 font-medium"
+                style="background: #eef2f7; color: #5b7fa6;">${f.cat}</span>
+            <div>
+                <p class="font-medium text-gray-700 text-sm">${f.q}</p>
+                <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">${f.a}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+function statusBadge(s) {
+    const map = {
+        'Neu': 'badge-neu',
+        'Angebot gesendet': 'badge-angebot',
+        'Auftrag bestätigt': 'badge-auftrag',
+        'Rechnung gesendet': 'badge-rechnung',
+        'Bezahlt': 'badge-bezahlt',
+    };
+    const cls = map[s] || 'badge-neu';
+    return `<span class="px-2 py-0.5 rounded-md text-xs font-medium ${cls}">${s || 'Neu'}</span>`;
+}
+
+function actionBtn(lead, i) {
+    const s = lead.status || 'Neu';
+    const btns = {
+        'Neu': `<button onclick="event.stopPropagation();quickAction(${i},'Angebot gesendet')"
+            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition" style="background:#5b7fa6;">
+            Angebot senden</button>`,
+        'Angebot gesendet': `<button onclick="event.stopPropagation();quickAction(${i},'Auftrag bestätigt')"
+            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition bg-amber-600">
+            Auftrag bestätigen</button>`,
+        'Auftrag bestätigt': `<button onclick="event.stopPropagation();quickAction(${i},'Rechnung gesendet')"
+            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition bg-purple-600">
+            Rechnung senden</button>`,
+        'Rechnung gesendet': `<button onclick="event.stopPropagation();quickAction(${i},'Bezahlt')"
+            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition" style="background:var(--sage);">
+            Als bezahlt</button>`,
+    };
+    return btns[s] || `<span class="text-xs font-medium" style="color:var(--sage);">✓ Abgeschlossen</span>`;
+}
+
+// Parse CSV from Google Sheets
+function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    if (lines.length < 2) return [];
+    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+    return lines.slice(1).map(line => {
+        const vals = [];
+        let cur = '', inQ = false;
+        for (let c of line) {
+            if (c === '"') { inQ = !inQ; }
+            else if (c === ',' && !inQ) { vals.push(cur); cur = ''; }
+            else cur += c;
+        }
+        vals.push(cur);
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = (vals[i] || '').trim().replace(/^"|"$/g, ''));
+        return obj;
+    }).filter(r => r.name);
+}
+
+async function loadLeads() {
+    document.getElementById('leads-loading').classList.remove('hidden');
+    document.getElementById('leads-table').classList.add('hidden');
+    document.getElementById('leads-empty').classList.add('hidden');
+    document.getElementById('leads-error').classList.add('hidden');
+    try {
+        const res = await fetch(SHEET_CSV);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        allLeads = parseCSV(text);
+        renderLeads(allLeads);
+        updateStats(allLeads);
+    } catch(e) {
+        document.getElementById('leads-loading').classList.add('hidden');
+        document.getElementById('leads-error-msg').textContent = `Fehler beim Laden der Daten. Ist die Google Sheets Tabelle öffentlich freigegeben?`;
+        document.getElementById('leads-error').classList.remove('hidden');
+    }
+}
+
+function updateStats(leads) {
+    document.getElementById('stat-total').textContent = leads.length;
+    document.getElementById('stat-neu').textContent = leads.filter(l => !l.status || l.status === 'Neu').length;
+    document.getElementById('stat-angebote').textContent = leads.filter(l => l.status === 'Angebot gesendet').length;
+    document.getElementById('stat-rechnungen').textContent = leads.filter(l => l.status === 'Rechnung gesendet').length;
+}
+
+function renderLeads(leads) {
+    document.getElementById('leads-loading').classList.add('hidden');
+    if (!leads.length) {
+        document.getElementById('leads-empty').classList.remove('hidden');
+        return;
+    }
+    document.getElementById('leads-table').classList.remove('hidden');
+    document.getElementById('leads-tbody').innerHTML = leads.map((l, i) => `
+        <tr class="border-t row-hover cursor-pointer transition" onclick="openModal(${i})"
+            style="border-color: var(--border);">
+            <td class="px-5 py-3 font-medium text-gray-800">${l.name || '–'}</td>
+            <td class="px-5 py-3 text-gray-400 text-xs">${l.created_at || '–'}</td>
+            <td class="px-5 py-3 text-gray-600">${l.property_type || '–'}</td>
+            <td class="px-5 py-3 text-gray-600">${l.roof_area ? l.roof_area + ' m²' : '–'}</td>
+            <td class="px-5 py-3">${l.lang === 'ES' ? '🇪🇸' : '🇩🇪'}</td>
+            <td class="px-5 py-3">${statusBadge(l.status)}</td>
+            <td class="px-5 py-3">${actionBtn(l, i)}</td>
+        </tr>
+    `).join('');
+}
+
+function filterLeads() {
+    const f = document.getElementById('filter-status').value;
+    renderLeads(f ? allLeads.filter(l => (l.status || 'Neu') === f) : allLeads);
+}
+
+function openModal(i) {
+    currentLeadIndex = i;
+    const l = allLeads[i];
+    document.getElementById('modal-name').textContent = l.name || 'Lead';
+    document.getElementById('modal-date').textContent =
+        `Erhalten: ${l.created_at || '–'} · ${l.lang === 'ES' ? '🇪🇸 Spanisch' : '🇩🇪 Deutsch'}`;
+    document.getElementById('modal-content').innerHTML = `
+        <div><p class="text-gray-400 text-xs mb-0.5">Adresse</p><p class="font-medium text-gray-700 text-sm">${l.address || '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">E-Mail</p><p class="font-medium text-gray-700 text-sm">${l.email || '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">Telefon</p><p class="font-medium text-gray-700 text-sm">${l.phone || '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">Immobilientyp</p><p class="font-medium text-gray-700 text-sm">${l.property_type || '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">Dachfläche</p><p class="font-medium text-gray-700 text-sm">${l.roof_area ? l.roof_area + ' m²' : '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">Stromverbrauch</p><p class="font-medium text-gray-700 text-sm">${l.consumption ? l.consumption + ' kWh/Jahr' : '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">Batteriespeicher</p><p class="font-medium text-gray-700 text-sm">${l.battery || '–'}</p></div>
+        <div><p class="text-gray-400 text-xs mb-0.5">Installationszeitraum</p><p class="font-medium text-gray-700 text-sm">${l.timeline || '–'}</p></div>
+        <div class="col-span-2"><p class="text-gray-400 text-xs mb-1">Status</p>${statusBadge(l.status)}</div>
+    `;
+    if (l.notas) {
+        document.getElementById('modal-notas').classList.remove('hidden');
+        document.getElementById('modal-notas-text').textContent = l.notas;
+    } else {
+        document.getElementById('modal-notas').classList.add('hidden');
+    }
+    const s = l.status || 'Neu';
+    const actions = {
+        'Neu': `<button onclick="updateStatus('Angebot gesendet')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition" style="background:#5b7fa6;">Angebot versenden</button>`,
+        'Angebot gesendet': `<button onclick="updateStatus('Auftrag bestätigt')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition bg-amber-600">Auftrag bestätigen</button>`,
+        'Auftrag bestätigt': `<button onclick="updateStatus('Rechnung gesendet')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition bg-purple-600">Rechnung senden</button>`,
+        'Rechnung gesendet': `<button onclick="updateStatus('Bezahlt')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition" style="background:var(--sage);">Als bezahlt markieren</button>`,
+    };
+    document.getElementById('modal-actions').innerHTML = actions[s] || `<p class="text-sm font-medium" style="color:var(--sage);">✓ Auftrag abgeschlossen</p>`;
+    document.getElementById('modal').classList.remove('hidden');
+}
+
+function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+
+async function quickAction(i, newStatus) {
+    currentLeadIndex = i;
+    await updateStatus(newStatus);
+}
+
+async function updateStatus(newStatus) {
+    const lead = allLeads[currentLeadIndex];
+    if (!confirm(`Status von "${lead.name}" ändern zu:\n"${newStatus}"?`)) return;
+    try {
+        await fetch(`${WEBHOOK_BASE}/jhonatan-update`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: lead.email, name: lead.name, status: newStatus })
+        });
+        closeModal();
+        showToast();
+        await loadLeads();
+    } catch(e) {
+        alert('Fehler beim Aktualisieren.');
+    }
+}
+
+function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.remove('hidden');
+    setTimeout(() => t.classList.add('hidden'), 3000);
+}
+
+renderFAQ();
+loadLeads();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# macOS Systemdateien
+.DS_Store
+
+# Grosse Mediendateien
+*.mp4
+
+# WordPress Backup & Core (sehr gross, nicht fuer Git geeignet)
+Backup Webseite Hauptverzeichnis /
+Hauptverzeichnis/
+
+# Gespeicherte Instagram-Seiten
+fotos/Instagram.html
+fotos/Instagram_files/
+
+# PHP Admin-Skripte (sicherheitsrelevant)
+create-admin.php
+wp-config.php

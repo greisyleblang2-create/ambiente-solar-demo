@@ -1,0 +1,224 @@
+PROMPT PARA STITCH / DISEÑO VISUAL IA
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PROYECTO: Radar Interactivo Quantum Wave - Ambiente Solar
+
+═══════════════════════════════════════════════════════════════════════════════
+
+DESCRIPCIÓN GENERAL:
+Crea un diseño de radar futurístico que represente la expansión de Ambiente Solar
+(empresa de energía solar) hacia toda Alemania. El radar debe ser interactivo,
+moderno y utilizar la paleta de colores corporativa.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+PALETA DE COLORES CORPORATIVA (OBLIGATORIA):
+- Amarillo Principal: #F5A623
+- Turquesa Principal: #1B8CA6
+- Turquesa Oscuro: #136B80
+- Azul Oscuro: #0D3B4F
+- Blanco/Fondo Claro: #ffffff
+- Gris Claro: #f7f9fb
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CONCEPTO CENTRAL:
+El radar debe mostrar EXPANSIÓN y ACEPTACIÓN:
+- Centro: Logo/marca de Ambiente Solar (punto de origen)
+- Ondas concéntricas: Representan la expansión desde el centro hacia afuera
+- 7 Puntos alrededor: Representan proyectos/ubicaciones donde Ambiente Solar
+  está presente
+- Interacción: Las ondas "tocan" los puntos, generando REFLEJOS/DESTELLOS
+  que simbolizan "conexión establecida" e "impacto"
+
+═══════════════════════════════════════════════════════════════════════════════
+
+COMPONENTES ESPECÍFICOS:
+
+1. FONDO
+   - Color: Blanco o muy claro (#f9fafb)
+   - Efecto: Gradiente sutil hacia gris claro
+   - Bordes: Círculo con borde turquesa
+
+2. GRILLA/CUADRÍCULA POLAR
+   - Anillos concéntricos (3-4 anillos)
+   - Cruz cardinal (línea horizontal + vertical)
+   - Color: Turquesa con baja opacidad (20-30%)
+   - Propósito: Dar estructura al radar
+
+3. ONDAS DE EXPANSIÓN (ELEMENTO CLAVE)
+   - Cantidad: 3 ondas principales
+   - Patrón: Se expanden continuamente desde el centro
+   - Velocidad: Lenta y elegante (8-10 segundos por ciclo)
+   - Colores (degradado):
+     * Onda 1: Amarillo #F5A623 (más opaca, 80%)
+     * Onda 2: Turquesa #1B8CA6 (media, 50%)
+     * Onda 3: Turquesa Oscuro #136B80 (menos opaca, 30%)
+   - Movimiento: Expandirse uniformemente desde el centro hacia afuera
+   - NO deben "repeler" o alejar los puntos
+
+4. 7 PUNTOS DE PROYECTO (NÚCLEOS DE ADOPCIÓN)
+   - Forma: Círculos
+   - Tamaño: ~40-50px de diámetro
+   - Color de relleno: Turquesa #1B8CA6
+   - Borde: Amarillo #F5A623 (3-4px de grosor)
+   - Número: Etiquetados 1-7 en blanco
+   - Posiciones: Distribuidos estratégicamente (no en línea recta)
+     * Punto 1: 60% x, 25% y
+     * Punto 2: 35% x, 20% y
+     * Punto 3: 28% x, 65% y
+     * Punto 4: 75% x, 42% y
+     * Punto 5: 55% x, 75% y
+     * Punto 6: 78% x, 55% y
+     * Punto 7: 22% x, 35% y
+
+5. REFLEJO/DESTELLO DE COLISIÓN (INTERACCIÓN)
+   Cuando una onda toca un punto:
+   - EFECTO 1: El punto emite un GLOW/BRILLO en Amarillo
+     * Duración: 0.6 segundos
+     * Intensidad: Fuerte inicialmente, desvaneciéndose
+   - EFECTO 2: DESTELLO/BURST radial
+     * Forma: Círculo de luz que se expande
+     * Color: Gradiente de Amarillo (#F5A623) a transparente
+     * Tamaño final: 2-3x el tamaño del punto
+     * Duración: 0.8 segundos
+   - EFECTO 3: PULSO INTERNO
+     * Pequeña animación de pulsación en el punto
+     * Glow interior que brilla + se desvanece
+   - Propósito Visual: Simbolizar "conexión establecida" e "impacto"
+
+6. LOGO/CENTRO
+   - Contenido: Logotipo de Ambiente Solar o representación simple
+   - Tamaño: ~80-100px
+   - Forma: Cuadrado redondeado (border-radius ~15-20%)
+   - Fondo: Gradiente lineal Amarillo → Turquesa
+   - Borde: Azul Oscuro, ~3px
+   - Sombra: Glow suave turquesa (inset + outer)
+   - Texto alternativo: "Ambiente Solar AI"
+   - Efecto: Flotación suave (sube/baja levemente, 3s ciclo)
+   - Z-index: Encima de todo
+   - Opacidad en colisión: NO se ve afectado, permanece constante
+
+═══════════════════════════════════════════════════════════════════════════════
+
+ANIMACIONES REQUERIDAS:
+
+A) WAVE EXPANSION (Onda de Expansión)
+   - Inicia: Tamaño 0 en el centro
+   - Termina: Tamaño 110% del radar (sale ligeramente del borde)
+   - Duración: 8 segundos
+   - Easing: ease-out (rápido al inicio, lento al final)
+   - Loop: Continuo, sin pausa
+   - Fade: Desaparece gradualmente (opacidad de 1.0 a 0)
+   - Retraso por onda: Wave 1 (0s), Wave 2 (0.4s), Wave 3 (0.8s)
+
+B) POINT COLLISION REFLECTION
+   - Trigger: Cuando una onda matemáticamente "toca" el punto
+   - Duración: 0.6 segundos
+   - Animación:
+     * Glow intenso (shadow 0 0 20px amarillo)
+     * Opacidad interna aumenta a 0.4, luego desvanece
+     * Pequeña escala: 1.0 → 1.05 → 1.0
+
+C) BURST EFFECT
+   - Trigger: Simultáneamente con reflection
+   - Forma: Círculo radial que emana del punto
+   - Tamaño inicial: 0px
+   - Tamaño final: ~120px
+   - Opacidad: 1.0 → 0.0
+   - Duración: 0.8 segundos
+   - Easing: ease-out
+   - Color: Radial gradient (Amarillo al centro → transparente en bordes)
+
+D) LOGO FLOAT
+   - Movimiento: Arriba/abajo suave
+   - Rango: ±8px
+   - Duración: 3 segundos
+   - Easing: ease-in-out
+
+═══════════════════════════════════════════════════════════════════════════════
+
+INTERACTIVIDAD:
+
+1. HOVER EN PUNTOS
+   - Color de relleno: Cambia a Amarillo #F5A623
+   - Texto/número: Cambia a color Azul Oscuro
+   - Escala: +15% (scale 1.15)
+   - Glow: Aumenta intensidad (0 0 30px amarillo)
+   - Sombra interna: Resplandor leve
+
+2. CLICK EN PUNTOS
+   - Abre modal/popup con detalles del proyecto
+   - Muestra: Nombre, kWp, ubicación, fotos, videos
+
+3. RESPONSIVE
+   - Desktop: Tamaño 100%
+   - Tablet: 90% de tamaño
+   - Mobile: 70% de tamaño, ajustar layout
+
+═══════════════════════════════════════════════════════════════════════════════
+
+GENERACIONES A PEDIR (VERSIONES PARA COMPARAR):
+
+VERSIÓN 1: CLASSIC
+- Ondas lisas, sin efectos adicionales
+- Reflejos sutiles en colisión
+- Colores estándar
+
+VERSIÓN 2: ENERGETIC
+- Ondas con efecto de "energía" (punteadas o con patrón)
+- Reflejos más intensos y rápidos
+- Partículas pequeñas moviéndose alrededor
+
+VERSIÓN 3: TECH/FUTURISTIC
+- Ondas con efecto holográfico (iridiscente)
+- Reflejos con multiple capas de glow
+- Líneas de conexión entre puntos y centro
+
+VERSIÓN 4: MINIMAL
+- Ondas más sutiles (líneas finas)
+- Reflejos elegantes y minimalistas
+- Menos efectos, más enfoque en la estructura
+
+VERSIÓN 5: PREMIUM
+- Todo lo anterior pero ultra pulido
+- Sombras 3D
+- Effectos de refracción de luz
+- Bokeh/depth de field
+
+═══════════════════════════════════════════════════════════════════════════════
+
+REQUISITOS TÉCNICOS:
+
+- Formato: HTML5 + CSS3 + JavaScript (vanilla, sin dependencias)
+- Responsive: Sí (mobile-first)
+- Performance: Optimizado (60fps en desktops, 30fps en móviles)
+- Accesibilidad: ARIA labels, colores con suficiente contraste
+- Navegadores: Chrome, Firefox, Safari, Edge (versiones recientes)
+- Tamaño: <500KB total (incluyendo CSS y JS)
+- Exportable: Como componente reutilizable
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CONTEXTO EMPRESARIAL:
+
+Ambiente Solar es una empresa de instalación de paneles solares en Alemania.
+El radar debe:
+- Mostrar su presencia nacional (no solo local)
+- Comunicar expansión y crecimiento
+- Ser profesional pero moderno/futurístico
+- Inspirar confianza (tech + energía renovable)
+- Ser interactivo para mejorar engagement del usuario
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CASOS DE USO:
+
+- Landing page hero section
+- Portfolio/proyectos showcase
+- Presentación de expansión nacional
+- Marketing automation/webflow landing
+- Admin dashboard (mostrar cobertura geográfica)
+
+═══════════════════════════════════════════════════════════════════════════════

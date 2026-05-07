@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar Design Options - Futuristic AI Theme</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0a0e27;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #00d4ff;
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      margin-bottom: 50px;
+      font-size: 1.1rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .option {
+      background: linear-gradient(135deg, #1a1f3a 0%, #16213e 100%);
+      border: 2px solid #00d4ff;
+      border-radius: 16px;
+      padding: 30px;
+      transition: all 0.3s;
+    }
+
+    .option:hover {
+      border-color: #00ff88;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .option h2 {
+      color: #00d4ff;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option-number {
+      background: linear-gradient(135deg, #00d4ff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    .radar-demo {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      margin: 25px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0f1729;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .description {
+      color: #aaa;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .features {
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    .features li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .features li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #00ff88;
+      font-weight: 700;
+    }
+
+    /* OPTION 1: NEURAL NETWORK */
+    .neural-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .neural-nodes {
+      position: absolute;
+      inset: 0;
+    }
+
+    .neural-node {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #00ff88 0%, rgba(0, 255, 136, 0.3) 100%);
+      border: 2px solid #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+    }
+
+    .neural-connection {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0, 212, 255, 0.5), transparent);
+      transform-origin: left center;
+    }
+
+    .neural-center {
+      position: relative;
+      z-index: 10;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #00d4ff 0%, rgba(0, 212, 255, 0.3) 100%);
+      border: 3px solid #00d4ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      text-align: center;
+      box-shadow:
+        0 0 20px rgba(0, 212, 255, 0.8),
+        inset 0 0 20px rgba(0, 212, 255, 0.2);
+      animation: neural-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes neural-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), inset 0 0 20px rgba(0, 212, 255, 0.2); }
+      50% { box-shadow: 0 0 40px rgba(0, 212, 255, 1), inset 0 0 30px rgba(0, 212, 255, 0.4); }
+    }
+
+    /* OPTION 2: HOLOGRAM GRID */
+    .hologram-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    }
+
+    .hologram-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(0deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      perspective: 1000px;
+      animation: grid-tilt 6s ease-in-out infinite;
+    }
+
+    @keyframes grid-tilt {
+      0%, 100% { transform: rotateX(15deg) rotateZ(0deg); }
+      50% { transform: rotateX(15deg) rotateZ(2deg); }
+    }
+
+    .hologram-rings {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 2px solid rgba(0, 212, 255, 0.6);
+      border-radius: 50%;
+      animation: hologram-rotate 8s linear infinite;
+    }
+
+    .hologram-rings:nth-child(2) {
+      width: 250px;
+      height: 250px;
+      border-color: rgba(0, 255, 136, 0.4);
+      animation: hologram-rotate 10s linear infinite reverse;
+    }
+
+    .hologram-rings:nth-child(3) {
+      width: 350px;
+      height: 350px;
+      border-color: rgba(255, 0, 255, 0.2);
+      animation: hologram-rotate 12s linear infinite;
+    }
+
+    @keyframes hologram-rotate {
+      from { transform: rotateZ(0deg); }
+      to { transform: rotateZ(360deg); }
+    }
+
+    .hologram-center {
+      position: relative;
+      z-index: 10;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #00d4ff, #00ff88);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+      text-align: center;
+      color: #000;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+      animation: hologram-float 3s ease-in-out infinite;
+    }
+
+    @keyframes hologram-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hologram-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    /* OPTION 3: QUANTUM WAVE */
+    .quantum-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantum-waves {
+      position: absolute;
+      inset: 0;
+    }
+
+    .wave {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .wave1 {
+      border: 2px solid rgba(0, 212, 255, 0.6);
+      animation: wave-expand1 4s ease-out infinite;
+    }
+
+    .wave2 {
+      border: 2px solid rgba(0, 255, 136, 0.4);
+      animation: wave-expand2 4s ease-out infinite 0.5s;
+    }
+
+    .wave3 {
+      border: 2px solid rgba(255, 0, 255, 0.2);
+      animation: wave-expand3 4s ease-out infinite 1s;
+    }
+
+    @keyframes wave-expand1 {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    @keyframes wave-expand2 {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    @keyframes wave-expand3 {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .quantum-center {
+      position: relative;
+      z-index: 10;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.8), rgba(0, 255, 136, 0.4));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      text-align: center;
+      border: 2px solid #00d4ff;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), inset 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+
+    .quantum-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #00ff88;
+      animation: particle-move 6s ease-in-out infinite;
+    }
+
+    @keyframes particle-move {
+      0%, 100% { transform: translate(0, 0); opacity: 1; }
+      50% { transform: translate(100px, 100px); opacity: 0.5; }
+    }
+
+    .quantum-particle:nth-child(1) { animation-delay: 0s; top: 30%; left: 20%; }
+    .quantum-particle:nth-child(2) { animation-delay: 1s; top: 60%; right: 25%; }
+    .quantum-particle:nth-child(3) { animation-delay: 2s; bottom: 20%; left: 30%; }
+
+    /* COMPARISON SECTION */
+    .comparison-section {
+      background: linear-gradient(135deg, #1a1f3a 0%, #16213e 100%);
+      border: 2px solid #00d4ff;
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 60px;
+    }
+
+    .comparison-section h2 {
+      color: #00d4ff;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    .comparison-table {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+      padding: 15px;
+      text-align: left;
+      border-bottom: 2px solid #00d4ff;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      color: #ccc;
+    }
+
+    tr:hover {
+      background: rgba(0, 212, 255, 0.05);
+    }
+
+    .check { color: #00ff88; font-weight: 700; }
+    .partial { color: #ffaa00; }
+    .cross { color: #ff6b6b; }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, #00d4ff, #00ff88);
+      color: #000;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin: 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cta:hover {
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 1024px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 OPCIONES DE DISEÑO FUTURÍSTICO</h1>
+    <p class="subtitle">3 propuestas con temática de Inteligencia Artificial</p>
+
+    <div class="options-grid">
+      <!-- OPTION 1: NEURAL NETWORK -->
+      <div class="option">
+        <h2><span class="option-number">1</span> Neural Network</h2>
+        <div class="radar-demo">
+          <div class="neural-container">
+            <div class="neural-nodes" id="neural-nodes"></div>
+            <div class="neural-center">Ambiente<br>Solar<br>AI</div>
+          </div>
+        </div>
+        <p class="description">
+          Inspirado en redes neuronales de IA. Los nodos (puntos de proyecto) están conectados con líneas dinámicas que representan conexiones neuronales. Diseño orgánico y científico.
+        </p>
+        <ul class="features">
+          <li>Nodos verdes con conexiones azules</li>
+          <li>Animación de pulso en el centro</li>
+          <li>Conexiones dinámicas al hover</li>
+          <li>Altamente futurístico y tech</li>
+          <li>Perfecto para IA/tech companies</li>
+        </ul>
+      </div>
+
+      <!-- OPTION 2: HOLOGRAM GRID -->
+      <div class="option">
+        <h2><span class="option-number">2</span> Hologram Grid</h2>
+        <div class="radar-demo">
+          <div class="hologram-container">
+            <div class="hologram-grid"></div>
+            <div class="hologram-rings"></div>
+            <div class="hologram-rings"></div>
+            <div class="hologram-rings"></div>
+            <div class="hologram-center">Ambiente<br>Solar</div>
+            <div class="hologram-dot" style="top: 20%; left: 25%;"></div>
+            <div class="hologram-dot" style="top: 35%; right: 20%;"></div>
+            <div class="hologram-dot" style="bottom: 25%; left: 30%;"></div>
+          </div>
+        </div>
+        <p class="description">
+          Estilo holograma 3D con grilla en perspectiva (como en Blade Runner o Tron). Anillos rotativos y logo flotante. Muy cinematográfico y futurístico.
+        </p>
+        <ul class="features">
+          <li>Grid de perspectiva 3D</li>
+          <li>Anillos rotativos en colores vibrantes</li>
+          <li>Logo flotante con gravedad</li>
+          <li>Efecto holograma auténtico</li>
+          <li>Extremadamente futurístico</li>
+        </ul>
+      </div>
+
+      <!-- OPTION 3: QUANTUM WAVE -->
+      <div class="option">
+        <h2><span class="option-number">3</span> Quantum Wave</h2>
+        <div class="radar-demo">
+          <div class="quantum-container">
+            <div class="quantum-waves">
+              <div class="wave wave1"></div>
+              <div class="wave wave2"></div>
+              <div class="wave wave3"></div>
+              <div class="quantum-particle"></div>
+              <div class="quantum-particle"></div>
+              <div class="quantum-particle"></div>
+            </div>
+            <div class="quantum-center">Ambiente<br>Solar</div>
+          </div>
+        </div>
+        <p class="description">
+          Ondas de expansión cuántica con partículas animadas. Inspira en física cuántica y energía. Diseño limpio, moderno y elegante con toques de color magenta.
+        </p>
+        <ul class="features">
+          <li>Ondas concéntricas expandiéndose</li>
+          <li>Partículas cuánticas móviles</li>
+          <li>Colores: cyan, verde neón, magenta</li>
+          <li>Efecto energía radiante</li>
+          <li>Moderno y limpio</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="comparison-section">
+      <h2>📊 COMPARATIVA DETALLADA</h2>
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Neural Network</th>
+              <th>Hologram Grid</th>
+              <th>Quantum Wave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Futurismo</strong></td>
+              <td><span class="check">★★★★★</span></td>
+              <td><span class="check">★★★★★</span></td>
+              <td><span class="check">★★★★☆</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tema IA</strong></td>
+              <td><span class="check">NEURAL (✓)</span></td>
+              <td><span class="partial">VISUAL (◐)</span></td>
+              <td><span class="partial">ENERGÍA (◐)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Complejidad Visual</strong></td>
+              <td><span class="check">Alta</span></td>
+              <td><span class="check">Muy Alta</span></td>
+              <td><span class="check">Media-Alta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Performance</strong></td>
+              <td><span class="check">Excelente</span></td>
+              <td><span class="partial">Bueno</span></td>
+              <td><span class="check">Excelente</span></td>
+            </tr>
+            <tr>
+              <td><strong>Responsivo (Mobile)</strong></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td><strong>Interactividad</strong></td>
+              <td><span class="check">Conexiones dinámicas</span></td>
+              <td><span class="check">Rotación + flotación</span></td>
+              <td><span class="check">Ondas + partículas</span></td>
+            </tr>
+            <tr>
+              <td><strong>Paleta de Colores</strong></td>
+              <td><span class="check">Cyan + Verde</span></td>
+              <td><span class="check">Multi-color vibrante</span></td>
+              <td><span class="check">Cyan + Magenta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Alineación Marca</strong></td>
+              <td><span class="check">Muy buena</span></td>
+              <td><span class="check">Excelente</span></td>
+              <td><span class="check">Buena</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cta-section">
+        <p style="margin-bottom: 20px; color: #aaa;">¿Cuál prefieres?</p>
+        <button class="cta" onclick="selectOption(1)">1️⃣ Neural Network</button>
+        <button class="cta" onclick="selectOption(2)">2️⃣ Hologram Grid</button>
+        <button class="cta" onclick="selectOption(3)">3️⃣ Quantum Wave</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate neural network visualization
+    function initNeural() {
+      const container = document.querySelector('#neural-nodes');
+      if (!container) return;
+
+      container.innerHTML = '';
+      const containerRect = container.parentElement.getBoundingClientRect();
+      const w = containerRect.width;
+      const h = containerRect.height;
+
+      // Create nodes
+      const nodes = [
+        { x: 0.35, y: 0.25 }, { x: 0.65, y: 0.2 },
+        { x: 0.25, y: 0.65 }, { x: 0.75, y: 0.45 },
+        { x: 0.6, y: 0.75 }, { x: 0.8, y: 0.65 },
+        { x: 0.2, y: 0.35 }
+      ];
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.style.position = 'absolute';
+      svg.style.inset = '0';
+      svg.style.width = '100%';
+      svg.style.height = '100%';
+      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+      // Draw lines
+      nodes.forEach((node, i) => {
+        if (i < nodes.length - 1) {
+          const nextNode = nodes[i + 1];
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', node.x * w);
+          line.setAttribute('y1', node.y * h);
+          line.setAttribute('x2', nextNode.x * w);
+          line.setAttribute('y2', nextNode.y * h);
+          line.setAttribute('stroke', 'rgba(0, 212, 255, 0.4)');
+          line.setAttribute('stroke-width', '2');
+          line.style.animation = 'dash 2s linear infinite';
+          svg.appendChild(line);
+        }
+      });
+
+      container.appendChild(svg);
+
+      // Create node circles
+      nodes.forEach((node, i) => {
+        const nodeEl = document.createElement('div');
+        nodeEl.className = 'neural-node';
+        nodeEl.style.left = (node.x * 100) + '%';
+        nodeEl.style.top = (node.y * 100) + '%';
+        nodeEl.style.animation = `neural-pulse ${1.5 + i * 0.2}s ease-in-out infinite`;
+        container.appendChild(nodeEl);
+      });
+    }
+
+    function selectOption(num) {
+      alert(`✅ Opción ${num} seleccionada!\n\nAhora implementaré el diseño elegido en la página web con todas las características listadas.`);
+    }
+
+    document.addEventListener('DOMContentLoaded', initNeural);
+  </script>
+</body>
+</html>

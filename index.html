@@ -427,49 +427,485 @@
       line-height: 1.6;
     }
 
-    /* ===== PROJEKTE ===== */
-    .projekte { background: var(--gris-claro); }
+    /* ===== PROJEKTE (RADAR) ===== */
+    .projekte {
+      background: linear-gradient(180deg, #061a26 0%, #0D3B4F 50%, #061a26 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
 
-    .projekte-header { max-width: 1200px; margin: 0 auto 50px; }
+    .projekte::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(27,140,166,0.15), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(245,166,35,0.08), transparent 40%);
+      pointer-events: none;
+    }
 
-    .projekte-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .projekte-header {
       max-width: 1200px;
       margin: 0 auto 40px;
-    }
-
-    .projekt-card {
+      text-align: center;
       position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
+      z-index: 2;
     }
 
-    .projekt-card img {
+    .projekte .section-label { color: var(--amarillo); }
+    .projekte h2 { color: white; }
+    .projekte h2 span { color: var(--amarillo); }
+    .projekte .section-subtitle { color: rgba(255,255,255,0.75); margin: 0 auto; }
+
+    .radar-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .radar-container {
+      position: relative;
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      transition: transform 0.4s;
+      max-width: 540px;
+      aspect-ratio: 1;
+      margin: 0 auto;
     }
 
-    .projekt-card:hover img { transform: scale(1.05); }
-
-    .projekt-overlay {
+    .radar-screen {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(13,59,79,0.9));
-      padding: 20px 16px 16px;
+      inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(27,140,166,0.18) 0%, rgba(13,59,79,0.6) 60%, rgba(6,26,38,0.95) 100%);
+      box-shadow:
+        0 0 60px rgba(27,140,166,0.4),
+        inset 0 0 40px rgba(0,0,0,0.6),
+        inset 0 0 100px rgba(27,140,166,0.15);
+      border: 2px solid rgba(245,166,35,0.4);
+      overflow: hidden;
+    }
+
+    .radar-rings {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    .radar-rings::before,
+    .radar-rings::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(245,166,35,0.25);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .radar-rings::before { width: 33.33%; height: 33.33%; }
+    .radar-rings::after { width: 66.66%; height: 66.66%; }
+
+    .radar-cross {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .radar-cross::before,
+    .radar-cross::after {
+      content: "";
+      position: absolute;
+      background: rgba(245,166,35,0.2);
+    }
+    .radar-cross::before {
+      top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%);
+    }
+    .radar-cross::after {
+      left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%);
+    }
+
+    .radar-sweep {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      background: conic-gradient(
+        from 0deg,
+        rgba(245,166,35,0.55) 0deg,
+        rgba(245,166,35,0.25) 15deg,
+        rgba(245,166,35,0.08) 35deg,
+        transparent 60deg,
+        transparent 360deg
+      );
+      animation: radar-rotate 5s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes radar-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .radar-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 18px; height: 18px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--amarillo);
+      box-shadow: 0 0 18px var(--amarillo), 0 0 40px rgba(245,166,35,0.6);
+      z-index: 3;
+    }
+
+    .radar-center::after {
+      content: "Frankfurt";
+      position: absolute;
+      top: 24px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--amarillo);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+
+    .radar-dot {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 4;
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    .radar-dot-inner {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--turquesa);
+      box-shadow: 0 0 12px var(--turquesa), 0 0 24px rgba(27,140,166,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .radar-dot::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--amarillo);
+      opacity: 0;
+      animation: radar-pulse 2.4s ease-out infinite;
+    }
+
+    .radar-dot:nth-child(2)::before { animation-delay: 0.3s; }
+    .radar-dot:nth-child(3)::before { animation-delay: 0.6s; }
+    .radar-dot:nth-child(4)::before { animation-delay: 0.9s; }
+    .radar-dot:nth-child(5)::before { animation-delay: 1.2s; }
+    .radar-dot:nth-child(6)::before { animation-delay: 1.5s; }
+    .radar-dot:nth-child(7)::before { animation-delay: 1.8s; }
+
+    @keyframes radar-pulse {
+      0%   { transform: scale(0.6); opacity: 0.9; }
+      80%  { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    .radar-dot:hover .radar-dot-inner {
+      transform: scale(1.35);
+      background: var(--amarillo);
+      box-shadow: 0 0 18px var(--amarillo), 0 0 36px rgba(245,166,35,0.8);
+    }
+
+    .radar-dot:focus-visible { outline: none; }
+    .radar-dot:focus-visible .radar-dot-inner {
+      transform: scale(1.35);
+      background: var(--amarillo);
+      box-shadow: 0 0 0 3px white;
+    }
+
+    .radar-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,59,79,0.95);
       color: white;
-      transform: translateY(100%);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      border: 1px solid var(--amarillo);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    .radar-tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--amarillo);
+    }
+
+    .radar-dot:hover .radar-tooltip,
+    .radar-dot:focus-visible .radar-tooltip { opacity: 1; }
+
+    /* Project list / legend */
+    .radar-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .radar-legend-title {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: var(--amarillo);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(245,166,35,0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s;
+      color: white;
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .legend-item:hover,
+    .legend-item:focus-visible {
+      background: rgba(245,166,35,0.12);
+      border-color: var(--amarillo);
+      transform: translateX(4px);
+      outline: none;
+    }
+
+    .legend-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--turquesa);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(27,140,166,0.5);
+    }
+
+    .legend-item:hover .legend-num,
+    .legend-item:focus-visible .legend-num {
+      background: var(--amarillo);
+      color: var(--azul-dark);
+      box-shadow: 0 0 14px var(--amarillo);
+    }
+
+    .legend-text strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .legend-text span {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== PROJEKT MODAL ===== */
+    .projekt-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(6,26,38,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .projekt-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .projekt-modal-content {
+      background: white;
+      color: var(--texto);
+      border-radius: 18px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 92vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transform: scale(0.95);
       transition: transform 0.3s;
     }
 
-    .projekt-card:hover .projekt-overlay { transform: translateY(0); }
+    .projekt-modal.active .projekt-modal-content { transform: scale(1); }
 
-    .projekt-overlay h4 { font-size: 1rem; font-weight: 700; }
-    .projekt-overlay span { font-size: 0.8rem; color: var(--amarillo); }
+    .projekt-modal-header {
+      padding: 22px 28px;
+      background: var(--azul-dark);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .projekt-modal-header h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .projekt-modal-header .meta {
+      font-size: 0.85rem;
+      color: var(--amarillo);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .projekt-modal-close {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .projekt-modal-close:hover { background: var(--amarillo); color: var(--azul-dark); }
+
+    .projekt-carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+
+    .carousel-slide.active { opacity: 1; }
+
+    .carousel-slide img,
+    .carousel-slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-indicators {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .carousel-indicator {
+      width: 28px;
+      height: 4px;
+      background: rgba(255,255,255,0.4);
+      border: 0;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.3s;
+      padding: 0;
+    }
+
+    .carousel-indicator.active { background: var(--amarillo); }
+
+    .projekt-modal-body {
+      padding: 22px 28px 26px;
+      overflow-y: auto;
+    }
+
+    .projekt-modal-body p {
+      color: var(--gris);
+      margin-bottom: 14px;
+    }
+
+    .projekt-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .projekt-stat {
+      background: var(--gris-claro);
+      padding: 14px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .projekt-stat strong {
+      display: block;
+      color: var(--turquesa);
+      font-size: 1.2rem;
+    }
+
+    .projekt-stat span {
+      font-size: 0.75rem;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 900px) {
+      .radar-wrapper { grid-template-columns: 1fr; gap: 30px; }
+      .radar-container { max-width: 380px; }
+      .projekt-stats { grid-template-columns: 1fr 1fr; }
+    }
 
     /* ===== PREISE ===== */
     .preise { background: white; }
@@ -1260,54 +1696,100 @@
   </div>
 </section>
 
-<!-- PROJEKTE -->
+<!-- PROJEKTE (RADAR) -->
 <section class="projekte" id="projekte">
   <div class="projekte-header">
     <span class="section-label">Referenzen</span>
-    <h2>Unsere <span>Projekte</span></h2>
-    <p class="section-subtitle">Reale Installationen von Ambiente Solar in Frankfurt und Umgebung.</p>
+    <h2>Unsere <span>Projekte</span> auf einen Blick</h2>
+    <p class="section-subtitle">Echte Installationen von Ambiente Solar in Frankfurt und Umgebung – klicken Sie auf einen Punkt, um Details, Fotos und Videos zu sehen.</p>
   </div>
-  <div class="projekte-grid">
-    <div class="projekt-card">
-      <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt="100 kWp">
-      <div class="projekt-overlay">
-        <h4>Gewerbeanlage</h4>
-        <span>100 kWp · Frankfurt</span>
+
+  <div class="radar-wrapper">
+    <div class="radar-container" aria-label="Interaktives Projekt-Radar">
+      <div class="radar-screen">
+        <div class="radar-rings"></div>
+        <div class="radar-cross"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center" aria-hidden="true"></div>
+
+        <button type="button" class="radar-dot" data-project="0" style="top:32%; left:60%;" aria-label="Projekt Gewerbeanlage 100 kWp Frankfurt">
+          <span class="radar-dot-inner">1</span>
+          <span class="radar-tooltip">Gewerbeanlage · 100 kWp</span>
+        </button>
+        <button type="button" class="radar-dot" data-project="1" style="top:24%; left:38%;" aria-label="Projekt Flachdachanlage 146 kWp Rhein-Main">
+          <span class="radar-dot-inner">2</span>
+          <span class="radar-tooltip">Flachdachanlage · 146 kWp</span>
+        </button>
+        <button type="button" class="radar-dot" data-project="2" style="top:62%; left:30%;" aria-label="Projekt Gewerbedach 34 kWp Rhein-Main">
+          <span class="radar-dot-inner">3</span>
+          <span class="radar-tooltip">Gewerbedach · 34 kWp</span>
+        </button>
+        <button type="button" class="radar-dot" data-project="3" style="top:42%; left:72%;" aria-label="Projekt Einfamilienhaus 112 kWp Frankfurt">
+          <span class="radar-dot-inner">4</span>
+          <span class="radar-tooltip">Einfamilienhaus · 112 kWp</span>
+        </button>
+        <button type="button" class="radar-dot" data-project="4" style="top:74%; left:55%;" aria-label="Projekt Einfamilienhaus 56 kWp Darmstadt">
+          <span class="radar-dot-inner">5</span>
+          <span class="radar-tooltip">Einfamilienhaus · 56 kWp</span>
+        </button>
+        <button type="button" class="radar-dot" data-project="5" style="top:55%; left:78%;" aria-label="Projekt Einfamilienhaus 7 kWp Frankfurt">
+          <span class="radar-dot-inner">6</span>
+          <span class="radar-tooltip">Einfamilienhaus · 7 kWp</span>
+        </button>
+        <button type="button" class="radar-dot" data-project="6" style="top:35%; left:25%;" aria-label="Projekt Fassadenmontage mit Vogelschutz Frankfurt">
+          <span class="radar-dot-inner">7</span>
+          <span class="radar-tooltip">Fassade & Vogelschutz</span>
+        </button>
       </div>
     </div>
-    <div class="projekt-card">
-      <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/FlachDach-146-KWP.jpg" alt="146 kWp Flachdach">
-      <div class="projekt-overlay">
-        <h4>Flachdachanlage</h4>
-        <span>146 kWp · Rhein-Main</span>
-      </div>
+
+    <div class="radar-legend">
+      <div class="radar-legend-title">Aktive Standorte</div>
+      <button type="button" class="legend-item" data-project="0">
+        <span class="legend-num">1</span>
+        <span class="legend-text"><strong>Gewerbeanlage</strong><span>100 kWp · Frankfurt</span></span>
+      </button>
+      <button type="button" class="legend-item" data-project="1">
+        <span class="legend-num">2</span>
+        <span class="legend-text"><strong>Flachdachanlage</strong><span>146 kWp · Rhein-Main</span></span>
+      </button>
+      <button type="button" class="legend-item" data-project="2">
+        <span class="legend-num">3</span>
+        <span class="legend-text"><strong>Gewerbedach</strong><span>34 kWp · Rhein-Main</span></span>
+      </button>
+      <button type="button" class="legend-item" data-project="3">
+        <span class="legend-num">4</span>
+        <span class="legend-text"><strong>Einfamilienhaus</strong><span>112 kWp · Frankfurt</span></span>
+      </button>
+      <button type="button" class="legend-item" data-project="4">
+        <span class="legend-num">5</span>
+        <span class="legend-text"><strong>Einfamilienhaus</strong><span>56 kWp · Darmstadt</span></span>
+      </button>
+      <button type="button" class="legend-item" data-project="5">
+        <span class="legend-num">6</span>
+        <span class="legend-text"><strong>Einfamilienhaus</strong><span>7 kWp · Frankfurt</span></span>
+      </button>
+      <button type="button" class="legend-item" data-project="6">
+        <span class="legend-num">7</span>
+        <span class="legend-text"><strong>Fassadenmontage</strong><span>Vogelschutz · Frankfurt</span></span>
+      </button>
     </div>
-    <div class="projekt-card">
-      <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/34KWP.jpg" alt="34 kWp">
-      <div class="projekt-overlay">
-        <h4>Gewerbedach</h4>
-        <span>34 kWp · Rhein-Main</span>
+  </div>
+
+  <!-- MODAL -->
+  <div class="projekt-modal" id="projektModal" role="dialog" aria-modal="true" aria-labelledby="projektModalTitle">
+    <div class="projekt-modal-content">
+      <div class="projekt-modal-header">
+        <div>
+          <h3 id="projektModalTitle">Projektname</h3>
+          <div class="meta" id="projektModalMeta">– kWp · Standort</div>
+        </div>
+        <button type="button" class="projekt-modal-close" id="projektModalClose" aria-label="Schließen">✕</button>
       </div>
-    </div>
-    <div class="projekt-card">
-      <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/112-kWP-Bild-1.jpg" alt="112 kWp">
-      <div class="projekt-overlay">
-        <h4>Einfamilienhaus</h4>
-        <span>112 kWp · Frankfurt</span>
-      </div>
-    </div>
-    <div class="projekt-card">
-      <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg" alt="56 kWp">
-      <div class="projekt-overlay">
-        <h4>Einfamilienhaus</h4>
-        <span>56 kWp · Darmstadt</span>
-      </div>
-    </div>
-    <div class="projekt-card">
-      <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt="7 kWp">
-      <div class="projekt-overlay">
-        <h4>Einfamilienhaus</h4>
-        <span>7 kWp · Frankfurt</span>
+      <div class="projekt-carousel" id="projektCarousel"></div>
+      <div class="projekt-modal-body">
+        <p id="projektModalDesc"></p>
+        <div class="projekt-stats" id="projektStats"></div>
       </div>
     </div>
   </div>
@@ -1831,6 +2313,239 @@
   if (localStorage.getItem('cookies-ok')) {
     document.getElementById('cookie-banner').style.display = 'none';
   }
+
+  /* ===== PROJEKT-RADAR ===== */
+  const projects = [
+    {
+      title: 'Gewerbeanlage',
+      meta: '100 kWp · Frankfurt',
+      desc: 'Großflächige Photovoltaikanlage auf einem Gewerbedach in Frankfurt. Optimiert für hohe Eigenverbrauchsquote und schnelle Amortisation.',
+      stats: [
+        { val: '100 kWp', label: 'Leistung' },
+        { val: '~95.000 kWh', label: 'Jahresertrag' },
+        { val: '~55 t', label: 'CO₂ / Jahr' }
+      ],
+      media: [
+        { type: 'image', src: 'https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg' },
+        { type: 'video', src: 'drone-video.mp4' },
+        { type: 'image', src: 'fotos/fassade-cropped.jpeg' }
+      ]
+    },
+    {
+      title: 'Flachdachanlage',
+      meta: '146 kWp · Rhein-Main',
+      desc: 'Flachdach-Großanlage mit Aufständerung und optimiertem Reihenabstand für maximalen Ertrag bei minimaler Verschattung.',
+      stats: [
+        { val: '146 kWp', label: 'Leistung' },
+        { val: '~138.000 kWh', label: 'Jahresertrag' },
+        { val: '~80 t', label: 'CO₂ / Jahr' }
+      ],
+      media: [
+        { type: 'image', src: 'https://www.ambiente-solar.de/wp-content/uploads/2024/01/FlachDach-146-KWP.jpg' },
+        { type: 'video', src: 'drone-video.mp4' }
+      ]
+    },
+    {
+      title: 'Gewerbedach',
+      meta: '34 kWp · Rhein-Main',
+      desc: 'Mittelgroße Gewerbeanlage mit Eigenverbrauchsoptimierung. Ideal für kleine und mittelständische Unternehmen.',
+      stats: [
+        { val: '34 kWp', label: 'Leistung' },
+        { val: '~32.000 kWh', label: 'Jahresertrag' },
+        { val: '~18 t', label: 'CO₂ / Jahr' }
+      ],
+      media: [
+        { type: 'image', src: 'https://www.ambiente-solar.de/wp-content/uploads/2024/01/34KWP.jpg' }
+      ]
+    },
+    {
+      title: 'Einfamilienhaus',
+      meta: '112 kWp · Frankfurt',
+      desc: 'Premium-Anlage für ein großes Einfamilienhaus mit Speicher und Wallbox. Höchste Qualität bei Komponenten und Montage.',
+      stats: [
+        { val: '112 kWp', label: 'Leistung' },
+        { val: '~106.000 kWh', label: 'Jahresertrag' },
+        { val: '~60 t', label: 'CO₂ / Jahr' }
+      ],
+      media: [
+        { type: 'image', src: 'https://www.ambiente-solar.de/wp-content/uploads/2024/01/112-kWP-Bild-1.jpg' }
+      ]
+    },
+    {
+      title: 'Einfamilienhaus',
+      meta: '56 kWp · Darmstadt',
+      desc: 'Mittelgroße Wohnanlage mit Batteriespeicher. Hohe Autarkie und optimaler Eigenverbrauch durch intelligente Steuerung.',
+      stats: [
+        { val: '56 kWp', label: 'Leistung' },
+        { val: '~53.000 kWh', label: 'Jahresertrag' },
+        { val: '~30 t', label: 'CO₂ / Jahr' }
+      ],
+      media: [
+        { type: 'image', src: 'https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg' }
+      ]
+    },
+    {
+      title: 'Einfamilienhaus',
+      meta: '7 kWp · Frankfurt',
+      desc: 'Klassische Wohnanlage mit kompletter Eigenverbrauchsabdeckung. Perfekte Lösung für Familien, die unabhängig werden wollen.',
+      stats: [
+        { val: '7 kWp', label: 'Leistung' },
+        { val: '~6.700 kWh', label: 'Jahresertrag' },
+        { val: '~4 t', label: 'CO₂ / Jahr' }
+      ],
+      media: [
+        { type: 'image', src: 'https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg' }
+      ]
+    },
+    {
+      title: 'Fassadenmontage mit Vogelschutz',
+      meta: 'Spezialprojekt · Frankfurt',
+      desc: 'Anspruchsvolle Fassadeninstallation mit integriertem Vogelschutz. Ästhetik und Naturschutz in einem System vereint.',
+      stats: [
+        { val: 'Fassade', label: 'Montagetyp' },
+        { val: 'Aktiv', label: 'Vogelschutz' },
+        { val: 'Custom', label: 'Konfiguration' }
+      ],
+      media: [
+        { type: 'image', src: 'fotos/fassade-cropped.jpeg' },
+        { type: 'image', src: 'fotos/PHOTO-2026-04-26-15-16-32.jpeg' }
+      ]
+    }
+  ];
+
+  const modal = document.getElementById('projektModal');
+  const modalTitle = document.getElementById('projektModalTitle');
+  const modalMeta = document.getElementById('projektModalMeta');
+  const modalDesc = document.getElementById('projektModalDesc');
+  const modalStats = document.getElementById('projektStats');
+  const carousel = document.getElementById('projektCarousel');
+  const modalClose = document.getElementById('projektModalClose');
+
+  let carouselTimer = null;
+  let currentSlide = 0;
+  let currentSlides = [];
+
+  function clearCarousel() {
+    if (carouselTimer) { clearTimeout(carouselTimer); carouselTimer = null; }
+    carousel.querySelectorAll('video').forEach(v => { try { v.pause(); } catch(e){} });
+    carousel.innerHTML = '';
+    currentSlides = [];
+    currentSlide = 0;
+  }
+
+  function showSlide(index) {
+    currentSlides.forEach((slide, i) => {
+      const isActive = i === index;
+      slide.classList.toggle('active', isActive);
+      const video = slide.querySelector('video');
+      if (video) {
+        if (isActive) { video.currentTime = 0; video.play().catch(() => {}); }
+        else { video.pause(); }
+      }
+    });
+    const indicators = carousel.querySelectorAll('.carousel-indicator');
+    indicators.forEach((ind, i) => ind.classList.toggle('active', i === index));
+    currentSlide = index;
+  }
+
+  function scheduleNext(delay) {
+    if (carouselTimer) clearTimeout(carouselTimer);
+    if (currentSlides.length <= 1) return;
+    carouselTimer = setTimeout(() => {
+      const next = (currentSlide + 1) % currentSlides.length;
+      showSlide(next);
+      const nextSlide = currentSlides[next];
+      const video = nextSlide.querySelector('video');
+      if (video) {
+        video.onended = () => scheduleNext(0);
+      } else {
+        scheduleNext(4500);
+      }
+    }, delay);
+  }
+
+  function buildCarousel(media) {
+    clearCarousel();
+    media.forEach((m, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+      if (m.type === 'video') {
+        const v = document.createElement('video');
+        v.src = m.src;
+        v.muted = true;
+        v.playsInline = true;
+        v.preload = 'metadata';
+        slide.appendChild(v);
+      } else {
+        const img = document.createElement('img');
+        img.src = m.src;
+        img.alt = '';
+        img.loading = 'lazy';
+        slide.appendChild(img);
+      }
+      carousel.appendChild(slide);
+      currentSlides.push(slide);
+    });
+
+    if (media.length > 1) {
+      const ind = document.createElement('div');
+      ind.className = 'carousel-indicators';
+      media.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'carousel-indicator' + (i === 0 ? ' active' : '');
+        b.setAttribute('aria-label', 'Slide ' + (i + 1));
+        b.addEventListener('click', () => { showSlide(i); kickOff(); });
+        ind.appendChild(b);
+      });
+      carousel.appendChild(ind);
+    }
+
+    kickOff();
+  }
+
+  function kickOff() {
+    const first = currentSlides[currentSlide];
+    if (!first) return;
+    const video = first.querySelector('video');
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      video.onended = () => scheduleNext(0);
+    } else {
+      scheduleNext(4500);
+    }
+  }
+
+  function openProject(idx) {
+    const p = projects[idx];
+    if (!p) return;
+    modalTitle.textContent = p.title;
+    modalMeta.textContent = p.meta;
+    modalDesc.textContent = p.desc;
+    modalStats.innerHTML = p.stats.map(s =>
+      '<div class="projekt-stat"><strong>' + s.val + '</strong><span>' + s.label + '</span></div>'
+    ).join('');
+    buildCarousel(p.media);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProject() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    clearCarousel();
+  }
+
+  document.querySelectorAll('[data-project]').forEach(el => {
+    el.addEventListener('click', () => openProject(parseInt(el.dataset.project, 10)));
+  });
+
+  modalClose.addEventListener('click', closeProject);
+  modal.addEventListener('click', e => { if (e.target === modal) closeProject(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeProject();
+  });
 </script>
 </body>
 </html>

@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="UTF-8">
+
+<script>
+/* Offline fallback: when an external image can't be fetched, replace with a branded SVG using alt text */
+(function(){
+  function svgFor(label){
+    label = (label||'Solaranlage').toString();
+    var grid='';
+    for(var r=0;r<6;r++) for(var c=0;c<10;c++){
+      var x=c*70+40, y=r*70+150;
+      grid+='<rect x="'+x+'" y="'+y+'" width="60" height="60" rx="3" fill="#0e2a3a" stroke="#1a4d6b" stroke-width="1"/>';
+      grid+='<line x1="'+(x+30)+'" y1="'+y+'" x2="'+(x+30)+'" y2="'+(y+60)+'" stroke="#1a4d6b" stroke-width="0.5"/>';
+      grid+='<line x1="'+x+'" y1="'+(y+30)+'" x2="'+(x+60)+'" y2="'+(y+30)+'" stroke="#1a4d6b" stroke-width="0.5"/>';
+    }
+    var svg=
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">'+
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1722"/><stop offset="1" stop-color="#050a10"/></linearGradient></defs>'+
+      '<rect width="800" height="600" fill="url(#g)"/>'+
+      '<circle cx="660" cy="100" r="50" fill="#facc14" opacity="0.85"/>'+
+      '<circle cx="660" cy="100" r="80" fill="#facc14" opacity="0.15"/>'+
+      grid+
+      '<text x="40" y="80" font-family="Space Grotesk,sans-serif" font-weight="800" font-size="44" fill="#fff" letter-spacing="-1">'+label.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</text>'+
+      '<text x="40" y="115" font-family="Inter,sans-serif" font-weight="500" font-size="16" fill="#129ddb" letter-spacing="3">AMBIENTE SOLAR</text>'+
+      '</svg>';
+    return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
+  }
+  function fixImg(img){
+    var alt=img.getAttribute('alt')||'';
+    // derive a sensible label
+    var ctx='';
+    var node=img.closest('.node');
+    if(node){
+      var kwp=node.querySelector('.kwp'); var loc=node.querySelector('.loc');
+      ctx=(kwp?kwp.textContent:'')+(loc?' · '+loc.textContent:'');
+    }
+    img.src=svgFor(ctx||alt||'Solaranlage');
+  }
+  function processAll(){
+    document.querySelectorAll('img').forEach(function(img){
+      if(img.complete && img.naturalWidth===0) fixImg(img);
+      img.addEventListener('error',function(){ fixImg(img); },{once:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',processAll);
+  else processAll();
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambiente Solar – Photovoltaik Frankfurt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("37a3642d-8dc7-4ae7-9ec6-1f86ed735802") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("ed827e05-50c4-4b0b-b42f-c0e2218d366d") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("2808d2a8-5d9d-428e-a484-52b48079fc60") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("951d7640-cdd0-4105-9e8f-1b950c809b20") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("6fa61eca-23af-474a-9a27-b3e5ddfd00a6") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("ce45b34e-facc-425c-bc01-0c8567668aa4") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("a62a728c-ff6b-4635-bc6c-8e8970ff0dd8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --accent:#129ddb;
+  --accent-2:#0d85c0;
+  --accent-soft:#e5f4fb;
+  --navy:#129ddb;
+  --navy-2:#0d85c0;
+  --navy-soft:#4cb5e3;
+  --gold:#facc14;
+  --gold-2:#e8b80a;
+  --zinc-950:#09090b;
+  --zinc-900:#18181b;
+  --zinc-800:#27272a;
+  --zinc-700:#3f3f46;
+  --zinc-500:#71717a;
+  --zinc-400:#a1a1aa;
+  --zinc-300:#d4d4d8;
+  --zinc-200:#e4e4e7;
+  --zinc-100:#f4f4f5;
+  --zinc-50:#fafafa;
+  --black:#09090b;
+  --ink:#18181b;
+  --muted:#71717a;
+  --line:#e4e4e7;
+  --bg:#ffffff;
+  --soft:#fafafa;
+  --soft-2:#f4f4f5;
+  --green:#10b981;
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --display:-apple-system,'SF Pro Display','Inter',ui-sans-serif,system-ui,sans-serif;
+  --body:-apple-system,'SF Pro Text','Inter',ui-sans-serif,system-ui,sans-serif;
+}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--body);font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* ===== layout ===== */
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+section{padding:120px 0;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--zinc-500);margin-bottom:24px}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
+.eyebrow .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;letter-spacing:-0.045em;color:var(--black);line-height:1.0}
+h1{font-size:clamp(56px,8vw,120px);font-weight:700;letter-spacing:-0.045em;line-height:.92}
+h1 strong{font-weight:900;letter-spacing:-.055em}
+h2{font-size:clamp(40px,5.2vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
+h2 strong{font-weight:900;letter-spacing:-.05em}
+h3{font-size:22px;font-weight:700;color:var(--black);letter-spacing:-0.02em}
+p{font-weight:400;color:var(--zinc-700);font-size:16px;line-height:1.7}
+.lead{font-size:19px;line-height:1.6;color:var(--zinc-700);font-weight:400;max-width:54ch;letter-spacing:-.008em}
+
+/* ===== nav ===== */
+nav.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 40px;
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:saturate(180%) blur(18px);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:60px;height:60px;display:grid;place-items:center;color:var(--accent)}
+.brand-mark svg,.brand-mark img{width:60px;height:60px;display:block;object-fit:contain}
+.brand-name{font-family:var(--display);font-weight:800;color:var(--black);font-size:19px;letter-spacing:.04em;line-height:1;text-transform:uppercase}
+.brand-sub{display:none}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-size:14px;color:var(--ink);font-weight:500;opacity:.85;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--navy)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;font-size:14px;padding:13px 22px;border-radius:999px;transition:transform .35s var(--spring),background .25s,color .25s,border-color .25s;letter-spacing:-.005em;will-change:transform}
+.btn:active{transform:scale(.98)}
+.btn-gold,.btn-navy{background:var(--black);color:#fff}
+.btn-gold:hover,.btn-navy:hover{background:var(--zinc-800);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--black);border:1px solid var(--black)}
+.btn-ghost:hover{background:var(--black);color:#fff}
+.btn-lg{padding:16px 30px;font-size:15px}
+.btn .arr{transition:transform .25s}
+.btn:hover .arr{transform:translateX(3px)}
+
+/* ===== hero ===== */
+.hero{padding:140px 0 0;position:relative;overflow:hidden}
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;
+  padding-bottom:96px;border-bottom:1px solid var(--line);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:6px 14px 6px 10px;border-radius:999px;
+  background:#fff;border:1px solid var(--line);
+  font-size:12px;font-weight:500;color:var(--zinc-700);letter-spacing:.02em;
+  margin-bottom:32px;
+}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(31,157,110,.18)}
+.hero h1 span{display:inline;color:var(--accent);font-style:italic;font-weight:500}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+.hero-meta{
+  display:grid;grid-template-columns:repeat(3,auto);gap:36px;margin-top:48px;
+}
+.hero-meta-item{padding-top:18px;border-top:1px solid var(--line)}
+.hero-meta-item .num{font-family:var(--display);font-weight:800;color:var(--black);font-size:38px;letter-spacing:-0.045em;line-height:1}
+.hero-meta-item .num em{font-style:normal;color:var(--accent)}
+.hero-meta-item .lab{font-size:12px;color:var(--zinc-500);margin-top:8px;letter-spacing:.02em}
+
+.hero-vis{position:relative;align-self:stretch;min-height:560px}
+.hero-photo{position:relative;height:100%;min-height:600px;border-radius:6px;overflow:hidden;background:var(--zinc-100);isolation:isolate}
+.hero-photo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+.hero-tile{
+  position:absolute;left:20px;bottom:20px;right:20px;
+  background:rgba(9,9,11,.55);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:14px 18px;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+  color:#fff;
+}
+.hero-tile .icn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;color:var(--accent)}
+.hero-tile .ti{font-family:var(--display);font-weight:700;color:#fff;font-size:14px}
+.hero-tile .sb{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
+.hero-tile .pulse{
+  width:8px;height:8px;border-radius:50%;background:var(--accent);
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,59,59,.55)}70%{box-shadow:0 0 0 12px rgba(255,59,59,0)}100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}}
+
+.hero-side{position:absolute;top:20px;left:20px;background:rgba(9,9,11,.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:8px 16px 8px 8px;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:.02em}
+.hero-side .k{font-family:var(--display);font-weight:800;color:var(--accent);font-size:14px;letter-spacing:-.02em;background:rgba(18,157,219,.15);padding:4px 10px;border-radius:999px}
+
+/* marquee under hero */
+.marquee{background:var(--black);color:#fff;overflow:hidden}
+.marquee-track{
+  display:flex;gap:60px;padding:22px 0;white-space:nowrap;
+  animation:scroll 38s linear infinite;
+  font-family:var(--display);font-size:14px;letter-spacing:.08em;text-transform:uppercase;
+}
+.marquee-track span{display:inline-flex;align-items:center;gap:60px;color:rgba(255,255,255,.85)}
+.marquee-track span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== about ===== */
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:260px 220px;gap:12px}
+.about-imgs > *{border-radius:6px;overflow:hidden;background:var(--zinc-100)}
+.about-imgs > *:first-child{grid-column:1 / -1}
+.about-imgs img{width:100%;height:100%;object-fit:cover}
+.about-text .lead{margin-bottom:18px}
+.about-list{list-style:none;margin:30px 0 36px;display:grid;gap:14px}
+.about-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink);font-weight:400}
+.about-list .chk{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+
+/* ===== leistungen ===== */
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:60px;flex-wrap:wrap}
+.section-head .lead{margin:0;max-width:46ch}
+.leist-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:0;border-top:1px solid var(--line)}
+.leist{position:relative;background:#fff;display:flex;flex-direction:column;min-height:380px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);overflow:hidden;transition:background .35s}
+.leist:hover{background:var(--zinc-50)}
+.leist .ph{height:180px;overflow:hidden;background:var(--zinc-100);position:relative}
+.leist .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--spring);filter:saturate(.9)}
+.leist:hover .ph img{transform:scale(1.04)}
+.leist .bd{padding:26px 24px 28px;display:flex;flex-direction:column;gap:8px;flex:1}
+.leist .num{font-family:var(--body);font-weight:500;color:var(--zinc-400);font-size:11px;letter-spacing:.16em;font-variant-numeric:tabular-nums}
+.leist h3{font-size:20px;color:var(--black);font-weight:700;letter-spacing:-0.025em;margin-top:2px}
+.leist p{font-size:14px;color:var(--zinc-500);line-height:1.65}
+/* 8 cards: 2 rows of 4 - simple 12-col split */
+.leist:nth-child(1),.leist:nth-child(2),.leist:nth-child(3),.leist:nth-child(4),
+.leist:nth-child(5),.leist:nth-child(6),.leist:nth-child(7),.leist:nth-child(8){grid-column:span 3}
+
+/* ===== radar / projekte ===== */
+.projekte{background:#0A0A0A;overflow:hidden;color:#fff}
+.projekte h2,.projekte .eyebrow{color:#fff}
+.projekte .eyebrow::before{background:var(--gold)}
+.projekte .lead{color:rgba(255,255,255,.7)}
+.radar-frame{
+  position:relative;width:100%;
+  aspect-ratio: 1 / 0.78;
+  max-width:1180px;margin:0 auto;
+  border-radius:24px;
+  background:radial-gradient(ellipse at center,#181818 0%,#0f0f0f 60%,#080808 100%);
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+/* grid backdrop */
+.radar-frame::before{content:"";position:absolute;inset:0;background-image:linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
+.radar-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.radar-rings circle{fill:none;stroke:rgba(18,157,219,.22);stroke-width:1}
+.radar-cross line{stroke:rgba(255,255,255,.06);stroke-width:1;stroke-dasharray:2 8}
+.radar-line{stroke:rgba(18,157,219,.55);stroke-width:1;fill:none}
+.radar-line-dot{fill:var(--accent)}
+.sweep{
+  position:absolute;left:50%;top:50%;width:50%;height:50%;
+  transform-origin:0 0;
+  background:conic-gradient(from 0deg,rgba(18,157,219,0) 0deg,rgba(18,157,219,.28) 40deg,rgba(18,157,219,0) 70deg);
+  border-radius:0 100% 0 0;
+  animation:sweep 7s linear infinite;
+  pointer-events:none;
+  mix-blend-mode:multiply;
+}
+@keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(18,157,219,.4);z-index:5}
+.radar-center::before, .radar-center::after{
+  content:"";position:absolute;border-radius:50%;
+  border:1px solid rgba(18,157,219,.35)}
+.radar-center::before{inset:-14px;animation:ringp 3s ease-out infinite}
+.radar-center::after{inset:-30px;animation:ringp 3s ease-out infinite .8s}
+@keyframes ringp{0%{opacity:.6;transform:scale(.85)}100%{opacity:0;transform:scale(1.2)}}
+.radar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1}
+.radar-logo .glyph{width:60px;height:60px;color:var(--accent);display:grid;place-items:center}
+.radar-logo .glyph img{width:60px;height:60px;object-fit:contain}
+.radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.radar-logo .sb{font-size:9px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+
+/* radar sun rays */
+.sun-rays{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:3}
+.sun-rays .ray{position:absolute;left:0;top:-1px;height:2px;width:46%;background:linear-gradient(90deg,rgba(250,204,20,.85),rgba(18,157,219,.45) 60%,transparent);transform-origin:0 50%;border-radius:2px;box-shadow:0 0 12px rgba(250,204,20,.5);opacity:0;animation:rayPulse 4s ease-in-out infinite}
+@keyframes rayPulse{0%,100%{opacity:0}45%{opacity:.9}}
+.sun-glow{position:absolute;left:50%;top:50%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(250,204,20,.35),rgba(18,157,219,.18) 40%,transparent 70%);transform:translate(-50%,-50%);animation:sunPulse 4s ease-in-out infinite;pointer-events:none;z-index:2}
+@keyframes sunPulse{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.9)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.1)}}
+.radar-line{animation:linePulse 3.2s ease-in-out infinite}
+@keyframes linePulse{0%,100%{stroke:rgba(18,157,219,.35)}50%{stroke:rgba(250,204,20,.75)}}
+
+/* project nodes */
+.node{position:absolute;width:172px;background:rgba(24,24,27,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;transform:translate(-50%,-50%);transition:transform .45s var(--spring),border-color .25s;z-index:4}
+.node:hover{transform:translate(-50%,-50%) scale(1.05);border-color:rgba(18,157,219,.5);z-index:6}
+.node img{width:100%;height:90px;object-fit:cover;display:block}
+.node .meta{padding:10px 12px}
+.node .kwp{font-family:var(--display);font-weight:800;color:#fff;font-size:18px;letter-spacing:-.03em;line-height:1}
+.node .loc{font-size:11px;color:rgba(255,255,255,.6);margin-top:4px;display:flex;align-items:center;gap:6px;letter-spacing:.02em}
+.node .loc::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.node .pin{position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(18,157,219,.25),0 0 12px var(--accent)}
+
+.radar-legend{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px 8px 8px;font-size:12px;color:rgba(255,255,255,.75)}
+.radar-legend .lg{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;font-family:var(--display)}
+.radar-corners{
+  position:absolute;top:24px;right:24px;display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+  font-family:var(--display);font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;
+}
+.radar-corners .dt{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:none}
+.radar-corners .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);display:inline-block;margin-right:6px;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.radar-coords{position:absolute;left:24px;top:24px;font-family:'Space Grotesk',monospace;font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.06em}
+.radar-cities{
+  position:absolute;inset:0;pointer-events:none;
+}
+.city-tag{position:absolute;font-family:var(--display);font-size:11px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase}
+
+/* ===== preise ===== */
+.preise{background:#fff}
+.preis-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.preis{background:#fff;padding:38px 28px 32px;display:flex;flex-direction:column;gap:8px;position:relative;border-bottom:1px solid var(--line);border-right:1px solid var(--line);transition:background .3s}
+.preis:first-child{border-left:1px solid var(--line)}
+.preis:hover{background:var(--zinc-50)}
+.preis.feat{background:var(--black);color:#fff}
+.preis.feat:hover{background:var(--zinc-900)}
+.preis.feat .nm{color:var(--accent)}
+.preis.feat .am{color:#fff}
+.preis.feat .sb{color:var(--zinc-400)}
+.preis.feat .nt{background:rgba(18,157,219,.15);color:var(--accent)}
+.preis.feat .preis-foot{color:var(--zinc-400);border-color:rgba(255,255,255,.1)}
+.preis .tg{position:absolute;top:-1px;left:-1px;background:var(--accent);color:#fff;font-family:var(--body);font-weight:600;font-size:10px;letter-spacing:.14em;padding:6px 12px;text-transform:uppercase}
+.preis .nm{font-family:var(--body);font-weight:500;color:var(--zinc-500);font-size:11px;text-transform:uppercase;letter-spacing:.16em;margin-top:8px}
+.preis .am{font-family:var(--display);font-weight:800;font-size:44px;color:var(--black);letter-spacing:-.05em;line-height:1;margin-top:14px}
+.preis .sb{font-size:13px;color:var(--zinc-500);margin-top:4px}
+.preis .nt{margin-top:16px;align-self:flex-start;font-size:11px;font-weight:500;background:var(--zinc-100);color:var(--zinc-700);padding:5px 10px;border-radius:6px;letter-spacing:.02em}
+.preis-foot{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--zinc-500);font-variant-numeric:tabular-nums}
+
+
+/* ===== kontakt ===== */
+.kontakt{background:#fff}
+.kontakt-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
+.kontakt-info .lead{margin-bottom:36px}
+.kontakt-list{display:grid;gap:18px;margin-bottom:32px}
+.kontakt-row{
+  display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:flex-start;
+  padding:18px 0;border-top:1px solid var(--line);
+}
+.kontakt-row:last-child{border-bottom:1px solid var(--line)}
+.kontakt-row .ic{width:42px;height:42px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.kontakt-row .lb{font-family:var(--body);font-weight:500;color:var(--zinc-500);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px}
+.kontakt-row .vl{font-size:15px;color:var(--ink)}
+.kontakt-card{background:var(--zinc-50);border:1px solid var(--line);border-radius:8px;padding:42px}
+.choose-grid{display:grid;gap:14px;margin-top:24px}
+.choose{
+  display:grid;grid-template-columns:46px 1fr auto;gap:16px;align-items:center;
+  padding:20px 22px;border-radius:14px;text-align:left;
+  transition:transform .2s,background .2s;
+}
+.choose .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:18px}
+.choose .ti{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:-.01em}
+.choose .ds{font-size:13px;font-weight:300;opacity:.85;margin-top:2px}
+.choose-a{background:var(--black);color:#fff}
+.choose-a .ic{background:rgba(18,157,219,.18);color:var(--accent)}
+.choose-a:hover{background:var(--zinc-800);transform:translateY(-2px)}
+.choose-b{background:#fff;color:var(--black);border:1px solid var(--line)}
+.choose-b .ic{background:var(--accent-soft);color:var(--accent)}
+.choose-b:hover{border-color:var(--black);transform:translateY(-2px)}
+.choose .arr{font-family:var(--display);font-weight:700}
+.back{font-family:var(--body);font-weight:500;color:var(--accent);font-size:13px;display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;background:none;border:none;cursor:pointer}
+.back:hover{color:var(--accent-2)}
+.kform h3{font-size:24px;margin-bottom:6px;font-weight:700}
+.kform .sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.fg{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.fg label{font-family:var(--body);font-size:11px;font-weight:500;color:var(--zinc-500);letter-spacing:.16em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{font-family:inherit;font-size:14px;color:var(--ink);padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(18,157,219,.15)}
+.fg textarea{min-height:110px;resize:vertical}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dsr{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:14px 0 18px}
+.dsr input{margin-top:3px;accent-color:var(--accent)}
+.dsr a{color:var(--accent);text-decoration:underline}
+.btn-form{width:100%;background:var(--accent);color:#fff;font-family:var(--body);font-weight:600;font-size:14px;padding:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .25s,transform .35s var(--spring);letter-spacing:.01em}
+.btn-form:hover{background:var(--accent-2)}
+.btn-form:active{transform:scale(.98)}
+.btn-form-navy{background:var(--black)}
+.btn-form-navy:hover{background:var(--zinc-800)}
+
+/* konzept steps */
+.kstep{margin-bottom:24px}
+.kstep-l{display:flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;color:var(--zinc-500);font-size:11px;margin-bottom:12px;letter-spacing:.16em;text-transform:uppercase}
+.kstep-l .n{width:22px;height:22px;border-radius:50%;background:var(--black);color:var(--accent);display:grid;place-items:center;font-size:10px;font-weight:700;letter-spacing:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:13px;color:var(--ink);font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:all .2s;cursor:pointer}
+.opt:hover{border-color:var(--black);color:var(--black)}
+.opt.sel{background:var(--black);border-color:var(--black);color:#fff}
+.tog{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tog .opt{justify-content:center}
+.opt.no{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+
+/* ===== map ===== */
+.map-wrap{position:relative;height:420px;overflow:hidden}
+.map-wrap iframe{width:100%;height:100%;border:none;display:block;filter:grayscale(0.2)}
+.map-pin{position:absolute;top:24px;left:50%;transform:translateX(-50%);background:#fff;color:var(--black);padding:10px 18px 10px 14px;border-radius:999px;font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:.04em;display:inline-flex;align-items:center;gap:10px;pointer-events:none;border:1px solid var(--line)}
+.map-pin::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(18,157,219,.18)}
+
+/* ===== partner ===== */
+.partner{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.partner-row{margin-bottom:36px}
+.partner-row:last-child{margin-bottom:0}
+.partner-cap{font-family:var(--body);font-size:11px;font-weight:500;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:24px}
+.partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1000px;margin:0 auto}
+.partner-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:border-color .25s,transform .35s var(--spring)}
+.partner-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.partner-card img{height:34px;width:auto;max-width:120px;object-fit:contain;filter:grayscale(40%);opacity:.85}
+.partner-card:hover img{filter:grayscale(0);opacity:1}
+.partner-mono{height:38px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;color:var(--black);letter-spacing:-.04em;opacity:.92}
+.partner-card:hover .partner-mono{opacity:1}
+.partner-card .nm{font-family:var(--display);font-weight:700;color:var(--black);font-size:14px;letter-spacing:-.01em}
+.partner-card .tg{font-size:11px;color:var(--zinc-500);letter-spacing:.1em;text-transform:uppercase}
+
+/* ===== bewertungen ===== */
+.bewertungen{background:#000;color:#fff;position:relative;overflow:hidden}
+.bewertungen::after{content:'“';position:absolute;top:40px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk',serif;font-size:340px;line-height:.7;color:rgba(250,204,20,.08);font-weight:700;pointer-events:none}
+.bewertungen::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at top right, rgba(245,166,35,.1), transparent 50%);
+}
+.bewertungen .eyebrow{color:#fff}
+.bewertungen .eyebrow::before{background:var(--gold)}
+.bewertungen h2{color:#fff}
+.bewertungen h2{color:#fff}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:60px;position:relative}
+.test{background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:30px;display:flex;flex-direction:column;gap:18px;transition:border-color .25s,background .25s}
+.test:hover{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.18)}
+.test .stars{color:var(--gold);font-size:13px;letter-spacing:.2em}
+.test p{color:rgba(255,255,255,.85);font-size:15px;line-height:1.65;font-weight:400;font-style:normal;letter-spacing:-.01em}
+.test .au{display:flex;align-items:center;gap:12px;margin-top:auto}
+.test .av{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.02em}
+.test .nm{font-family:var(--display);font-weight:600;font-size:14px}
+.test .lc{font-size:12px;color:rgba(255,255,255,.55)}
+.social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative}
+.social{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:32px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;transition:background .25s,border-color .25s,transform .35s var(--spring)}
+.social:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);transform:translateY(-3px)}
+.social .ic{font-size:24px;margin-bottom:6px}
+.social .ti{font-family:var(--display);font-weight:600;font-size:16px}
+.social .ds{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:14px}
+.social .pill{background:var(--accent);color:#fff;font-family:var(--body);font-weight:500;font-size:12px;padding:8px 16px;border-radius:999px;letter-spacing:.02em}
+.social.alt .pill{background:#fff;color:var(--black)}
+.social img.qr{width:90px;height:90px;border-radius:8px;margin:6px 0}
+
+/* ===== footer ===== */
+footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:50px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-brand .brand-mark{width:44px;height:44px;color:var(--accent)}
+.foot-brand .brand-mark svg,.foot-brand .brand-mark img{width:44px;height:44px;object-fit:contain}
+.foot-brand .bn{font-family:var(--display);font-weight:800;color:#fff;font-size:17px;margin-top:14px;letter-spacing:.08em;text-transform:uppercase}
+.foot-brand p{margin-top:14px;font-size:14px;line-height:1.7;max-width:36ch}
+.foot-brand .ust{margin-top:18px;color:var(--accent);font-size:12px;font-family:var(--body);font-weight:500;letter-spacing:.04em}
+.foot-col h4{color:#fff;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px;color:var(--zinc-400)}
+.foot-col ul{list-style:none;display:grid;gap:10px}
+.foot-col a{font-size:14px;color:rgba(255,255,255,.6)}
+.foot-col a:hover{color:var(--accent)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:13px;color:rgba(255,255,255,.4)}
+.foot-bot a{color:rgba(255,255,255,.5)}
+.foot-bot a:hover{color:var(--accent)}
+
+/* whatsapp */
+.wa{position:fixed;bottom:28px;right:28px;z-index:90;background:#10b981;color:#fff;border-radius:999px;padding:14px 22px 14px 18px;display:flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;font-size:14px;transition:transform .35s var(--spring),background .25s}
+.wa:hover{background:#0ea571}
+.wa:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(31,157,110,.7)}
+.wa svg{width:22px;height:22px;fill:#fff}
+
+/* cookie */
+.cookie{position:fixed;bottom:24px;left:24px;right:auto;max-width:520px;z-index:120;background:var(--black);color:#fff;border:1px solid var(--zinc-800);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:18px}
+.cookie p{margin:0;font-size:13px;color:var(--zinc-300);font-weight:400}
+.cookie a{color:var(--accent);text-decoration:underline}
+.cookie .btn{padding:9px 18px;font-size:12px;background:var(--accent);color:#fff;white-space:nowrap}
+
+/* modals */
+.modal{position:fixed;inset:0;background:rgba(10,19,48,.7);z-index:200;display:none;overflow-y:auto;padding:50px 20px}
+.modal.show{display:block}
+.modal-card{
+  background:#fff;max-width:720px;margin:0 auto;border-radius:20px;padding:44px 46px;position:relative;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+}
+.modal-card h2{margin-bottom:24px;font-size:32px}
+.modal-card p{margin-bottom:14px;font-size:14px;color:var(--muted);line-height:1.7}
+.modal-card p strong{color:var(--ink);font-weight:600}
+.modal-x{position:absolute;top:18px;right:22px;font-size:24px;color:var(--muted);background:none;border:none;cursor:pointer}
+
+@media (max-width:1000px){
+  section{padding:80px 0}
+  .wrap{padding:0 24px}
+  nav.topbar{padding:14px 20px}
+  .nav-links{display:none}
+  .hero-grid,.about-grid,.kontakt-grid{grid-template-columns:1fr;gap:50px}
+  .hero{padding-top:110px}
+  .hero-vis{min-height:380px}
+  .hero-photo{min-height:380px}
+  .hero-meta{grid-template-columns:repeat(3,1fr);gap:20px}
+  .leist-grid{grid-template-columns:repeat(6,1fr)}
+  .leist:nth-child(n){grid-column:span 6}
+  @media (min-width:640px){.leist:nth-child(n){grid-column:span 3}}
+  .preis-grid{grid-template-columns:1fr 1fr}
+  .test-grid,.social-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .partner-grid{grid-template-columns:1fr 1fr}
+  .radar-frame{aspect-ratio:1/1.2}
+  .node{width:130px}
+  .node img{height:70px}
+  .node .kwp{font-size:15px}
+  .frow{grid-template-columns:1fr}
+  .cookie{left:16px;right:16px;max-width:none;flex-direction:column;align-items:stretch;text-align:center}
+  .map-pin{font-size:11px;padding:10px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="topbar">
+  <a href="#" class="brand">
+    <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
+    <div class="brand-name">AMBIENTE SOLAR</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#projekte">Projekte</a></li>
+    <li><a href="#preise">Preise</a></li>
+    <li><a href="#partner">Partner</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1>Solarenergie für<br><strong><span>Ihre Zukunft.</span></strong></h1>
+        <p class="lead" style="margin-top:24px">Professionelle Photovoltaik-Installation für Privat- und Gewerbekunden. Sparen Sie Energiekosten und werden Sie unabhängig vom Stromnetz.</p>
+        <div class="hero-actions">
+          <a href="#kontakt" class="btn btn-navy btn-lg">Kostenloses Angebot <span class="arr">→</span></a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><div class="num">200+</div><div class="lab">Installierte Anlagen</div></div>
+          <div class="hero-meta-item"><div class="num">25 J.</div><div class="lab">Modulgarantie</div></div>
+          <div class="hero-meta-item"><div class="num">0 %</div><div class="lab">MwSt. Wohngebäude</div></div>
+        </div>
+      </div>
+      <div class="hero-vis">
+        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" poster="695c7a07-969f-4d53-9d8c-c306e95c6ebe"><source src="3332ba9b-e502-4af1-8b35-ffee365dd8f1" type="video/mp4"></video></div>
+        <div class="hero-side">
+          <span class="k">100 kWp</span>
+          <span>Deutschlandweit&nbsp;·&nbsp;Live-Anlage</span>
+        </div>
+        <div class="hero-tile">
+          <div class="icn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </div>
+          <div>
+            <div class="ti">Drohnenaufnahme</div>
+            <div class="sb">Ambiente Solar · live</div>
+          </div>
+          <div class="pulse"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" style="margin-top:0;">
+    <div class="marquee-track">
+      <span>Photovoltaik · Planung · Installation · Beratung · Batteriespeicher · Wartung · Anlagenerweiterung · Fassadenmontage · Vogelschutz · Photovoltaik · Planung · Installation · Beratung · Batteriespeicher · Wartung · Anlagenerweiterung · Fassadenmontage · Vogelschutz</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-imgs">
+        <div><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt="Solaranlage 100 kWp"></div>
+        <div><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/34KWP.jpg" alt="Solaranlage 34 kWp"></div>
+        <div><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt="Solaranlage 7 kWp"></div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">Über uns</span>
+        <h2>Ihr Spezialist für<br><strong><span style="color:var(--navy)">Photovoltaik</span></strong><br>deutschlandweit.</h2>
+        <p class="lead" style="margin-top:24px">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für die Installation von Photovoltaikanlagen — für Privat- und Gewerbekunden deutschlandweit.</p>
+        <p class="lead">Wir begleiten Sie von der ersten Beratung über die Planung bis zur schlüsselfertigen Installation — kompetent, transparent und termingerecht.</p>
+        <ul class="about-list">
+          <li><span class="chk">✓</span>Individuelle Beratung und Planung</li>
+          <li><span class="chk">✓</span>Installation für Privat- und Gewerbekunden</li>
+          <li><span class="chk">✓</span>Qualitätsmodule mit 25 Jahren Modulgarantie · 5 Jahre Gewährleistung</li>
+          <li><span class="chk">✓</span>Komplette Anmeldung beim Netzbetreiber &amp; MaStR</li>
+          <li><span class="chk">✓</span>0% MwSt. auf Wohngebäude (seit 2023)</li>
+        </ul>
+        <a href="#kontakt" class="btn btn-navy btn-lg">Jetzt Beratung anfragen <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEISTUNGEN ===== -->
+<section id="leistungen">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Was wir anbieten</span>
+        <h2>Unsere <span style="color:var(--navy)">Leistungen.</span></h2>
+      </div>
+      <p class="lead">Von der Beratung bis zur fertigen Anlage — alles aus einer Hand.</p>
+    </div>
+    <div class="leist-grid">
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2023/12/energy-efficiency-house.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">01 / Beratung</span>
+          <h3>Beratung &amp; Planung</h3>
+          <p>Analyse Ihres Energiebedarfs, Dachbegutachtung und individuelle Systemauslegung für maximalen Ertrag.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2023/12/man-worker-firld-by-solar-panels.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">02 / Installation</span>
+          <h3>Installation PV-Anlagen</h3>
+          <p>Professionelle Montage von Photovoltaikanlagen auf Schrägdach, Flachdach und Fassade für Privat- und Gewerbekunden.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/FlachDach-146-KWP.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">03 / Speicher</span>
+          <h3>Batteriespeicher</h3>
+          <p>Erhöhen Sie Ihren Eigenverbrauch auf bis zu 80% mit einem modernen Batteriespeichersystem.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">04 / Erweiterung</span>
+          <h3>Anlagenerweiterung</h3>
+          <p>Bestehende PV-Anlage vergrößern? Wir erweitern Ihr System mit zusätzlichen Modulen und Speichern — effizient und herstellerkompatibel.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="695c7a07-969f-4d53-9d8c-c306e95c6ebe" alt="" onerror="this.parentElement.innerHTML='&lt;div style=&quot;width:100%;height:100%;background:linear-gradient(135deg,#18181b,#27272a);display:grid;place-items:center;color:#129ddb;font-family:Inter;font-weight:800;font-size:14px;letter-spacing:.18em&quot;&gt;FASSADE&lt;/div&gt;'"></div>
+        <div class="bd">
+          <span class="num">05 / Fassade</span>
+          <h3>Fassadenmontage</h3>
+          <p>Solarmodule direkt an der Gebäudefassade — ideal für Gebäude ohne geeignete Dachfläche oder zur Maximierung der Solarproduktion.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">06 / Balkon</span>
+          <h3>Balkonkraftwerk</h3>
+          <p>Plug-and-play Solaranlagen für Mieter und Eigentümer — schnell montiert, sofort produktiv und ohne Genehmigung nutzbar.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">07 / Schutz</span>
+          <h3>Vogelschutz</h3>
+          <p>Schutzgitter und -systeme verhindern, dass Vögel unter Ihre Module gelangen — schützt die Anlage und die Tiere gleichermaßen.</p>
+        </div>
+      </article>
+      <article class="leist">
+        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/112-kWP-Bild-1.jpg" alt=""></div>
+        <div class="bd">
+          <span class="num">08 / Service</span>
+          <h3>Wartung &amp; Reparatur</h3>
+          <p>Regelmäßige Wartung und schnelle Reparatur für eine lange Lebensdauer und maximalen Ertrag Ihrer Anlage.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJEKTE — RADAR ===== -->
+<section class="projekte" id="projekte">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:42px">
+      <div>
+        <span class="eyebrow">Referenzen · Projekt-Radar</span>
+        <h2>Unsere Projekte<br><span style="color:var(--navy)">quer durch Deutschland.</span></h2>
+      </div>
+      <p class="lead">Reale Installationen von Ambiente Solar — wir reisen für Großprojekte deutschlandweit. Jeder Punkt auf dem Radar steht für eine schlüsselfertige Anlage.</p>
+    </div>
+
+    <div class="radar-frame" id="radar">
+      <!-- coords / labels -->
+      <div class="radar-coords">N 50°06′ &nbsp;·&nbsp; E 008°44′ &nbsp;·&nbsp; FRA-HQ</div>
+      <div class="radar-corners">
+        <span>Live</span>
+        <span class="dt">6 aktive Standorte</span>
+      </div>
+
+      <!-- city ghost labels -->
+      <div class="radar-cities">
+        <span class="city-tag" style="left:12%;top:18%">Köln</span>
+        <span class="city-tag" style="left:78%;top:14%">Berlin</span>
+        <span class="city-tag" style="left:14%;top:78%">Stuttgart</span>
+        <span class="city-tag" style="left:80%;top:80%">München</span>
+      </div>
+
+      <!-- SVG: rings + crosshair + connection lines -->
+      <svg class="radar-svg" viewBox="0 0 1180 920" preserveAspectRatio="none">
+        <g class="radar-rings">
+          <circle cx="590" cy="460" r="120"></circle>
+          <circle cx="590" cy="460" r="220"></circle>
+          <circle cx="590" cy="460" r="320"></circle>
+          <circle cx="590" cy="460" r="420"></circle>
+        </g>
+        <g class="radar-cross">
+          <line x1="0" y1="460" x2="1180" y2="460"></line>
+          <line x1="590" y1="0" x2="590" y2="920"></line>
+          <line x1="120" y1="0" x2="1060" y2="920"></line>
+          <line x1="1060" y1="0" x2="120" y2="920"></line>
+        </g>
+        <!-- lines from center to nodes (calculated from same %s as nodes) -->
+        <g id="radar-lines"></g>
+      </svg>
+
+      <!-- sweep -->
+      <div class="sweep"></div>
+
+      <!-- center logo -->
+      <div class="radar-center">
+        <div class="radar-logo">
+          <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg></div>
+          <div class="nm">Ambiente Solar</div>
+          <div class="sb">Frankfurt</div>
+        </div>
+      </div>
+
+      <!-- sun rays radiating from center -->
+      <div class="sun-glow"></div>
+      <div class="sun-rays" id="sun-rays"></div>
+
+      <!-- project nodes -->
+      <a class="node" data-x="22" data-y="32" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/FlachDach-146-KWP.jpg" alt="">
+        <div class="meta"><div class="kwp">146 kWp</div><div class="loc">Rhein-Main · Flachdach</div></div>
+      </a>
+      <a class="node" data-x="50" data-y="14" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt="">
+        <div class="meta"><div class="kwp">100 kWp</div><div class="loc">Frankfurt · Gewerbe</div></div>
+      </a>
+      <a class="node" data-x="80" data-y="32" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/112-kWP-Bild-1.jpg" alt="">
+        <div class="meta"><div class="kwp">112 kWp</div><div class="loc">Frankfurt · Einfamilienhaus</div></div>
+      </a>
+      <a class="node" data-x="84" data-y="68" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/34KWP.jpg" alt="">
+        <div class="meta"><div class="kwp">34 kWp</div><div class="loc">Rhein-Main · Gewerbedach</div></div>
+      </a>
+      <a class="node" data-x="50" data-y="88" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg" alt="">
+        <div class="meta"><div class="kwp">56 kWp</div><div class="loc">Darmstadt · Einfamilienhaus</div></div>
+      </a>
+      <a class="node" data-x="18" data-y="68" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt="">
+        <div class="meta"><div class="kwp">7 kWp</div><div class="loc">Frankfurt · Einfamilienhaus</div></div>
+      </a>
+
+      <!-- legend -->
+      <div class="radar-legend">
+        <div class="lg">A</div>
+        <span><strong style="color:#fff;font-weight:600">Ambiente Solar HQ</strong> · Mittelseestraße 32, Frankfurt</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PREISE ===== -->
+<section class="preise" id="preise">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Transparenz</span>
+        <h2>Orientierungspreise<br><span style="color:var(--navy)">ohne Überraschungen.</span></h2>
+      </div>
+      <p class="lead">Alle Preise inklusive 0% MwSt. für Wohngebäude (seit Januar 2023). Gewerbe 19% MwSt.</p>
+    </div>
+    <div class="preis-grid">
+      <div class="preis">
+        <div class="nm">Balkonkraftwerk</div>
+        <div class="am">ab 600 €</div>
+        <div class="sb">800 W · inkl. Montage</div>
+        <div class="nt">0% MwSt.</div>
+        <div class="preis-foot">Plug-and-play für Mieter und Eigentümer.</div>
+      </div>
+      <div class="preis">
+        <div class="nm">Klein-PV bis 5 kWp</div>
+        <div class="am">ab 8.000 €</div>
+        <div class="sb">Einfamilienhaus</div>
+        <div class="nt">0% MwSt.</div>
+        <div class="preis-foot">Kompaktanlage, schlüsselfertig montiert.</div>
+      </div>
+      <div class="preis feat">
+        <div class="tg">Beliebteste Wahl</div>
+        <div class="nm">PV 5–10 kWp</div>
+        <div class="am">ab 14.000 €</div>
+        <div class="sb">Mit Batteriespeicher</div>
+        <div class="nt">0% MwSt. · Amort. 8–12 J.</div>
+        <div class="preis-foot">Optimal für Familien mit Wärmepumpe oder E-Auto.</div>
+      </div>
+      <div class="preis">
+        <div class="nm">Großanlage 10–20 kWp</div>
+        <div class="am">ab 22.000 €</div>
+        <div class="sb">Gewerbe / Mehrfamilienhaus</div>
+        <div class="nt">Individuelle Beratung</div>
+        <div class="preis-foot">Auslegung nach Lastprofil und Eigenverbrauch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KONTAKT ===== -->
+<section class="kontakt" id="kontakt">
+  <div class="wrap">
+    <div class="kontakt-grid">
+      <div class="kontakt-info">
+        <span class="eyebrow">Kontakt</span>
+        <h2>Kostenloses<br><span style="color:var(--navy)">Angebot anfragen.</span></h2>
+        <p class="lead" style="margin-top:24px">Kontaktieren Sie uns für eine unverbindliche Beratung. Wir melden uns innerhalb von 1–2 Werktagen bei Ihnen.</p>
+        <div class="kontakt-list">
+          <div class="kontakt-row">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+            <div><div class="lb">Adresse</div><div class="vl">Mittelseestraße 32<br>60386 Frankfurt am Main</div></div>
+          </div>
+          <div class="kontakt-row">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+            <div><div class="lb">Telefon</div><div class="vl">+49 (0) 1786 337 520</div></div>
+          </div>
+          <div class="kontakt-row">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+            <div><div class="lb">E-Mail</div><div class="vl">info@ambiente-solar.de</div></div>
+          </div>
+          <div class="kontakt-row">
+            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+            <div><div class="lb">Öffnungszeiten</div><div class="vl">Mo–Fr: 8:00–18:00 Uhr<br>Sa: Nach Vereinbarung</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kontakt-card">
+        <!-- choose -->
+        <div id="kontakt-auswahl">
+          <h3 style="font-size:24px;margin-bottom:6px">Was möchten Sie?</h3>
+          <p style="font-size:14px;color:var(--muted)">Wählen Sie aus, wie wir Ihnen am besten helfen können.</p>
+          <div class="choose-grid">
+            <button class="choose choose-a" onclick="zeigeFormular('angebot')">
+              <span class="ic">📋</span>
+              <span>
+                <span class="ti" style="display:block">Individuelles Angebot anfordern</span>
+                <span class="ds">Ich beantworte Ihre Anfrage innerhalb von 1–2 Werktagen persönlich.</span>
+              </span>
+              <span class="arr">→</span>
+            </button>
+            <button class="choose choose-b" onclick="zeigeFormular('konzept')">
+              <span class="ic">☀️</span>
+              <span>
+                <span class="ti" style="display:block">Solar-Konzept erstellen lassen</span>
+                <span class="ds">Beantworten Sie einige Fragen — ich erstelle Ihr persönliches Konzept.</span>
+              </span>
+              <span class="arr">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- angebot -->
+        <div id="formular-angebot" class="kform" style="display:none;">
+          <button class="back" onclick="voltar()">← Zurück</button>
+          <h3>Individuelles Angebot anfordern</h3>
+          <div class="sub">Ich melde mich innerhalb von 1–2 Werktagen.</div>
+          <div class="frow">
+            <div class="fg"><label>Vorname *</label><input type="text" placeholder="Max"></div>
+            <div class="fg"><label>Nachname *</label><input type="text" placeholder="Mustermann"></div>
+          </div>
+          <div class="fg"><label>E-Mail *</label><input type="email" placeholder="max@beispiel.de"></div>
+          <div class="fg"><label>Telefon</label><input type="tel" placeholder="+49 ..."></div>
+          <div class="fg">
+            <label>Anlagentyp</label>
+            <select>
+              <option>Einfamilienhaus</option>
+              <option>Mehrfamilienhaus</option>
+              <option>Gewerbe</option>
+              <option>Balkonkraftwerk</option>
+              <option>Anlagenerweiterung</option>
+              <option>Fassadenmontage</option>
+              <option>Vogelschutz</option>
+            </select>
+          </div>
+          <div class="fg"><label>Ihre Nachricht</label><textarea placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
+          <div class="dsr">
+            <input type="checkbox" id="ds1">
+            <label for="ds1">Ich habe die <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
+          </div>
+          <button class="btn-form btn-form-navy">Angebot anfordern →</button>
+        </div>
+
+        <!-- konzept -->
+        <div id="formular-konzept" class="kform" style="display:none;">
+          <button class="back" onclick="voltar()">← Zurück</button>
+          <h3>☀️ Solar-Konzept erstellen</h3>
+          <div class="sub">Beantworten Sie kurz diese Fragen — ich erstelle Ihr individuelles Konzept.</div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">1</span> Gebäudetyp</div>
+            <div class="opts">
+              <button class="opt" onclick="select(this)">🏠 Einfamilienhaus</button>
+              <button class="opt" onclick="select(this)">🏘️ Doppelhaus</button>
+              <button class="opt" onclick="select(this)">🏚️ Reihenhaus</button>
+              <button class="opt" onclick="select(this)">🏭 Gewerbeobjekt</button>
+              <button class="opt" onclick="select(this)">➕ Anlagenerweiterung</button>
+              <button class="opt" onclick="select(this)">🏢 Fassadenmontage</button>
+              <button class="opt" onclick="select(this)">🐦 Vogelschutz</button>
+            </div>
+          </div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">2</span> Dachform</div>
+            <div class="opts">
+              <button class="opt" onclick="select(this)">🔺 Satteldach</button>
+              <button class="opt" onclick="select(this)">📐 Pultdach</button>
+              <button class="opt" onclick="select(this)">⬜ Flachdach</button>
+              <button class="opt" onclick="select(this)">❓ Sonstiges</button>
+            </div>
+          </div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">3</span> Dacheindeckung</div>
+            <div class="opts">
+              <button class="opt" onclick="select(this)">🏺 Ziegel</button>
+              <button class="opt" onclick="select(this)">🪨 Schiefer</button>
+              <button class="opt" onclick="select(this)">🟫 Bitumen / Folie</button>
+              <button class="opt" onclick="select(this)">❓ Sonstiges</button>
+            </div>
+          </div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">4</span> Wie viele Personen im Haushalt?</div>
+            <div class="opts">
+              <button class="opt" onclick="select(this)">👤 1–2 Personen</button>
+              <button class="opt" onclick="select(this)">👪 3–4 Personen</button>
+              <button class="opt" onclick="select(this)">👨‍👩‍👧‍👦 5 oder mehr</button>
+              <button class="opt" onclick="select(this)">❓ Weiß ich nicht</button>
+            </div>
+          </div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">5</span> E-Auto vorhanden?</div>
+            <div class="tog">
+              <button class="opt" onclick="toggle(this,'ja')">✅ Ja</button>
+              <button class="opt" onclick="toggle(this,'nein')">❌ Nein</button>
+            </div>
+          </div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">6</span> Wärmepumpe vorhanden?</div>
+            <div class="tog">
+              <button class="opt" onclick="toggle(this,'ja')">✅ Ja</button>
+              <button class="opt" onclick="toggle(this,'nein')">❌ Nein</button>
+            </div>
+          </div>
+
+          <div class="kstep">
+            <div class="kstep-l"><span class="n">7</span> Batteriespeicher gewünscht?</div>
+            <div class="tog">
+              <button class="opt" onclick="toggle(this,'ja')">✅ Ja</button>
+              <button class="opt" onclick="toggle(this,'nein')">❌ Nein</button>
+            </div>
+          </div>
+
+          <hr style="border:none;border-top:1px solid var(--line);margin:30px 0">
+          <p style="font-family:var(--display);font-weight:600;color:var(--navy);font-size:15px;text-align:center;margin-bottom:18px">Wohin soll ich Ihr Solar-Konzept senden?</p>
+
+          <div class="frow">
+            <div class="fg"><label>Vorname *</label><input type="text" placeholder="Max"></div>
+            <div class="fg"><label>Nachname *</label><input type="text" placeholder="Mustermann"></div>
+          </div>
+          <div class="fg"><label>E-Mail *</label><input type="email" placeholder="max@beispiel.de"></div>
+          <div class="fg"><label>Telefonnummer</label><input type="tel" placeholder="+49 ..."></div>
+
+          <div class="dsr">
+            <input type="checkbox" id="ds2">
+            <label for="ds2">Ich habe die <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
+          </div>
+          <button class="btn-form" onclick="sendeKonzept()">☀️ Solar-Konzept erhalten →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAP ===== -->
+<div class="map-wrap">
+  <a href="https://www.google.com/maps/search/Mittelseestraße+32,+60386+Frankfurt+am+Main" target="_blank" rel="noopener" style="display:block;height:100%;">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.5!2d8.7417!3d50.1109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMittelseestra%C3%9Fe+32%2C+60386+Frankfurt+am+Main!5e0!3m2!1sde!2sde!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ambiente Solar – Mittelseestraße 32, Frankfurt am Main">
+    </iframe>
+  </a>
+  <div class="map-pin">Mittelseestraße 32 · Frankfurt am Main — Klicken für Route</div>
+</div>
+
+<!-- ===== PARTNER ===== -->
+<section class="partner" id="partner">
+  <div class="wrap">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center">
+      <span class="eyebrow">Unsere Partner</span>
+      <h2 style="text-align:center">Geschäftspartner &amp; <span style="color:var(--navy)">Marken.</span></h2>
+      <p class="lead" style="text-align:center;margin:12px auto 0">Wir arbeiten mit führenden Herstellern und Partnern der Solarbranche zusammen.</p>
+    </div>
+
+    <div class="partner-row">
+      <div class="partner-cap">PV-Module</div>
+      <div class="partner-grid">
+        <div class="partner-card"><div class="partner-mono">AIKO</div><div class="nm">Aiko</div><div class="tg">PV-Module</div></div>
+        <div class="partner-card"><div class="partner-mono">TRINA</div><div class="nm">Trina Solar</div><div class="tg">PV-Module</div></div>
+        <div class="partner-card"><div class="partner-mono">LONGi</div><div class="nm">LONGi</div><div class="tg">PV-Module</div></div>
+        <div class="partner-card"><div class="partner-mono">ANKER</div><div class="nm">Anker</div><div class="tg">PV-Module</div></div>
+      </div>
+    </div>
+
+    <div class="partner-row">
+      <div class="partner-cap">Wechselrichter &amp; Speicher</div>
+      <div class="partner-grid" style="grid-template-columns:repeat(5,1fr)">
+        <div class="partner-card"><div class="partner-mono">SUNGROW</div><div class="nm">Sungrow</div><div class="tg">Wechselrichter</div></div>
+        <div class="partner-card"><div class="partner-mono">HUAWEI</div><div class="nm">Huawei</div><div class="tg">Wechselrichter</div></div>
+        <div class="partner-card"><div class="partner-mono">SMA</div><div class="nm">SMA</div><div class="tg">Wechselrichter</div></div>
+        <div class="partner-card"><div class="partner-mono">GoodWe</div><div class="nm">GoodWe</div><div class="tg">Wechselrichter</div></div>
+        <div class="partner-card"><div class="partner-mono">BYD</div><div class="nm">BYD</div><div class="tg">Batteriespeicher</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BEWERTUNGEN ===== -->
+<section class="bewertungen">
+  <div class="wrap">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:50px">
+      <span class="eyebrow">Bewertungen &amp; Social Media</span>
+      <h2 style="text-align:center;color:#fff">Kundenstimmen<br>&amp; <span style="color:var(--gold)">wo wir sind.</span></h2>
+    </div>
+
+    <div class="test-grid">
+      <div class="test">
+        <div class="stars">★★★★★</div>
+        <p>"Jhonatan und sein Team haben unsere 10 kWp Anlage in nur 2 Tagen installiert. Sehr professionell, pünktlich und sauber. Wir sparen jetzt über 60% unserer Stromkosten."</p>
+        <div class="au">
+          <div class="av">TM</div>
+          <div><div class="nm">Thomas M.</div><div class="lc">Frankfurt am Main · März 2025</div></div>
+        </div>
+      </div>
+      <div class="test">
+        <div class="stars">★★★★★</div>
+        <p>"Von der Beratung bis zur Anmeldung beim Netzbetreiber hat Ambiente Solar alles übernommen. Sehr empfehlenswert! Die Anlage produziert mehr als erwartet."</p>
+        <div class="au">
+          <div class="av">SK</div>
+          <div><div class="nm">Sandra K.</div><div class="lc">Wiesbaden · Januar 2025</div></div>
+        </div>
+      </div>
+      <div class="test">
+        <div class="stars">★★★★★</div>
+        <p>"Wir haben unsere 34 kWp Anlage mit Batteriespeicher über Ambiente Solar installieren lassen. Faire Preise, top Qualität und ein sehr kompetentes Team."</p>
+        <div class="au">
+          <div class="av">MH</div>
+          <div><div class="nm">Markus H.</div><div class="lc">Darmstadt · November 2024</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-grid">
+      <a class="social" href="https://g.page/r/CSzMrBTg2Et_EAE/review" target="_blank" rel="noopener">
+        <div class="ic">⭐</div>
+        <div class="ti">Google Bewertung</div>
+        <div class="ds">Bewerten Sie uns auf Google</div>
+        <div class="pill">Jetzt bewerten →</div>
+      </a>
+      <a class="social alt" href="https://www.my-hammer.de/auftragnehmer/ambiente-solar" target="_blank" rel="noopener">
+        <div class="ic">🔨</div>
+        <div class="ti">MyHammer Profil</div>
+        <div class="ds">Unser Profil &amp; Bewertungen</div>
+        <div class="pill">Profil ansehen →</div>
+      </a>
+      <a class="social" href="https://www.instagram.com/ambiente_solar_montage" target="_blank" rel="noopener">
+        <div class="ic">📸</div>
+        <div class="ti">Instagram</div>
+        <div class="ds">@ambiente_solar_montage</div>
+        <img class="qr" src="164dfa40-7fc4-4511-a3d2-5548a7b80658" alt="QR Instagram">
+        <div class="pill">Folgen Sie uns →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
+        <div class="bn">AMBIENTE SOLAR</div>
+        <p>Ihr zuverlässiger Partner für Photovoltaik-Anlagen in Frankfurt am Main und Umgebung. Saubere Energie für eine bessere Zukunft.</p>
+        <div class="ust">USt-IdNr: DE 357020901</div>
+      </div>
+      <div class="foot-col">
+        <h4>Leistungen</h4>
+        <ul>
+          <li><a href="#leistungen">PV-Anlagen Installation</a></li>
+          <li><a href="#leistungen">Batteriespeicher</a></li>
+          <li><a href="#leistungen">Beratung &amp; Planung</a></li>
+          <li><a href="#leistungen">Wartung &amp; Reparatur</a></li>
+          <li><a href="#leistungen">Balkonkraftwerke</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">Über uns</a></li>
+          <li><a href="#projekte">Projekte</a></li>
+          <li><a href="#preise">Preise</a></li>
+          <li><a href="#partner">Partner</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+4917863375200">+49 (0) 1786 337 520</a></li>
+          <li><a href="mailto:info@ambiente-solar.de">info@ambiente-solar.de</a></li>
+          <li><a href="#" onclick="zeigeImpressum();return false">Impressum</a></li>
+          <li><a href="#" onclick="zeigeDatenschutz();return false">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Ambiente Solar · Jhonatan Jaramillo Aguirre · Frankfurt am Main</span>
+      <span><a href="#" onclick="zeigeImpressum();return false">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="zeigeDatenschutz();return false">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- whatsapp -->
+<a class="wa" href="https://wa.me/491786337520" target="_blank" rel="noopener" aria-label="WhatsApp Ambiente Solar">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+  </svg>
+  WhatsApp
+</a>
+
+<!-- cookie -->
+<div id="cookie-banner" class="cookie">
+  <p>Diese Website verwendet keine Tracking-Cookies. Wir verarbeiten nur technisch notwendige Daten. Mehr Infos in unserer <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a>.</p>
+  <button class="btn" onclick="document.getElementById('cookie-banner').style.display='none';try{localStorage.setItem('cookies-ok','1')}catch(e){}">Verstanden ✓</button>
+</div>
+
+<!-- modals -->
+<div id="impressum-modal" class="modal">
+  <div class="modal-card">
+    <button class="modal-x" onclick="document.getElementById('impressum-modal').classList.remove('show')">✕</button>
+    <h2>Impressum</h2>
+    <p><strong>Angaben gemäß § 5 TMG</strong></p>
+    <p>Jhonatan Jaramillo Aguirre<br>Ambiente Solar<br>Mittelseestraße 32<br>60386 Frankfurt am Main</p>
+    <p><strong>Kontakt</strong></p>
+    <p>Telefon: +49 (0) 1786 337 520<br>E-Mail: info@ambiente-solar.de</p>
+    <p><strong>Umsatzsteuer-Identifikationsnummer</strong></p>
+    <p>USt-IdNr: DE 357020901</p>
+    <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong></p>
+    <p>Jhonatan Jaramillo Aguirre, Mittelseestraße 32, 60386 Frankfurt am Main</p>
+    <p><strong>Haftungsausschluss</strong></p>
+    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
+  </div>
+</div>
+
+<div id="datenschutz-modal" class="modal">
+  <div class="modal-card">
+    <button class="modal-x" onclick="document.getElementById('datenschutz-modal').classList.remove('show')">✕</button>
+    <h2>Datenschutzerklärung</h2>
+    <p><strong>1. Datenschutz auf einen Blick</strong></p>
+    <p>Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten auf dieser Website auf. Verantwortlicher im Sinne der DSGVO ist Jhonatan Jaramillo Aguirre, Mittelseestraße 32, 60386 Frankfurt am Main, info@ambiente-solar.de.</p>
+    <p><strong>2. Kontaktformular</strong></p>
+    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
+    <p><strong>3. Ihre Rechte</strong></p>
+    <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit Ihrer personenbezogenen Daten. Wenden Sie sich dazu an: info@ambiente-solar.de</p>
+    <p><strong>4. Hosting &amp; Cookies</strong></p>
+    <p>Diese Website verwendet keine Tracking-Cookies oder Analyse-Tools. Es werden ausschließlich technisch notwendige Daten verarbeitet. Das Hosting erfolgt über GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA).</p>
+    <p><strong>5. Beschwerderecht</strong></p>
+    <p>Sie haben das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren. Zuständig ist der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Gustav-Stresemann-Ring 1, 65189 Wiesbaden.</p>
+  </div>
+</div>
+
+<script>
+  /* ===== forms ===== */
+  function zeigeFormular(typ){
+    document.getElementById('kontakt-auswahl').style.display='none';
+    document.getElementById('formular-angebot').style.display='none';
+    document.getElementById('formular-konzept').style.display='none';
+    document.getElementById('formular-'+typ).style.display='block';
+  }
+  function voltar(){
+    document.getElementById('kontakt-auswahl').style.display='block';
+    document.getElementById('formular-angebot').style.display='none';
+    document.getElementById('formular-konzept').style.display='none';
+  }
+  function select(btn){
+    const parent=btn.closest('.opts')||btn.closest('.tog');
+    parent.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel','no'));
+    btn.classList.add('sel');
+  }
+  function toggle(btn,val){
+    const parent=btn.closest('.tog');
+    parent.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel','no'));
+    btn.classList.add(val==='nein'?'no':'sel');
+  }
+  function sendeKonzept(){alert('Vielen Dank! Ihr Solar-Konzept wird in Kürze an Sie übermittelt. ☀️')}
+
+  /* ===== modals ===== */
+  function zeigeImpressum(){document.getElementById('impressum-modal').classList.add('show')}
+  function zeigeDatenschutz(){document.getElementById('datenschutz-modal').classList.add('show')}
+  document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+
+  /* ===== cookies ===== */
+  try{if(localStorage.getItem('cookies-ok'))document.getElementById('cookie-banner').style.display='none';}catch(e){}
+
+  /* sun rays + clock */
+  (function sunRays(){
+    const c=document.getElementById('sun-rays'); if(!c) return;
+    const N=14;
+    for(let i=0;i<N;i++){
+      const r=document.createElement('div');
+      r.className='ray';
+      r.style.transform='rotate('+(i*(360/N))+'deg)';
+      r.style.animationDelay=(i*0.18)+'s';
+      c.appendChild(r);
+    }
+    const t=document.getElementById('dash-time');
+    if(t){const u=()=>{const d=new Date();t.textContent=d.toLocaleTimeString('de-DE')};u();setInterval(u,1000);}
+  })();
+
+  /* ===== radar lines (drawn in SVG viewBox coords) ===== */
+  (function drawRadarLines(){
+    const VB_W=1180, VB_H=920, CX=590, CY=460;
+    const g=document.getElementById('radar-lines');
+    if(!g) return;
+    document.querySelectorAll('#radar .node').forEach(n=>{
+      const x=parseFloat(n.dataset.x), y=parseFloat(n.dataset.y);
+      const tx=(x/100)*VB_W, ty=(y/100)*VB_H;
+      // shorten the line so it doesn't pass over the center logo
+      const dx=tx-CX, dy=ty-CY, len=Math.hypot(dx,dy);
+      const sx=CX + (dx/len)*78;  // start outside center disc
+      const sy=CY + (dy/len)*78;
+      const ex=tx - (dx/len)*8;   // stop just before card
+      const ey=ty - (dy/len)*8;
+      const ns='http://www.w3.org/2000/svg';
+      const line=document.createElementNS(ns,'line');
+      line.setAttribute('x1',sx);line.setAttribute('y1',sy);
+      line.setAttribute('x2',ex);line.setAttribute('y2',ey);
+      line.setAttribute('class','radar-line');
+      line.setAttribute('stroke-dasharray','2 4');
+      g.appendChild(line);
+      const dot=document.createElementNS(ns,'circle');
+      dot.setAttribute('cx',sx);dot.setAttribute('cy',sy);dot.setAttribute('r','3');
+      dot.setAttribute('class','radar-line-dot');
+      g.appendChild(dot);
+    });
+    // place node DOMs
+    document.querySelectorAll('#radar .node').forEach(n=>{
+      n.style.left=n.dataset.x+'%';
+      n.style.top=n.dataset.y+'%';
+    });
+  })();
+</script>
+
+
+
+</body></html>

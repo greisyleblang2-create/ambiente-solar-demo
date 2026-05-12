@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatisierung Ambiente Solar — Übersicht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --bg-card: #ffffff;
+    --ink: #1a1a2e;
+    --ink-soft: #4a4a5e;
+    --ink-muted: #7a7a8e;
+    --gold: #D4A534;
+    --gold-soft: #f5e9c8;
+    --teal: #1B8CA6;
+    --teal-soft: #d8eef2;
+    --line: #e3ddd0;
+    --warn: #c2410c;
+    --warn-soft: #fef0e6;
+    --good: #2d7a4f;
+    --good-soft: #e0f0e6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 24px;
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 600px;
+  }
+
+  .meta {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* SECTIONS */
+  section {
+    margin-bottom: 56px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  h2 .num {
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  h2 + .lead {
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin-bottom: 28px;
+    max-width: 700px;
+  }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  /* KEY CONCEPT BOX */
+  .key-concept {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 32px;
+    border-radius: 4px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .key-concept::before {
+    content: "Kernidee";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 2px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .key-concept p {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.4;
+    font-weight: 300;
+  }
+
+  .key-concept p em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* PHASES */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .phase {
+    background: var(--bg-card);
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--teal);
+  }
+
+  .phase-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .phase h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .phase p {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* SZENARIEN COMPARISON */
+  .scenarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .scenario {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 32px;
+    position: relative;
+  }
+
+  .scenario.recommended {
+    border-color: var(--teal);
+    border-width: 2px;
+  }
+
+  .scenario.recommended::before {
+    content: "Empfohlen für den Start";
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--teal);
+    color: white;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .scenario-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+
+  .scenario-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .scenario-price {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .scenario-price-suffix {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+  }
+
+  .analogy {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 14px;
+    padding: 16px;
+    background: var(--bg);
+    border-left: 3px solid var(--gold);
+    margin: 16px 0;
+  }
+
+  .pros-cons {
+    margin-top: 16px;
+  }
+
+  .pros-cons-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  .pros-cons-label.pro { color: var(--good); }
+  .pros-cons-label.con { color: var(--warn); }
+
+  .pros-cons ul {
+    list-style: none;
+    font-size: 14px;
+  }
+
+  .pros-cons li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+    color: var(--ink-soft);
+  }
+
+  .pros-cons li::before {
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+  }
+
+  .pros-cons .pro li::before {
+    content: "+";
+    color: var(--good);
+  }
+
+  .pros-cons .con li::before {
+    content: "−";
+    color: var(--warn);
+  }
+
+  /* COST TABLES */
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .cost-table th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .cost-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cost-table td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  .cost-table tr:last-child td {
+    border-bottom: 2px solid var(--ink);
+    font-weight: 600;
+  }
+
+  /* WARTUNG TIMELINE */
+  .timeline {
+    margin-top: 24px;
+    border-left: 2px solid var(--line);
+    padding-left: 24px;
+  }
+
+  .timeline-item {
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-frequency {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .timeline-who {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  .timeline-who strong {
+    color: var(--teal);
+  }
+
+  .timeline-tasks {
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .timeline-tasks li {
+    margin-left: 18px;
+    margin-bottom: 4px;
+  }
+
+  /* ALERT BOX */
+  .alert {
+    background: var(--warn-soft);
+    border-left: 4px solid var(--warn);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .alert-title {
+    font-weight: 600;
+    color: var(--warn);
+    margin-bottom: 6px;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .alert p {
+    color: var(--ink);
+    font-size: 15px;
+  }
+
+  .info {
+    background: var(--teal-soft);
+    border-left: 4px solid var(--teal);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .info-title {
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 6px;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* HONEST TRUTH */
+  .truth-list {
+    list-style: none;
+    counter-reset: truth;
+    margin-top: 16px;
+  }
+
+  .truth-list li {
+    counter-increment: truth;
+    padding: 20px 0 20px 56px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .truth-list li:last-child { border-bottom: none; }
+
+  .truth-list li::before {
+    content: counter(truth, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .truth-list strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+
+  .truth-list p {
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+
+  footer strong {
+    color: var(--ink);
+  }
+
+  /* PRINT */
+  @media print {
+    body { padding: 20px; background: white; }
+    .scenario, .phase, .key-concept, .alert, .info {
+      break-inside: avoid;
+    }
+    section { break-inside: avoid; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .phases, .scenarios {
+      grid-template-columns: 1fr;
+    }
+    h1 { font-size: 36px; }
+    h2 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="eyebrow">Leblang Digital Solutions</div>
+    <h1>Wie funktioniert die <em>Automatisierung</em> für Ambiente Solar?</h1>
+    <p class="subtitle">Eine ehrliche Übersicht: Was läuft automatisch, was kostet es, und worum musst du dich weiterhin kümmern.</p>
+    <div class="meta">
+      <span><strong>Für:</strong> Jhonatan / Ambiente Solar</span>
+      <span><strong>Von:</strong> Greisy Leblang</span>
+      <span><strong>Stand:</strong> Mai 2026</span>
+    </div>
+  </header>
+
+  <!-- SEKTION 1: KERNIDEE -->
+  <section>
+    <h2><span class="num">01</span>Was ist eine Automatisierung wirklich?</h2>
+    <p class="lead">Bevor wir über Technik und Kosten reden, ein wichtiges Konzept, das den Unterschied zwischen Erfolg und Frust ausmacht.</p>
+
+    <div class="key-concept">
+      <p>Eine Automatisierung ist <em>kein Produkt</em>, das man einmal kauft — sie ist ein <em>lebendes System</em>, das gepflegt werden muss. Wie ein Garten, nicht wie ein Auto.</p>
+    </div>
+
+    <p>Das System hat drei Lebensphasen — und jede hat andere Aufgaben und Kosten:</p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-num">01</div>
+        <h4>Aufbau</h4>
+        <p>Einmalige Erstellung des Systems. Diese Phase übernehme ich kostenlos im Rahmen meiner Weiterbildung.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-num">02</div>
+        <h4>Betrieb</h4>
+        <p>Monatliche Kosten für Server und Dienste, damit das System läuft. Diese trägst du.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-num">03</div>
+        <h4>Wartung</h4>
+        <p>Regelmäßige Pflege, Updates und Reaktion bei Problemen. Hier brauchst du langfristig einen Verantwortlichen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEKTION 2: SZENARIEN -->
+  <section>
+    <h2><span class="num">02</span>Zwei mögliche Wege</h2>
+    <p class="lead">Es gibt zwei Architekturen, mit unterschiedlichen Stärken. Der Preis ist nicht der wichtigste Unterschied — die Verantwortung ist es.</p>
+
+    <div class="scenarios">
+
+      <div class="scenario recommended">
+        <div class="scenario-label">Szenario A</div>
+        <h3 class="scenario-title">Cloud-Mietmodell</h3>
+        <div class="scenario-price">~25 €</div>
+        <div class="scenario-price-suffix">pro Monat (Infrastruktur)</div>
+
+        <div class="analogy">
+          Wie eine Wohnung in einem gepflegten Apartmenthaus mieten — die Hausverwaltung kümmert sich um alles, du zahlst Miete.
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros-cons-label pro">Vorteile</div>
+          <ul class="pro">
+            <li>Updates passieren automatisch</li>
+            <li>Anbieter kümmert sich um Ausfälle</li>
+            <li>Backups eingebaut</li>
+            <li>Weniger Wartungsaufwand</li>
+          </ul>
+
+          <div class="pros-cons-label con">Nachteile</div>
+          <ul class="con">
+            <li>Höhere monatliche Grundkosten</li>
+            <li>Daten teilweise bei US-Anbietern</li>
+            <li>Wird teurer bei sehr hohem Volumen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-label">Szenario B</div>
+        <h3 class="scenario-title">Eigener Server</h3>
+        <div class="scenario-price">~50 €</div>
+        <div class="scenario-price-suffix">pro Monat (inkl. Wartung)</div>
+
+        <div class="analogy">
+          Wie ein eigenes Haus — niedrigere Grundkosten, aber wenn die Heizung kaputt geht, musst du selbst den Klempner rufen.
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros-cons-label pro">Vorteile</div>
+          <ul class="pro">
+            <li>Daten 100% in Deutschland (Hetzner)</li>
+            <li>DSGVO-Vorteil</li>
+            <li>Volle Kontrolle</li>
+            <li>Skaliert günstiger bei viel Volumen</li>
+          </ul>
+
+          <div class="pros-cons-label con">Nachteile</div>
+          <ul class="con">
+            <li>Updates müssen manuell eingespielt werden</li>
+            <li>Backups selbst einrichten</li>
+            <li>Bei Ausfall: schnelle Reaktion nötig</li>
+            <li>Sicherheit liegt in eigener Verantwortung</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEKTION 3: KOSTEN AUFGESCHLÜSSELT -->
+  <section>
+    <h2><span class="num">03</span>Was kosten die monatlichen Beträge wirklich?</h2>
+    <p class="lead">Die monatlichen Kosten gehen an Drittanbieter — nicht an mich. Hier die ehrliche Aufschlüsselung.</p>
+
+    <h3 style="margin-top: 24px;">Szenario A — ~25 €/Monat</h3>
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Wofür</th>
+          <th>Kosten</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>n8n Cloud (Starter)</td>
+          <td>Workflow-Engine, die alles steuert</td>
+          <td>~20 €</td>
+        </tr>
+        <tr>
+          <td>Supabase (Free)</td>
+          <td>Datenbank für Kunden &amp; Aufträge</td>
+          <td>0 €</td>
+        </tr>
+        <tr>
+          <td>Brevo (Free)</td>
+          <td>E-Mail-Versand (bis 300/Tag)</td>
+          <td>0 €</td>
+        </tr>
+        <tr>
+          <td>Telegram Bot</td>
+          <td>Chat-Bot</td>
+          <td>0 €</td>
+        </tr>
+        <tr>
+          <td>Domain</td>
+          <td>Eigene Webhook-URL</td>
+          <td>~1 €</td>
+        </tr>
+        <tr>
+          <td>Gesamt</td>
+          <td>Alles inklusive</td>
+          <td>~25 €/Monat</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 32px;">Szenario B — ~50 €/Monat</h3>
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Wofür</th>
+          <th>Kosten</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hetzner VPS</td>
+          <td>Eigener Server in Deutschland</td>
+          <td>~5 €</td>
+        </tr>
+        <tr>
+          <td>Domain</td>
+          <td>Webhook &amp; Mail</td>
+          <td>~1 €</td>
+        </tr>
+        <tr>
+          <td>Backup-Speicher</td>
+          <td>Tägliche Sicherungen</td>
+          <td>~3 €</td>
+        </tr>
+        <tr>
+          <td>Brevo (Starter)</td>
+          <td>E-Mail-Versand</td>
+          <td>~20 €</td>
+        </tr>
+        <tr>
+          <td>Wartungspauschale</td>
+          <td>Updates, Monitoring, Reaktion</td>
+          <td>~20 €</td>
+        </tr>
+        <tr>
+          <td>Gesamt</td>
+          <td>Alles inklusive</td>
+          <td>~50 €/Monat</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info">
+      <div class="info-title">Wichtig zu wissen</div>
+      <p>Die Free Tiers reichen für ein kleines Solarunternehmen problemlos aus. Wenn das Geschäft wächst (z. B. 500 Anfragen/Monat), steigen die Kosten auf etwa 80 €/Monat — das ist ein gutes Problem, weil es bedeutet, dass das System sich rechnet.</p>
+    </div>
+  </section>
+
+  <!-- SEKTION 4: WARTUNG -->
+  <section>
+    <h2><span class="num">04</span>Wer macht was — und wie oft?</h2>
+    <p class="lead">Hier die ehrliche Realität: Auch automatisierte Systeme brauchen menschliche Aufmerksamkeit. Hier ist genau wie viel.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-frequency">Täglich · ca. 5 Minuten</div>
+        <div class="timeline-who">Verantwortlich: <strong>Jhonatan</strong></div>
+        <ul class="timeline-tasks">
+          <li>Dashboard öffnen, neue Anfragen ansehen</li>
+          <li>Generierte Angebote prüfen und freigeben</li>
+          <li>Auf nicht-standardisierte Telegram-Anfragen antworten</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-frequency">Wöchentlich · ca. 15 Minuten</div>
+        <div class="timeline-who">Verantwortlich: <strong>Jhonatan</strong></div>
+        <ul class="timeline-tasks">
+          <li>Kontrolle: Sind alle Angebote rausgegangen?</li>
+          <li>Welche Leads sind noch offen?</li>
+          <li>Stimmen die generierten Preise?</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-frequency">Monatlich · ca. 30 Minuten</div>
+        <div class="timeline-who">Verantwortlich: <strong>Technischer Verantwortlicher</strong></div>
+        <ul class="timeline-tasks">
+          <li>Logs prüfen: Gab es fehlgeschlagene Workflows?</li>
+          <li>E-Mail-Zustellquote prüfen (landet alles im Posteingang?)</li>
+          <li>Backup-Integrität prüfen (nur bei Szenario B)</li>
+          <li>Speicherverbrauch der Datenbank kontrollieren</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-frequency">Quartalsweise · 1–2 Stunden</div>
+        <div class="timeline-who">Verantwortlich: <strong>Technischer Verantwortlicher</strong></div>
+        <ul class="timeline-tasks">
+          <li>Software-Updates einspielen (n8n, Datenbank)</li>
+          <li>Kosten-Review: Sind wir noch in den Free Tiers?</li>
+          <li>Sicherheits-Updates des Servers (nur Szenario B)</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-frequency">Bei Bedarf</div>
+        <div class="timeline-who">Verantwortlich: <strong>Technischer Verantwortlicher</strong></div>
+        <ul class="timeline-tasks">
+          <li>Preisliste ändert sich → Workflow anpassen</li>
+          <li>Neue Energieberatungs-Regeln → Vorlage aktualisieren</li>
+          <li>API-Änderung bei einem Anbieter → Workflow korrigieren</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEKTION 5: EHRLICHE WAHRHEIT -->
+  <section>
+    <h2><span class="num">05</span>Drei ehrliche Wahrheiten</h2>
+    <p class="lead">Damit du genau weißt, worauf du dich einlässt — und damit es später keine Überraschungen gibt.</p>
+
+    <ol class="truth-list">
+      <li>
+        <strong>Das System braucht einen langfristigen Verantwortlichen.</strong>
+        <p>Ich baue das System kostenlos im Rahmen meiner Weiterbildung. Danach hast du drei Optionen: selbst lernen (~20 Stunden Einarbeitung in n8n), jemanden für Wartung bezahlen (50–100 €/Stunde marktüblich), oder akzeptieren, dass das System eines Tages ohne Pflege nicht mehr funktioniert.</p>
+      </li>
+      <li>
+        <strong>Die monatlichen Kosten wachsen mit dem Geschäft.</strong>
+        <p>Bei 50 Anfragen/Monat: ~25 €. Bei 500 Anfragen/Monat: ~80 €. Bei 5.000 Anfragen: ~300 €. Das ist ein gutes Zeichen — es bedeutet, das System bringt mehr Aufträge. Aber es muss eingeplant werden.</p>
+      </li>
+      <li>
+        <strong>Die Automatisierung ersetzt nicht dein Urteil.</strong>
+        <p>Sie spart dir etwa 80 % der Verwaltungsroutine — nicht 100 %. Du musst weiterhin Angebote freigeben, Kunden persönlich kontaktieren bei großen Aufträgen, und strategische Entscheidungen treffen. Das System ist dein Assistent, nicht dein Ersatz.</p>
+      </li>
+    </ol>
+
+    <div class="alert">
+      <div class="alert-title">Warum diese Ehrlichkeit?</div>
+      <p>Viele Berater verschweigen Wartungskosten und Folgeaufwand, um Projekte zu gewinnen. Ich möchte, dass du das System wirklich verstehst — sonst wäre alles, was wir jetzt aufbauen, in 6 Monaten kaputt und enttäuschend.</p>
+    </div>
+  </section>
+
+  <!-- SEKTION 6: NÄCHSTE SCHRITTE -->
+  <section>
+    <h2><span class="num">06</span>Was wir jetzt entscheiden müssen</h2>
+    <p class="lead">Bevor ich mit der Umsetzung beginnen kann, brauche ich Antworten auf 5 Fragen.</p>
+
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Frage</th>
+          <th>Warum wichtig</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Szenario A oder B?</td>
+          <td>Bestimmt den gesamten Tech-Stack</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Preisliste (Module, Installation, Wartung)</td>
+          <td>Ohne das kein automatisches Angebot</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>SolarCan-Portal: Wie kommen Aufträge?</td>
+          <td>Bestimmt die Integrationsstrategie</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>E-Mail-Adresse (info@ambiente-solar.de?)</td>
+          <td>Nötig für Brevo-Einrichtung</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Bankdaten (IBAN/BIC)</td>
+          <td>Für die automatische Rechnung</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <p><strong>Greisy Leblang</strong> · Leblang Digital Solutions · Frankfurt am Main</p>
+    <p style="margin-top: 6px;">Workflow-Automatisierung &amp; KI-Implementierung für SMBs und Handwerk</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

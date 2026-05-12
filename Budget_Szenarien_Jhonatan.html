@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatisierungs-Szenarien – Jhonatan Solartechnik</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; }
+    
+    @media print {
+      body { font-size: 11pt; }
+      .page-break { page-break-before: always; }
+      .no-print { display: none; }
+    }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 40px; }
+
+    /* Header */
+    .doc-header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 3px solid #1B8CA6; }
+    .doc-header h1 { font-size: 1.8rem; font-weight: 800; color: #0D3B4F; margin-bottom: 8px; }
+    .doc-header p { color: #666; font-size: 0.95rem; }
+    .doc-header .date { font-size: 0.8rem; color: #999; margin-top: 12px; }
+    .logo-line { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+    .logo-img { height: 60px; width: auto; border-radius: 10px; }
+
+    /* Section */
+    .section { margin-bottom: 40px; }
+    .section h2 { font-size: 1.3rem; font-weight: 700; color: #0D3B4F; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .section h3 { font-size: 1.05rem; font-weight: 700; color: #1B8CA6; margin-bottom: 12px; }
+
+    /* Info box */
+    .info-box { background: #f0f7fa; border-left: 4px solid #1B8CA6; padding: 16px 20px; border-radius: 0 8px 8px 0; margin-bottom: 20px; font-size: 0.9rem; line-height: 1.6; }
+
+    /* Workflow */
+    .workflow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; justify-content: center; margin: 24px 0; }
+    .workflow-step { background: #f7f9fb; border: 2px solid #e0ecf1; border-radius: 12px; padding: 12px 16px; text-align: center; font-size: 0.78rem; font-weight: 600; color: #0D3B4F; min-width: 90px; }
+    .workflow-step.approval { background: #fff3cd; border-color: #F5A623; }
+    .workflow-step.final { background: #d4edda; border-color: #28a745; }
+    .workflow-arrow { font-size: 1.2rem; color: #1B8CA6; padding: 0 4px; }
+
+    /* Scenario cards */
+    .scenario { border: 2px solid #e0ecf1; border-radius: 16px; padding: 28px; margin-bottom: 24px; position: relative; }
+    .scenario.recommended { border-color: #1B8CA6; box-shadow: 0 4px 20px rgba(27,140,166,0.12); }
+    .scenario-badge { position: absolute; top: -12px; left: 24px; background: #1B8CA6; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 14px; border-radius: 12px; letter-spacing: 0.5px; }
+    .scenario h3 { margin-bottom: 6px; }
+    .scenario .price { font-size: 1.8rem; font-weight: 800; color: #1B8CA6; margin-bottom: 4px; }
+    .scenario .price-note { font-size: 0.8rem; color: #999; margin-bottom: 16px; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 16px; }
+    th { background: #f0f7fa; color: #0D3B4F; font-weight: 700; text-align: left; padding: 10px 14px; border-bottom: 2px solid #1B8CA6; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 10px 14px; border-bottom: 1px solid #eef2f7; }
+    tr:last-child td { border-bottom: none; }
+    .total-row td { font-weight: 700; background: #f7f9fb; border-top: 2px solid #1B8CA6; font-size: 0.95rem; }
+
+    /* Pros/Cons */
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .pros, .cons { font-size: 0.82rem; line-height: 1.8; }
+    .pros li::marker { content: '✅ '; }
+    .cons li::marker { content: '⚠️ '; }
+    .pros li, .cons li { padding-left: 4px; }
+
+    /* Footer */
+    .doc-footer { text-align: center; padding-top: 32px; border-top: 2px solid #eef2f7; color: #999; font-size: 0.8rem; margin-top: 48px; }
+
+    /* Comparison */
+    .compare-table th:first-child { width: 30%; }
+    .highlight-cell { background: #e8f4f8; font-weight: 600; }
+
+    /* Sources */
+    .source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+    .source-card { background: #f7f9fb; border-radius: 10px; padding: 14px; border: 1px solid #e0ecf1; }
+    .source-card h4 { font-size: 0.85rem; color: #0D3B4F; margin-bottom: 4px; }
+    .source-card p { font-size: 0.78rem; color: #666; line-height: 1.5; }
+    .source-icon { font-size: 1.3rem; margin-bottom: 6px; }
+
+    ul { padding-left: 20px; }
+    li { margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo-line">
+      <img class="logo-img" src="https://www.ambiente-solar.de/wp-content/uploads/2023/12/cropped-Logo-Ambiente-Solar-1.png" alt="Ambiente Solar Logo" onerror="this.style.display='none'">
+      <div>
+        <div style="font-size:1.1rem;font-weight:800;color:#0D3B4F;">Ambiente Solar</div>
+        <div style="font-size:0.7rem;color:#1B8CA6;letter-spacing:2px;text-transform:uppercase;">Photovoltaik</div>
+      </div>
+    </div>
+    <h1>Automatisierungs-Infrastruktur für Ambiente Solar</h1>
+    <p>Budget-Szenarien & Technische Architektur</p>
+    <div class="date">Erstellt: April 2026 · Erstellt von: Greisy Leblang</div>
+  </div>
+
+  <!-- ZIEL -->
+  <div class="section">
+    <h2>🎯 Ziel der Automatisierung</h2>
+    <div class="info-box">
+      <strong>Alle Kundenanfragen</strong> aus 5 verschiedenen Quellen fließen automatisch in eine zentrale Datenbank. 
+      <strong>Angebote, Auftragsbestätigungen und Rechnungen</strong> werden automatisch erstellt — Jhonatan 
+      prüft, bearbeitet und gibt alles frei, bevor es an den Kunden geht. Jhonatan behält die volle Kontrolle.
+    </div>
+  </div>
+
+  <!-- DATENQUELLEN -->
+  <div class="section">
+    <h2>📥 Datenquellen</h2>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-icon">🌐</div><h4>Webseite – Angebotsformular</h4><p>Kunden fragen ein individuelles Angebot an</p></div>
+      <div class="source-card"><div class="source-icon">☀️</div><h4>Webseite – Solar-Konzept</h4><p>Kunden lassen ein Solar-Konzept erstellen</p></div>
+      <div class="source-card"><div class="source-icon">💬</div><h4>WhatsApp</h4><p>Direkte Nachrichten von Kunden</p></div>
+      <div class="source-card"><div class="source-icon">📱</div><h4>Telegram</h4><p>Nachrichten & Kommunikation</p></div>
+    </div>
+    <div class="source-grid" style="grid-template-columns:1fr;">
+      <div class="source-card"><div class="source-icon">🔧</div><h4>SolarCan Installateure – Portal</h4><p>Aufträge von der Handwerker-Plattform. Automatisches Auslesen der neuen Aufträge aus dem Portal per Web-Automation (Scraping), damit J. nichts mehr manuell suchen muss.</p></div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="section">
+    <h2>🔄 Automatisierter Workflow</h2>
+    <div class="workflow">
+      <div class="workflow-step">📥 Anfrage</div><span class="workflow-arrow">→</span>
+      <div class="workflow-step">🗄️ Datenbank</div><span class="workflow-arrow">→</span>
+      <div class="workflow-step">📄 Angebot<br><small>auto-erstellt</small></div><span class="workflow-arrow">→</span>
+      <div class="workflow-step approval">👀 J. prüft<br><small>& gibt frei</small></div><span class="workflow-arrow">→</span>
+      <div class="workflow-step">📧 An Kunde</div>
+    </div>
+    <div class="workflow">
+      <div class="workflow-step">✅ Kunde nimmt an</div><span class="workflow-arrow">→</span>
+      <div class="workflow-step">📋 AB<br><small>auto-erstellt</small></div><span class="workflow-arrow">→</span>
+      <div class="workflow-step approval">👀 J. prüft<br><small>& gibt frei</small></div><span class="workflow-arrow">→</span>
+      <div class="workflow-step">📧 AB an Kunde</div>
+    </div>
+    <div class="workflow">
+      <div class="workflow-step">🔧 Auftrag erledigt</div><span class="workflow-arrow">→</span>
+      <div class="workflow-step">🧾 Rechnung<br><small>auto-erstellt</small></div><span class="workflow-arrow">→</span>
+      <div class="workflow-step approval">👀 J. prüft<br><small>& gibt frei</small></div><span class="workflow-arrow">→</span>
+      <div class="workflow-step final">📧 Rechnung<br>→ 💰 Bezahlt</div>
+    </div>
+    <div class="info-box" style="margin-top:20px;">
+      <strong>⚡ Wichtig:</strong> Nichts wird automatisch an den Kunden gesendet. Jhonatan hat bei jedem Schritt (Angebot, AB, Rechnung) die Möglichkeit zu prüfen, zu bearbeiten und freizugeben.
+    </div>
+  </div>
+
+  <!-- PAGE BREAK -->
+  <div class="page-break"></div>
+
+  <!-- SZENARIO 1 -->
+  <div class="section">
+    <h2>💰 Budget-Szenarien</h2>
+
+    <div class="scenario recommended">
+      <div class="scenario-badge">⭐ EMPFEHLUNG</div>
+      <h3>Szenario A — Smart Start</h3>
+      <div class="price">~20–30 €/Monat</div>
+      <div class="price-note">Langfristig tragbar · Professionell · Sofort einsatzbereit</div>
+      
+      <table>
+        <thead><tr><th>Komponente</th><th>Lösung</th><th>Kosten</th></tr></thead>
+        <tbody>
+          <tr><td>Webseite (Hosting)</td><td>GitHub Pages / Cloudflare Pages</td><td>0 €</td></tr>
+          <tr><td>Automatisierung</td><td>n8n Cloud – Starter Plan</td><td>~20 €/M.</td></tr>
+          <tr><td>Datenbank</td><td>Supabase – Free Tier (PostgreSQL)</td><td>0 €</td></tr>
+          <tr><td>E-Mail-Versand</td><td>Brevo (Sendinblue) – Free (300/Tag)</td><td>0 €</td></tr>
+          <tr><td>PDF-Erstellung</td><td>n8n + HTML-Templates</td><td>0 €</td></tr>
+          <tr><td>WhatsApp</td><td>WWebJS (Open Source)</td><td>0 €</td></tr>
+          <tr><td>Telegram Bot</td><td>Telegram Bot API</td><td>0 €</td></tr>
+          <tr><td>Dashboard / CRM</td><td>Vercel / Netlify (Free Tier)</td><td>0 €</td></tr>
+          <tr><td>SolarCan Scraping</td><td>n8n + HTTP/Playwright Node</td><td>0 €</td></tr>
+          <tr><td>Eigene Domain E-Mail</td><td>info@ambiente-solar.de (optional)</td><td>~5 €/M.</td></tr>
+          <tr class="total-row"><td colspan="2">GESAMT</td><td>~20–30 €/M.</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="pros-cons">
+        <div class="pros"><strong style="color:#28a745;">Vorteile:</strong>
+          <ul>
+            <li>Läuft 24/7 in der Cloud</li>
+            <li>Kein eigener Server nötig</li>
+            <li>Professionelle Infrastruktur</li>
+            <li>Einfach zu warten</li>
+            <li>Skalierbar bei Wachstum</li>
+            <li>Sofort einsatzbereit</li>
+          </ul>
+        </div>
+        <div class="cons"><strong style="color:#e8941a;">Einschränkungen:</strong>
+          <ul>
+            <li>n8n Starter: begrenzte Workflows</li>
+            <li>WhatsApp (inoffiziell) kann brechen</li>
+            <li>Supabase Free: 500MB Speicher</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SZENARIO 2 -->
+    <div class="scenario">
+      <h3>Szenario B — Professionell & Unabhängig</h3>
+      <div class="price">~40–55 €/Monat</div>
+      <div class="price-note">Volle Kontrolle · Eigener Server · Offizielle WhatsApp API</div>
+      
+      <table>
+        <thead><tr><th>Komponente</th><th>Lösung</th><th>Kosten</th></tr></thead>
+        <tbody>
+          <tr><td>Webseite + Backend</td><td>Hetzner VPS (CX22)</td><td>~5 €/M.</td></tr>
+          <tr><td>Automatisierung</td><td>n8n Self-Hosted auf VPS</td><td>0 € (inkl. VPS)</td></tr>
+          <tr><td>Datenbank</td><td>PostgreSQL auf VPS</td><td>0 € (inkl. VPS)</td></tr>
+          <tr><td>E-Mail-Versand</td><td>Brevo Starter (20.000 E-Mails/M.)</td><td>~19 €/M.</td></tr>
+          <tr><td>PDF-Erstellung</td><td>n8n + Professional Templates</td><td>0 €</td></tr>
+          <tr><td>WhatsApp</td><td>WhatsApp Business API (360dialog)</td><td>~15 €/M.</td></tr>
+          <tr><td>Telegram Bot</td><td>Telegram Bot API</td><td>0 €</td></tr>
+          <tr><td>Dashboard / CRM</td><td>Auf eigenem VPS gehostet</td><td>0 € (inkl. VPS)</td></tr>
+          <tr><td>SolarCan Scraping</td><td>Playwright auf VPS (zeitgesteuert)</td><td>0 € (inkl. VPS)</td></tr>
+          <tr><td>Domain E-Mail</td><td>info@ambiente-solar.de</td><td>~5 €/M.</td></tr>
+          <tr><td>Auto-Backup</td><td>Tägliches DB-Backup</td><td>0 € (inkl.)</td></tr>
+          <tr class="total-row"><td colspan="2">GESAMT</td><td>~40–55 €/M.</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="pros-cons">
+        <div class="pros"><strong style="color:#28a745;">Vorteile:</strong>
+          <ul>
+            <li>Volle Kontrolle über alles</li>
+            <li>Offizielle WhatsApp Business API</li>
+            <li>Unbegrenzte Workflows</li>
+            <li>Eigene Datenbank, keine Limits</li>
+            <li>Professionelle E-Mails</li>
+            <li>Automatische Backups</li>
+          </ul>
+        </div>
+        <div class="cons"><strong style="color:#e8941a;">Einschränkungen:</strong>
+          <ul>
+            <li>VPS braucht etwas Wartung</li>
+            <li>Setup etwas aufwändiger</li>
+            <li>Höhere monatliche Kosten</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERGLEICH -->
+  <div class="section">
+    <h2>📊 Direktvergleich</h2>
+    <table class="compare-table">
+      <thead><tr><th>Kriterium</th><th>Szenario A (Smart)</th><th>Szenario B (Profi)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Monatliche Kosten</strong></td><td class="highlight-cell">~20–30 €</td><td>~40–55 €</td></tr>
+        <tr><td><strong>Setup-Aufwand</strong></td><td class="highlight-cell">Gering</td><td>Mittel</td></tr>
+        <tr><td><strong>Verfügbarkeit</strong></td><td>99.9% (Cloud)</td><td class="highlight-cell">99.9% (VPS)</td></tr>
+        <tr><td><strong>WhatsApp</strong></td><td>Inoffiziell (kostenlos)</td><td class="highlight-cell">Offiziell (API)</td></tr>
+        <tr><td><strong>Datenbank-Limit</strong></td><td>500 MB (Free Tier)</td><td class="highlight-cell">Unbegrenzt</td></tr>
+        <tr><td><strong>Workflow-Limit</strong></td><td>Begrenzt (Starter)</td><td class="highlight-cell">Unbegrenzt</td></tr>
+        <tr><td><strong>Wartung</strong></td><td class="highlight-cell">Keine (Cloud)</td><td>Gelegentlich</td></tr>
+        <tr><td><strong>Skalierbarkeit</strong></td><td>Gut</td><td class="highlight-cell">Sehr gut</td></tr>
+        <tr><td><strong>Empfohlen für</strong></td><td class="highlight-cell">Start & erste Kunden</td><td>Wachstum & viele Kunden</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">
+      <strong>💡 Unsere Empfehlung:</strong> Mit <strong>Szenario A</strong> starten und bei wachsendem Geschäft auf <strong>Szenario B</strong> upgraden. 
+      Der Umstieg ist einfach, da die gleichen Technologien verwendet werden (n8n, PostgreSQL, gleiche Templates).
+    </div>
+  </div>
+
+  <!-- ZEITPLAN -->
+  <div class="section">
+    <h2>📅 Umsetzungszeitplan</h2>
+    <table>
+      <thead><tr><th>Phase</th><th>Was</th><th>Zeitraum</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Phase 1</strong></td><td>Datenbank + n8n + Webseite-Formulare + Telegram</td><td>Woche 1–2</td></tr>
+        <tr><td><strong>Phase 2</strong></td><td>Preisliste + Angebots-/AB-/Rechnungs-Vorlagen als PDF</td><td>Woche 3–4</td></tr>
+        <tr><td><strong>Phase 3</strong></td><td>Dashboard/CRM mit Freigabe-System</td><td>Woche 4–5</td></tr>
+        <tr><td><strong>Phase 4</strong></td><td>WhatsApp + Telegram Anbindung erweitern</td><td>Woche 5–6</td></tr>
+        <tr><td><strong>Phase 5</strong></td><td>SolarCan-Portal Automation + Go-Live</td><td>Woche 6–8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <p><strong>Erstellt von Greisy Leblang</strong> · KI-Implementation Architect</p>
+    <p>Für Jhonatan Solartechnik · Frankfurt am Main · April 2026</p>
+    <p style="margin-top:8px;">Bei Fragen stehe ich jederzeit zur Verfügung.</p>
+  </div>
+
+</div>
+
+<!-- PRINT BUTTON -->
+<div class="no-print" style="text-align:center;padding:20px;">
+  <button onclick="window.print()" style="background:#1B8CA6;color:#fff;border:none;padding:14px 40px;border-radius:30px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;">🖨️ Als PDF drucken / speichern</button>
+</div>
+
+</body>
+</html>

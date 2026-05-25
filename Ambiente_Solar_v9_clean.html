@@ -120,9 +120,8 @@ nav.topbar{
   border-bottom:1px solid rgba(0,0,0,.05);
 }
 .brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:60px;height:60px;display:grid;place-items:center;color:var(--accent)}
-.brand-mark svg,.brand-mark img{width:60px;height:60px;display:block;object-fit:contain}
-.brand-name{font-family:var(--display);font-weight:800;color:var(--black);font-size:19px;letter-spacing:.04em;line-height:1;text-transform:uppercase}
+.brand-mark{height:44px;display:flex;align-items:center}
+.brand-mark img{height:44px;width:auto;display:block;object-fit:contain}
 .brand-sub{display:none}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
 .nav-links a{font-size:14px;color:var(--ink);font-weight:500;opacity:.85;transition:opacity .2s}
@@ -151,7 +150,7 @@ nav.topbar{
   margin-bottom:32px;
 }
 .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(31,157,110,.18)}
-.hero h1 span{display:inline;color:var(--accent);font-style:italic;font-weight:500}
+.hero h1 span{display:inline;color:inherit;font-style:normal;font-weight:inherit;letter-spacing:inherit}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
 .hero-meta{
   display:grid;grid-template-columns:repeat(3,auto);gap:36px;margin-top:48px;
@@ -264,8 +263,8 @@ nav.topbar{
 .radar-center::after{inset:-30px;animation:ringp 3s ease-out infinite .8s}
 @keyframes ringp{0%{opacity:.6;transform:scale(.85)}100%{opacity:0;transform:scale(1.2)}}
 .radar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1}
-.radar-logo .glyph{width:60px;height:60px;color:var(--accent);display:grid;place-items:center}
-.radar-logo .glyph img{width:60px;height:60px;object-fit:contain}
+.radar-logo .glyph{width:120px;height:auto;display:flex;align-items:center;justify-content:center}
+.radar-logo .glyph img{width:120px;height:auto;max-height:32px;object-fit:contain}
 .radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
 .radar-logo .sb{font-size:9px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
 
@@ -391,20 +390,29 @@ nav.topbar{
 .map-pin{position:absolute;top:24px;left:50%;transform:translateX(-50%);background:#fff;color:var(--black);padding:10px 18px 10px 14px;border-radius:999px;font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:.04em;display:inline-flex;align-items:center;gap:10px;pointer-events:none;border:1px solid var(--line)}
 .map-pin::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(245,166,35,.18)}
 
-/* ===== partner ===== */
+/* ===== Partner (statische Cards mit Kategorien) ===== */
 .partner{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.partner-row{margin-bottom:36px}
-.partner-row:last-child{margin-bottom:0}
-.partner-cap{font-family:var(--body);font-size:11px;font-weight:500;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:24px}
-.partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1000px;margin:0 auto}
-.partner-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:border-color .25s,transform .35s var(--spring)}
-.partner-card:hover{transform:translateY(-2px);border-color:var(--accent)}
-.partner-card img{height:34px;width:auto;max-width:120px;object-fit:contain;filter:grayscale(40%);opacity:.85}
-.partner-card:hover img{filter:grayscale(0);opacity:1}
-.partner-mono{height:38px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;color:var(--black);letter-spacing:-.04em;opacity:.92}
-.partner-card:hover .partner-mono{opacity:1}
-.partner-card .nm{font-family:var(--display);font-weight:700;color:var(--black);font-size:14px;letter-spacing:-.01em}
-.partner-card .tg{font-size:11px;color:var(--zinc-500);letter-spacing:.1em;text-transform:uppercase}
+.partner-cat{margin-bottom:0}
+.partner-cat-label{font-family:var(--display);font-size:13px;font-weight:600;color:var(--accent-blue);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:20px}
+.partner-card-grid{display:grid;gap:18px;max-width:1100px;margin:0 auto}
+.partner-card-grid-4{grid-template-columns:repeat(4,1fr);max-width:720px}
+.partner-card-grid-6{grid-template-columns:repeat(6,1fr)}
+.partner-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;transition:border-color .25s,transform .35s var(--spring),box-shadow .25s}
+.partner-card:hover{border-color:var(--accent-gold);transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(0,0,0,.12)}
+.partner-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:50%}
+.partner-icon-sun{color:var(--accent);background:var(--accent-soft)}
+.partner-icon-bolt{color:var(--accent);background:var(--accent-soft)}
+.partner-icon-battery{color:#16a34a;background:#dcfce7}
+.partner-name{font-family:var(--display);font-weight:700;font-size:16px;color:var(--black);letter-spacing:-.01em}
+.partner-cat-tag{font-family:var(--body);font-size:11px;font-weight:500;color:var(--accent-blue);letter-spacing:.14em;text-transform:uppercase}
+@media (max-width:1000px){
+  .partner-card-grid-4{grid-template-columns:repeat(2,1fr);max-width:480px}
+  .partner-card-grid-6{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+  .partner-card-grid-4,.partner-card-grid-6{grid-template-columns:repeat(2,1fr)}
+  .partner-card{padding:18px 12px}
+}
 
 /* ===== bewertungen ===== */
 .bewertungen{background:#000;color:#fff;position:relative;overflow:hidden}
@@ -439,8 +447,8 @@ nav.topbar{
 /* ===== footer ===== */
 footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:50px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
-.foot-brand .brand-mark{width:44px;height:44px;color:var(--accent)}
-.foot-brand .brand-mark svg,.foot-brand .brand-mark img{width:44px;height:44px;object-fit:contain}
+.foot-brand .brand-mark{height:60px;width:auto}
+.foot-brand .brand-mark img{height:60px;width:auto;object-fit:contain}
 .foot-brand .bn{font-family:var(--display);font-weight:800;color:#fff;font-size:17px;margin-top:14px;letter-spacing:.08em;text-transform:uppercase}
 .foot-brand p{margin-top:14px;font-size:14px;line-height:1.7;max-width:36ch}
 .foot-brand .ust{margin-top:18px;color:var(--accent);font-size:12px;font-family:var(--body);font-weight:500;letter-spacing:.04em}
@@ -481,6 +489,8 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .wrap{padding:0 24px}
   nav.topbar{padding:14px 20px}
   .nav-links{display:none}
+  .brand-mark{height:36px;width:auto}
+  .brand-mark img{height:36px;width:auto}
   .hero-grid,.about-grid,.kontakt-grid{grid-template-columns:1fr;gap:50px}
   .hero{padding-top:110px}
   .hero-vis{min-height:380px}
@@ -492,7 +502,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .preis-grid{grid-template-columns:1fr 1fr}
   .test-grid,.social-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
-  .partner-grid{grid-template-columns:1fr 1fr}
   .radar-frame{aspect-ratio:1/1.2}
   .node{width:130px}
   .node img{height:70px}
@@ -507,9 +516,8 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 
 <!-- ===== NAV ===== -->
 <nav class="topbar">
-  <a href="#" class="brand">
+  <a href="#" class="brand" aria-label="Ambiente Solar — zurück nach oben">
     <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
-    <div class="brand-name">AMBIENTE SOLAR</div>
   </a>
   <ul class="nav-links">
     <li><a href="#about">Über uns</a></li>
@@ -722,7 +730,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       <div class="radar-center">
         <div class="radar-logo">
           <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg></div>
-          <div class="nm">Ambiente Solar</div>
           <div class="sb">Frankfurt</div>
         </div>
       </div>
@@ -1006,30 +1013,91 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <!-- ===== PARTNER ===== -->
 <section class="partner" id="partner">
   <div class="wrap">
-    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:48px">
       <span class="eyebrow">Unsere Partner</span>
-      <h2 style="text-align:center">Geschäftspartner &amp; <span style="color:var(--navy)">Marken.</span></h2>
-      <p class="lead" style="text-align:center;margin:12px auto 0">Wir arbeiten mit führenden Herstellern und Partnern der Solarbranche zusammen.</p>
+      <h2 style="text-align:center">Geschäftspartner &amp; <span style="color:var(--accent)">Marken.</span></h2>
+      <p class="lead" style="text-align:center;margin:12px auto 0">Wir arbeiten mit führenden Herstellern der Solarbranche zusammen.</p>
     </div>
 
-    <div class="partner-row">
-      <div class="partner-cap">PV-Module</div>
-      <div class="partner-grid">
-        <div class="partner-card"><div class="partner-mono">AIKO</div><div class="nm">Aiko</div><div class="tg">PV-Module</div></div>
-        <div class="partner-card"><div class="partner-mono">TRINA</div><div class="nm">Trina Solar</div><div class="tg">PV-Module</div></div>
-        <div class="partner-card"><div class="partner-mono">LONGi</div><div class="nm">LONGi</div><div class="tg">PV-Module</div></div>
-        <div class="partner-card"><div class="partner-mono">ANKER</div><div class="nm">Anker</div><div class="tg">PV-Module</div></div>
+    <div class="partner-cat">
+      <div class="partner-cat-label">PV-Module</div>
+      <div class="partner-card-grid partner-card-grid-4">
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-sun" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </div>
+          <div class="partner-name">Aiko</div>
+          <div class="partner-cat-tag">PV-Module</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-sun" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </div>
+          <div class="partner-name">Trina Solar</div>
+          <div class="partner-cat-tag">PV-Module</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-sun" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </div>
+          <div class="partner-name">LONGi</div>
+          <div class="partner-cat-tag">PV-Module</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-sun" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </div>
+          <div class="partner-name">Anker</div>
+          <div class="partner-cat-tag">PV-Module</div>
+        </div>
       </div>
     </div>
 
-    <div class="partner-row">
-      <div class="partner-cap">Wechselrichter &amp; Speicher</div>
-      <div class="partner-grid" style="grid-template-columns:repeat(5,1fr)">
-        <div class="partner-card"><div class="partner-mono">SUNGROW</div><div class="nm">Sungrow</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">HUAWEI</div><div class="nm">Huawei</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">SMA</div><div class="nm">SMA</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">GoodWe</div><div class="nm">GoodWe</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">BYD</div><div class="nm">BYD</div><div class="tg">Batteriespeicher</div></div>
+    <div class="partner-cat" style="margin-top:48px">
+      <div class="partner-cat-label">Wechselrichter &amp; Speicher</div>
+      <div class="partner-card-grid partner-card-grid-6">
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-bolt" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="partner-name">Sungrow</div>
+          <div class="partner-cat-tag">Wechselrichter</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-bolt" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="partner-name">Huawei</div>
+          <div class="partner-cat-tag">Wechselrichter</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-bolt" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="partner-name">SMA</div>
+          <div class="partner-cat-tag">Wechselrichter</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-bolt" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="partner-name">GoodWe</div>
+          <div class="partner-cat-tag">Wechselrichter</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-battery" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="10" rx="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line><polyline points="10 10 8 13 12 13 10 16"></polyline></svg>
+          </div>
+          <div class="partner-name">BYD</div>
+          <div class="partner-cat-tag">Batteriespeicher</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon partner-icon-battery" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="10" rx="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line><polyline points="10 10 8 13 12 13 10 16"></polyline></svg>
+          </div>
+          <div class="partner-name">Anker</div>
+          <div class="partner-cat-tag">Batteriespeicher</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1100,7 +1168,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     <div class="foot-grid">
       <div class="foot-brand">
         <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
-        <div class="bn">AMBIENTE SOLAR</div>
         <p>Ihr zuverlässiger Partner für Photovoltaik-Anlagen in Frankfurt am Main und Umgebung. Saubere Energie für eine bessere Zukunft.</p>
         <div class="ust">USt-IdNr: DE 357020901</div>
       </div>

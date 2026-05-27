@@ -121,7 +121,7 @@ nav.topbar{
 }
 .brand{display:flex;align-items:center;gap:12px}
 .brand-mark{height:44px;display:flex;align-items:center}
-.brand-mark img{height:44px;width:auto;display:block;object-fit:contain}
+.brand-mark img{height:44px;width:auto;display:block;object-fit:contain;background:transparent;border:none;outline:none}
 .brand-sub{display:none}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
 .nav-links a{font-size:14px;color:var(--ink);font-weight:500;opacity:.85;transition:opacity .2s}
@@ -264,7 +264,7 @@ nav.topbar{
 @keyframes ringp{0%{opacity:.6;transform:scale(.85)}100%{opacity:0;transform:scale(1.2)}}
 .radar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1}
 .radar-logo .glyph{width:120px;height:auto;display:flex;align-items:center;justify-content:center}
-.radar-logo .glyph img{width:120px;height:auto;max-height:32px;object-fit:contain}
+.radar-logo .glyph img{width:130px;height:auto;max-height:40px;object-fit:contain;background:transparent;border:none}
 .radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
 .radar-logo .sb{font-size:9px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
 
@@ -730,7 +730,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       <div class="radar-center">
         <div class="radar-logo">
           <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg></div>
-          <div class="sb">Frankfurt</div>
         </div>
       </div>
 
@@ -770,11 +769,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         <div class="meta"><div class="kwp">7 kWp</div><div class="loc">Frankfurt · Einfamilienhaus</div></div>
       </a>
 
-      <!-- legend -->
-      <div class="radar-legend">
-        <div class="lg">A</div>
-        <span><strong style="color:#fff;font-weight:600">Ambiente Solar HQ</strong> · Mittelseestraße 32, Frankfurt</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1167,9 +1161,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
         <p>Ihr zuverlässiger Partner für Photovoltaik-Anlagen in Frankfurt am Main und Umgebung. Saubere Energie für eine bessere Zukunft.</p>
-        <div class="ust">USt-IdNr: DE 357020901</div>
       </div>
       <div class="foot-col">
         <h4>Leistungen</h4>
@@ -1203,7 +1195,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     </div>
     <div class="foot-bot">
       <span>© 2026 Ambiente Solar · Jhonatan Jaramillo Aguirre · Frankfurt am Main</span>
-      <span><a href="#" onclick="zeigeImpressum();return false">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="zeigeDatenschutz();return false">Datenschutz</a></span>
     </div>
   </div>
 </footer>

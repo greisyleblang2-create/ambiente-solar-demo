@@ -51,12 +51,18 @@
 <title>Ambiente Solar – Photovoltaik deutschlandweit</title>
 <meta name="description" content="Ambiente Solar — deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung. Beratung, Planung und Installation aus einer Hand.">
 <meta property="og:title" content="Ambiente Solar – Photovoltaik deutschlandweit">
+<link rel="canonical" href="https://ambiente-solar.de">
+<meta property="og:url" content="https://ambiente-solar.de">
+<meta property="og:image" content="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
 <meta property="og:description" content="Deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung. Beratung, Planung und Installation aus einer Hand.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -71,7 +77,7 @@
   --zinc-900:#18181b;
   --zinc-800:#27272a;
   --zinc-700:#3f3f46;
-  --zinc-500:#71717a;
+  --zinc-500:#5a5a63;
   --zinc-400:#a1a1aa;
   --zinc-300:#d4d4d8;
   --zinc-200:#e4e4e7;
@@ -95,11 +101,12 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 ::selection{background:var(--accent);color:#fff}
+.btn:focus-visible,.btn-form:focus-visible,.choose:focus-visible,.opt:focus-visible,.back:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* ===== layout ===== */
 .wrap{max-width:1280px;margin:0 auto;padding:0 40px}
 section{padding:120px 0;position:relative}
-.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--zinc-500);margin-bottom:24px}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#5a5a63;margin-bottom:24px}
 .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
 .eyebrow .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
 h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-0.04em;color:var(--black);line-height:1.0}
@@ -417,7 +424,6 @@ nav.topbar{
 .bewertungen .eyebrow{color:#fff}
 .bewertungen .eyebrow::before{background:var(--accent)}
 .bewertungen h2{color:#fff}
-.bewertungen h2{color:#fff}
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:60px;position:relative}
 .test{background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:30px;display:flex;flex-direction:column;gap:18px;transition:border-color .25s,background .25s}
 .test:hover{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.18)}
@@ -539,6 +545,38 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 /* ===== Kontakt CTA und About ===== */
 .about-text .btn-navy{display:inline-flex}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ambiente Solar",
+  "description": "Deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung.",
+  "url": "https://ambiente-solar.de",
+  "telephone": "+4917863375200",
+  "email": "info@ambiente-solar.de",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Mittelseestraße 32",
+    "addressLocality": "Frankfurt am Main",
+    "postalCode": "60386",
+    "addressCountry": "DE"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Jhonatan Jaramillo Aguirre"
+  },
+  "areaServed": "DE",
+  "serviceType": ["Photovoltaik-Installation","Batteriespeicher","Wartung","Balkonkraftwerk"]
+}
+</script>
 </head>
 <body>
 
@@ -570,7 +608,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         </div>
       </div>
       <div class="hero-vis">
-        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" poster="fotos/200kwp-lauterbach.jpg"><source src="fotos/hero-video.mp4" type="video/mp4"></video></div>
+        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" preload="none" poster="fotos/200kwp-lauterbach.jpg"><source src="fotos/hero-video.mp4" type="video/mp4"></video></div>
         <div class="hero-side">
           <span class="k">100 kWp</span>
           <span>Deutschlandweit&nbsp;·&nbsp;Live-Anlage</span>
@@ -787,8 +825,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         <span class="pin"></span>
         <img src="fotos/balkon-limburgerhof.jpg" alt="Erweiterung – Limburgerh." loading="lazy">
         <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Limburgerh. · Balkon</div></div>
-      </a>
-    </div>
+      </a></div>
   </div>
 </section>
 
@@ -903,13 +940,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <h3 style="font-size:20px;font-weight:700;margin-bottom:4px">Individuelles Angebot anfordern</h3>
           <div class="sub">Ich melde mich innerhalb von 1–2 Werktagen.</div>
           <div class="frow">
-            <div class="fg"><label>Vorname *</label><input type="text" id="ang-vorname" placeholder="Max" autocomplete="given-name"></div>
-            <div class="fg"><label>Nachname *</label><input type="text" id="ang-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
+            <div class="fg"><label for="ang-vorname">Vorname *</label><input type="text" id="ang-vorname" placeholder="Max" autocomplete="given-name"></div>
+            <div class="fg"><label for="ang-nachname">Nachname *</label><input type="text" id="ang-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label>E-Mail *</label><input type="email" id="ang-email" placeholder="max@beispiel.de" autocomplete="email"></div>
-          <div class="fg"><label>Telefon</label><input type="tel" id="ang-tel" placeholder="+49 ..." autocomplete="tel"></div>
+          <div class="fg"><label for="ang-email">E-Mail *</label><input type="email" id="ang-email" placeholder="max@beispiel.de" autocomplete="email"></div>
+          <div class="fg"><label for="ang-tel">Telefon *</label><input type="tel" id="ang-tel" required placeholder="+49 ..." autocomplete="tel"></div>
           <div class="fg">
-            <label>Anlagentyp</label>
+            <label for="ang-typ">Anlagentyp</label>
             <select id="ang-typ">
               <option>Einfamilienhaus</option>
               <option>Mehrfamilienhaus</option>
@@ -920,7 +957,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
               <option>Vogelschutz</option>
             </select>
           </div>
-          <div class="fg"><label>Ihre Nachricht</label><textarea id="ang-msg" placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
+          <div class="fg"><label for="ang-msg">Ihre Nachricht</label><textarea id="ang-msg" placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
           <div class="dsr">
             <input type="checkbox" id="ds1">
             <label for="ds1">Ich habe die <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
@@ -1006,11 +1043,11 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <p style="font-family:var(--display);font-weight:600;color:var(--accent);font-size:15px;text-align:center;margin-bottom:18px">Wohin soll ich Ihr Solar-Konzept senden?</p>
 
           <div class="frow">
-            <div class="fg"><label>Vorname *</label><input type="text" id="kon-vorname" placeholder="Max" autocomplete="given-name"></div>
-            <div class="fg"><label>Nachname *</label><input type="text" id="kon-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
+            <div class="fg"><label for="kon-vorname">Vorname *</label><input type="text" id="kon-vorname" placeholder="Max" autocomplete="given-name"></div>
+            <div class="fg"><label for="kon-nachname">Nachname *</label><input type="text" id="kon-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label>E-Mail *</label><input type="email" id="kon-email" placeholder="max@beispiel.de" autocomplete="email"></div>
-          <div class="fg"><label>Telefonnummer</label><input type="tel" id="kon-tel" placeholder="+49 ..." autocomplete="tel"></div>
+          <div class="fg"><label for="kon-email">E-Mail *</label><input type="email" id="kon-email" placeholder="max@beispiel.de" autocomplete="email"></div>
+          <div class="fg"><label for="kon-tel">Telefonnummer *</label><input type="tel" id="kon-tel" required placeholder="+49 ..." autocomplete="tel"></div>
 
           <div class="dsr">
             <input type="checkbox" id="ds2">
@@ -1298,12 +1335,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   /* ===== Angebot-Formular senden ===== */
   async function sendeAngebot(){
     const vorname=document.getElementById('ang-vorname').value.trim();
+    const tel=document.getElementById('ang-tel').value.trim();
     const nachname=document.getElementById('ang-nachname').value.trim();
     const email=document.getElementById('ang-email').value.trim();
     const typ=document.getElementById('ang-typ').value;
     const msg=document.getElementById('ang-msg').value.trim();
     const ds=document.getElementById('ds1').checked;
-    if(!vorname||!email){setStatus('ang-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
+    if(!vorname||!email||!tel){setStatus('ang-status','error','Bitte Vorname, E-Mail und Telefon ausfüllen.');return;}
     if(!ds){setStatus('ang-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
     const btn=document.getElementById('ang-submit');
     btn.disabled=true;
@@ -1329,9 +1367,10 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   /* ===== Solar-Konzept senden ===== */
   async function sendeKonzept(){
     const vorname=document.getElementById('kon-vorname').value.trim();
+    const tel=document.getElementById('kon-tel').value.trim();
     const email=document.getElementById('kon-email').value.trim();
     const ds=document.getElementById('ds2').checked;
-    if(!vorname||!email){setStatus('kon-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
+    if(!vorname||!email||!tel){setStatus('kon-status','error','Bitte Vorname, E-Mail und Telefon ausfüllen.');return;}
     if(!ds){setStatus('kon-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
     const antworten=[...document.querySelectorAll('#formular-konzept .opt.sel,.opt.no')].map(b=>b.textContent.trim());
     const btn=document.getElementById('kon-submit');

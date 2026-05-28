@@ -122,8 +122,8 @@ nav.topbar{
   border-bottom:1px solid rgba(0,0,0,.05);
 }
 .brand{display:flex;align-items:center;gap:12px}
-.brand-mark{height:44px;display:flex;align-items:center}
-.brand-mark img{height:44px;width:auto;display:block;object-fit:contain}
+.brand-mark{height:52px;display:flex;align-items:center}
+.brand-mark img{height:52px;width:auto;display:block;object-fit:contain}
 .brand-name{font-family:var(--display);font-weight:800;color:var(--black);font-size:19px;letter-spacing:.04em;line-height:1;text-transform:uppercase}
 .brand-sub{font-family:var(--body);font-size:10px;font-weight:500;color:var(--zinc-500);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
@@ -516,8 +516,8 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 @media (max-width:640px){
   .leist-grid{grid-template-columns:1fr}
   .preis-grid{grid-template-columns:1fr}
-  .brand-mark{height:36px;width:auto}
-  .brand-mark img{height:36px;width:auto}
+  .brand-mark{height:38px;width:auto}
+  .brand-mark img,.brand-mark svg{height:38px;width:auto}
   .review-grid{grid-template-columns:1fr}
 }
 
@@ -566,12 +566,54 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <nav class="topbar">
   <a href="#" class="brand" aria-label="Ambiente Solar — zurück nach oben">
     <div class="brand-mark">
-      <img src="fotos/logo.png" alt="Ambiente Solar — Photovoltaik deutschlandweit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <svg style="display:none;height:40px;width:auto" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="40" height="40" rx="8" fill="#0D3B4F"/>
-        <path d="M8 30 L20 10 L32 30 M13 22 H27" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="50" y="16" font-family="system-ui,sans-serif" font-weight="800" font-size="11" fill="#0D3B4F" letter-spacing="1">AMBIENTE</text>
-        <text x="50" y="31" font-family="system-ui,sans-serif" font-weight="500" font-size="11" fill="#F5A623" letter-spacing="2">SOLAR</text>
+      <!-- Logo SVG — inline, kein externes File nötig -->
+      <svg height="52" width="auto" viewBox="0 0 420 84" xmlns="http://www.w3.org/2000/svg" aria-label="Ambiente Solar — Photovoltaik deutschlandweit" role="img">
+        <defs>
+          <linearGradient id="pg" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0" stop-color="#2685D4"/>
+            <stop offset="1" stop-color="#0A3D8F"/>
+          </linearGradient>
+          <clipPath id="icon-clip">
+            <rect width="82" height="84" rx="0"/>
+          </clipPath>
+        </defs>
+        <!-- Sun rays (behind panels) -->
+        <g stroke="#F5A623" stroke-width="2.4" stroke-linecap="round">
+          <line x1="60" y1="3"  x2="60" y2="9"/>
+          <line x1="74" y1="7"  x2="71" y2="12"/>
+          <line x1="81" y1="19" x2="75" y2="21"/>
+          <line x1="45" y1="3"  x2="48" y2="8"/>
+          <line x1="35" y1="9"  x2="39" y2="14"/>
+          <line x1="29" y1="20" x2="35" y2="22"/>
+        </g>
+        <!-- Sun -->
+        <circle cx="60" cy="24" r="17" fill="#FFA800"/>
+        <circle cx="60" cy="24" r="12" fill="#FFCC00"/>
+        <!-- Solar panels — 3 cols × 4 rows, slight shear -->
+        <g transform="translate(2,34) matrix(1,0,-0.1,1,0,0)">
+          <rect x="0"  y="0"  width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="0"  width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="0"  width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="14" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="14" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="14" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="28" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="28" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="28" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="42" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="42" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="42" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+        </g>
+        <!-- Divider -->
+        <line x1="88" y1="10" x2="88" y2="74" stroke="#C8C8C8" stroke-width="1.5"/>
+        <!-- AMBIENTE SOLAR -->
+        <text x="100" y="49"
+          font-family="'Arial Black','Arial Bold',Arial,Helvetica,sans-serif"
+          font-weight="900" font-size="30" fill="#111111" letter-spacing="-0.4">AMBIENTE SOLAR</text>
+        <!-- PHOTOVOLTAIK DEUTSCHLANDWEIT -->
+        <text x="101" y="66"
+          font-family="Arial,Helvetica,sans-serif"
+          font-weight="400" font-size="9.8" fill="#9A7820" letter-spacing="2.6">PHOTOVOLTAIK DEUTSCHLANDWEIT</text>
       </svg>
     </div>
   </a>

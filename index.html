@@ -103,13 +103,13 @@ section{padding:120px 0;position:relative}
 .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
 .eyebrow .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
 h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-0.04em;color:var(--black);line-height:1.0}
-h1{font-size:clamp(56px,8vw,120px);font-weight:700;letter-spacing:-0.045em;line-height:.92}
+h1{font-size:clamp(44px,5.8vw,88px);font-weight:700;letter-spacing:-0.045em;line-height:.94}
 h1 strong{font-weight:900;letter-spacing:-.055em}
-h2{font-size:clamp(40px,5.2vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
+h2{font-size:clamp(30px,3.8vw,58px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
 h2 strong{font-weight:900;letter-spacing:-.05em}
-h3{font-size:22px;font-weight:700;color:var(--black);letter-spacing:-0.02em}
+h3{font-size:20px;font-weight:700;color:var(--black);letter-spacing:-0.02em}
 p{font-weight:400;color:var(--zinc-700);font-size:16px;line-height:1.7}
-.lead{font-size:19px;line-height:1.6;color:var(--zinc-700);font-weight:400;max-width:54ch;letter-spacing:-.008em}
+.lead{font-size:18px;line-height:1.65;color:var(--zinc-700);font-weight:400;max-width:52ch;letter-spacing:-.008em}
 
 /* ===== nav ===== */
 nav.topbar{
@@ -167,7 +167,7 @@ nav.topbar{
 
 .hero-vis{position:relative;align-self:stretch;min-height:560px}
 .hero-photo{position:relative;height:100%;min-height:600px;border-radius:6px;overflow:hidden;background:var(--zinc-100);isolation:isolate}
-.hero-photo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-photo video,.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
 .hero-tile{
   position:absolute;left:20px;bottom:20px;right:20px;
@@ -565,7 +565,15 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <!-- ===== NAV ===== -->
 <nav class="topbar">
   <a href="#" class="brand" aria-label="Ambiente Solar — zurück nach oben">
-    <div class="brand-mark"><img src="fotos/logo.png" alt="Ambiente Solar — Photovoltaik deutschlandweit"></div>
+    <div class="brand-mark">
+      <img src="fotos/logo.png" alt="Ambiente Solar — Photovoltaik deutschlandweit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <svg style="display:none;height:40px;width:auto" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="40" height="40" rx="8" fill="#0D3B4F"/>
+        <path d="M8 30 L20 10 L32 30 M13 22 H27" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="50" y="16" font-family="system-ui,sans-serif" font-weight="800" font-size="11" fill="#0D3B4F" letter-spacing="1">AMBIENTE</text>
+        <text x="50" y="31" font-family="system-ui,sans-serif" font-weight="500" font-size="11" fill="#F5A623" letter-spacing="2">SOLAR</text>
+      </svg>
+    </div>
   </a>
   <ul class="nav-links">
     <li><a href="#about">Über uns</a></li>
@@ -590,7 +598,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         </div>
       </div>
       <div class="hero-vis">
-        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" poster="fotos/200kwp-lauterbach.jpg"><source src="fotos/hero-video.mp4" type="video/mp4"></video></div>
+        <div class="hero-photo"><img src="fotos/200kwp-lauterbach.jpg" alt="100 kWp Photovoltaik-Gewerbeanlage – Ambiente Solar" fetchpriority="high"></div>
         <div class="hero-side">
           <span class="k">100 kWp</span>
           <span>Deutschlandweit&nbsp;·&nbsp;Live-Anlage</span>

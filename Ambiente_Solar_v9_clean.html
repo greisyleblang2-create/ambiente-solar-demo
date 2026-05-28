@@ -51,18 +51,12 @@
 <title>Ambiente Solar – Photovoltaik deutschlandweit</title>
 <meta name="description" content="Ambiente Solar — deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung. Beratung, Planung und Installation aus einer Hand.">
 <meta property="og:title" content="Ambiente Solar – Photovoltaik deutschlandweit">
-<link rel="canonical" href="https://ambiente-solar.de">
-<meta property="og:url" content="https://ambiente-solar.de">
-<meta property="og:image" content="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:type" content="website">
 <meta property="og:description" content="Deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung. Beratung, Planung und Installation aus einer Hand.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -77,7 +71,7 @@
   --zinc-900:#18181b;
   --zinc-800:#27272a;
   --zinc-700:#3f3f46;
-  --zinc-500:#5a5a63;
+  --zinc-500:#71717a;
   --zinc-400:#a1a1aa;
   --zinc-300:#d4d4d8;
   --zinc-200:#e4e4e7;
@@ -101,18 +95,17 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 ::selection{background:var(--accent);color:#fff}
-.btn:focus-visible,.btn-form:focus-visible,.choose:focus-visible,.opt:focus-visible,.back:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* ===== layout ===== */
 .wrap{max-width:1280px;margin:0 auto;padding:0 40px}
 section{padding:120px 0;position:relative}
-.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#5a5a63;margin-bottom:24px}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--zinc-500);margin-bottom:24px}
 .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
 .eyebrow .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
 h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-0.04em;color:var(--black);line-height:1.0}
-h1{font-size:clamp(40px,5.5vw,80px);font-weight:700;letter-spacing:-0.045em;line-height:.92}
+h1{font-size:clamp(56px,8vw,120px);font-weight:700;letter-spacing:-0.045em;line-height:.92}
 h1 strong{font-weight:900;letter-spacing:-.055em}
-h2{font-size:clamp(28px,3.8vw,52px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
+h2{font-size:clamp(40px,5.2vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
 h2 strong{font-weight:900;letter-spacing:-.05em}
 h3{font-size:22px;font-weight:700;color:var(--black);letter-spacing:-0.02em}
 p{font-weight:400;color:var(--zinc-700);font-size:16px;line-height:1.7}
@@ -130,7 +123,8 @@ nav.topbar{
 }
 .brand{display:flex;align-items:center;gap:12px}
 .brand-mark{height:44px;display:flex;align-items:center}
-.brand-mark img{height:44px;width:auto;display:block;object-fit:contain;background:transparent;border:none;outline:none}
+.brand-mark img{height:44px;width:auto;display:block;object-fit:contain}
+.brand-name{font-family:var(--display);font-weight:800;color:var(--black);font-size:19px;letter-spacing:.04em;line-height:1;text-transform:uppercase}
 .brand-sub{font-family:var(--body);font-size:10px;font-weight:500;color:var(--zinc-500);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
 .nav-links a{font-size:16px;color:var(--ink);font-weight:600;letter-spacing:-.01em;opacity:.85;transition:opacity .2s}
@@ -235,10 +229,7 @@ nav.topbar{
 .leist:nth-child(5),.leist:nth-child(6),.leist:nth-child(7),.leist:nth-child(8){grid-column:span 3}
 
 /* ===== radar / projekte ===== */
-.projekte{background:#0A0A0A;overflow:hidden;color:#fff;position:relative}
-.projekte::before,.projekte::after{content:"";position:absolute;left:0;right:0;height:100px;z-index:20;pointer-events:none}
-.projekte::before{top:0;background:linear-gradient(to bottom,#fff,transparent)}
-.projekte::after{bottom:0;background:linear-gradient(to top,#fff,transparent)}
+.projekte{background:#0A0A0A;overflow:hidden;color:#fff}
 .projekte h2,.projekte .eyebrow{color:#fff}
 .projekte .eyebrow::before{background:var(--accent)}
 .projekte .lead{color:rgba(255,255,255,.7)}
@@ -277,7 +268,7 @@ nav.topbar{
 @keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes sweepPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
-.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:180px;height:180px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(245,166,35,.4);z-index:5}
+.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(245,166,35,.4);z-index:5}
 .radar-center::before, .radar-center::after{
   content:"";position:absolute;border-radius:50%;
   border:1px solid rgba(245,166,35,.35)}
@@ -285,8 +276,8 @@ nav.topbar{
 .radar-center::after{inset:-30px;animation:ringp 3s ease-out infinite .8s}
 @keyframes ringp{0%{opacity:.6;transform:scale(.85)}100%{opacity:0;transform:scale(1.2)}}
 .radar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1}
-.radar-logo .glyph{width:140px;height:auto;display:flex;align-items:center;justify-content:center}
-.radar-logo .glyph img{width:140px;height:auto;max-height:44px;object-fit:contain;background:transparent;border:none}
+.radar-logo .glyph{width:120px;height:auto;display:flex;align-items:center;justify-content:center}
+.radar-logo .glyph img{width:120px;height:auto;max-height:32px;object-fit:contain}
 .radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
 .radar-logo .sb{font-size:9px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
 
@@ -302,12 +293,17 @@ nav.topbar{
 @keyframes linePulse{0%,100%{stroke:rgba(245,166,35,.35)}50%{stroke:rgba(250,204,20,.75)}}
 
 /* project nodes */
-.node{position:absolute;width:72px;height:72px;border-radius:50%;border:2px solid var(--accent-gold);overflow:hidden;transform:translate(-50%,-50%);transition:transform .45s var(--spring),border-color .25s,box-shadow .25s;z-index:4;cursor:pointer}
-.node:hover{transform:translate(-50%,-50%) scale(1.15);border-color:var(--accent);box-shadow:0 0 0 4px rgba(245,166,35,.3),0 0 24px rgba(245,166,35,.55);z-index:6}
-.node img{width:100%;height:100%;object-fit:cover;display:block}
-.node .meta{display:none}
-.node .pin{display:none}
+.node{position:absolute;width:172px;background:rgba(24,24,27,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;transform:translate(-50%,-50%);transition:transform .45s var(--spring),border-color .25s;z-index:4}
+.node:hover{transform:translate(-50%,-50%) scale(1.05);border-color:rgba(245,166,35,.5);z-index:6}
+.node img{width:100%;height:90px;object-fit:cover;display:block}
+.node .meta{padding:10px 12px}
+.node .kwp{font-family:var(--display);font-weight:800;color:#fff;font-size:18px;letter-spacing:-.03em;line-height:1}
+.node .loc{font-size:11px;color:rgba(255,255,255,.6);margin-top:4px;display:flex;align-items:center;gap:6px;letter-spacing:.02em}
+.node .loc::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.node .pin{position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(245,166,35,.25),0 0 12px var(--accent)}
 
+.radar-legend{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px 8px 8px;font-size:12px;color:rgba(255,255,255,.75)}
+.radar-legend .lg{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;font-family:var(--display)}
 .radar-corners{
   position:absolute;top:24px;right:24px;display:flex;flex-direction:column;align-items:flex-end;gap:6px;
   font-family:var(--display);font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;
@@ -411,9 +407,19 @@ nav.topbar{
 
 /* ===== partner ===== */
 .partner{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.partner-row{margin-bottom:36px}
+.partner-row:last-child{margin-bottom:0}
+.partner-cap{font-family:var(--body);font-size:11px;font-weight:500;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:24px}
+.partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1000px;margin:0 auto}
 .partner-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:border-color .25s,transform .35s var(--spring)}
 .partner-card:hover{transform:translateY(-2px);border-color:var(--accent)}
-.partner-card:hover 
+.partner-card img{height:34px;width:auto;max-width:120px;object-fit:contain;filter:grayscale(40%);opacity:.85}
+.partner-card:hover img{filter:grayscale(0);opacity:1}
+.partner-mono{height:38px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;color:var(--black);letter-spacing:-.04em;opacity:.92}
+.partner-card:hover .partner-mono{opacity:1}
+.partner-card .nm{font-family:var(--display);font-weight:700;color:var(--black);font-size:14px;letter-spacing:-.01em}
+.partner-card .tg{font-size:11px;color:var(--zinc-500);letter-spacing:.1em;text-transform:uppercase}
+
 /* ===== bewertungen ===== */
 .bewertungen{background:#000;color:#fff;position:relative;overflow:hidden}
 .bewertungen::after{content:'”';position:absolute;top:40px;left:50%;transform:translateX(-50%);font-family:'Geist',serif;font-size:340px;line-height:.7;color:rgba(250,204,20,.08);font-weight:700;pointer-events:none}
@@ -423,6 +429,7 @@ nav.topbar{
 }
 .bewertungen .eyebrow{color:#fff}
 .bewertungen .eyebrow::before{background:var(--accent)}
+.bewertungen h2{color:#fff}
 .bewertungen h2{color:#fff}
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:60px;position:relative}
 .test{background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:30px;display:flex;flex-direction:column;gap:18px;transition:border-color .25s,background .25s}
@@ -446,8 +453,12 @@ nav.topbar{
 /* ===== footer ===== */
 footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:50px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-brand .brand-mark{height:60px;width:auto}
+.foot-brand .brand-mark img{height:60px;width:auto;object-fit:contain}
+.foot-brand .bn{font-family:var(--display);font-weight:800;color:#fff;font-size:17px;margin-top:14px;letter-spacing:.08em;text-transform:uppercase}
 .foot-brand .foot-sub{font-family:var(--body);font-size:10px;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
 .foot-brand p{margin-top:14px;font-size:14px;line-height:1.7;max-width:36ch}
+.foot-brand .ust{margin-top:18px;color:var(--accent);font-size:12px;font-family:var(--body);font-weight:500;letter-spacing:.04em}
 .foot-col h4{color:#fff;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px;color:var(--zinc-400)}
 .foot-col ul{list-style:none;display:grid;gap:10px}
 .foot-col a{font-size:14px;color:rgba(255,255,255,.6)}
@@ -494,8 +505,11 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .preis-grid{grid-template-columns:1fr 1fr}
   .test-grid,.social-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .partner-grid{grid-template-columns:1fr 1fr}
   .radar-frame{aspect-ratio:1/1.2}
-  .node{width:52px;height:52px}
+  .node{width:130px}
+  .node img{height:70px}
+  .node .kwp{font-size:15px}
   .frow{grid-template-columns:1fr}
   .cookie{left:16px;right:16px;max-width:none;flex-direction:column;align-items:stretch;text-align:center}
 }
@@ -545,38 +559,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 /* ===== Kontakt CTA und About ===== */
 .about-text .btn-navy{display:inline-flex}
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Ambiente Solar",
-  "description": "Deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung.",
-  "url": "https://ambiente-solar.de",
-  "telephone": "+4917863375200",
-  "email": "info@ambiente-solar.de",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Mittelseestraße 32",
-    "addressLocality": "Frankfurt am Main",
-    "postalCode": "60386",
-    "addressCountry": "DE"
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      "opens": "08:00",
-      "closes": "17:00"
-    }
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": "Jhonatan Jaramillo Aguirre"
-  },
-  "areaServed": "DE",
-  "serviceType": ["Photovoltaik-Installation","Batteriespeicher","Wartung","Balkonkraftwerk"]
-}
-</script>
 </head>
 <body>
 
@@ -608,7 +590,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         </div>
       </div>
       <div class="hero-vis">
-        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" preload="none" poster="fotos/200kwp-lauterbach.jpg"><source src="fotos/hero-video.mp4" type="video/mp4"></video></div>
+        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" poster="fotos/200kwp-lauterbach.jpg"><source src="fotos/hero-video.mp4" type="video/mp4"></video></div>
         <div class="hero-side">
           <span class="k">100 kWp</span>
           <span>Deutschlandweit&nbsp;·&nbsp;Live-Anlage</span>
@@ -790,6 +772,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       <div class="radar-center">
         <div class="radar-logo">
           <div class="glyph"><img src="fotos/logo.png" alt="Ambiente Solar"></div>
+          <div class="sb" style="margin-top:6px">Deutschland</div>
         </div>
       </div>
 
@@ -825,7 +808,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         <span class="pin"></span>
         <img src="fotos/balkon-limburgerhof.jpg" alt="Erweiterung – Limburgerh." loading="lazy">
         <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Limburgerh. · Balkon</div></div>
-      </a></div>
+      </a>
+
+      <div class="radar-legend">
+        <div class="lg">A</div>
+        <span><strong style="color:#fff;font-weight:600">Ambiente Solar HQ</strong> · Mittelseestraße 32, Frankfurt</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -940,13 +929,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <h3 style="font-size:20px;font-weight:700;margin-bottom:4px">Individuelles Angebot anfordern</h3>
           <div class="sub">Ich melde mich innerhalb von 1–2 Werktagen.</div>
           <div class="frow">
-            <div class="fg"><label for="ang-vorname">Vorname *</label><input type="text" id="ang-vorname" placeholder="Max" autocomplete="given-name"></div>
-            <div class="fg"><label for="ang-nachname">Nachname *</label><input type="text" id="ang-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
+            <div class="fg"><label>Vorname *</label><input type="text" id="ang-vorname" placeholder="Max" autocomplete="given-name"></div>
+            <div class="fg"><label>Nachname *</label><input type="text" id="ang-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label for="ang-email">E-Mail *</label><input type="email" id="ang-email" placeholder="max@beispiel.de" autocomplete="email"></div>
-          <div class="fg"><label for="ang-tel">Telefon *</label><input type="tel" id="ang-tel" required placeholder="+49 ..." autocomplete="tel"></div>
+          <div class="fg"><label>E-Mail *</label><input type="email" id="ang-email" placeholder="max@beispiel.de" autocomplete="email"></div>
+          <div class="fg"><label>Telefon</label><input type="tel" id="ang-tel" placeholder="+49 ..." autocomplete="tel"></div>
           <div class="fg">
-            <label for="ang-typ">Anlagentyp</label>
+            <label>Anlagentyp</label>
             <select id="ang-typ">
               <option>Einfamilienhaus</option>
               <option>Mehrfamilienhaus</option>
@@ -957,7 +946,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
               <option>Vogelschutz</option>
             </select>
           </div>
-          <div class="fg"><label for="ang-msg">Ihre Nachricht</label><textarea id="ang-msg" placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
+          <div class="fg"><label>Ihre Nachricht</label><textarea id="ang-msg" placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
           <div class="dsr">
             <input type="checkbox" id="ds1">
             <label for="ds1">Ich habe die <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
@@ -1043,11 +1032,11 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <p style="font-family:var(--display);font-weight:600;color:var(--accent);font-size:15px;text-align:center;margin-bottom:18px">Wohin soll ich Ihr Solar-Konzept senden?</p>
 
           <div class="frow">
-            <div class="fg"><label for="kon-vorname">Vorname *</label><input type="text" id="kon-vorname" placeholder="Max" autocomplete="given-name"></div>
-            <div class="fg"><label for="kon-nachname">Nachname *</label><input type="text" id="kon-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
+            <div class="fg"><label>Vorname *</label><input type="text" id="kon-vorname" placeholder="Max" autocomplete="given-name"></div>
+            <div class="fg"><label>Nachname *</label><input type="text" id="kon-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label for="kon-email">E-Mail *</label><input type="email" id="kon-email" placeholder="max@beispiel.de" autocomplete="email"></div>
-          <div class="fg"><label for="kon-tel">Telefonnummer *</label><input type="tel" id="kon-tel" required placeholder="+49 ..." autocomplete="tel"></div>
+          <div class="fg"><label>E-Mail *</label><input type="email" id="kon-email" placeholder="max@beispiel.de" autocomplete="email"></div>
+          <div class="fg"><label>Telefonnummer</label><input type="tel" id="kon-tel" placeholder="+49 ..." autocomplete="tel"></div>
 
           <div class="dsr">
             <input type="checkbox" id="ds2">
@@ -1203,7 +1192,9 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
+        <div class="brand-mark"><img src="fotos/logo.png" alt="Ambiente Solar — Photovoltaik deutschlandweit"></div>
         <p style="margin-top:18px">Ihr zuverlässiger Partner für deutschlandweite Photovoltaik-Installationen — Beratung, Planung und Installation aus einer Hand.</p>
+        <div class="ust">USt-IdNr: DE 357020901</div>
       </div>
       <div class="foot-col">
         <h4>Leistungen</h4>
@@ -1237,6 +1228,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     </div>
     <div class="foot-bot">
       <span>© 2026 Ambiente Solar · Jhonatan Jaramillo Aguirre · Frankfurt am Main</span>
+      <span><a href="#" onclick="zeigeImpressum();return false">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="zeigeDatenschutz();return false">Datenschutz</a></span>
     </div>
   </div>
 </footer>
@@ -1335,13 +1327,12 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   /* ===== Angebot-Formular senden ===== */
   async function sendeAngebot(){
     const vorname=document.getElementById('ang-vorname').value.trim();
-    const tel=document.getElementById('ang-tel').value.trim();
     const nachname=document.getElementById('ang-nachname').value.trim();
     const email=document.getElementById('ang-email').value.trim();
     const typ=document.getElementById('ang-typ').value;
     const msg=document.getElementById('ang-msg').value.trim();
     const ds=document.getElementById('ds1').checked;
-    if(!vorname||!email||!tel){setStatus('ang-status','error','Bitte Vorname, E-Mail und Telefon ausfüllen.');return;}
+    if(!vorname||!email){setStatus('ang-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
     if(!ds){setStatus('ang-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
     const btn=document.getElementById('ang-submit');
     btn.disabled=true;
@@ -1367,10 +1358,9 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   /* ===== Solar-Konzept senden ===== */
   async function sendeKonzept(){
     const vorname=document.getElementById('kon-vorname').value.trim();
-    const tel=document.getElementById('kon-tel').value.trim();
     const email=document.getElementById('kon-email').value.trim();
     const ds=document.getElementById('ds2').checked;
-    if(!vorname||!email||!tel){setStatus('kon-status','error','Bitte Vorname, E-Mail und Telefon ausfüllen.');return;}
+    if(!vorname||!email){setStatus('kon-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
     if(!ds){setStatus('kon-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
     const antworten=[...document.querySelectorAll('#formular-konzept .opt.sel,.opt.no')].map(b=>b.textContent.trim());
     const btn=document.getElementById('kon-submit');

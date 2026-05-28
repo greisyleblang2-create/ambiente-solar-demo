@@ -27,8 +27,8 @@
     return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
   }
   function fixImg(img){
+    if(img.hasAttribute('data-no-fallback')) return;
     var alt=img.getAttribute('alt')||'';
-    // derive a sensible label
     var ctx='';
     var node=img.closest('.node');
     if(node){
@@ -166,7 +166,7 @@ nav.topbar{
 .hero-meta-item .lab{font-size:12px;color:var(--zinc-500);margin-top:8px;letter-spacing:.02em}
 
 .hero-vis{position:relative;align-self:stretch;min-height:560px}
-.hero-photo{position:relative;height:100%;min-height:600px;border-radius:6px;overflow:hidden;background:var(--zinc-100);isolation:isolate}
+.hero-photo{position:relative;height:100%;min-height:600px;border-radius:6px;overflow:hidden;background:linear-gradient(145deg,#0D3B4F 0%,#1B8CA6 55%,#0a2a3a 100%);isolation:isolate}
 .hero-photo video,.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
 .hero-tile{
@@ -633,14 +633,14 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1>Solarenergie für<br><strong><span>Ihre Zukunft.</span></strong></h1>
+        <h1>Ihr Spezialist für<br><strong><span style="color:var(--accent)">Photovoltaik</span></strong><br>deutschlandweit.</h1>
         <p class="lead" style="margin-top:24px">Professionelle Photovoltaik-Installation für Privat- und Gewerbekunden. Sparen Sie Energiekosten und werden Sie unabhängig vom Stromnetz.</p>
         <div class="hero-actions">
           <a href="#kontakt" class="btn btn-navy btn-lg">Kostenloses Angebot <span class="arr">→</span></a>
         </div>
       </div>
       <div class="hero-vis">
-        <div class="hero-photo"><img src="fotos/200kwp-lauterbach.jpg" alt="100 kWp Photovoltaik-Gewerbeanlage – Ambiente Solar" fetchpriority="high"></div>
+        <div class="hero-photo"><img src="fotos/200kwp-lauterbach.jpg" alt="100 kWp Photovoltaik-Gewerbeanlage – Ambiente Solar" fetchpriority="high" data-no-fallback></div>
         <div class="hero-side">
           <span class="k">100 kWp</span>
           <span>Deutschlandweit&nbsp;·&nbsp;Live-Anlage</span>
@@ -947,7 +947,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       <div class="kontakt-card">
         <!-- choose -->
         <div id="kontakt-auswahl">
-          <h3 style="font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-0.02em">Was möchten Sie?</h3>
+          <h3 style="margin-bottom:8px">Was möchten Sie?</h3>
           <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Wählen Sie aus, wie wir Ihnen am besten helfen können.</p>
           <div class="choose-grid">
             <button class="choose choose-a" onclick="zeigeFormular('angebot')">

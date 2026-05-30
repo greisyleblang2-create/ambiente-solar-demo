@@ -201,10 +201,7 @@ nav.topbar{
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ===== about ===== */
-.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
-.about-video{border-radius:12px;overflow:hidden;background:#000;aspect-ratio:16/9;width:100%}
-.about-video video{width:100%;height:100%;object-fit:cover;display:block}
-.about-text .lead{margin-bottom:18px}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
 .about-list{list-style:none;margin:30px 0 36px;display:grid;gap:14px}
 .about-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink);font-weight:400}
 .about-list .chk{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
@@ -652,16 +649,14 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <section id="about">
   <div class="wrap">
     <div class="about-grid">
-      <div class="about-video">
-        <video controls poster="fotos/15 KWP Anlage in Babenhausen_Bild.jpeg" preload="none">
-          <source src="fotos/Video-Ambiente Solar.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="about-text">
+      <div>
         <span class="eyebrow">Über uns</span>
         <h2>Von der Beratung bis zur<br><strong><span style="color:var(--accent)">fertigen Anlage</span></strong> —<br>alles aus einer Hand.</h2>
-        <p class="lead" style="margin-top:24px">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für deutschlandweite Photovoltaik-Installationen — für Privat- und Gewerbekunden.</p>
-        <p class="lead">Wir begleiten Sie von der ersten Beratung über die Planung bis zur schlüsselfertigen Installation — kompetent, transparent und termingerecht.</p>
+        <a href="#kontakt" class="btn btn-navy btn-lg" style="margin-top:40px">Jetzt Beratung anfragen <span class="arr">→</span></a>
+      </div>
+      <div>
+        <p class="lead" style="margin-top:8px">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für deutschlandweite Photovoltaik-Installationen — für Privat- und Gewerbekunden.</p>
+        <p class="lead" style="margin-top:18px">Wir begleiten Sie von der ersten Beratung über die Planung bis zur schlüsselfertigen Installation — kompetent, transparent und termingerecht.</p>
         <ul class="about-list">
           <li><span class="chk">✓</span>Individuelle Beratung und Planung</li>
           <li><span class="chk">✓</span>Installation für Privat- und Gewerbekunden</li>
@@ -669,7 +664,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <li><span class="chk">✓</span>Komplette Anmeldung beim Netzbetreiber &amp; MaStR</li>
           <li><span class="chk">✓</span>0% MwSt. auf Wohngebäude (seit 2023)</li>
         </ul>
-        <a href="#kontakt" class="btn btn-navy btn-lg">Jetzt Beratung anfragen <span class="arr">→</span></a>
       </div>
     </div>
   </div>

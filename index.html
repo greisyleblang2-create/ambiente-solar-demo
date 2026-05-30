@@ -266,18 +266,19 @@ nav.topbar{
 @keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes sweepPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
-.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(245,166,35,.4);z-index:5}
+.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff 36%,rgba(255,255,255,.78) 52%,rgba(255,255,255,.28) 70%,rgba(255,255,255,0) 100%);display:grid;place-items:center;text-align:center;box-shadow:0 0 60px rgba(245,166,35,.55),0 0 120px rgba(245,166,35,.2);z-index:5}
 .radar-center::before, .radar-center::after{
   content:"";position:absolute;border-radius:50%;
-  border:1px solid rgba(245,166,35,.35)}
-.radar-center::before{inset:-14px;animation:ringp 3s ease-out infinite}
-.radar-center::after{inset:-30px;animation:ringp 3s ease-out infinite .8s}
+  border:1px solid rgba(245,166,35,.22)}
+.radar-center::before{inset:-16px;animation:ringp 3s ease-out infinite}
+.radar-center::after{inset:-34px;animation:ringp 3s ease-out infinite .8s}
 @keyframes ringp{0%{opacity:.6;transform:scale(.85)}100%{opacity:0;transform:scale(1.2)}}
 .radar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1}
 .radar-logo .glyph{width:120px;height:auto;display:flex;align-items:center;justify-content:center}
 .radar-logo .glyph img{width:120px;height:auto;max-height:32px;object-fit:contain}
-.radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
-.radar-logo .sb{font-size:9px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+.radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+.radar-logo .sb{font-size:8px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:1px}
+.node video{width:100%;height:90px;object-fit:cover;display:block}
 
 /* radar sun rays */
 .sun-rays{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:3}
@@ -1014,11 +1015,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 
     <div class="radar-frame" id="radar">
       <div class="radar-coords">N 50°06′ &nbsp;·&nbsp; E 008°44′ &nbsp;·&nbsp; Sitz: Frankfurt</div>
-      <div class="radar-corners">
-        <span>Live</span>
-        <span class="dt">6 aktive Standorte</span>
-      </div>
-
       <div class="radar-cities">
         <span class="city-tag" style="left:10%;top:12%">Köln</span>
         <span class="city-tag" style="left:72%;top:8%">Berlin</span>
@@ -1084,7 +1080,8 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
               </g>
             </svg>
           </div>
-          <div class="sb" style="margin-top:6px">Deutschland</div>
+          <div class="nm">AMBIENTE SOLAR</div>
+          <div class="sb">Photovoltaik</div>
         </div>
       </div>
 
@@ -1120,6 +1117,18 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         <span class="pin"></span>
         <img src="fotos/Erweiterung Balkonkraftwerk in Limburggerhof_Bild.jpeg" alt="Erweiterung – Limburgerh." loading="lazy">
         <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Limburgerh. · Balkon</div></div>
+      </a>
+      <a class="node" data-x="66" data-y="52" href="#" onclick="return false">
+        <span class="pin"></span>
+        <img src="fotos/Fassadenmontage.jpeg" alt="Fassadenmontage" loading="lazy">
+        <div class="meta"><div class="kwp">Fassade</div><div class="loc">Südhessen · Fassadenmontage</div></div>
+      </a>
+      <a class="node" data-x="34" data-y="52" href="#" onclick="return false">
+        <span class="pin"></span>
+        <video autoplay muted loop playsinline poster="fotos/15 KWP Anlage in Babenhausen_Bild.jpeg">
+          <source src="fotos/Video-Ambiente Solar.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><div class="kwp">Showreel</div><div class="loc">Ambiente Solar · Video</div></div>
       </a>
 
     </div>

@@ -553,6 +553,18 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 .modal-card p strong{color:var(--ink);font-weight:600}
 .modal-x{position:absolute;top:18px;right:22px;font-size:24px;color:var(--muted);background:none;border:none;cursor:pointer}
 
+/* ===== Review buttons (Fase 10) ===== */
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto}
+.review-btn{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px 24px;text-decoration:none;color:#fff;transition:background .25s,border-color .25s,transform .35s var(--spring)}
+.review-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);transform:translateY(-3px)}
+.review-icon{width:52px;height:52px;flex-shrink:0;border-radius:12px;background:#fff;display:grid;place-items:center}
+.review-icon svg{display:block}
+.review-info{display:flex;flex-direction:column;gap:4px;flex:1}
+.review-title{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:-0.01em}
+.review-desc{font-size:13px;color:rgba(255,255,255,.6)}
+.review-arr{font-size:18px;color:rgba(255,255,255,.4);transition:transform .2s,color .2s}
+.review-btn:hover .review-arr{transform:translateX(4px);color:var(--accent)}
+
 @media (max-width:1000px){
   section{padding:80px 0}
   .wrap{padding:0 24px}
@@ -575,28 +587,16 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .node .kwp{font-size:15px}
   .frow{grid-template-columns:1fr}
   .cookie{left:16px;right:16px;max-width:none;flex-direction:column;align-items:stretch;text-align:center}
+  .review-grid{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   .leist-grid{grid-template-columns:1fr}
   .preis-grid{grid-template-columns:1fr}
   .brand-mark{height:38px;width:auto}
   .brand-mark img,.brand-mark svg{height:38px;width:auto}
-  .review-grid{grid-template-columns:1fr}
   .tog{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
 }
-
-/* ===== Review buttons (Fase 10) ===== */
-.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto}
-.review-btn{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px 24px;text-decoration:none;color:#fff;transition:background .25s,border-color .25s,transform .35s var(--spring)}
-.review-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);transform:translateY(-3px)}
-.review-icon{width:52px;height:52px;flex-shrink:0;border-radius:12px;background:#fff;display:grid;place-items:center}
-.review-icon svg{display:block}
-.review-info{display:flex;flex-direction:column;gap:4px;flex:1}
-.review-title{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:-0.01em}
-.review-desc{font-size:13px;color:rgba(255,255,255,.6)}
-.review-arr{font-size:18px;color:rgba(255,255,255,.4);transition:transform .2s,color .2s}
-.review-btn:hover .review-arr{transform:translateX(4px);color:var(--accent)}
 
 /* ===== Partner (statische Cards mit Kategorien) ===== */
 .partner-cat-label{font-family:var(--display);font-size:13px;font-weight:600;color:var(--accent-blue);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:20px}

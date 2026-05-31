@@ -177,6 +177,15 @@ nav.topbar{
 .nav-links a{font-size:16px;color:var(--ink);font-weight:600;letter-spacing:-.01em;opacity:.85;transition:opacity .2s}
 .nav-links a:hover{opacity:1;color:var(--accent)}
 .nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--cta);color:#fff;font-family:var(--body);font-weight:600;font-size:13px;padding:10px 20px;border-radius:999px;letter-spacing:-.005em;transition:background .2s,transform .2s;white-space:nowrap}
+/* Hamburger */
+.nav-mob-btn{display:none;flex-direction:column;justify-content:space-between;width:26px;height:18px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0}
+.nav-mob-btn span{display:block;height:2px;border-radius:2px;background:var(--black);transition:transform .3s,opacity .3s}
+/* Mobile nav overlay */
+.nav-mob-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:79;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.nav-mob-menu.open{display:flex}
+.nav-mob-menu a{font-family:var(--display);font-size:clamp(22px,6vw,32px);font-weight:700;color:var(--black);letter-spacing:-.03em;text-decoration:none;padding:12px 24px;opacity:.85;transition:opacity .2s,color .2s}
+.nav-mob-menu a:hover{opacity:1;color:var(--accent)}
+.nav-mob-menu .close-btn{position:absolute;top:20px;right:20px;background:none;border:none;font-size:28px;cursor:pointer;color:var(--zinc-500);line-height:1}
 .nav-cta:hover{background:var(--cta-hover);transform:translateY(-1px)}
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;font-size:14px;padding:13px 22px;border-radius:999px;transition:transform .35s var(--spring),background .25s,color .25s,border-color .25s;letter-spacing:-.005em;will-change:transform}
 .btn:active{transform:scale(.98)}
@@ -549,6 +558,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .wrap{padding:0 24px}
   nav.topbar{padding:14px 20px}
   .nav-links{display:none}
+  .nav-mob-btn{display:flex}
   .nav-cta{font-size:12px;padding:8px 16px}
   .hero-grid,.about-grid,.kontakt-grid{grid-template-columns:1fr;gap:50px}
   .hero{padding-top:110px}
@@ -572,6 +582,8 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .brand-mark{height:38px;width:auto}
   .brand-mark img,.brand-mark svg{height:38px;width:auto}
   .review-grid{grid-template-columns:1fr}
+  .tog{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
 }
 
 /* ===== Review buttons (Fase 10) ===== */
@@ -666,7 +678,21 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
   <a href="#kontakt" class="nav-cta">Angebot anfragen <span>→</span></a>
+  <button class="nav-mob-btn" id="mob-btn" aria-label="Menü öffnen" onclick="toggleMobNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="nav-mob-menu" id="mob-nav">
+  <button class="close-btn" onclick="toggleMobNav()" aria-label="Menü schließen">×</button>
+  <a href="#about"      onclick="toggleMobNav()">Über uns</a>
+  <a href="#leistungen" onclick="toggleMobNav()">Leistungen</a>
+  <a href="#projekte"   onclick="toggleMobNav()">Projekte</a>
+  <a href="#preise"     onclick="toggleMobNav()">Preise</a>
+  <a href="#partner"    onclick="toggleMobNav()">Partner</a>
+  <a href="#kontakt"    onclick="toggleMobNav()" style="color:var(--accent)">Kontakt →</a>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
@@ -1424,6 +1450,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 </div>
 
 <script>
+  /* ===== Mobile Nav ===== */
+  function toggleMobNav(){
+    const menu=document.getElementById('mob-nav');
+    menu.classList.toggle('open');
+    document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+  }
+
   /* ===== GOOGLE APPS SCRIPT URL — nach Deployment hier eintragen ===== */
   const GOOGLE_SCRIPT_URL = "HIER_APPS_SCRIPT_URL_EINTRAGEN";
 

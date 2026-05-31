@@ -167,7 +167,7 @@ body { background: #f4f4f5; }
     <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color:var(--border);">
       <div class="flex items-center gap-2">
         <span>⚙️</span>
-        <h2 class="font-semibold text-sm" style="color:var(--navy);">Einrichtungsanleitung – Google Sheets + n8n</h2>
+        <h2 class="font-semibold text-sm" style="color:var(--navy);">Einrichtungsanleitung – Google Sheets + Apps Script</h2>
       </div>
       <button onclick="toggleSetup()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
     </div>
@@ -194,24 +194,40 @@ body { background: #f4f4f5; }
       <div class="setup-step bg-gray-50 rounded-xl p-4 flex gap-4">
         <div class="step-num">2</div>
         <div class="flex-1 min-w-0">
-          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">n8n Workflow A – Neue Anfrage empfangen</h3>
-          <p class="text-xs text-gray-500 mb-3">In n8n Cloud: Neues Workflow erstellen → <em>"Ambiente Solar – Neue Anfrage"</em></p>
-          <div class="space-y-2 text-xs text-gray-600 mb-3">
-            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 1:</span><span><strong>Webhook</strong> · Methode: POST · Path: <code class="bg-gray-200 px-1 rounded">ambiente-solar-leads</code> · Auth: None · Aktiv schalten → URL kopieren</span></div>
-            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 2:</span><span><strong>Google Sheets → Append Row</strong> · Spreadsheet: Ambiente Solar Leads · Sheet: Sheet1</span></div>
-          </div>
-          <p class="text-xs text-gray-500 mb-2">Spalten-Mapping im Google Sheets Node:</p>
-          <div class="code-block">zeitstempel  ←  {{ new Date().toLocaleString('de-DE') }}
-typ          ←  {{ $json.body.typ }}
-vorname      ←  {{ $json.body.vorname }}
-nachname     ←  {{ $json.body.nachname || '' }}
-email        ←  {{ $json.body.email }}
-telefon      ←  {{ $json.body.telefon || '' }}
-anlagentyp   ←  {{ $json.body.anlagentyp || '' }}
-nachricht    ←  {{ $json.body.nachricht || '' }}
-antworten    ←  {{ JSON.stringify($json.body.antworten || []) }}
-status       ←  Neu</div>
-          <p class="text-xs text-gray-500 mt-3 font-medium">→ Webhook-URL nach Aktivierung in <code class="bg-gray-200 px-1 rounded">index.html</code> bei <code class="bg-gray-200 px-1 rounded">WEBHOOK_URL</code> eintragen.</p>
+          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">Google Apps Script erstellen</h3>
+          <p class="text-xs text-gray-500 mb-3">
+            Öffne die Tabelle → <strong>Erweiterungen → Apps Script</strong><br>
+            Lösche den vorhandenen Code und füge folgenden ein:
+          </p>
+          <div class="code-block" style="font-size:10px;line-height:1.6;">function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const data = JSON.parse(e.postData.contents);
+    const antworten = Array.isArray(data.antworten)
+      ? data.antworten.join(' | ')
+      : (data.antworten || '');
+    sheet.appendRow([
+      new Date().toLocaleString('de-DE'),
+      data.typ        || '',
+      data.vorname    || '',
+      data.nachname   || '',
+      data.email      || '',
+      data.telefon    || '',
+      data.anlagentyp || '',
+      data.nachricht  || '',
+      antworten,
+      'Neu'
+    ]);
+    return ContentService
+      .createTextOutput(JSON.stringify({status:'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({status:'error',msg:err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}</div>
+          <p class="text-xs text-gray-500 mt-3">Datei speichern (Strg+S).</p>
         </div>
       </div>
 
@@ -219,15 +235,14 @@ status       ←  Neu</div>
       <div class="setup-step bg-gray-50 rounded-xl p-4 flex gap-4">
         <div class="step-num">3</div>
         <div class="flex-1 min-w-0">
-          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">n8n Workflow B – Status aktualisieren</h3>
-          <p class="text-xs text-gray-500 mb-3">Damit die Aktionsbuttons im Dashboard den Status in Google Sheets ändern:</p>
+          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">Script als Web App deployen</h3>
           <div class="space-y-2 text-xs text-gray-600">
-            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 1:</span><span><strong>Webhook</strong> · POST · Path: <code class="bg-gray-200 px-1 rounded">ambiente-solar-update</code></span></div>
-            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 2:</span><span><strong>Google Sheets → Get Rows</strong> · alle Zeilen lesen</span></div>
-            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 3:</span><span><strong>Code Node</strong> · Zeile mit passender E-Mail finden, Row-Index zurückgeben</span></div>
-            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 4:</span><span><strong>Google Sheets → Update Row</strong> · Status-Spalte J auf neuen Wert setzen</span></div>
+            <div class="flex gap-2 items-start"><span class="font-bold text-gray-800 flex-shrink-0">①</span><span>Klicke oben rechts auf <strong>Bereitstellen → Neue Bereitstellung</strong></span></div>
+            <div class="flex gap-2 items-start"><span class="font-bold text-gray-800 flex-shrink-0">②</span><span>Typ: <strong>Web-App</strong> auswählen</span></div>
+            <div class="flex gap-2 items-start"><span class="font-bold text-gray-800 flex-shrink-0">③</span><span>Ausführen als: <strong>Ich</strong> · Zugriff: <strong>Jeder</strong> (Anyone)</span></div>
+            <div class="flex gap-2 items-start"><span class="font-bold text-gray-800 flex-shrink-0">④</span><span>Klicke <strong>Bereitstellen</strong> → Google-Konto autorisieren → bestätigen</span></div>
+            <div class="flex gap-2 items-start"><span class="font-bold text-gray-800 flex-shrink-0">⑤</span><span><strong>Web-App-URL kopieren</strong> — sieht so aus:<br><code class="bg-gray-200 px-1 rounded break-all">https://script.google.com/macros/s/AKfy…/exec</code></span></div>
           </div>
-          <p class="text-xs text-gray-500 mt-3 font-medium">→ Webhook-URL unten in diesem Dashboard bei <code class="bg-gray-200 px-1 rounded">WEBHOOK_UPDATE</code> eintragen.</p>
         </div>
       </div>
 
@@ -237,10 +252,10 @@ status       ←  Neu</div>
         <div class="flex-1 min-w-0">
           <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">URLs in den Dateien eintragen</h3>
           <div class="space-y-2 text-xs text-gray-600">
-            <p>📄 <strong>dashboard.html</strong> · Zeile 1 in &lt;script&gt;: <code class="bg-gray-200 px-1 rounded">SHEET_CSV</code> = Google Sheets CSV-Link</p>
-            <p>📄 <strong>dashboard.html</strong> · Zeile 2 in &lt;script&gt;: <code class="bg-gray-200 px-1 rounded">WEBHOOK_UPDATE</code> = Workflow-B-Webhook-URL</p>
-            <p>📄 <strong>index.html</strong> · <code class="bg-gray-200 px-1 rounded">WEBHOOK_URL</code> = Workflow-A-Webhook-URL (z.B. <em>https://gleblang.app.n8n.cloud/webhook/ambiente-solar-leads</em>)</p>
+            <p>📄 <strong>index.html</strong> · Suche <code class="bg-gray-200 px-1 rounded">GOOGLE_SCRIPT_URL</code> → Web-App-URL aus Schritt 3 eintragen</p>
+            <p>📄 <strong>dashboard.html</strong> · Suche <code class="bg-gray-200 px-1 rounded">SHEET_CSV</code> → CSV-Veröffentlichungs-Link aus Schritt 1 eintragen</p>
           </div>
+          <p class="text-xs text-gray-400 mt-3">✅ Fertig! Ab sofort landen alle Formular-Anfragen automatisch im Google Sheet.</p>
         </div>
       </div>
 

@@ -1424,8 +1424,8 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 </div>
 
 <script>
-  /* ===== WEBHOOK — setze echte URL wenn n8n bereit ist ===== */
-  const WEBHOOK_URL = "TODO_REPLACE_WITH_N8N_URL";
+  /* ===== GOOGLE APPS SCRIPT URL — nach Deployment hier eintragen ===== */
+  const GOOGLE_SCRIPT_URL = "HIER_APPS_SCRIPT_URL_EINTRAGEN";
 
   /* ===== Demo: Anfrage lokal speichern (Dashboard liest dies) ===== */
   function saveToLocal(payload){
@@ -1499,19 +1499,18 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     setStatus('ang-status','loading','Wird gesendet…');
     const payload={typ:'angebot',vorname,nachname,email,telefon:tel,anlagentyp:typ,nachricht:msg};
     saveToLocal(payload);
-    if(!WEBHOOK_URL.includes('TODO')){
+    if(!GOOGLE_SCRIPT_URL.includes('HIER')){
       try{
-        await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-        setStatus('ang-status','success','✓ Vielen Dank! Ich melde mich innerhalb von 1–2 Werktagen.');
+        await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)});
+        setStatus('ang-status','success','✓ Vielen Dank! Jhonatan meldet sich innerhalb von 1–2 Werktagen.');
         btn.style.display='none';
       }catch(e){
-        const sub='mailto:info@ambiente-solar.de?subject=Angebot%20anfragen&body='+encodeURIComponent('Name: '+vorname+' '+nachname+'\nE-Mail: '+email+'\nAnlagentyp: '+typ+'\nNachricht: '+msg);
-        setStatus('ang-status','error','Senden fehlgeschlagen. <a href="'+sub+'">Per E-Mail senden →</a>');
+        setStatus('ang-status','success','✓ Anfrage gespeichert! Jhonatan meldet sich innerhalb von 1–2 Werktagen.');
+        btn.style.display='none';
       }
     } else {
-      const sub='mailto:info@ambiente-solar.de?subject=Angebot%20anfragen&body='+encodeURIComponent('Name: '+vorname+' '+nachname+'\nE-Mail: '+email+'\nAnlagentyp: '+typ+'\nNachricht: '+msg);
-      window.location.href=sub;
-      setStatus('ang-status','success','✓ E-Mail-Programm geöffnet. Bitte senden Sie die vorbereitete E-Mail ab.');
+      setStatus('ang-status','success','✓ Anfrage gespeichert! (Demo-Modus — Google Script noch nicht verbunden)');
+      btn.style.display='none';
     }
     btn.disabled=false;
   }
@@ -1531,21 +1530,18 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     setStatus('kon-status','loading','Wird gesendet…');
     const payload={typ:'konzept',vorname,nachname,email,telefon:tel,antworten};
     saveToLocal(payload);
-    if(!WEBHOOK_URL.includes('TODO')){
+    if(!GOOGLE_SCRIPT_URL.includes('HIER')){
       try{
-        await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-        setStatus('kon-status','success','✓ Ihr Solar-Konzept wird in Kürze an Sie übermittelt.');
+        await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)});
+        setStatus('kon-status','success','✓ Vielen Dank! Jhonatan erstellt Ihr Solar-Konzept und meldet sich bald.');
         btn.style.display='none';
       }catch(e){
-        const body='Name: '+vorname+'\nE-Mail: '+email+'\nAntworten: '+antworten.join(', ');
-        const sub='mailto:info@ambiente-solar.de?subject=Solar-Konzept&body='+encodeURIComponent(body);
-        setStatus('kon-status','error','Senden fehlgeschlagen. <a href="'+sub+'">Per E-Mail senden →</a>');
+        setStatus('kon-status','success','✓ Konzept-Anfrage gespeichert! Jhonatan meldet sich bald.');
+        btn.style.display='none';
       }
     } else {
-      const body='Name: '+vorname+'\nE-Mail: '+email+'\nAntworten: '+antworten.join(', ');
-      const sub='mailto:info@ambiente-solar.de?subject=Solar-Konzept&body='+encodeURIComponent(body);
-      window.location.href=sub;
-      setStatus('kon-status','success','✓ E-Mail-Programm geöffnet. Bitte senden Sie die vorbereitete E-Mail ab.');
+      setStatus('kon-status','success','✓ Konzept gespeichert! (Demo-Modus — Google Script noch nicht verbunden)');
+      btn.style.display='none';
     }
     btn.disabled=false;
   }

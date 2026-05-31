@@ -297,6 +297,22 @@ nav.topbar{
 .node .loc{font-size:11px;color:rgba(255,255,255,.6);margin-top:4px;display:flex;align-items:center;gap:6px;letter-spacing:.02em}
 .node .loc::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
 .node .pin{position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(245,166,35,.25),0 0 12px var(--accent)}
+.node{cursor:pointer}
+
+/* ===== lightbox ===== */
+.lb{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.lb.open{opacity:1;pointer-events:all}
+.lb-bg{position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lb-box{position:relative;z-index:1;max-width:880px;width:calc(100% - 48px);border-radius:18px;overflow:hidden;background:#0f0f0f;box-shadow:0 40px 100px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);transform:scale(.93) translateY(20px);transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s ease}
+.lb.open .lb-box{transform:scale(1) translateY(0)}
+.lb-media{width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;display:block}
+.lb-media img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-media video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.lb-info{padding:18px 24px;background:#0f0f0f;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.08)}
+.lb-title{font-family:var(--display);font-weight:800;color:#fff;font-size:19px;letter-spacing:-.03em;line-height:1}
+.lb-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:5px;letter-spacing:.03em}
+.lb-close{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .2s;line-height:1}
+.lb-close:hover{background:rgba(255,255,255,.18);transform:rotate(90deg)}
 
 .radar-legend{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px 8px 8px;font-size:12px;color:rgba(255,255,255,.75)}
 .radar-legend .lg{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;font-family:var(--display)}
@@ -834,42 +850,42 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       <div class="sun-glow"></div>
       <div class="sun-rays" id="sun-rays"></div>
 
-      <a class="node" data-x="22" data-y="32" href="#" onclick="return false">
+      <a class="node" data-x="22" data-y="32" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/200kwp-lauterbach.jpg" alt="200 kWp – Lauterbach" loading="lazy">
         <div class="meta"><div class="kwp">200 kWp</div><div class="loc">Lauterbach · Gewerbe</div></div>
       </a>
-      <a class="node" data-x="50" data-y="14" href="#" onclick="return false">
+      <a class="node" data-x="50" data-y="14" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/10kwp-biblis.jpg" alt="10 kWp – Biblis" loading="lazy">
         <div class="meta"><div class="kwp">10 kWp</div><div class="loc">Biblis · Einfamilienhaus</div></div>
       </a>
-      <a class="node" data-x="80" data-y="32" href="#" onclick="return false">
+      <a class="node" data-x="80" data-y="32" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/15kwp-babenhausen.jpg" alt="15 kWp – Babenhausen" loading="lazy">
         <div class="meta"><div class="kwp">15 kWp</div><div class="loc">Babenhausen · Einfamilienhaus</div></div>
       </a>
-      <a class="node" data-x="84" data-y="68" href="#" onclick="return false">
+      <a class="node" data-x="84" data-y="68" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/erweiterung-kahl.jpg" alt="Erweiterung – Kahl am Main" loading="lazy">
         <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Kahl am Main · Gewerbedach</div></div>
       </a>
-      <a class="node" data-x="50" data-y="88" href="#" onclick="return false">
+      <a class="node" data-x="50" data-y="88" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/balkonkraftwerk-rodenbach.jpg" alt="Balkonkraftwerk – Rodenbach" loading="lazy">
         <div class="meta"><div class="kwp">Balkon</div><div class="loc">Rodenbach · Balkonkraftwerk</div></div>
       </a>
-      <a class="node" data-x="18" data-y="68" href="#" onclick="return false">
+      <a class="node" data-x="18" data-y="68" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/balkon-limburgerhof.jpg" alt="Erweiterung – Limburgerh." loading="lazy">
         <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Limburgerh. · Balkon</div></div>
       </a>
-      <a class="node" data-x="66" data-y="52" href="#" onclick="return false">
+      <a class="node" data-x="66" data-y="52" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <img src="fotos/fassade.jpg" alt="Fassadenmontage" loading="lazy">
         <div class="meta"><div class="kwp">Fassade</div><div class="loc">Südhessen · Fassadenmontage</div></div>
       </a>
-      <a class="node" data-x="34" data-y="52" href="#" onclick="return false">
+      <a class="node" data-x="34" data-y="52" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
         <video autoplay muted loop playsinline poster="fotos/15kwp-babenhausen.jpg">
           <source src="fotos/showreel.mp4" type="video/mp4">
@@ -1545,8 +1561,59 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     buildChars(partners[0].name);
     next();
   })();
+
+  /* ===== Lightbox ===== */
+  (function(){
+    function openLb(node){
+      const lb=document.getElementById('lb');
+      const media=document.getElementById('lb-media');
+      const title=document.getElementById('lb-title');
+      const sub=document.getElementById('lb-sub');
+      const kwp=node.querySelector('.kwp');
+      const loc=node.querySelector('.loc');
+      title.textContent=kwp?kwp.textContent:'';
+      sub.textContent=loc?loc.textContent:'';
+      media.innerHTML='';
+      const vid=node.querySelector('video source');
+      if(vid){
+        const v=document.createElement('video');
+        v.src=vid.src; v.autoplay=true; v.muted=false; v.loop=true; v.controls=true;
+        media.appendChild(v);
+      } else {
+        const src=node.querySelector('img');
+        const i=new Image(); i.src=src.src; i.alt=src.alt;
+        media.appendChild(i);
+      }
+      lb.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeLb(){
+      const lb=document.getElementById('lb');
+      lb.classList.remove('open');
+      document.body.style.overflow='';
+      const v=lb.querySelector('video');
+      if(v) v.pause();
+      setTimeout(()=>{document.getElementById('lb-media').innerHTML='';},320);
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+    window.openLb=openLb;
+    window.closeLb=closeLb;
+  })();
 </script>
 
-
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Projektbild">
+  <div class="lb-bg" onclick="closeLb()"></div>
+  <div class="lb-box">
+    <div class="lb-media" id="lb-media"></div>
+    <div class="lb-info">
+      <div>
+        <div class="lb-title" id="lb-title"></div>
+        <div class="lb-sub" id="lb-sub"></div>
+      </div>
+      <button class="lb-close" onclick="closeLb()" aria-label="Schließen">&#x2715;</button>
+    </div>
+  </div>
+</div>
 
 </body></html>

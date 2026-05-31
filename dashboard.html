@@ -1,382 +1,654 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jhonatan Solartechnik – CRM Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --slate: #2d3f50;
-            --slate-light: #3d5166;
-            --sage: #5a8a6e;
-            --sage-light: #7aad8f;
-            --cream: #f7f8f5;
-            --border: #e4e8e3;
-        }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--cream); }
-        .btn-primary { background: var(--slate); color: white; transition: background 0.2s; }
-        .btn-primary:hover { background: var(--slate-light); }
-        .badge-neu { background: #e8f0fe; color: #3d5a99; }
-        .badge-angebot { background: #fff8e1; color: #8a6a00; }
-        .badge-auftrag { background: #e6f4ea; color: #2d6a4f; }
-        .badge-rechnung { background: #f3e8ff; color: #6b3fa0; }
-        .badge-bezahlt { background: #d1fae5; color: #065f46; }
-        .stat-card { border-top: 3px solid; }
-        .stat-blue { border-color: #5b7fa6; }
-        .stat-green { border-color: var(--sage); }
-        .stat-amber { border-color: #b8860b; }
-        .stat-purple { border-color: #8b6ab0; }
-        .fade-in { animation: fadeIn 0.25s ease; }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-        .row-hover:hover { background: #f0f4f8; }
-        .modal-overlay { backdrop-filter: blur(2px); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambiente Solar · Lead Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+* { font-family: 'Geist', system-ui, sans-serif; }
+:root {
+  --accent: #F5A623;
+  --accent-soft: #FEF3E0;
+  --navy: #1A1A1A;
+  --green: #10b981;
+  --border: #e4e4e7;
+  --muted: #71717a;
+}
+body { background: #f4f4f5; }
+
+.badge-neu      { background: #dbeafe; color: #1e40af; }
+.badge-angebot  { background: #fef9c3; color: #854d0e; }
+.badge-auftrag  { background: #dcfce7; color: #166534; }
+.badge-rechnung { background: #f3e8ff; color: #6b21a8; }
+.badge-bezahlt  { background: #d1fae5; color: #065f46; }
+
+.typ-angebot { background: var(--accent-soft); color: #c2410c; border: 1px solid #fed7aa; }
+.typ-konzept { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+.chip         { display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500; }
+.chip-default { background: var(--accent-soft); color: #92400e; border: 1px solid #fde68a; }
+.chip-ja      { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.chip-nein    { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
+.stat-top-accent { border-top: 3px solid var(--accent); }
+.stat-top-green  { border-top: 3px solid #10b981; }
+.stat-top-amber  { border-top: 3px solid #f59e0b; }
+.stat-top-purple { border-top: 3px solid #8b5cf6; }
+
+.row-hover:hover { background: #fafafa; cursor: pointer; }
+.fade-in { animation: fadeIn 0.22s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+
+.setup-step { border-left: 4px solid var(--accent); }
+.step-num { width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0; }
+.code-block { font-family:'Courier New',monospace;background:#f4f4f5;border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:11.5px;color:#374151;overflow-x:auto;white-space:pre;line-height:1.7; }
+
+.modal-max { max-height: calc(100vh - 80px); overflow-y: auto; }
+</style>
 </head>
 <body class="min-h-screen">
 
-<!-- HEADER -->
-<header style="background: var(--slate);">
-    <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-4">
-            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: var(--sage);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-            </div>
-            <div>
-                <h1 class="text-white font-semibold text-base leading-tight">Jhonatan Solartechnik</h1>
-                <p class="text-xs" style="color: #8fa8c0;">Frankfurt am Main · 150 km Servicegebiet</p>
-            </div>
+<!-- ===== HEADER ===== -->
+<header style="background:var(--navy);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <svg height="34" viewBox="0 0 420 84" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="dpg" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0" stop-color="#2685D4"/><stop offset="1" stop-color="#0A3D8F"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#F5A623" stroke-width="2.4" stroke-linecap="round">
+          <line x1="60" y1="3" x2="60" y2="9"/><line x1="74" y1="7" x2="71" y2="12"/>
+          <line x1="81" y1="19" x2="75" y2="21"/><line x1="45" y1="3" x2="48" y2="8"/>
+          <line x1="35" y1="9" x2="39" y2="14"/><line x1="29" y1="20" x2="35" y2="22"/>
+        </g>
+        <circle cx="60" cy="24" r="17" fill="#FFA800"/>
+        <circle cx="60" cy="24" r="12" fill="#FFCC00"/>
+        <g transform="translate(2,34) matrix(1,0,-0.1,1,0,0)">
+          <rect x="0"  y="0"  width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="0"  width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="0"  width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="14" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="14" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="14" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="28" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="28" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="28" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="42" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="42" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="42" width="19" height="12" rx="2" fill="url(#dpg)" stroke="#5BA0D8" stroke-width="0.7"/>
+        </g>
+        <line x1="88" y1="10" x2="88" y2="74" stroke="#555" stroke-width="1.5"/>
+        <text x="100" y="49" font-family="'Geist','Arial Black',Arial,sans-serif" font-weight="900" font-size="30" fill="#ffffff" letter-spacing="-0.4">AMBIENTE SOLAR</text>
+        <text x="101" y="66" font-family="Geist,Arial,sans-serif" font-weight="400" font-size="9.8" fill="#9A7820" letter-spacing="2.6">PHOTOVOLTAIK DEUTSCHLANDWEIT</text>
+      </svg>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-white font-semibold text-sm tracking-tight">Lead Dashboard</span>
+          <span id="demo-badge" class="hidden text-xs px-2 py-0.5 rounded-full font-medium" style="background:rgba(245,166,35,0.2);color:#F5A623;">Demo</span>
         </div>
-        <div class="flex items-center gap-3">
-            <span class="flex items-center gap-1.5 text-xs px-3 py-1 rounded-full" style="background: rgba(90,138,110,0.25); color: #a8d5ba;">
-                <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: #7aad8f;"></span>
-                Bot aktiv
-            </span>
-            <button onclick="loadLeads()" class="btn-primary text-xs px-3 py-1.5 rounded-lg font-medium border border-white/10">
-                ↻ Aktualisieren
-            </button>
-        </div>
+        <p class="text-xs" style="color:#6b7280;">Jhonatan Jaramillo Aguirre · Ambiente Solar</p>
+      </div>
     </div>
+    <div class="flex items-center gap-2">
+      <button onclick="toggleSetup()" class="text-xs px-3 py-1.5 rounded-lg font-medium border transition"
+        style="background:rgba(245,166,35,0.12);color:#F5A623;border-color:rgba(245,166,35,0.25);">
+        ⚙ Einrichtung
+      </button>
+      <button onclick="loadDemo()" class="text-xs px-3 py-1.5 rounded-lg font-medium border transition"
+        style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.1);">
+        Demo-Daten
+      </button>
+      <button onclick="loadLeads()" class="text-xs px-3 py-1.5 rounded-lg font-medium border transition"
+        style="background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.15);">
+        ↻ Aktualisieren
+      </button>
+    </div>
+  </div>
 </header>
+
+<!-- ===== CONFIG BANNER ===== -->
+<div id="config-banner" class="hidden" style="background:#fffbeb;border-bottom:1px solid #fde68a;">
+  <div class="max-w-6xl mx-auto px-5 py-2.5 flex items-center gap-3">
+    <span class="text-sm">⚙️</span>
+    <p class="text-sm font-medium" style="color:#92400e;">Google Sheets noch nicht verbunden — Einrichtungsanleitung unten aufklappen.</p>
+    <button onclick="toggleSetup()" class="text-xs ml-auto underline font-medium" style="color:#b45309;">Anzeigen →</button>
+  </div>
+</div>
 
 <main class="max-w-6xl mx-auto px-5 py-6 space-y-5">
 
-    <!-- STATS -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-blue fade-in">
-            <p class="text-gray-400 text-xs uppercase tracking-wide">Gesamt Leads</p>
-            <p id="stat-total" class="text-3xl font-bold mt-1" style="color: var(--slate);">–</p>
+  <!-- ===== STATS ===== -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="bg-white rounded-xl p-4 shadow-sm stat-top-accent fade-in">
+      <p class="text-gray-400 text-xs uppercase tracking-wide font-medium">Gesamt</p>
+      <p id="stat-total" class="text-3xl font-bold mt-1" style="color:var(--navy);">–</p>
+      <p class="text-xs text-gray-400 mt-1">Kundenanfragen</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 shadow-sm stat-top-green fade-in">
+      <p class="text-gray-400 text-xs uppercase tracking-wide font-medium">Neu</p>
+      <p id="stat-neu" class="text-3xl font-bold mt-1 text-emerald-600">–</p>
+      <p class="text-xs text-gray-400 mt-1">Noch nicht bearbeitet</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 shadow-sm stat-top-amber fade-in">
+      <p class="text-gray-400 text-xs uppercase tracking-wide font-medium">In Bearbeitung</p>
+      <p id="stat-offen" class="text-3xl font-bold mt-1 text-amber-600">–</p>
+      <p class="text-xs text-gray-400 mt-1">Angebot / Auftrag</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 shadow-sm stat-top-purple fade-in">
+      <p class="text-gray-400 text-xs uppercase tracking-wide font-medium">Abgeschlossen</p>
+      <p id="stat-bezahlt" class="text-3xl font-bold mt-1 text-purple-700">–</p>
+      <p class="text-xs text-gray-400 mt-1">Bezahlt</p>
+    </div>
+  </div>
+
+  <!-- ===== SETUP GUIDE ===== -->
+  <div id="setup-section" class="hidden bg-white rounded-xl shadow-sm overflow-hidden fade-in">
+    <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color:var(--border);">
+      <div class="flex items-center gap-2">
+        <span>⚙️</span>
+        <h2 class="font-semibold text-sm" style="color:var(--navy);">Einrichtungsanleitung – Google Sheets + n8n</h2>
+      </div>
+      <button onclick="toggleSetup()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+    </div>
+    <div class="p-5 space-y-4">
+
+      <!-- Step 1 -->
+      <div class="setup-step bg-gray-50 rounded-xl p-4 flex gap-4">
+        <div class="step-num">1</div>
+        <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">Google Spreadsheet erstellen</h3>
+          <p class="text-xs text-gray-500 mb-2">
+            Öffne <strong>sheets.google.com</strong> → Neue Tabelle → Name: <em>"Ambiente Solar Leads"</em><br>
+            Erste Zeile genau so ausfüllen (jede Spalte einzeln):
+          </p>
+          <div class="code-block">A: zeitstempel   B: typ   C: vorname   D: nachname   E: email   F: telefon   G: anlagentyp   H: nachricht   I: antworten   J: status</div>
+          <p class="text-xs text-gray-500 mt-3">
+            Dann: <strong>Datei → Im Web veröffentlichen → Gesamtes Dokument → CSV → Veröffentlichen</strong><br>
+            CSV-Link kopieren → unten in diesem Dashboard bei <code class="bg-gray-200 px-1 rounded text-xs">SHEET_CSV</code> eintragen.
+          </p>
         </div>
-        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-green fade-in">
-            <p class="text-gray-400 text-xs uppercase tracking-wide">Neu</p>
-            <p id="stat-neu" class="text-3xl font-bold mt-1" style="color: var(--sage);">–</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="setup-step bg-gray-50 rounded-xl p-4 flex gap-4">
+        <div class="step-num">2</div>
+        <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">n8n Workflow A – Neue Anfrage empfangen</h3>
+          <p class="text-xs text-gray-500 mb-3">In n8n Cloud: Neues Workflow erstellen → <em>"Ambiente Solar – Neue Anfrage"</em></p>
+          <div class="space-y-2 text-xs text-gray-600 mb-3">
+            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 1:</span><span><strong>Webhook</strong> · Methode: POST · Path: <code class="bg-gray-200 px-1 rounded">ambiente-solar-leads</code> · Auth: None · Aktiv schalten → URL kopieren</span></div>
+            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 2:</span><span><strong>Google Sheets → Append Row</strong> · Spreadsheet: Ambiente Solar Leads · Sheet: Sheet1</span></div>
+          </div>
+          <p class="text-xs text-gray-500 mb-2">Spalten-Mapping im Google Sheets Node:</p>
+          <div class="code-block">zeitstempel  ←  {{ new Date().toLocaleString('de-DE') }}
+typ          ←  {{ $json.body.typ }}
+vorname      ←  {{ $json.body.vorname }}
+nachname     ←  {{ $json.body.nachname || '' }}
+email        ←  {{ $json.body.email }}
+telefon      ←  {{ $json.body.telefon || '' }}
+anlagentyp   ←  {{ $json.body.anlagentyp || '' }}
+nachricht    ←  {{ $json.body.nachricht || '' }}
+antworten    ←  {{ JSON.stringify($json.body.antworten || []) }}
+status       ←  Neu</div>
+          <p class="text-xs text-gray-500 mt-3 font-medium">→ Webhook-URL nach Aktivierung in <code class="bg-gray-200 px-1 rounded">index.html</code> bei <code class="bg-gray-200 px-1 rounded">WEBHOOK_URL</code> eintragen.</p>
         </div>
-        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-amber fade-in">
-            <p class="text-gray-400 text-xs uppercase tracking-wide">Angebote offen</p>
-            <p id="stat-angebote" class="text-3xl font-bold mt-1 text-amber-700">–</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="setup-step bg-gray-50 rounded-xl p-4 flex gap-4">
+        <div class="step-num">3</div>
+        <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">n8n Workflow B – Status aktualisieren</h3>
+          <p class="text-xs text-gray-500 mb-3">Damit die Aktionsbuttons im Dashboard den Status in Google Sheets ändern:</p>
+          <div class="space-y-2 text-xs text-gray-600">
+            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 1:</span><span><strong>Webhook</strong> · POST · Path: <code class="bg-gray-200 px-1 rounded">ambiente-solar-update</code></span></div>
+            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 2:</span><span><strong>Google Sheets → Get Rows</strong> · alle Zeilen lesen</span></div>
+            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 3:</span><span><strong>Code Node</strong> · Zeile mit passender E-Mail finden, Row-Index zurückgeben</span></div>
+            <div class="flex gap-2"><span class="font-bold text-gray-800 w-16 flex-shrink-0">Node 4:</span><span><strong>Google Sheets → Update Row</strong> · Status-Spalte J auf neuen Wert setzen</span></div>
+          </div>
+          <p class="text-xs text-gray-500 mt-3 font-medium">→ Webhook-URL unten in diesem Dashboard bei <code class="bg-gray-200 px-1 rounded">WEBHOOK_UPDATE</code> eintragen.</p>
         </div>
-        <div class="bg-white rounded-xl p-4 shadow-sm stat-card stat-purple fade-in">
-            <p class="text-gray-400 text-xs uppercase tracking-wide">Rechnungen offen</p>
-            <p id="stat-rechnungen" class="text-3xl font-bold mt-1 text-purple-700">–</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="setup-step bg-gray-50 rounded-xl p-4 flex gap-4">
+        <div class="step-num">4</div>
+        <div class="flex-1 min-w-0">
+          <h3 class="font-semibold text-sm mb-2" style="color:var(--navy);">URLs in den Dateien eintragen</h3>
+          <div class="space-y-2 text-xs text-gray-600">
+            <p>📄 <strong>dashboard.html</strong> · Zeile 1 in &lt;script&gt;: <code class="bg-gray-200 px-1 rounded">SHEET_CSV</code> = Google Sheets CSV-Link</p>
+            <p>📄 <strong>dashboard.html</strong> · Zeile 2 in &lt;script&gt;: <code class="bg-gray-200 px-1 rounded">WEBHOOK_UPDATE</code> = Workflow-B-Webhook-URL</p>
+            <p>📄 <strong>index.html</strong> · <code class="bg-gray-200 px-1 rounded">WEBHOOK_URL</code> = Workflow-A-Webhook-URL (z.B. <em>https://gleblang.app.n8n.cloud/webhook/ambiente-solar-leads</em>)</p>
+          </div>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== LEADS TABLE ===== -->
+  <div class="bg-white rounded-xl shadow-sm overflow-hidden fade-in">
+    <div class="px-5 py-3.5 border-b flex items-center justify-between gap-3 flex-wrap" style="border-color:var(--border);">
+      <h2 class="font-semibold text-sm" style="color:var(--navy);">Kundenanfragen</h2>
+      <div class="flex items-center gap-2">
+        <select id="filter-typ" onchange="applyFilters()"
+          class="text-xs border rounded-lg px-2 py-1.5 focus:outline-none" style="border-color:var(--border);color:#6b7280;">
+          <option value="">Alle Typen</option>
+          <option value="angebot">Angebot</option>
+          <option value="konzept">Solar-Konzept</option>
+        </select>
+        <select id="filter-status" onchange="applyFilters()"
+          class="text-xs border rounded-lg px-2 py-1.5 focus:outline-none" style="border-color:var(--border);color:#6b7280;">
+          <option value="">Alle Status</option>
+          <option value="Neu">Neu</option>
+          <option value="Angebot gesendet">Angebot gesendet</option>
+          <option value="Auftrag bestätigt">Auftrag bestätigt</option>
+          <option value="Rechnung gesendet">Rechnung gesendet</option>
+          <option value="Bezahlt">Bezahlt</option>
+        </select>
+      </div>
     </div>
 
-    <!-- LEADS TABLE -->
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden fade-in">
-        <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color: var(--border);">
-            <h2 class="font-semibold text-sm" style="color: var(--slate);">Kundenanfragen</h2>
-            <select id="filter-status" onchange="filterLeads()"
-                class="text-xs border rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1"
-                style="border-color: var(--border); color: #6b7280;">
-                <option value="">Alle Status</option>
-                <option value="Neu">Neu</option>
-                <option value="Angebot gesendet">Angebot gesendet</option>
-                <option value="Auftrag bestätigt">Auftrag bestätigt</option>
-                <option value="Rechnung gesendet">Rechnung gesendet</option>
-                <option value="Bezahlt">Bezahlt</option>
-            </select>
-        </div>
-
-        <div id="leads-loading" class="p-12 text-center text-gray-400">
-            <div class="text-2xl mb-2">⏳</div>
-            <p class="text-sm">Leads werden geladen...</p>
-        </div>
-        <div id="leads-empty" class="hidden p-12 text-center text-gray-400">
-            <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: var(--cream);">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                </svg>
-            </div>
-            <p class="text-sm font-medium text-gray-500">Noch keine Leads vorhanden</p>
-            <p class="text-xs text-gray-400 mt-1">Sobald ein Kunde den Bot kontaktiert, erscheinen die Daten hier.</p>
-        </div>
-        <div id="leads-error" class="hidden p-12 text-center text-red-400">
-            <div class="text-2xl mb-2">⚠️</div>
-            <p id="leads-error-msg" class="text-sm">Fehler beim Laden.</p>
-        </div>
-
-        <div id="leads-table" class="hidden overflow-x-auto">
-            <table class="w-full text-sm">
-                <thead style="background: var(--cream);">
-                    <tr class="text-left" style="border-bottom: 1px solid var(--border);">
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Name</th>
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Datum</th>
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Immobilie</th>
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Fläche</th>
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Sprache</th>
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
-                        <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Aktion</th>
-                    </tr>
-                </thead>
-                <tbody id="leads-tbody"></tbody>
-            </table>
-        </div>
+    <!-- Loading -->
+    <div id="leads-loading" class="p-12 text-center text-gray-400">
+      <div class="text-2xl mb-2">⏳</div>
+      <p class="text-sm">Daten werden geladen…</p>
     </div>
 
-    <!-- FAQ -->
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden fade-in">
-        <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color: var(--border);">
-            <h2 class="font-semibold text-sm" style="color: var(--slate);">FAQ – Häufige Fragen</h2>
-            <span class="text-xs text-gray-400">Referenz für Beratungsgespräche</span>
-        </div>
-        <div id="faq-list" class="divide-y" style="border-color: var(--border);"></div>
+    <!-- Empty -->
+    <div id="leads-empty" class="hidden p-12 text-center text-gray-400">
+      <div class="w-14 h-14 rounded-full mx-auto mb-3 flex items-center justify-center bg-gray-50">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <p class="text-sm font-semibold text-gray-500 mb-1">Noch keine Anfragen</p>
+      <p class="text-xs text-gray-400 mb-4">Sobald Kunden das Formular ausfüllen, erscheinen sie hier.</p>
+      <button onclick="loadDemo()" class="text-xs px-4 py-2 rounded-lg font-medium border"
+        style="background:var(--accent-soft);color:#92400e;border-color:#fed7aa;">
+        Demo-Daten anzeigen →
+      </button>
     </div>
+
+    <!-- Error -->
+    <div id="leads-error" class="hidden p-12 text-center">
+      <div class="text-2xl mb-2">⚠️</div>
+      <p id="leads-error-msg" class="text-sm text-red-500 mb-4">Fehler beim Laden.</p>
+      <button onclick="loadDemo()" class="text-xs px-4 py-2 rounded-lg font-medium border"
+        style="background:var(--accent-soft);color:#92400e;border-color:#fed7aa;">
+        Demo-Daten laden →
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div id="leads-table" class="hidden overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead style="background:#fafafa;border-bottom:1px solid var(--border);">
+          <tr class="text-left">
+            <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Name</th>
+            <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Typ</th>
+            <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Details</th>
+            <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Datum</th>
+            <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
+            <th class="px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Aktion</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody"></tbody>
+      </table>
+    </div>
+  </div>
 
 </main>
 
-<!-- MODAL -->
-<div id="modal" class="hidden fixed inset-0 bg-black/40 modal-overlay flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto fade-in">
-        <div class="p-6">
-            <div class="flex items-start justify-between mb-5">
-                <div>
-                    <h3 class="font-bold text-gray-800" id="modal-name">–</h3>
-                    <p id="modal-date" class="text-xs text-gray-400 mt-0.5">–</p>
-                </div>
-                <button onclick="closeModal()" class="text-gray-300 hover:text-gray-500 text-2xl leading-none">×</button>
-            </div>
-            <div id="modal-content" class="grid grid-cols-2 gap-3 text-sm mb-5"></div>
-            <div id="modal-notas" class="mb-5 hidden">
-                <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Notizen</p>
-                <p id="modal-notas-text" class="text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2"></p>
-            </div>
-            <div class="border-t pt-4" style="border-color: var(--border);">
-                <p class="text-xs text-gray-400 uppercase tracking-wide mb-3">Nächste Aktion</p>
-                <div id="modal-actions" class="flex gap-2 flex-wrap"></div>
-            </div>
+<!-- ===== DETAIL MODAL ===== -->
+<div id="modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+  style="background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);"
+  onclick="if(event.target===this)closeModal()">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg modal-max fade-in" onclick="event.stopPropagation()">
+    <div class="p-6">
+
+      <!-- Header -->
+      <div class="flex items-start justify-between mb-5">
+        <div>
+          <h3 id="modal-name" class="font-bold text-gray-800 text-lg leading-tight">–</h3>
+          <div id="modal-meta" class="flex items-center gap-2 mt-1.5 flex-wrap"></div>
         </div>
+        <button onclick="closeModal()" class="text-gray-300 hover:text-gray-500 text-2xl leading-none ml-4 flex-shrink-0">×</button>
+      </div>
+
+      <!-- Contact -->
+      <div id="modal-contact" class="grid grid-cols-2 gap-3 pb-5 mb-5 border-b" style="border-color:var(--border);"></div>
+
+      <!-- Request Details -->
+      <div id="modal-details" class="pb-5 mb-5 border-b" style="border-color:var(--border);"></div>
+
+      <!-- Actions -->
+      <div>
+        <p class="text-xs text-gray-400 uppercase tracking-wide font-medium mb-3">Nächste Aktion</p>
+        <div id="modal-actions" class="flex gap-2 flex-wrap"></div>
+      </div>
+
     </div>
+  </div>
 </div>
 
-<!-- TOAST -->
-<div id="toast" class="hidden fixed bottom-6 right-6 text-white px-5 py-3 rounded-xl shadow-lg text-sm fade-in z-50" style="background: var(--sage);">
-    ✓ Status erfolgreich aktualisiert
+<!-- ===== TOAST ===== -->
+<div id="toast" class="hidden fixed bottom-6 right-6 text-white px-5 py-3 rounded-xl shadow-lg text-sm fade-in z-50" style="background:#10b981;">
+  ✓ Status aktualisiert
 </div>
 
 <script>
-const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTEM5KHgXyt8nM9CwSWWUVthl-t_2rlSQkYfGXC7X77bkR-tQ2glh5C3vwiTDqSSFUu5FHe2N7JYzve/pub?output=csv';
-const WEBHOOK_BASE = 'https://gleblang.app.n8n.cloud/webhook';
-let allLeads = [];
-let currentLeadIndex = null;
+/* ===== KONFIGURATION — hier anpassen ===== */
+const SHEET_CSV      = 'HIER_EINTRAGEN'; // Google Sheets CSV-URL (Im Web veröffentlichen → CSV)
+const WEBHOOK_UPDATE = 'https://gleblang.app.n8n.cloud/webhook/ambiente-solar-update';
 
-const FAQ = [
-    { q: 'Was kostet eine PV-Anlage?', a: 'Balkonkraftwerk ab 600 €, bis 5 kWp ab 8.000 €, 5–10 kWp ab 14.000 €, 10–20 kWp ab 22.000 €. Batteriespeicher ab 4.000 € extra. Preise für Wohngebäude inkl. 0% MwSt. Für Gewerbeobjekte gilt 19% MwSt.', cat: 'Preise' },
-    { q: 'Wie lange dauert die Installation?', a: 'Einfamilienhaus 5–10 kWp: 1–2 Tage. Größere Anlagen: 3–5 Tage. Balkonkraftwerk: halber Tag.', cat: 'Installation' },
-    { q: 'Servicegebiet', a: 'Ausschließlich im 150 km Umkreis um Frankfurt am Main: Wiesbaden, Darmstadt, Mainz, Mannheim, Heidelberg, Koblenz, Gießen, Fulda, Würzburg u.a.', cat: 'Servicegebiet' },
-    { q: 'Baugenehmigung erforderlich?', a: 'In Hessen keine Baugenehmigung für Anlagen bis 30 kWp auf Wohngebäuden. Wir kümmern uns um Netzbetreiber-Anmeldung und MaStR-Eintragung.', cat: 'Rechtliches' },
-    { q: 'Staatliche Förderungen', a: 'KfW-Kredit 270, mögliche BAFA-Zuschüsse, Steuerbefreiung seit 2023, MwSt. 0% auf PV-Anlagen für Wohngebäude seit 2023.', cat: 'Förderungen' },
-    { q: 'Amortisation', a: 'Bei normalem Verbrauch und guter Ausrichtung ca. 8–12 Jahre. Einsparung ca. 800–1.500 €/Jahr.', cat: 'Wirtschaftlichkeit' },
-    { q: 'Batteriespeicher', a: 'Erhöht den Eigenverbrauch von ca. 30% auf 60–80%. Überschüssiger Solarstrom für Nacht und bewölkte Tage.', cat: 'Technik' },
-    { q: '¿Trabajan en toda Alemania?', a: 'No, solo en un radio de 150 km alrededor de Frankfurt: Wiesbaden, Darmstadt, Mainz, Mannheim, Heidelberg, Koblenz, Gießen, Fulda, Würzburg.', cat: 'Español' },
-    { q: '¿Cuánto cuesta una instalación solar?', a: 'Balcón 800W desde 600€, hasta 5 kWp desde 8.000€ (IVA 0% viviendas), 5–10 kWp desde 14.000€, 10–20 kWp desde 22.000€. Para locales comerciales aplica 19% IVA.', cat: 'Español' },
+/* ===== Konzept-Fragen (Reihenfolge aus index.html) ===== */
+const FRAGEN = [
+  'Gebäudetyp',
+  'Dachform',
+  'Dacheindeckung',
+  'Personen im Haushalt',
+  'E-Auto vorhanden',
+  'Wärmepumpe vorhanden',
+  'Batteriespeicher gewünscht',
 ];
 
-function renderFAQ() {
-    document.getElementById('faq-list').innerHTML = FAQ.map(f => `
-        <div class="px-5 py-3.5 hover:bg-gray-50 transition flex items-start gap-3">
-            <span class="text-xs px-2 py-0.5 rounded-md whitespace-nowrap mt-0.5 font-medium"
-                style="background: #eef2f7; color: #5b7fa6;">${f.cat}</span>
-            <div>
-                <p class="font-medium text-gray-700 text-sm">${f.q}</p>
-                <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">${f.a}</p>
-            </div>
-        </div>
-    `).join('');
+/* ===== Demo-Daten ===== */
+const DEMO = [
+  { zeitstempel:'31.05.2026, 10:23', typ:'angebot',  vorname:'Thomas',  nachname:'Müller',   email:'thomas.mueller@example.de',  telefon:'+49 171 234 5678', anlagentyp:'Einfamilienhaus', nachricht:'Interessiert an einer PV-Anlage, ca. 150 m² Dachfläche, Südausrichtung. Batteriespeicher auch gewünscht.', antworten:'', status:'Neu' },
+  { zeitstempel:'30.05.2026, 14:05', typ:'konzept',  vorname:'Sabine',  nachname:'Koch',     email:'sabine.koch@example.de',     telefon:'+49 160 987 6543', anlagentyp:'', nachricht:'', antworten:'["🏠 Einfamilienhaus","🔺 Satteldach","🏺 Ziegel","👪 3–4 Personen","✅ Ja","❌ Nein","✅ Ja"]', status:'Angebot gesendet' },
+  { zeitstempel:'28.05.2026, 09:12', typ:'angebot',  vorname:'Markus',  nachname:'Weber',    email:'markus.weber@example.de',    telefon:'+49 1786 555 123', anlagentyp:'Gewerbe',           nachricht:'Gewerbehalle, ca. 500 m² Flachdach. Bitte Angebot für 100+ kWp.', antworten:'', status:'Auftrag bestätigt' },
+  { zeitstempel:'25.05.2026, 16:44', typ:'konzept',  vorname:'Anna',    nachname:'Schmidt',  email:'a.schmidt@example.de',       telefon:'',                 anlagentyp:'', nachricht:'', antworten:'["🏘️ Doppelhaus","📐 Pultdach","🟫 Bitumen / Folie","👤 1–2 Personen","❌ Nein","✅ Ja","❌ Nein"]', status:'Bezahlt' },
+  { zeitstempel:'22.05.2026, 11:30', typ:'angebot',  vorname:'Luis',    nachname:'Martínez', email:'luis.martinez@example.de',   telefon:'+49 170 333 4444', anlagentyp:'Balkonkraftwerk',   nachricht:'Mietwohnung, 3. OG, Südbalkon ~6 m². Plug & Play gewünscht.', antworten:'', status:'Rechnung gesendet' },
+];
+
+let allLeads = [];
+let isDemoMode = false;
+let currentIdx = null;
+
+/* ===== Hilfsfunktionen ===== */
+function fullName(l) {
+  return [l.vorname, l.nachname].filter(Boolean).join(' ') || '–';
 }
 
 function statusBadge(s) {
-    const map = {
-        'Neu': 'badge-neu',
-        'Angebot gesendet': 'badge-angebot',
-        'Auftrag bestätigt': 'badge-auftrag',
-        'Rechnung gesendet': 'badge-rechnung',
-        'Bezahlt': 'badge-bezahlt',
-    };
-    const cls = map[s] || 'badge-neu';
-    return `<span class="px-2 py-0.5 rounded-md text-xs font-medium ${cls}">${s || 'Neu'}</span>`;
+  const map = { 'Neu':'badge-neu','Angebot gesendet':'badge-angebot','Auftrag bestätigt':'badge-auftrag','Rechnung gesendet':'badge-rechnung','Bezahlt':'badge-bezahlt' };
+  return `<span class="px-2 py-0.5 rounded-md text-xs font-medium ${map[s]||'badge-neu'}">${s||'Neu'}</span>`;
 }
 
-function actionBtn(lead, i) {
-    const s = lead.status || 'Neu';
-    const btns = {
-        'Neu': `<button onclick="event.stopPropagation();quickAction(${i},'Angebot gesendet')"
-            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition" style="background:#5b7fa6;">
-            Angebot senden</button>`,
-        'Angebot gesendet': `<button onclick="event.stopPropagation();quickAction(${i},'Auftrag bestätigt')"
-            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition bg-amber-600">
-            Auftrag bestätigen</button>`,
-        'Auftrag bestätigt': `<button onclick="event.stopPropagation();quickAction(${i},'Rechnung gesendet')"
-            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition bg-purple-600">
-            Rechnung senden</button>`,
-        'Rechnung gesendet': `<button onclick="event.stopPropagation();quickAction(${i},'Bezahlt')"
-            class="text-xs px-3 py-1 rounded-lg font-medium text-white transition" style="background:var(--sage);">
-            Als bezahlt</button>`,
-    };
-    return btns[s] || `<span class="text-xs font-medium" style="color:var(--sage);">✓ Abgeschlossen</span>`;
+function typBadge(t) {
+  const isA = t === 'angebot';
+  return `<span class="px-2 py-0.5 rounded-md text-xs font-semibold ${isA?'typ-angebot':'typ-konzept'}">${isA?'📋 Angebot':'☀️ Solar-Konzept'}</span>`;
 }
 
-// Parse CSV from Google Sheets
+function parseAntworten(str) {
+  if (!str) return [];
+  try { return JSON.parse(str); } catch { return str.split(',').map(s=>s.trim()).filter(Boolean); }
+}
+
+function detailPreview(l) {
+  if (l.typ === 'angebot') return l.anlagentyp || '–';
+  const a = parseAntworten(l.antworten);
+  return a.slice(0,2).join(' · ') || '–';
+}
+
+function quickBtn(lead, i) {
+  const s = lead.status || 'Neu';
+  const btns = {
+    'Neu':              `<button onclick="event.stopPropagation();quickAction(${i},'Angebot gesendet')" class="text-xs px-3 py-1.5 rounded-lg font-medium text-white" style="background:var(--navy);">Angebot senden</button>`,
+    'Angebot gesendet': `<button onclick="event.stopPropagation();quickAction(${i},'Auftrag bestätigt')" class="text-xs px-3 py-1.5 rounded-lg font-medium text-white bg-amber-600">Auftrag bestätigen</button>`,
+    'Auftrag bestätigt':`<button onclick="event.stopPropagation();quickAction(${i},'Rechnung gesendet')" class="text-xs px-3 py-1.5 rounded-lg font-medium text-white bg-purple-600">Rechnung senden</button>`,
+    'Rechnung gesendet':`<button onclick="event.stopPropagation();quickAction(${i},'Bezahlt')" class="text-xs px-3 py-1.5 rounded-lg font-medium text-white" style="background:#10b981;">Als bezahlt</button>`,
+  };
+  return btns[s] || `<span class="text-xs font-medium text-emerald-600">✓ Fertig</span>`;
+}
+
+/* ===== CSV Parser ===== */
 function parseCSV(text) {
-    const lines = text.trim().split('\n');
-    if (lines.length < 2) return [];
-    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-    return lines.slice(1).map(line => {
-        const vals = [];
-        let cur = '', inQ = false;
-        for (let c of line) {
-            if (c === '"') { inQ = !inQ; }
-            else if (c === ',' && !inQ) { vals.push(cur); cur = ''; }
-            else cur += c;
-        }
-        vals.push(cur);
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = (vals[i] || '').trim().replace(/^"|"$/g, ''));
-        return obj;
-    }).filter(r => r.name);
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,''));
+  return lines.slice(1).map(line => {
+    const vals = [];
+    let cur = '', inQ = false;
+    for (const c of line) {
+      if (c === '"') inQ = !inQ;
+      else if (c === ',' && !inQ) { vals.push(cur); cur = ''; }
+      else cur += c;
+    }
+    vals.push(cur);
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i]||'').trim().replace(/^"|"$/g,''));
+    return obj;
+  }).filter(r => r.email || r.vorname);
 }
 
+/* ===== Laden ===== */
 async function loadLeads() {
-    document.getElementById('leads-loading').classList.remove('hidden');
-    document.getElementById('leads-table').classList.add('hidden');
-    document.getElementById('leads-empty').classList.add('hidden');
-    document.getElementById('leads-error').classList.add('hidden');
-    try {
-        const res = await fetch(SHEET_CSV);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        allLeads = parseCSV(text);
-        renderLeads(allLeads);
-        updateStats(allLeads);
-    } catch(e) {
-        document.getElementById('leads-loading').classList.add('hidden');
-        document.getElementById('leads-error-msg').textContent = `Fehler beim Laden der Daten. Ist die Google Sheets Tabelle öffentlich freigegeben?`;
-        document.getElementById('leads-error').classList.remove('hidden');
-    }
+  isDemoMode = false;
+  document.getElementById('demo-badge').classList.add('hidden');
+
+  if (!SHEET_CSV || SHEET_CSV === 'HIER_EINTRAGEN') {
+    document.getElementById('config-banner').classList.remove('hidden');
+    document.getElementById('setup-section').classList.remove('hidden');
+    show('leads-loading', false);
+    show('leads-empty', true);
+    return;
+  }
+
+  show('leads-loading', true);
+  show('leads-table', false);
+  show('leads-empty', false);
+  show('leads-error', false);
+
+  try {
+    const res = await fetch(SHEET_CSV);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    allLeads = parseCSV(text);
+    render(allLeads);
+    stats(allLeads);
+  } catch(e) {
+    show('leads-loading', false);
+    document.getElementById('leads-error-msg').textContent = 'Fehler: ' + e.message + '. Ist die Tabelle öffentlich freigegeben?';
+    show('leads-error', true);
+  }
 }
 
-function updateStats(leads) {
-    document.getElementById('stat-total').textContent = leads.length;
-    document.getElementById('stat-neu').textContent = leads.filter(l => !l.status || l.status === 'Neu').length;
-    document.getElementById('stat-angebote').textContent = leads.filter(l => l.status === 'Angebot gesendet').length;
-    document.getElementById('stat-rechnungen').textContent = leads.filter(l => l.status === 'Rechnung gesendet').length;
+function loadDemo() {
+  isDemoMode = true;
+  document.getElementById('demo-badge').classList.remove('hidden');
+  document.getElementById('config-banner').classList.add('hidden');
+  show('leads-loading', false);
+  show('leads-empty', false);
+  show('leads-error', false);
+  allLeads = DEMO.map(d => ({...d}));
+  render(allLeads);
+  stats(allLeads);
 }
 
-function renderLeads(leads) {
-    document.getElementById('leads-loading').classList.add('hidden');
-    if (!leads.length) {
-        document.getElementById('leads-empty').classList.remove('hidden');
-        return;
-    }
-    document.getElementById('leads-table').classList.remove('hidden');
-    document.getElementById('leads-tbody').innerHTML = leads.map((l, i) => `
-        <tr class="border-t row-hover cursor-pointer transition" onclick="openModal(${i})"
-            style="border-color: var(--border);">
-            <td class="px-5 py-3 font-medium text-gray-800">${l.name || '–'}</td>
-            <td class="px-5 py-3 text-gray-400 text-xs">${l.created_at || '–'}</td>
-            <td class="px-5 py-3 text-gray-600">${l.property_type || '–'}</td>
-            <td class="px-5 py-3 text-gray-600">${l.roof_area ? l.roof_area + ' m²' : '–'}</td>
-            <td class="px-5 py-3">${l.lang === 'ES' ? '🇪🇸' : '🇩🇪'}</td>
-            <td class="px-5 py-3">${statusBadge(l.status)}</td>
-            <td class="px-5 py-3">${actionBtn(l, i)}</td>
-        </tr>
-    `).join('');
+function show(id, visible) {
+  document.getElementById(id).classList.toggle('hidden', !visible);
 }
 
-function filterLeads() {
-    const f = document.getElementById('filter-status').value;
-    renderLeads(f ? allLeads.filter(l => (l.status || 'Neu') === f) : allLeads);
+function stats(leads) {
+  document.getElementById('stat-total').textContent   = leads.length;
+  document.getElementById('stat-neu').textContent     = leads.filter(l => !l.status || l.status === 'Neu').length;
+  document.getElementById('stat-offen').textContent   = leads.filter(l => l.status === 'Angebot gesendet' || l.status === 'Auftrag bestätigt').length;
+  document.getElementById('stat-bezahlt').textContent = leads.filter(l => l.status === 'Bezahlt').length;
 }
 
+function render(leads) {
+  show('leads-loading', false);
+  if (!leads.length) { show('leads-empty', true); show('leads-table', false); return; }
+  show('leads-table', true);
+  show('leads-empty', false);
+  document.getElementById('leads-tbody').innerHTML = leads.map((l, i) => `
+    <tr class="border-t row-hover transition" onclick="openModal(${i})" style="border-color:var(--border);">
+      <td class="px-5 py-3.5">
+        <div class="font-semibold text-gray-800 text-sm">${fullName(l)}</div>
+        <div class="text-xs text-gray-400 mt-0.5">${l.email||''}</div>
+      </td>
+      <td class="px-5 py-3.5">${typBadge(l.typ)}</td>
+      <td class="px-5 py-3.5 text-xs text-gray-500 max-w-xs truncate">${detailPreview(l)}</td>
+      <td class="px-5 py-3.5 text-xs text-gray-400 whitespace-nowrap">${l.zeitstempel||'–'}</td>
+      <td class="px-5 py-3.5">${statusBadge(l.status)}</td>
+      <td class="px-5 py-3.5">${quickBtn(l, i)}</td>
+    </tr>
+  `).join('');
+}
+
+function applyFilters() {
+  const typ    = document.getElementById('filter-typ').value;
+  const status = document.getElementById('filter-status').value;
+  let f = allLeads;
+  if (typ)    f = f.filter(l => l.typ === typ);
+  if (status) f = f.filter(l => (l.status||'Neu') === status);
+  render(f);
+}
+
+/* ===== Modal ===== */
 function openModal(i) {
-    currentLeadIndex = i;
-    const l = allLeads[i];
-    document.getElementById('modal-name').textContent = l.name || 'Lead';
-    document.getElementById('modal-date').textContent =
-        `Erhalten: ${l.created_at || '–'} · ${l.lang === 'ES' ? '🇪🇸 Spanisch' : '🇩🇪 Deutsch'}`;
-    document.getElementById('modal-content').innerHTML = `
-        <div><p class="text-gray-400 text-xs mb-0.5">Adresse</p><p class="font-medium text-gray-700 text-sm">${l.address || '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">E-Mail</p><p class="font-medium text-gray-700 text-sm">${l.email || '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">Telefon</p><p class="font-medium text-gray-700 text-sm">${l.phone || '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">Immobilientyp</p><p class="font-medium text-gray-700 text-sm">${l.property_type || '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">Dachfläche</p><p class="font-medium text-gray-700 text-sm">${l.roof_area ? l.roof_area + ' m²' : '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">Stromverbrauch</p><p class="font-medium text-gray-700 text-sm">${l.consumption ? l.consumption + ' kWh/Jahr' : '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">Batteriespeicher</p><p class="font-medium text-gray-700 text-sm">${l.battery || '–'}</p></div>
-        <div><p class="text-gray-400 text-xs mb-0.5">Installationszeitraum</p><p class="font-medium text-gray-700 text-sm">${l.timeline || '–'}</p></div>
-        <div class="col-span-2"><p class="text-gray-400 text-xs mb-1">Status</p>${statusBadge(l.status)}</div>
+  currentIdx = i;
+  const l = allLeads[i];
+
+  document.getElementById('modal-name').textContent = fullName(l);
+  document.getElementById('modal-meta').innerHTML =
+    typBadge(l.typ) +
+    `<span class="text-xs text-gray-400">${l.zeitstempel||''}</span>`;
+
+  // Kontaktdaten
+  document.getElementById('modal-contact').innerHTML = `
+    <div>
+      <p class="text-gray-400 text-xs mb-1 uppercase tracking-wide font-medium">E-Mail</p>
+      <a href="mailto:${l.email}" class="text-sm font-semibold text-blue-600 hover:underline break-all">${l.email||'–'}</a>
+    </div>
+    <div>
+      <p class="text-gray-400 text-xs mb-1 uppercase tracking-wide font-medium">Telefon</p>
+      ${l.telefon
+        ? `<a href="tel:${l.telefon.replace(/\s/g,'')}" class="text-sm font-medium text-gray-700">${l.telefon}</a>`
+        : `<span class="text-sm text-gray-400">–</span>`}
+    </div>
+    <div>
+      <p class="text-gray-400 text-xs mb-1 uppercase tracking-wide font-medium">Status</p>
+      ${statusBadge(l.status)}
+    </div>
+    <div>
+      <p class="text-gray-400 text-xs mb-1 uppercase tracking-wide font-medium">Anfragetyp</p>
+      <p class="text-sm text-gray-700">${l.typ==='angebot'?'Individuelles Angebot':'Solar-Konzept'}</p>
+    </div>
+  `;
+
+  // Anfragedetails
+  let detHTML = '';
+  if (l.typ === 'angebot') {
+    detHTML = `
+      <p class="text-xs text-gray-400 uppercase tracking-wide font-medium mb-3">Anfrage-Details</p>
+      <div class="mb-3">
+        <p class="text-gray-400 text-xs mb-1">Anlagentyp</p>
+        <span class="chip chip-default">${l.anlagentyp||'–'}</span>
+      </div>
+      ${l.nachricht ? `
+        <div>
+          <p class="text-gray-400 text-xs mb-1">Nachricht</p>
+          <p class="text-sm text-gray-700 bg-gray-50 rounded-lg px-3 py-2.5 leading-relaxed">${l.nachricht}</p>
+        </div>
+      ` : ''}
     `;
-    if (l.notas) {
-        document.getElementById('modal-notas').classList.remove('hidden');
-        document.getElementById('modal-notas-text').textContent = l.notas;
-    } else {
-        document.getElementById('modal-notas').classList.add('hidden');
-    }
-    const s = l.status || 'Neu';
-    const actions = {
-        'Neu': `<button onclick="updateStatus('Angebot gesendet')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition" style="background:#5b7fa6;">Angebot versenden</button>`,
-        'Angebot gesendet': `<button onclick="updateStatus('Auftrag bestätigt')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition bg-amber-600">Auftrag bestätigen</button>`,
-        'Auftrag bestätigt': `<button onclick="updateStatus('Rechnung gesendet')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition bg-purple-600">Rechnung senden</button>`,
-        'Rechnung gesendet': `<button onclick="updateStatus('Bezahlt')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold transition" style="background:var(--sage);">Als bezahlt markieren</button>`,
-    };
-    document.getElementById('modal-actions').innerHTML = actions[s] || `<p class="text-sm font-medium" style="color:var(--sage);">✓ Auftrag abgeschlossen</p>`;
-    document.getElementById('modal').classList.remove('hidden');
+  } else {
+    const antworten = parseAntworten(l.antworten);
+    const chips = FRAGEN.map((frage, idx) => {
+      const a = antworten[idx] || '–';
+      const cls = a.includes('❌') ? 'chip-nein' : a.includes('✅') ? 'chip-ja' : 'chip-default';
+      return `
+        <div>
+          <p class="text-gray-400 text-xs mb-1">${frage}</p>
+          <span class="chip ${cls}">${a}</span>
+        </div>
+      `;
+    }).join('');
+    detHTML = `
+      <p class="text-xs text-gray-400 uppercase tracking-wide font-medium mb-3">Solar-Konzept Antworten</p>
+      <div class="grid grid-cols-2 gap-3">${chips}</div>
+    `;
+  }
+  document.getElementById('modal-details').innerHTML = detHTML;
+
+  // Aktions-Buttons
+  const s = l.status || 'Neu';
+  const acts = {
+    'Neu':              `<button onclick="updateStatus('Angebot gesendet')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold" style="background:var(--navy);">📋 Angebot versenden</button>`,
+    'Angebot gesendet': `<button onclick="updateStatus('Auftrag bestätigt')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold bg-amber-600">✅ Auftrag bestätigen</button>`,
+    'Auftrag bestätigt':`<button onclick="updateStatus('Rechnung gesendet')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold bg-purple-600">📄 Rechnung senden</button>`,
+    'Rechnung gesendet':`<button onclick="updateStatus('Bezahlt')" class="flex-1 text-white py-2.5 rounded-xl text-sm font-semibold" style="background:#10b981;">💚 Als bezahlt markieren</button>`,
+  };
+  document.getElementById('modal-actions').innerHTML =
+    acts[s] || `<p class="text-sm font-medium text-emerald-600">✓ Auftrag vollständig abgeschlossen</p>`;
+
+  show('modal', true);
 }
 
-function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+function closeModal() {
+  show('modal', false);
+  currentIdx = null;
+}
 
+/* ===== Status-Update ===== */
 async function quickAction(i, newStatus) {
-    currentLeadIndex = i;
-    await updateStatus(newStatus);
+  currentIdx = i;
+  await updateStatus(newStatus);
 }
 
 async function updateStatus(newStatus) {
-    const lead = allLeads[currentLeadIndex];
-    if (!confirm(`Status von "${lead.name}" ändern zu:\n"${newStatus}"?`)) return;
-    try {
-        await fetch(`${WEBHOOK_BASE}/jhonatan-update`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: lead.email, name: lead.name, status: newStatus })
-        });
-        closeModal();
-        showToast();
-        await loadLeads();
-    } catch(e) {
-        alert('Fehler beim Aktualisieren.');
-    }
+  const lead = allLeads[currentIdx];
+  if (!confirm(`Status von "${fullName(lead)}" ändern zu:\n"${newStatus}"?`)) return;
+
+  if (isDemoMode || WEBHOOK_UPDATE.includes('EINTRAGEN')) {
+    allLeads[currentIdx].status = newStatus;
+    closeModal();
+    showToast('Status aktualisiert' + (isDemoMode ? ' (Demo)' : ''));
+    render(allLeads);
+    stats(allLeads);
+    return;
+  }
+
+  try {
+    await fetch(WEBHOOK_UPDATE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: lead.email, name: fullName(lead), status: newStatus })
+    });
+    closeModal();
+    showToast('Status aktualisiert');
+    setTimeout(loadLeads, 1500);
+  } catch(e) {
+    allLeads[currentIdx].status = newStatus;
+    closeModal();
+    showToast('Lokal aktualisiert (Webhook offline)');
+    render(allLeads);
+    stats(allLeads);
+  }
 }
 
-function showToast() {
-    const t = document.getElementById('toast');
-    t.classList.remove('hidden');
-    setTimeout(() => t.classList.add('hidden'), 3000);
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ' + msg;
+  show('toast', true);
+  setTimeout(() => show('toast', false), 3000);
 }
 
-renderFAQ();
+function toggleSetup() {
+  document.getElementById('setup-section').classList.toggle('hidden');
+}
+
+/* ===== Init ===== */
 loadLeads();
 </script>
 </body>

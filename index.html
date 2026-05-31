@@ -1465,6 +1465,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     const vorname=document.getElementById('ang-vorname').value.trim();
     const nachname=document.getElementById('ang-nachname').value.trim();
     const email=document.getElementById('ang-email').value.trim();
+    const tel=document.getElementById('ang-tel').value.trim();
     const typ=document.getElementById('ang-typ').value;
     const msg=document.getElementById('ang-msg').value.trim();
     const ds=document.getElementById('ds1').checked;
@@ -1473,7 +1474,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     const btn=document.getElementById('ang-submit');
     btn.disabled=true;
     setStatus('ang-status','loading','Wird gesendet…');
-    const payload={typ:'angebot',vorname,nachname,email,anlagentyp:typ,nachricht:msg};
+    const payload={typ:'angebot',vorname,nachname,email,telefon:tel,anlagentyp:typ,nachricht:msg};
     if(!WEBHOOK_URL.includes('TODO')){
       try{
         await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
@@ -1494,7 +1495,9 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   /* ===== Solar-Konzept senden ===== */
   async function sendeKonzept(){
     const vorname=document.getElementById('kon-vorname').value.trim();
+    const nachname=document.getElementById('kon-nachname').value.trim();
     const email=document.getElementById('kon-email').value.trim();
+    const tel=document.getElementById('kon-tel').value.trim();
     const ds=document.getElementById('ds2').checked;
     if(!vorname||!email){setStatus('kon-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
     if(!ds){setStatus('kon-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
@@ -1502,7 +1505,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     const btn=document.getElementById('kon-submit');
     btn.disabled=true;
     setStatus('kon-status','loading','Wird gesendet…');
-    const payload={typ:'konzept',vorname,email,antworten};
+    const payload={typ:'konzept',vorname,nachname,email,telefon:tel,antworten};
     if(!WEBHOOK_URL.includes('TODO')){
       try{
         await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});

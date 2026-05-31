@@ -22,13 +22,13 @@
       '<circle cx="660" cy="100" r="80" fill="#facc14" opacity="0.15"/>'+
       grid+
       '<text x="40" y="80" font-family="Geist,sans-serif" font-weight="700" font-size="44" fill="#fff" letter-spacing="-2">'+label.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</text>'+
-      '<text x="40" y="115" font-family="Geist,sans-serif" font-weight="500" font-size="16" fill="#129ddb" letter-spacing="3">AMBIENTE SOLAR</text>'+
+      '<text x="40" y="115" font-family="Geist,sans-serif" font-weight="500" font-size="16" fill="#F5A623" letter-spacing="3">AMBIENTE SOLAR</text>'+
       '</svg>';
     return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
   }
   function fixImg(img){
+    if(img.hasAttribute('data-no-fallback')) return;
     var alt=img.getAttribute('alt')||'';
-    // derive a sensible label
     var ctx='';
     var node=img.closest('.node');
     if(node){
@@ -48,21 +48,73 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ambiente Solar – Photovoltaik Frankfurt</title>
+<title>Ambiente Solar – Photovoltaik deutschlandweit</title>
+<meta name="description" content="Ambiente Solar: Deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung. 0% MwSt. auf Wohngebäude. Jetzt kostenloses Angebot anfragen.">
+<meta name="keywords" content="Photovoltaik, Solaranlage, PV-Anlage, Batteriespeicher, Balkonkraftwerk, Frankfurt, deutschlandweit, Jhonatan Jaramillo">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Ambiente Solar – Jhonatan Jaramillo Aguirre">
+<meta property="og:title" content="Ambiente Solar – Photovoltaik deutschlandweit">
+<meta property="og:description" content="Professionelle PV-Anlagen für Privat- und Gewerbekunden. 0% MwSt. auf Wohngebäude. Jetzt kostenloses Angebot anfragen.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="fotos/hero-ki.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ambiente Solar – Photovoltaik deutschlandweit">
+<meta name="twitter:description" content="Professionelle PV-Anlagen für Privat- und Gewerbekunden. 0% MwSt. auf Wohngebäude.">
+<meta name="twitter:image" content="fotos/hero-ki.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Ambiente Solar",
+  "description": "Deutschlandweite Photovoltaik-Installationen, Batteriespeicher und Wartung für Privat- und Gewerbekunden.",
+  "url": "https://ambiente-solar.de",
+  "telephone": "+4917863375200",
+  "email": "info@ambiente-solar.de",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Mittelseestraße 32",
+    "addressLocality": "Frankfurt am Main",
+    "postalCode": "60386",
+    "addressCountry": "DE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 50.1109,
+    "longitude": 8.6821
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Deutschland"
+  },
+  "serviceType": ["Photovoltaik Installation", "Batteriespeicher", "Balkonkraftwerk", "Wartung", "Fassadenmontage"],
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Banküberweisung",
+  "sameAs": []
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --accent:#129ddb;
-  --accent-2:#0d85c0;
-  --accent-soft:#e5f4fb;
-  --navy:#129ddb;
-  --navy-2:#0d85c0;
-  --navy-soft:#4cb5e3;
-  --gold:#facc14;
-  --gold-2:#e8b80a;
+  --accent:#F5A623;
+  --accent-2:#C8881A;
+  --accent-soft:#FEF3E0;
+  --accent-blue:#1D5A99;
+  --accent-gold:#C9A35E;
+  --cta:#1A1A1A;
+  --cta-hover:#333;
   --zinc-950:#09090b;
   --zinc-900:#18181b;
   --zinc-800:#27272a;
@@ -96,16 +148,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .wrap{max-width:1280px;margin:0 auto;padding:0 40px}
 section{padding:120px 0;position:relative}
 .eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--zinc-500);margin-bottom:24px}
-.eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
 .eyebrow .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
 h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-0.04em;color:var(--black);line-height:1.0}
-h1{font-size:clamp(56px,8vw,120px);font-weight:700;letter-spacing:-0.045em;line-height:.92}
+h1{font-size:clamp(44px,5.8vw,88px);font-weight:700;letter-spacing:-0.045em;line-height:.94}
 h1 strong{font-weight:900;letter-spacing:-.055em}
-h2{font-size:clamp(40px,5.2vw,76px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
+h2{font-size:clamp(30px,3.8vw,58px);font-weight:700;letter-spacing:-0.04em;line-height:.98}
 h2 strong{font-weight:900;letter-spacing:-.05em}
-h3{font-size:22px;font-weight:700;color:var(--black);letter-spacing:-0.02em}
+h3{font-size:20px;font-weight:700;color:var(--black);letter-spacing:-0.02em}
 p{font-weight:400;color:var(--zinc-700);font-size:16px;line-height:1.7}
-.lead{font-size:19px;line-height:1.6;color:var(--zinc-700);font-weight:400;max-width:54ch;letter-spacing:-.008em}
+.lead{font-size:18px;line-height:1.65;color:var(--zinc-700);font-weight:400;max-width:52ch;letter-spacing:-.008em}
 
 /* ===== nav ===== */
 nav.topbar{
@@ -118,19 +169,21 @@ nav.topbar{
   border-bottom:1px solid rgba(0,0,0,.05);
 }
 .brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:60px;height:60px;display:grid;place-items:center;color:var(--accent)}
-.brand-mark svg,.brand-mark img{width:60px;height:60px;display:block;object-fit:contain}
+.brand-mark{height:52px;display:flex;align-items:center}
+.brand-mark img{height:52px;width:auto;display:block;object-fit:contain}
 .brand-name{font-family:var(--display);font-weight:800;color:var(--black);font-size:19px;letter-spacing:.04em;line-height:1;text-transform:uppercase}
-.brand-sub{display:none}
+.brand-sub{font-family:var(--body);font-size:10px;font-weight:500;color:var(--zinc-500);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
-.nav-links a{font-size:14px;color:var(--ink);font-weight:500;opacity:.85;transition:opacity .2s}
-.nav-links a:hover{opacity:1;color:var(--navy)}
+.nav-links a{font-size:16px;color:var(--ink);font-weight:600;letter-spacing:-.01em;opacity:.85;transition:opacity .2s}
+.nav-links a:hover{opacity:1;color:var(--accent)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--cta);color:#fff;font-family:var(--body);font-weight:600;font-size:13px;padding:10px 20px;border-radius:999px;letter-spacing:-.005em;transition:background .2s,transform .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--cta-hover);transform:translateY(-1px)}
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;font-size:14px;padding:13px 22px;border-radius:999px;transition:transform .35s var(--spring),background .25s,color .25s,border-color .25s;letter-spacing:-.005em;will-change:transform}
 .btn:active{transform:scale(.98)}
-.btn-gold,.btn-navy{background:var(--black);color:#fff}
-.btn-gold:hover,.btn-navy:hover{background:var(--zinc-800);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--black);border:1px solid var(--black)}
-.btn-ghost:hover{background:var(--black);color:#fff}
+.btn-navy{background:var(--cta);color:#fff}
+.btn-navy:hover{background:var(--cta-hover);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--cta);border:1px solid var(--cta)}
+.btn-ghost:hover{background:var(--cta);color:#fff}
 .btn-lg{padding:16px 30px;font-size:15px}
 .btn .arr{transition:transform .25s}
 .btn:hover .arr{transform:translateX(3px)}
@@ -138,7 +191,7 @@ nav.topbar{
 /* ===== hero ===== */
 .hero{padding:140px 0 0;position:relative;overflow:hidden}
 .hero-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;
+  display:grid;grid-template-columns:1fr 1.35fr;gap:56px;align-items:center;
   padding-bottom:96px;border-bottom:1px solid var(--line);
 }
 .hero-tag{
@@ -149,7 +202,7 @@ nav.topbar{
   margin-bottom:32px;
 }
 .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(31,157,110,.18)}
-.hero h1 span{display:inline;color:var(--accent);font-style:italic;font-weight:500}
+.hero h1 span{display:inline;color:inherit;font-style:normal;font-weight:inherit;letter-spacing:inherit}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
 .hero-meta{
   display:grid;grid-template-columns:repeat(3,auto);gap:36px;margin-top:48px;
@@ -160,8 +213,8 @@ nav.topbar{
 .hero-meta-item .lab{font-size:12px;color:var(--zinc-500);margin-top:8px;letter-spacing:.02em}
 
 .hero-vis{position:relative;align-self:stretch;min-height:560px}
-.hero-photo{position:relative;height:100%;min-height:600px;border-radius:6px;overflow:hidden;background:var(--zinc-100);isolation:isolate}
-.hero-photo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-photo{position:relative;height:100%;min-height:580px;border-radius:12px;overflow:hidden;background:linear-gradient(145deg,#0D3B4F 0%,#1B8CA6 55%,#0a2a3a 100%);isolation:isolate}
+.hero-photo video,.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
 .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
 .hero-tile{
   position:absolute;left:20px;bottom:20px;right:20px;
@@ -178,10 +231,10 @@ nav.topbar{
   width:8px;height:8px;border-radius:50%;background:var(--accent);
   animation:pulse 1.8s infinite;
 }
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,59,59,.55)}70%{box-shadow:0 0 0 12px rgba(255,59,59,0)}100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,166,35,.55)}70%{box-shadow:0 0 0 12px rgba(245,166,35,0)}100%{box-shadow:0 0 0 0 rgba(245,166,35,0)}}
 
 .hero-side{position:absolute;top:20px;left:20px;background:rgba(9,9,11,.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:8px 16px 8px 8px;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:.02em}
-.hero-side .k{font-family:var(--display);font-weight:800;color:var(--accent);font-size:14px;letter-spacing:-.02em;background:rgba(18,157,219,.15);padding:4px 10px;border-radius:999px}
+.hero-side .k{font-family:var(--display);font-weight:800;color:var(--accent);font-size:14px;letter-spacing:-.02em;background:rgba(245,166,35,.15);padding:4px 10px;border-radius:999px}
 
 /* marquee under hero */
 .marquee{background:var(--black);color:#fff;overflow:hidden}
@@ -195,12 +248,7 @@ nav.topbar{
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ===== about ===== */
-.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
-.about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:260px 220px;gap:12px}
-.about-imgs > *{border-radius:6px;overflow:hidden;background:var(--zinc-100)}
-.about-imgs > *:first-child{grid-column:1 / -1}
-.about-imgs img{width:100%;height:100%;object-fit:cover}
-.about-text .lead{margin-bottom:18px}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
 .about-list{list-style:none;margin:30px 0 36px;display:grid;gap:14px}
 .about-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink);font-weight:400}
 .about-list .chk{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
@@ -212,8 +260,8 @@ nav.topbar{
 .leist{position:relative;background:#fff;display:flex;flex-direction:column;min-height:380px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);overflow:hidden;transition:background .35s}
 .leist:hover{background:var(--zinc-50)}
 .leist .ph{height:180px;overflow:hidden;background:var(--zinc-100);position:relative}
-.leist .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--spring);filter:saturate(.9)}
-.leist:hover .ph img{transform:scale(1.04)}
+.leist .ph img,.leist .ph svg{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--spring);filter:saturate(.9)}
+.leist:hover .ph img,.leist:hover .ph svg{transform:scale(1.04)}
 .leist .bd{padding:26px 24px 28px;display:flex;flex-direction:column;gap:8px;flex:1}
 .leist .num{font-family:var(--body);font-weight:500;color:var(--zinc-400);font-size:11px;letter-spacing:.16em;font-variant-numeric:tabular-nums}
 .leist h3{font-size:20px;color:var(--black);font-weight:700;letter-spacing:-0.025em;margin-top:2px}
@@ -225,7 +273,6 @@ nav.topbar{
 /* ===== radar / projekte ===== */
 .projekte{background:#0A0A0A;overflow:hidden;color:#fff}
 .projekte h2,.projekte .eyebrow{color:#fff}
-.projekte .eyebrow::before{background:var(--gold)}
 .projekte .lead{color:rgba(255,255,255,.7)}
 .radar-frame{
   position:relative;width:100%;
@@ -239,52 +286,79 @@ nav.topbar{
 /* grid backdrop */
 .radar-frame::before{content:"";position:absolute;inset:0;background-image:linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
 .radar-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.radar-rings circle{fill:none;stroke:rgba(18,157,219,.22);stroke-width:1}
+.radar-rings circle{fill:none;stroke:rgba(245,166,35,.22);stroke-width:1}
 .radar-cross line{stroke:rgba(255,255,255,.06);stroke-width:1;stroke-dasharray:2 8}
-.radar-line{stroke:rgba(18,157,219,.55);stroke-width:1;fill:none}
+.radar-line{stroke:rgba(245,166,35,.55);stroke-width:1;fill:none}
 .radar-line-dot{fill:var(--accent)}
 .sweep{
-  position:absolute;left:50%;top:50%;width:50%;height:50%;
+  position:absolute;left:50%;top:50%;width:1px;height:1px;
   transform-origin:0 0;
-  background:conic-gradient(from 0deg,rgba(18,157,219,0) 0deg,rgba(18,157,219,.28) 40deg,rgba(18,157,219,0) 70deg);
-  border-radius:0 100% 0 0;
-  animation:sweep 7s linear infinite;
+  background:none;
   pointer-events:none;
-  mix-blend-mode:multiply;
+}
+.sweep::before{
+  content:"";position:absolute;
+  left:0;top:0;
+  width:800px;height:800px;
+  margin-left:-400px;margin-top:-400px;
+  background:conic-gradient(from 0deg,rgba(245,166,35,0) 0deg,rgba(245,166,35,.22) 35deg,rgba(245,166,35,0) 65deg);
+  border-radius:50%;
+  animation:sweep 7s linear infinite, sweepPulse 4s ease-in-out infinite;
+  pointer-events:none;
 }
 @keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes sweepPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
-.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(18,157,219,.4);z-index:5}
+.radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff 36%,rgba(255,255,255,.78) 52%,rgba(255,255,255,.28) 70%,rgba(255,255,255,0) 100%);display:grid;place-items:center;text-align:center;box-shadow:0 0 60px rgba(245,166,35,.55),0 0 120px rgba(245,166,35,.2);z-index:5}
 .radar-center::before, .radar-center::after{
   content:"";position:absolute;border-radius:50%;
-  border:1px solid rgba(18,157,219,.35)}
-.radar-center::before{inset:-14px;animation:ringp 3s ease-out infinite}
-.radar-center::after{inset:-30px;animation:ringp 3s ease-out infinite .8s}
+  border:1px solid rgba(245,166,35,.22)}
+.radar-center::before{inset:-16px;animation:ringp 3s ease-out infinite}
+.radar-center::after{inset:-34px;animation:ringp 3s ease-out infinite .8s}
 @keyframes ringp{0%{opacity:.6;transform:scale(.85)}100%{opacity:0;transform:scale(1.2)}}
 .radar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;line-height:1}
-.radar-logo .glyph{width:60px;height:60px;color:var(--accent);display:grid;place-items:center}
-.radar-logo .glyph img{width:60px;height:60px;object-fit:contain}
-.radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
-.radar-logo .sb{font-size:9px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+.radar-logo .glyph{width:120px;height:auto;display:flex;align-items:center;justify-content:center}
+.radar-logo .glyph img{width:120px;height:auto;max-height:32px;object-fit:contain}
+.radar-logo .nm{font-family:var(--display);font-weight:800;color:var(--black);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+.radar-logo .sb{font-size:8px;color:var(--zinc-500);letter-spacing:.18em;text-transform:uppercase;margin-top:1px}
+.node video{width:100%;height:90px;object-fit:cover;display:block}
 
 /* radar sun rays */
 .sun-rays{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;z-index:3}
-.sun-rays .ray{position:absolute;left:0;top:-1px;height:2px;width:46%;background:linear-gradient(90deg,rgba(250,204,20,.85),rgba(18,157,219,.45) 60%,transparent);transform-origin:0 50%;border-radius:2px;box-shadow:0 0 12px rgba(250,204,20,.5);opacity:0;animation:rayPulse 4s ease-in-out infinite}
-@keyframes rayPulse{0%,100%{opacity:0}45%{opacity:.9}}
-.sun-glow{position:absolute;left:50%;top:50%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(250,204,20,.35),rgba(18,157,219,.18) 40%,transparent 70%);transform:translate(-50%,-50%);animation:sunPulse 4s ease-in-out infinite;pointer-events:none;z-index:2}
+.sun-rays .ray{position:absolute;left:0;top:-.5px;height:1px;width:54%;background:linear-gradient(90deg,rgba(250,204,20,.9) 0%,rgba(250,204,20,.6) 50%,rgba(250,204,20,.1) 85%,transparent);transform-origin:0 50%;border-radius:1px;box-shadow:0 0 6px 1px rgba(250,204,20,.4);opacity:0;animation:rayPulse 4s ease-in-out infinite}
+.sun-rays .ray::after{content:"";position:absolute;right:-2px;top:-2px;width:5px;height:5px;border-radius:50%;background:rgba(250,204,20,.95);box-shadow:0 0 8px 3px rgba(250,204,20,.7),0 0 18px 6px rgba(250,204,20,.3);animation:sparkle 4s ease-in-out infinite}
+@keyframes rayPulse{0%,100%{opacity:0}45%{opacity:1}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1.2)}60%{opacity:.7;transform:scale(.9)}}
+.sun-glow{position:absolute;left:50%;top:50%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(250,204,20,.35),rgba(245,166,35,.18) 40%,transparent 70%);transform:translate(-50%,-50%);animation:sunPulse 4s ease-in-out infinite;pointer-events:none;z-index:2}
 @keyframes sunPulse{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.9)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.1)}}
 .radar-line{animation:linePulse 3.2s ease-in-out infinite}
-@keyframes linePulse{0%,100%{stroke:rgba(18,157,219,.35)}50%{stroke:rgba(250,204,20,.75)}}
+@keyframes linePulse{0%,100%{stroke:rgba(245,166,35,.35)}50%{stroke:rgba(250,204,20,.75)}}
 
 /* project nodes */
 .node{position:absolute;width:172px;background:rgba(24,24,27,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;transform:translate(-50%,-50%);transition:transform .45s var(--spring),border-color .25s;z-index:4}
-.node:hover{transform:translate(-50%,-50%) scale(1.05);border-color:rgba(18,157,219,.5);z-index:6}
+.node:hover{transform:translate(-50%,-50%) scale(1.05);border-color:rgba(245,166,35,.5);z-index:6}
 .node img{width:100%;height:90px;object-fit:cover;display:block}
 .node .meta{padding:10px 12px}
 .node .kwp{font-family:var(--display);font-weight:800;color:#fff;font-size:18px;letter-spacing:-.03em;line-height:1}
 .node .loc{font-size:11px;color:rgba(255,255,255,.6);margin-top:4px;display:flex;align-items:center;gap:6px;letter-spacing:.02em}
 .node .loc::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
-.node .pin{position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(18,157,219,.25),0 0 12px var(--accent)}
+.node .pin{position:absolute;left:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(245,166,35,.25),0 0 12px var(--accent)}
+.node{cursor:pointer}
+
+/* ===== lightbox ===== */
+.lb{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.lb.open{opacity:1;pointer-events:all}
+.lb-bg{position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lb-box{position:relative;z-index:1;max-width:880px;width:calc(100% - 48px);border-radius:18px;overflow:hidden;background:#0f0f0f;box-shadow:0 40px 100px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);transform:scale(.93) translateY(20px);transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s ease}
+.lb.open .lb-box{transform:scale(1) translateY(0)}
+.lb-media{width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;display:block}
+.lb-media img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-media video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.lb-info{padding:18px 24px;background:#0f0f0f;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.08)}
+.lb-title{font-family:var(--display);font-weight:800;color:#fff;font-size:19px;letter-spacing:-.03em;line-height:1}
+.lb-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:5px;letter-spacing:.03em}
+.lb-close{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .2s;line-height:1}
+.lb-close:hover{background:rgba(255,255,255,.18);transform:rotate(90deg)}
 
 .radar-legend{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 16px 8px 8px;font-size:12px;color:rgba(255,255,255,.75)}
 .radar-legend .lg{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;font-family:var(--display)}
@@ -312,7 +386,7 @@ nav.topbar{
 .preis.feat .nm{color:var(--accent)}
 .preis.feat .am{color:#fff}
 .preis.feat .sb{color:var(--zinc-400)}
-.preis.feat .nt{background:rgba(18,157,219,.15);color:var(--accent)}
+.preis.feat .nt{background:rgba(245,166,35,.15);color:var(--accent)}
 .preis.feat .preis-foot{color:var(--zinc-400);border-color:rgba(255,255,255,.1)}
 .preis .tg{position:absolute;top:-1px;left:-1px;background:var(--accent);color:#fff;font-family:var(--body);font-weight:600;font-size:10px;letter-spacing:.14em;padding:6px 12px;text-transform:uppercase}
 .preis .nm{font-family:var(--body);font-weight:500;color:var(--zinc-500);font-size:11px;text-transform:uppercase;letter-spacing:.16em;margin-top:8px}
@@ -346,7 +420,7 @@ nav.topbar{
 .choose .ti{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:-.01em}
 .choose .ds{font-size:13px;font-weight:300;opacity:.85;margin-top:2px}
 .choose-a{background:var(--black);color:#fff}
-.choose-a .ic{background:rgba(18,157,219,.18);color:var(--accent)}
+.choose-a .ic{background:rgba(245,166,35,.18);color:var(--accent)}
 .choose-a:hover{background:var(--zinc-800);transform:translateY(-2px)}
 .choose-b{background:#fff;color:var(--black);border:1px solid var(--line)}
 .choose-b .ic{background:var(--accent-soft);color:var(--accent)}
@@ -359,14 +433,14 @@ nav.topbar{
 .fg{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
 .fg label{font-family:var(--body);font-size:11px;font-weight:500;color:var(--zinc-500);letter-spacing:.16em;text-transform:uppercase}
 .fg input,.fg select,.fg textarea{font-family:inherit;font-size:14px;color:var(--ink);padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:8px;outline:none;transition:border-color .2s,box-shadow .2s}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(18,157,219,.15)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(245,166,35,.15)}
 .fg textarea{min-height:110px;resize:vertical}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .dsr{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:14px 0 18px}
 .dsr input{margin-top:3px;accent-color:var(--accent)}
 .dsr a{color:var(--accent);text-decoration:underline}
-.btn-form{width:100%;background:var(--accent);color:#fff;font-family:var(--body);font-weight:600;font-size:14px;padding:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .25s,transform .35s var(--spring);letter-spacing:.01em}
-.btn-form:hover{background:var(--accent-2)}
+.btn-form{width:100%;background:var(--cta);color:#fff;font-family:var(--body);font-weight:600;font-size:14px;padding:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .25s,transform .35s var(--spring);letter-spacing:.01em}
+.btn-form:hover{background:var(--cta-hover)}
 .btn-form:active{transform:scale(.98)}
 .btn-form-navy{background:var(--black)}
 .btn-form-navy:hover{background:var(--zinc-800)}
@@ -387,7 +461,7 @@ nav.topbar{
 .map-wrap{position:relative;height:420px;overflow:hidden}
 .map-wrap iframe{width:100%;height:100%;border:none;display:block;filter:grayscale(0.2)}
 .map-pin{position:absolute;top:24px;left:50%;transform:translateX(-50%);background:#fff;color:var(--black);padding:10px 18px 10px 14px;border-radius:999px;font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:.04em;display:inline-flex;align-items:center;gap:10px;pointer-events:none;border:1px solid var(--line)}
-.map-pin::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(18,157,219,.18)}
+.map-pin::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(245,166,35,.18)}
 
 /* ===== partner ===== */
 .partner{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -410,15 +484,15 @@ nav.topbar{
 .bewertungen::before{
   content:"";position:absolute;inset:0;
   background:radial-gradient(ellipse at top right, rgba(245,166,35,.1), transparent 50%);
+  pointer-events:none;
 }
 .bewertungen .eyebrow{color:#fff}
-.bewertungen .eyebrow::before{background:var(--gold)}
 .bewertungen h2{color:#fff}
 .bewertungen h2{color:#fff}
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:60px;position:relative}
 .test{background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:30px;display:flex;flex-direction:column;gap:18px;transition:border-color .25s,background .25s}
 .test:hover{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.18)}
-.test .stars{color:var(--gold);font-size:13px;letter-spacing:.2em}
+.test .stars{color:var(--accent);font-size:13px;letter-spacing:.2em}
 .test p{color:rgba(255,255,255,.85);font-size:15px;line-height:1.65;font-weight:400;font-style:normal;letter-spacing:-.01em}
 .test .au{display:flex;align-items:center;gap:12px;margin-top:auto}
 .test .av{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.02em}
@@ -436,12 +510,8 @@ nav.topbar{
 
 /* ===== footer ===== */
 footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
-.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:50px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
-.foot-brand .brand-mark{width:44px;height:44px;color:var(--accent)}
-.foot-brand .brand-mark svg,.foot-brand .brand-mark img{width:44px;height:44px;object-fit:contain}
-.foot-brand .bn{font-family:var(--display);font-weight:800;color:#fff;font-size:17px;margin-top:14px;letter-spacing:.08em;text-transform:uppercase}
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
 .foot-brand p{margin-top:14px;font-size:14px;line-height:1.7;max-width:36ch}
-.foot-brand .ust{margin-top:18px;color:var(--accent);font-size:12px;font-family:var(--body);font-weight:500;letter-spacing:.04em}
 .foot-col h4{color:#fff;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px;color:var(--zinc-400)}
 .foot-col ul{list-style:none;display:grid;gap:10px}
 .foot-col a{font-size:14px;color:rgba(255,255,255,.6)}
@@ -479,17 +549,15 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .wrap{padding:0 24px}
   nav.topbar{padding:14px 20px}
   .nav-links{display:none}
+  .nav-cta{font-size:12px;padding:8px 16px}
   .hero-grid,.about-grid,.kontakt-grid{grid-template-columns:1fr;gap:50px}
   .hero{padding-top:110px}
   .hero-vis{min-height:380px}
   .hero-photo{min-height:380px}
-  .hero-meta{grid-template-columns:repeat(3,1fr);gap:20px}
-  .leist-grid{grid-template-columns:repeat(6,1fr)}
-  .leist:nth-child(n){grid-column:span 6}
-  @media (min-width:640px){.leist:nth-child(n){grid-column:span 3}}
+  .leist-grid{grid-template-columns:repeat(2,1fr)}
   .preis-grid{grid-template-columns:1fr 1fr}
   .test-grid,.social-grid{grid-template-columns:1fr}
-  .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px;padding-bottom:30px}
   .partner-grid{grid-template-columns:1fr 1fr}
   .radar-frame{aspect-ratio:1/1.2}
   .node{width:130px}
@@ -497,17 +565,97 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   .node .kwp{font-size:15px}
   .frow{grid-template-columns:1fr}
   .cookie{left:16px;right:16px;max-width:none;flex-direction:column;align-items:stretch;text-align:center}
-  .map-pin{font-size:11px;padding:10px 16px}
 }
+@media (max-width:640px){
+  .leist-grid{grid-template-columns:1fr}
+  .preis-grid{grid-template-columns:1fr}
+  .brand-mark{height:38px;width:auto}
+  .brand-mark img,.brand-mark svg{height:38px;width:auto}
+  .review-grid{grid-template-columns:1fr}
+}
+
+/* ===== Review buttons (Fase 10) ===== */
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto}
+.review-btn{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px 24px;text-decoration:none;color:#fff;transition:background .25s,border-color .25s,transform .35s var(--spring)}
+.review-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);transform:translateY(-3px)}
+.review-icon{width:52px;height:52px;flex-shrink:0;border-radius:12px;background:#fff;display:grid;place-items:center}
+.review-icon svg{display:block}
+.review-info{display:flex;flex-direction:column;gap:4px;flex:1}
+.review-title{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:-0.01em}
+.review-desc{font-size:13px;color:rgba(255,255,255,.6)}
+.review-arr{font-size:18px;color:rgba(255,255,255,.4);transition:transform .2s,color .2s}
+.review-btn:hover .review-arr{transform:translateX(4px);color:var(--accent)}
+
+/* ===== Partner (statische Cards mit Kategorien) ===== */
+.partner-cat-label{font-family:var(--display);font-size:13px;font-weight:600;color:var(--accent-blue);letter-spacing:.18em;text-transform:uppercase;text-align:center;margin-bottom:20px}
+.partner-card-grid{display:grid;gap:18px;max-width:1100px;margin:0 auto}
+.partner-card-grid-4{grid-template-columns:repeat(4,1fr);max-width:720px}
+.partner-card-grid-6{grid-template-columns:repeat(6,1fr)}
+.partner-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;text-align:center;transition:border-color .25s,transform .35s var(--spring),box-shadow .25s}
+.partner-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px -16px rgba(0,0,0,.14)}
+.pc-bar{height:5px;width:100%;flex-shrink:0}
+.pc-body{padding:22px 16px 18px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.pc-init{font-family:var(--display);font-weight:900;font-size:30px;line-height:1;letter-spacing:-.04em}
+.partner-name{font-family:var(--display);font-weight:700;color:var(--black);font-size:14px;letter-spacing:-.02em;margin-top:2px}
+.partner-cat-tag{font-size:10px;color:var(--zinc-500);letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.partner-name{font-family:var(--display);font-weight:700;font-size:16px;color:var(--black);letter-spacing:-.01em}
+.partner-cat-tag{font-family:var(--body);font-size:11px;font-weight:500;color:var(--accent-blue);letter-spacing:.14em;text-transform:uppercase}
+@media (max-width:1000px){
+  .partner-card-grid-4{grid-template-columns:repeat(2,1fr);max-width:480px}
+  .partner-card-grid-6{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+  .partner-card-grid-4,.partner-card-grid-6{grid-template-columns:repeat(2,1fr)}
+  .partner-card{padding:18px 12px}
+}
+
+
+/* ===== Kontakt CTA und About ===== */
+.about-text .btn-navy{display:inline-flex}
 </style>
 </head>
 <body>
 
 <!-- ===== NAV ===== -->
 <nav class="topbar">
-  <a href="#" class="brand">
-    <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
-    <div class="brand-name">AMBIENTE SOLAR</div>
+  <a href="#" class="brand" aria-label="Ambiente Solar - zurück nach oben">
+    <div class="brand-mark">
+      <svg height="52" width="auto" viewBox="0 0 420 84" xmlns="http://www.w3.org/2000/svg" aria-label="Ambiente Solar — Photovoltaik deutschlandweit" role="img">
+        <defs>
+          <linearGradient id="pg" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0" stop-color="#2685D4"/>
+            <stop offset="1" stop-color="#0A3D8F"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#F5A623" stroke-width="2.4" stroke-linecap="round">
+          <line x1="60" y1="3"  x2="60" y2="9"/>
+          <line x1="74" y1="7"  x2="71" y2="12"/>
+          <line x1="81" y1="19" x2="75" y2="21"/>
+          <line x1="45" y1="3"  x2="48" y2="8"/>
+          <line x1="35" y1="9"  x2="39" y2="14"/>
+          <line x1="29" y1="20" x2="35" y2="22"/>
+        </g>
+        <circle cx="60" cy="24" r="17" fill="#FFA800"/>
+        <circle cx="60" cy="24" r="12" fill="#FFCC00"/>
+        <g transform="translate(2,34) matrix(1,0,-0.1,1,0,0)">
+          <rect x="0"  y="0"  width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="0"  width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="0"  width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="14" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="14" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="14" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="28" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="28" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="28" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="0"  y="42" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="21" y="42" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+          <rect x="42" y="42" width="19" height="12" rx="2" fill="url(#pg)" stroke="#5BA0D8" stroke-width="0.7"/>
+        </g>
+        <line x1="88" y1="10" x2="88" y2="74" stroke="#C8C8C8" stroke-width="1.5"/>
+        <text x="100" y="49" font-family="'Arial Black','Arial Bold',Arial,Helvetica,sans-serif" font-weight="900" font-size="30" fill="#111111" letter-spacing="-0.4">AMBIENTE SOLAR</text>
+        <text x="101" y="66" font-family="Arial,Helvetica,sans-serif" font-weight="400" font-size="9.8" fill="#9A7820" letter-spacing="2.6">PHOTOVOLTAIK DEUTSCHLANDWEIT</text>
+      </svg>
+    </div>
   </a>
   <ul class="nav-links">
     <li><a href="#about">Über uns</a></li>
@@ -517,6 +665,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     <li><a href="#partner">Partner</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
+  <a href="#kontakt" class="nav-cta">Angebot anfragen <span>→</span></a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -524,33 +673,29 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1>Solarenergie für<br><strong><span>Ihre Zukunft.</span></strong></h1>
-        <p class="lead" style="margin-top:24px">Professionelle Photovoltaik-Installation für Privat- und Gewerbekunden. Sparen Sie Energiekosten und werden Sie unabhängig vom Stromnetz.</p>
+        <h1><span style="font-size:.68em;letter-spacing:-.04em;font-weight:700">Ihr Spezialist für</span><br><strong><span style="color:var(--accent)">Photovoltaik</span></strong><br><span style="font-size:.68em;letter-spacing:-.04em;font-weight:700">deutschlandweit.</span></h1>
+        <p class="lead" style="margin-top:24px">Professionelle PV-Anlagen für Privat- und Gewerbekunden. Sparen Sie bis zu <strong>80 % Ihrer Stromkosten</strong> und werden Sie unabhängig vom Netz.</p>
         <div class="hero-actions">
           <a href="#kontakt" class="btn btn-navy btn-lg">Kostenloses Angebot <span class="arr">→</span></a>
+          <a href="#projekte" class="btn btn-ghost btn-lg">Projekte ansehen <span class="arr">→</span></a>
         </div>
         <div class="hero-meta">
-          <div class="hero-meta-item"><div class="num">200+</div><div class="lab">Installierte Anlagen</div></div>
-          <div class="hero-meta-item"><div class="num">25 J.</div><div class="lab">Modulgarantie</div></div>
-          <div class="hero-meta-item"><div class="num">0 %</div><div class="lab">MwSt. Wohngebäude</div></div>
+          <div class="hero-meta-item">
+            <div class="num">100<em>+</em></div>
+            <div class="lab">Installierte Anlagen</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="num">25<em>J.</em></div>
+            <div class="lab">Modulgarantie</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="num">0<em>%</em></div>
+            <div class="lab">MwSt. Wohngebäude</div>
+          </div>
         </div>
       </div>
       <div class="hero-vis">
-        <div class="hero-photo"><video autoplay="" muted="" loop="" playsinline="" poster="695c7a07-969f-4d53-9d8c-c306e95c6ebe"><source src="3332ba9b-e502-4af1-8b35-ffee365dd8f1" type="video/mp4"></video></div>
-        <div class="hero-side">
-          <span class="k">100 kWp</span>
-          <span>Deutschlandweit&nbsp;·&nbsp;Live-Anlage</span>
-        </div>
-        <div class="hero-tile">
-          <div class="icn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
-          </div>
-          <div>
-            <div class="ti">Drohnenaufnahme</div>
-            <div class="sb">Ambiente Solar · live</div>
-          </div>
-          <div class="pulse"></div>
-        </div>
+        <div class="hero-photo"><img src="fotos/hero-ki.jpg" alt="Modernes Einfamilienhaus mit Photovoltaikanlage, Batteriespeicher und E-Auto-Ladepunkt" fetchpriority="high" data-no-fallback></div>
       </div>
     </div>
   </div>
@@ -566,16 +711,14 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <section id="about">
   <div class="wrap">
     <div class="about-grid">
-      <div class="about-imgs">
-        <div><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt="Solaranlage 100 kWp"></div>
-        <div><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/34KWP.jpg" alt="Solaranlage 34 kWp"></div>
-        <div><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt="Solaranlage 7 kWp"></div>
-      </div>
-      <div class="about-text">
+      <div>
         <span class="eyebrow">Über uns</span>
-        <h2>Ihr Spezialist für<br><strong><span style="color:var(--navy)">Photovoltaik</span></strong><br>deutschlandweit.</h2>
-        <p class="lead" style="margin-top:24px">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für die Installation von Photovoltaikanlagen — für Privat- und Gewerbekunden deutschlandweit.</p>
-        <p class="lead">Wir begleiten Sie von der ersten Beratung über die Planung bis zur schlüsselfertigen Installation — kompetent, transparent und termingerecht.</p>
+        <h2>Von der Beratung bis zur<br><strong><span style="color:var(--accent)">fertigen Anlage.</span></strong><br>Alles aus einer Hand.</h2>
+        <a href="#kontakt" class="btn btn-navy btn-lg" style="margin-top:40px">Jetzt Beratung anfragen <span class="arr">→</span></a>
+      </div>
+      <div>
+        <p class="lead" style="margin-top:8px">Jhonatan Jaramillo A. und sein Team sind Ihr zuverlässiger Partner für deutschlandweite Photovoltaik-Installationen, sowohl für Privat- als auch für Gewerbekunden.</p>
+        <p class="lead" style="margin-top:18px">Wir begleiten Sie von der ersten Beratung über die Planung bis zur schlüsselfertigen Installation: kompetent, transparent und termingerecht.</p>
         <ul class="about-list">
           <li><span class="chk">✓</span>Individuelle Beratung und Planung</li>
           <li><span class="chk">✓</span>Installation für Privat- und Gewerbekunden</li>
@@ -583,7 +726,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <li><span class="chk">✓</span>Komplette Anmeldung beim Netzbetreiber &amp; MaStR</li>
           <li><span class="chk">✓</span>0% MwSt. auf Wohngebäude (seit 2023)</li>
         </ul>
-        <a href="#kontakt" class="btn btn-navy btn-lg">Jetzt Beratung anfragen <span class="arr">→</span></a>
       </div>
     </div>
   </div>
@@ -595,13 +737,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     <div class="section-head">
       <div>
         <span class="eyebrow">Was wir anbieten</span>
-        <h2>Unsere <span style="color:var(--navy)">Leistungen.</span></h2>
+        <h2>Unsere <span style="color:var(--accent)">Leistungen.</span></h2>
       </div>
-      <p class="lead">Von der Beratung bis zur fertigen Anlage — alles aus einer Hand.</p>
+      <p class="lead">Solarenergie für jedes Gebäude und jeden Bedarf.</p>
     </div>
     <div class="leist-grid">
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2023/12/energy-efficiency-house.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/beratung-ki.jpg" alt="Beratung &amp; Planung" loading="lazy"></div>
         <div class="bd">
           <span class="num">01 / Beratung</span>
           <h3>Beratung &amp; Planung</h3>
@@ -609,15 +751,15 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2023/12/man-worker-firld-by-solar-panels.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/installation-ki.jpg" alt="Installation PV-Anlage" loading="lazy"></div>
         <div class="bd">
           <span class="num">02 / Installation</span>
-          <h3>Installation PV-Anlagen</h3>
+          <h3>Installation PV-Anlage</h3>
           <p>Professionelle Montage von Photovoltaikanlagen auf Schrägdach, Flachdach und Fassade für Privat- und Gewerbekunden.</p>
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/FlachDach-146-KWP.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/batteriespeicher-ki.jpg" alt="Batteriespeicher PV-Anlage" loading="lazy"></div>
         <div class="bd">
           <span class="num">03 / Speicher</span>
           <h3>Batteriespeicher</h3>
@@ -625,39 +767,39 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/erweiterung-ki.jpg" alt="Anlagenerweiterung" loading="lazy"></div>
         <div class="bd">
           <span class="num">04 / Erweiterung</span>
           <h3>Anlagenerweiterung</h3>
-          <p>Bestehende PV-Anlage vergrößern? Wir erweitern Ihr System mit zusätzlichen Modulen und Speichern — effizient und herstellerkompatibel.</p>
+          <p>Bestehende PV-Anlage vergrößern? Wir erweitern Ihr System mit zusätzlichen Modulen und Speichern, effizient und herstellerkompatibel.</p>
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="695c7a07-969f-4d53-9d8c-c306e95c6ebe" alt="" onerror="this.parentElement.innerHTML='&lt;div style=&quot;width:100%;height:100%;background:linear-gradient(135deg,#18181b,#27272a);display:grid;place-items:center;color:#129ddb;font-family:Geist,sans-serif;font-weight:700;font-size:14px;letter-spacing:.18em&quot;&gt;FASSADE&lt;/div&gt;'"></div>
+        <div class="ph"><img src="fotos/fassade-ki.jpg" alt="Fassadenmontage Solaranlage" loading="lazy"></div>
         <div class="bd">
           <span class="num">05 / Fassade</span>
           <h3>Fassadenmontage</h3>
-          <p>Solarmodule direkt an der Gebäudefassade — ideal für Gebäude ohne geeignete Dachfläche oder zur Maximierung der Solarproduktion.</p>
+          <p>Solarmodule direkt an der Gebäudefassade, ideal für Gebäude ohne geeignete Dachfläche oder zur Maximierung der Solarproduktion.</p>
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/balkon-ki.jpg" alt="Balkonkraftwerk" loading="lazy"></div>
         <div class="bd">
           <span class="num">06 / Balkon</span>
           <h3>Balkonkraftwerk</h3>
-          <p>Plug-and-play Solaranlagen für Mieter und Eigentümer — schnell montiert, sofort produktiv und ohne Genehmigung nutzbar.</p>
+          <p>Plug-and-play Solaranlagen für Mieter und Eigentümer: schnell montiert, sofort produktiv und ohne Genehmigung nutzbar.</p>
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/vogelschutz-ki.jpg" alt="Vogelschutz PV-Anlage" loading="lazy"></div>
         <div class="bd">
           <span class="num">07 / Schutz</span>
           <h3>Vogelschutz</h3>
-          <p>Schutzgitter und -systeme verhindern, dass Vögel unter Ihre Module gelangen — schützt die Anlage und die Tiere gleichermaßen.</p>
+          <p>Schutzgitter und -systeme verhindern, dass Vögel unter Ihre Module gelangen. Schützt Anlage und Tiere gleichermaßen.</p>
         </div>
       </article>
       <article class="leist">
-        <div class="ph"><img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/112-kWP-Bild-1.jpg" alt=""></div>
+        <div class="ph"><img src="fotos/wartung-ki.jpg" alt="Wartung &amp; Reparatur PV-Anlage" loading="lazy"></div>
         <div class="bd">
           <span class="num">08 / Service</span>
           <h3>Wartung &amp; Reparatur</h3>
@@ -674,28 +816,24 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     <div class="section-head" style="margin-bottom:42px">
       <div>
         <span class="eyebrow">Referenzen · Projekt-Radar</span>
-        <h2>Unsere Projekte<br><span style="color:var(--navy)">quer durch Deutschland.</span></h2>
+        <h2>Unsere Projekte<br><span style="color:var(--accent)">quer durch Deutschland.</span></h2>
       </div>
-      <p class="lead">Reale Installationen von Ambiente Solar — wir reisen für Großprojekte deutschlandweit. Jeder Punkt auf dem Radar steht für eine schlüsselfertige Anlage.</p>
+      <p class="lead" style="font-size:22px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:-.02em;max-width:44ch">Reale Installationen von Ambiente Solar. Wir reisen für Großprojekte deutschlandweit. Jeder Punkt auf dem Radar steht für eine schlüsselfertige Anlage.</p>
     </div>
 
     <div class="radar-frame" id="radar">
-      <!-- coords / labels -->
-      <div class="radar-coords">N 50°06′ &nbsp;·&nbsp; E 008°44′ &nbsp;·&nbsp; FRA-HQ</div>
-      <div class="radar-corners">
-        <span>Live</span>
-        <span class="dt">6 aktive Standorte</span>
-      </div>
-
-      <!-- city ghost labels -->
+      <div class="radar-coords">N 50°06′ &nbsp;·&nbsp; E 008°44′ &nbsp;·&nbsp; Sitz: Frankfurt</div>
       <div class="radar-cities">
-        <span class="city-tag" style="left:12%;top:18%">Köln</span>
-        <span class="city-tag" style="left:78%;top:14%">Berlin</span>
-        <span class="city-tag" style="left:14%;top:78%">Stuttgart</span>
-        <span class="city-tag" style="left:80%;top:80%">München</span>
+        <span class="city-tag" style="left:10%;top:12%">Köln</span>
+        <span class="city-tag" style="left:72%;top:8%">Berlin</span>
+        <span class="city-tag" style="left:20%;top:82%">Stuttgart</span>
+        <span class="city-tag" style="left:78%;top:82%">München</span>
+        <span class="city-tag" style="left:48%;top:55%">Frankfurt</span>
+        <span class="city-tag" style="left:38%;top:6%">Hamburg</span>
+        <span class="city-tag" style="left:18%;top:46%">Düsseldorf</span>
+        <span class="city-tag" style="left:60%;top:70%">Leipzig</span>
       </div>
 
-      <!-- SVG: rings + crosshair + connection lines -->
       <svg class="radar-svg" viewBox="0 0 1180 920" preserveAspectRatio="none">
         <g class="radar-rings">
           <circle cx="590" cy="460" r="120"></circle>
@@ -709,63 +847,98 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
           <line x1="120" y1="0" x2="1060" y2="920"></line>
           <line x1="1060" y1="0" x2="120" y2="920"></line>
         </g>
-        <!-- lines from center to nodes (calculated from same %s as nodes) -->
         <g id="radar-lines"></g>
       </svg>
 
-      <!-- sweep -->
       <div class="sweep"></div>
 
-      <!-- center logo -->
       <div class="radar-center">
         <div class="radar-logo">
-          <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg></div>
-          <div class="nm">Ambiente Solar</div>
-          <div class="sb">Frankfurt</div>
+          <div class="glyph">
+            <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" aria-label="Ambiente Solar">
+              <defs>
+                <linearGradient id="rpg" x1="0" y1="0" x2="0.4" y2="1">
+                  <stop offset="0" stop-color="#2685D4"/>
+                  <stop offset="1" stop-color="#0A3D8F"/>
+                </linearGradient>
+              </defs>
+              <!-- Sonnenstrahlen -->
+              <g stroke="#F5A623" stroke-width="2" stroke-linecap="round">
+                <line x1="45" y1="4"  x2="45" y2="10"/>
+                <line x1="63" y1="9"  x2="60" y2="14"/>
+                <line x1="74" y1="23" x2="68" y2="25"/>
+                <line x1="27" y1="4"  x2="30" y2="9"/>
+                <line x1="16" y1="10" x2="20" y2="15"/>
+                <line x1="76" y1="38" x2="70" y2="38"/>
+              </g>
+              <!-- Sonne -->
+              <circle cx="45" cy="28" r="14" fill="#FFA800"/>
+              <circle cx="45" cy="28" r="10" fill="#FFCC00"/>
+              <!-- Solarpanels 3×3 leicht geneigt -->
+              <g transform="translate(8,48) matrix(1,0,-0.08,1,0,0)">
+                <rect x="0"  y="0"  width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="22" y="0"  width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="44" y="0"  width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="0"  y="15" width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="22" y="15" width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="44" y="15" width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="0"  y="30" width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="22" y="30" width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+                <rect x="44" y="30" width="20" height="13" rx="2" fill="url(#rpg)" stroke="#5BA0D8" stroke-width="0.8"/>
+              </g>
+            </svg>
+          </div>
+          <div class="nm">AMBIENTE SOLAR</div>
+          <div class="sb">Photovoltaik</div>
         </div>
       </div>
 
-      <!-- sun rays radiating from center -->
       <div class="sun-glow"></div>
       <div class="sun-rays" id="sun-rays"></div>
 
-      <!-- project nodes -->
-      <a class="node" data-x="22" data-y="32" href="#" onclick="return false">
+      <a class="node" data-x="22" data-y="32" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
-        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/FlachDach-146-KWP.jpg" alt="">
-        <div class="meta"><div class="kwp">146 kWp</div><div class="loc">Rhein-Main · Flachdach</div></div>
+        <video autoplay muted loop playsinline poster="fotos/200kwp-lauterbach.jpg"><source src="fotos/radar-lauterbach.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">200 kWp</div><div class="loc">Lauterbach · Gewerbe</div></div>
       </a>
-      <a class="node" data-x="50" data-y="14" href="#" onclick="return false">
+      <a class="node" data-x="50" data-y="14" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
-        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/100-KWP.jpg" alt="">
-        <div class="meta"><div class="kwp">100 kWp</div><div class="loc">Frankfurt · Gewerbe</div></div>
+        <video autoplay muted loop playsinline poster="fotos/10kwp-biblis.jpg"><source src="fotos/radar-biblis.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">10 kWp</div><div class="loc">Biblis · Einfamilienhaus</div></div>
       </a>
-      <a class="node" data-x="80" data-y="32" href="#" onclick="return false">
+      <a class="node" data-x="80" data-y="32" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
-        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/112-kWP-Bild-1.jpg" alt="">
-        <div class="meta"><div class="kwp">112 kWp</div><div class="loc">Frankfurt · Einfamilienhaus</div></div>
+        <video autoplay muted loop playsinline poster="fotos/15kwp-babenhausen.jpg"><source src="fotos/radar-babenhausen.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">15 kWp</div><div class="loc">Babenhausen · Einfamilienhaus</div></div>
       </a>
-      <a class="node" data-x="84" data-y="68" href="#" onclick="return false">
+      <a class="node" data-x="84" data-y="68" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
-        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/34KWP.jpg" alt="">
-        <div class="meta"><div class="kwp">34 kWp</div><div class="loc">Rhein-Main · Gewerbedach</div></div>
+        <video autoplay muted loop playsinline poster="fotos/erweiterung-kahl.jpg"><source src="fotos/radar-kahl.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Kahl am Main · Gewerbedach</div></div>
       </a>
-      <a class="node" data-x="50" data-y="88" href="#" onclick="return false">
+      <a class="node" data-x="50" data-y="88" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
-        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/56-KWP.jpg" alt="">
-        <div class="meta"><div class="kwp">56 kWp</div><div class="loc">Darmstadt · Einfamilienhaus</div></div>
+        <video autoplay muted loop playsinline poster="fotos/balkonkraftwerk-rodenbach.jpg"><source src="fotos/radar-rodenbach.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">Balkon</div><div class="loc">Rodenbach · Balkonkraftwerk</div></div>
       </a>
-      <a class="node" data-x="18" data-y="68" href="#" onclick="return false">
+      <a class="node" data-x="18" data-y="68" href="#" onclick="openLb(this);return false">
         <span class="pin"></span>
-        <img src="https://www.ambiente-solar.de/wp-content/uploads/2024/01/7KWP.jpg" alt="">
-        <div class="meta"><div class="kwp">7 kWp</div><div class="loc">Frankfurt · Einfamilienhaus</div></div>
+        <video autoplay muted loop playsinline poster="fotos/balkon-limburgerhof.jpg"><source src="fotos/radar-limburgerh.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">Erweiterung</div><div class="loc">Limburgerh. · Balkon</div></div>
+      </a>
+      <a class="node" data-x="66" data-y="52" href="#" onclick="openLb(this);return false">
+        <span class="pin"></span>
+        <video autoplay muted loop playsinline poster="fotos/fassade.jpg"><source src="fotos/radar-fassade.mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">Fassade</div><div class="loc">Südhessen · Fassadenmontage</div></div>
+      </a>
+      <a class="node" data-x="34" data-y="52" href="#" onclick="openLb(this);return false">
+        <span class="pin"></span>
+        <video autoplay muted loop playsinline poster="fotos/15kwp-babenhausen.jpg">
+          <source src="fotos/showreel.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><div class="kwp">Showreel</div><div class="loc">Ambiente Solar · Video</div></div>
       </a>
 
-      <!-- legend -->
-      <div class="radar-legend">
-        <div class="lg">A</div>
-        <span><strong style="color:#fff;font-weight:600">Ambiente Solar HQ</strong> · Mittelseestraße 32, Frankfurt</span>
-      </div>
     </div>
   </div>
 </section>
@@ -776,9 +949,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     <div class="section-head">
       <div>
         <span class="eyebrow">Transparenz</span>
-        <h2>Orientierungspreise<br><span style="color:var(--navy)">ohne Überraschungen.</span></h2>
+        <h2>Orientierungspreise<br><span style="color:var(--accent)">ohne Überraschungen.</span></h2>
       </div>
-      <p class="lead">Alle Preise inklusive 0% MwSt. für Wohngebäude (seit Januar 2023). Gewerbe 19% MwSt.</p>
+      <div>
+        <p class="lead">Alle Preise inklusive 0% MwSt. für Wohngebäude (seit Januar 2023). Gewerbe 19% MwSt.</p>
+        <p style="margin-top:16px;font-size:15px;color:var(--zinc-500);max-width:50ch">Jedes Projekt ist individuell. Die angegebenen Preise sind Richtwerte. Fordern Sie Ihr persönliches Angebot an.</p>
+        <a href="#kontakt" class="btn btn-navy" style="margin-top:20px">Angebot anfragen <span class="arr">→</span></a>
+      </div>
     </div>
     <div class="preis-grid">
       <div class="preis">
@@ -814,13 +991,116 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   </div>
 </section>
 
+<!-- ===== PARTNER ===== -->
+<section class="partner" id="partner">
+  <div class="wrap">
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:48px">
+      <span class="eyebrow">Unsere Partner</span>
+      <h2 style="text-align:center">Geschäftspartner &amp; <span style="color:var(--accent)">Marken.</span></h2>
+      <p class="lead" style="text-align:center;margin:12px auto 0">Wir arbeiten mit führenden Herstellern der Solarbranche zusammen.</p>
+    </div>
+
+    <div class="partner-cat">
+      <div class="partner-cat-label">PV-Module</div>
+      <div class="partner-card-grid partner-card-grid-4">
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#FF6200"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#FF6200">A</div>
+            <div class="partner-name">Aiko Solar</div>
+            <div class="partner-cat-tag">PV-Module</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#003E7E"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#003E7E">T</div>
+            <div class="partner-name">Trina Solar</div>
+            <div class="partner-cat-tag">PV-Module</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#CC1B2A"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#CC1B2A">L</div>
+            <div class="partner-name">LONGi</div>
+            <div class="partner-cat-tag">PV-Module</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#003D6B"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#003D6B">JA</div>
+            <div class="partner-name">JA Solar</div>
+            <div class="partner-cat-tag">PV-Module</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-cat" style="margin-top:48px">
+      <div class="partner-cat-label">Wechselrichter &amp; Speicher</div>
+      <div class="partner-card-grid partner-card-grid-6">
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#F37021"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#F37021">S</div>
+            <div class="partner-name">Sungrow</div>
+            <div class="partner-cat-tag">Wechselrichter</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#CF0A2C"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#CF0A2C">H</div>
+            <div class="partner-name">Huawei</div>
+            <div class="partner-cat-tag">Wechselrichter</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#007A3D"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#007A3D">S</div>
+            <div class="partner-name">SMA</div>
+            <div class="partner-cat-tag">Wechselrichter</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#F7941D"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#F7941D">G</div>
+            <div class="partner-name">GoodWe</div>
+            <div class="partner-cat-tag">Wechselrichter</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#1677C8"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#1677C8">B</div>
+            <div class="partner-name">BYD</div>
+            <div class="partner-cat-tag">Batteriespeicher</div>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="pc-bar" style="background:#000000"></div>
+          <div class="pc-body">
+            <div class="pc-init" style="color:#000000">A</div>
+            <div class="partner-name">Anker</div>
+            <div class="partner-cat-tag">Batteriespeicher</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== KONTAKT ===== -->
 <section class="kontakt" id="kontakt">
   <div class="wrap">
     <div class="kontakt-grid">
       <div class="kontakt-info">
         <span class="eyebrow">Kontakt</span>
-        <h2>Kostenloses<br><span style="color:var(--navy)">Angebot anfragen.</span></h2>
+        <h2>Kostenloses<br><span style="color:var(--accent)">Angebot anfragen.</span></h2>
         <p class="lead" style="margin-top:24px">Kontaktieren Sie uns für eine unverbindliche Beratung. Wir melden uns innerhalb von 1–2 Werktagen bei Ihnen.</p>
         <div class="kontakt-list">
           <div class="kontakt-row">
@@ -845,11 +1125,13 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       <div class="kontakt-card">
         <!-- choose -->
         <div id="kontakt-auswahl">
-          <h3 style="font-size:24px;margin-bottom:6px">Was möchten Sie?</h3>
-          <p style="font-size:14px;color:var(--muted)">Wählen Sie aus, wie wir Ihnen am besten helfen können.</p>
+          <h3 style="margin-bottom:8px">Was möchten Sie?</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Wählen Sie aus, wie wir Ihnen am besten helfen können.</p>
           <div class="choose-grid">
             <button class="choose choose-a" onclick="zeigeFormular('angebot')">
-              <span class="ic">📋</span>
+              <span class="ic" style="background:rgba(245,166,35,.15);color:var(--accent)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </span>
               <span>
                 <span class="ti" style="display:block">Individuelles Angebot anfordern</span>
                 <span class="ds">Ich beantworte Ihre Anfrage innerhalb von 1–2 Werktagen persönlich.</span>
@@ -857,10 +1139,12 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
               <span class="arr">→</span>
             </button>
             <button class="choose choose-b" onclick="zeigeFormular('konzept')">
-              <span class="ic">☀️</span>
+              <span class="ic" style="background:var(--accent-soft);color:var(--accent)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+              </span>
               <span>
                 <span class="ti" style="display:block">Solar-Konzept erstellen lassen</span>
-                <span class="ds">Beantworten Sie einige Fragen — ich erstelle Ihr persönliches Konzept.</span>
+                <span class="ds">Beantworten Sie einige Fragen, ich erstelle Ihr persönliches Konzept.</span>
               </span>
               <span class="arr">→</span>
             </button>
@@ -870,17 +1154,17 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         <!-- angebot -->
         <div id="formular-angebot" class="kform" style="display:none;">
           <button class="back" onclick="voltar()">← Zurück</button>
-          <h3>Individuelles Angebot anfordern</h3>
+          <h3 style="font-size:20px;font-weight:700;margin-bottom:4px">Individuelles Angebot anfordern</h3>
           <div class="sub">Ich melde mich innerhalb von 1–2 Werktagen.</div>
           <div class="frow">
-            <div class="fg"><label>Vorname *</label><input type="text" placeholder="Max"></div>
-            <div class="fg"><label>Nachname *</label><input type="text" placeholder="Mustermann"></div>
+            <div class="fg"><label>Vorname *</label><input type="text" id="ang-vorname" placeholder="Max" autocomplete="given-name"></div>
+            <div class="fg"><label>Nachname *</label><input type="text" id="ang-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label>E-Mail *</label><input type="email" placeholder="max@beispiel.de"></div>
-          <div class="fg"><label>Telefon</label><input type="tel" placeholder="+49 ..."></div>
+          <div class="fg"><label>E-Mail *</label><input type="email" id="ang-email" placeholder="max@beispiel.de" autocomplete="email"></div>
+          <div class="fg"><label>Telefon</label><input type="tel" id="ang-tel" placeholder="+49 ..." autocomplete="tel"></div>
           <div class="fg">
             <label>Anlagentyp</label>
-            <select>
+            <select id="ang-typ">
               <option>Einfamilienhaus</option>
               <option>Mehrfamilienhaus</option>
               <option>Gewerbe</option>
@@ -890,144 +1174,105 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
               <option>Vogelschutz</option>
             </select>
           </div>
-          <div class="fg"><label>Ihre Nachricht</label><textarea placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
+          <div class="fg"><label>Ihre Nachricht</label><textarea id="ang-msg" placeholder="Beschreiben Sie kurz Ihr Projekt..."></textarea></div>
           <div class="dsr">
             <input type="checkbox" id="ds1">
             <label for="ds1">Ich habe die <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
           </div>
-          <button class="btn-form btn-form-navy">Angebot anfordern →</button>
+          <div id="ang-status"></div>
+          <button class="btn-form btn-form-navy" id="ang-submit" onclick="sendeAngebot()">Angebot anfordern →</button>
         </div>
 
         <!-- konzept -->
         <div id="formular-konzept" class="kform" style="display:none;">
           <button class="back" onclick="voltar()">← Zurück</button>
-          <h3>☀️ Solar-Konzept erstellen</h3>
-          <div class="sub">Beantworten Sie kurz diese Fragen — ich erstelle Ihr individuelles Konzept.</div>
+          <h3 style="font-size:20px;font-weight:700;margin-bottom:4px">Solar-Konzept erstellen</h3>
+          <div class="sub">Beantworten Sie kurz diese Fragen, ich erstelle Ihr individuelles Konzept.</div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">1</span> Gebäudetyp</div>
             <div class="opts">
-              <button class="opt" onclick="select(this)">🏠 Einfamilienhaus</button>
-              <button class="opt" onclick="select(this)">🏘️ Doppelhaus</button>
-              <button class="opt" onclick="select(this)">🏚️ Reihenhaus</button>
-              <button class="opt" onclick="select(this)">🏭 Gewerbeobjekt</button>
-              <button class="opt" onclick="select(this)">➕ Anlagenerweiterung</button>
-              <button class="opt" onclick="select(this)">🏢 Fassadenmontage</button>
-              <button class="opt" onclick="select(this)">🐦 Vogelschutz</button>
+              <button class="opt" onclick="selectOpt(this)">🏠 Einfamilienhaus</button>
+              <button class="opt" onclick="selectOpt(this)">🏘️ Doppelhaus</button>
+              <button class="opt" onclick="selectOpt(this)">🏚️ Reihenhaus</button>
+              <button class="opt" onclick="selectOpt(this)">🏭 Gewerbeobjekt</button>
+              <button class="opt" onclick="selectOpt(this)">➕ Anlagenerweiterung</button>
+              <button class="opt" onclick="selectOpt(this)">🏢 Fassadenmontage</button>
+              <button class="opt" onclick="selectOpt(this)">🐦 Vogelschutz</button>
             </div>
           </div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">2</span> Dachform</div>
             <div class="opts">
-              <button class="opt" onclick="select(this)">🔺 Satteldach</button>
-              <button class="opt" onclick="select(this)">📐 Pultdach</button>
-              <button class="opt" onclick="select(this)">⬜ Flachdach</button>
-              <button class="opt" onclick="select(this)">❓ Sonstiges</button>
+              <button class="opt" onclick="selectOpt(this)">🔺 Satteldach</button>
+              <button class="opt" onclick="selectOpt(this)">📐 Pultdach</button>
+              <button class="opt" onclick="selectOpt(this)">⬜ Flachdach</button>
+              <button class="opt" onclick="selectOpt(this)">❓ Sonstiges</button>
             </div>
           </div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">3</span> Dacheindeckung</div>
             <div class="opts">
-              <button class="opt" onclick="select(this)">🏺 Ziegel</button>
-              <button class="opt" onclick="select(this)">🪨 Schiefer</button>
-              <button class="opt" onclick="select(this)">🟫 Bitumen / Folie</button>
-              <button class="opt" onclick="select(this)">❓ Sonstiges</button>
+              <button class="opt" onclick="selectOpt(this)">🏺 Ziegel</button>
+              <button class="opt" onclick="selectOpt(this)">🪨 Schiefer</button>
+              <button class="opt" onclick="selectOpt(this)">🟫 Bitumen / Folie</button>
+              <button class="opt" onclick="selectOpt(this)">❓ Sonstiges</button>
             </div>
           </div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">4</span> Wie viele Personen im Haushalt?</div>
             <div class="opts">
-              <button class="opt" onclick="select(this)">👤 1–2 Personen</button>
-              <button class="opt" onclick="select(this)">👪 3–4 Personen</button>
-              <button class="opt" onclick="select(this)">👨‍👩‍👧‍👦 5 oder mehr</button>
-              <button class="opt" onclick="select(this)">❓ Weiß ich nicht</button>
+              <button class="opt" onclick="selectOpt(this)">👤 1–2 Personen</button>
+              <button class="opt" onclick="selectOpt(this)">👪 3–4 Personen</button>
+              <button class="opt" onclick="selectOpt(this)">👨‍👩‍👧‍👦 5 oder mehr</button>
+              <button class="opt" onclick="selectOpt(this)">❓ Weiß ich nicht</button>
             </div>
           </div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">5</span> E-Auto vorhanden?</div>
             <div class="tog">
-              <button class="opt" onclick="toggle(this,'ja')">✅ Ja</button>
-              <button class="opt" onclick="toggle(this,'nein')">❌ Nein</button>
+              <button class="opt" onclick="toggleOpt(this,'ja')">✅ Ja</button>
+              <button class="opt" onclick="toggleOpt(this,'nein')">❌ Nein</button>
             </div>
           </div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">6</span> Wärmepumpe vorhanden?</div>
             <div class="tog">
-              <button class="opt" onclick="toggle(this,'ja')">✅ Ja</button>
-              <button class="opt" onclick="toggle(this,'nein')">❌ Nein</button>
+              <button class="opt" onclick="toggleOpt(this,'ja')">✅ Ja</button>
+              <button class="opt" onclick="toggleOpt(this,'nein')">❌ Nein</button>
             </div>
           </div>
 
           <div class="kstep">
             <div class="kstep-l"><span class="n">7</span> Batteriespeicher gewünscht?</div>
             <div class="tog">
-              <button class="opt" onclick="toggle(this,'ja')">✅ Ja</button>
-              <button class="opt" onclick="toggle(this,'nein')">❌ Nein</button>
+              <button class="opt" onclick="toggleOpt(this,'ja')">✅ Ja</button>
+              <button class="opt" onclick="toggleOpt(this,'nein')">❌ Nein</button>
             </div>
           </div>
 
           <hr style="border:none;border-top:1px solid var(--line);margin:30px 0">
-          <p style="font-family:var(--display);font-weight:600;color:var(--navy);font-size:15px;text-align:center;margin-bottom:18px">Wohin soll ich Ihr Solar-Konzept senden?</p>
+          <p style="font-family:var(--display);font-weight:600;color:var(--accent);font-size:15px;text-align:center;margin-bottom:18px">Wohin soll ich Ihr Solar-Konzept senden?</p>
 
           <div class="frow">
-            <div class="fg"><label>Vorname *</label><input type="text" placeholder="Max"></div>
-            <div class="fg"><label>Nachname *</label><input type="text" placeholder="Mustermann"></div>
+            <div class="fg"><label>Vorname *</label><input type="text" id="kon-vorname" placeholder="Max" autocomplete="given-name"></div>
+            <div class="fg"><label>Nachname *</label><input type="text" id="kon-nachname" placeholder="Mustermann" autocomplete="family-name"></div>
           </div>
-          <div class="fg"><label>E-Mail *</label><input type="email" placeholder="max@beispiel.de"></div>
-          <div class="fg"><label>Telefonnummer</label><input type="tel" placeholder="+49 ..."></div>
+          <div class="fg"><label>E-Mail *</label><input type="email" id="kon-email" placeholder="max@beispiel.de" autocomplete="email"></div>
+          <div class="fg"><label>Telefonnummer</label><input type="tel" id="kon-tel" placeholder="+49 ..." autocomplete="tel"></div>
 
           <div class="dsr">
             <input type="checkbox" id="ds2">
             <label for="ds2">Ich habe die <a href="#" onclick="zeigeDatenschutz();return false">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</label>
           </div>
-          <button class="btn-form" onclick="sendeKonzept()">☀️ Solar-Konzept erhalten →</button>
+          <div id="kon-status"></div>
+          <button class="btn-form btn-form-navy" id="kon-submit" onclick="sendeKonzept()">Solar-Konzept erhalten →</button>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== MAP ===== -->
-<div class="map-wrap">
-  <a href="https://www.google.com/maps/search/Mittelseestraße+32,+60386+Frankfurt+am+Main" target="_blank" rel="noopener" style="display:block;height:100%;">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.5!2d8.7417!3d50.1109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMittelseestra%C3%9Fe+32%2C+60386+Frankfurt+am+Main!5e0!3m2!1sde!2sde!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ambiente Solar – Mittelseestraße 32, Frankfurt am Main">
-    </iframe>
-  </a>
-  <div class="map-pin">Mittelseestraße 32 · Frankfurt am Main — Klicken für Route</div>
-</div>
-
-<!-- ===== PARTNER ===== -->
-<section class="partner" id="partner">
-  <div class="wrap">
-    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center">
-      <span class="eyebrow">Unsere Partner</span>
-      <h2 style="text-align:center">Geschäftspartner &amp; <span style="color:var(--navy)">Marken.</span></h2>
-      <p class="lead" style="text-align:center;margin:12px auto 0">Wir arbeiten mit führenden Herstellern und Partnern der Solarbranche zusammen.</p>
-    </div>
-
-    <div class="partner-row">
-      <div class="partner-cap">PV-Module</div>
-      <div class="partner-grid">
-        <div class="partner-card"><div class="partner-mono">AIKO</div><div class="nm">Aiko</div><div class="tg">PV-Module</div></div>
-        <div class="partner-card"><div class="partner-mono">TRINA</div><div class="nm">Trina Solar</div><div class="tg">PV-Module</div></div>
-        <div class="partner-card"><div class="partner-mono">LONGi</div><div class="nm">LONGi</div><div class="tg">PV-Module</div></div>
-        <div class="partner-card"><div class="partner-mono">ANKER</div><div class="nm">Anker</div><div class="tg">PV-Module</div></div>
-      </div>
-    </div>
-
-    <div class="partner-row">
-      <div class="partner-cap">Wechselrichter &amp; Speicher</div>
-      <div class="partner-grid" style="grid-template-columns:repeat(5,1fr)">
-        <div class="partner-card"><div class="partner-mono">SUNGROW</div><div class="nm">Sungrow</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">HUAWEI</div><div class="nm">Huawei</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">SMA</div><div class="nm">SMA</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">GoodWe</div><div class="nm">GoodWe</div><div class="tg">Wechselrichter</div></div>
-        <div class="partner-card"><div class="partner-mono">BYD</div><div class="nm">BYD</div><div class="tg">Batteriespeicher</div></div>
       </div>
     </div>
   </div>
@@ -1036,57 +1281,46 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <!-- ===== BEWERTUNGEN ===== -->
 <section class="bewertungen">
   <div class="wrap">
-    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:50px">
-      <span class="eyebrow">Bewertungen &amp; Social Media</span>
-      <h2 style="text-align:center;color:#fff">Kundenstimmen<br>&amp; <span style="color:var(--gold)">wo wir sind.</span></h2>
+    <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;margin-bottom:56px">
+      <span class="eyebrow">Echte Bewertungen</span>
+      <h2 style="text-align:center;color:#fff">Was unsere Kunden<br><span style="color:var(--accent)">über uns sagen.</span></h2>
+      <p class="lead" style="color:rgba(255,255,255,.65);text-align:center;margin-top:16px;max-width:48ch">Lesen Sie echte Bewertungen von unseren Kunden auf den führenden Plattformen.</p>
     </div>
 
-    <div class="test-grid">
-      <div class="test">
-        <div class="stars">★★★★★</div>
-        <p>"Jhonatan und sein Team haben unsere 10 kWp Anlage in nur 2 Tagen installiert. Sehr professionell, pünktlich und sauber. Wir sparen jetzt über 60% unserer Stromkosten."</p>
-        <div class="au">
-          <div class="av">TM</div>
-          <div><div class="nm">Thomas M.</div><div class="lc">Frankfurt am Main · März 2025</div></div>
-        </div>
-      </div>
-      <div class="test">
-        <div class="stars">★★★★★</div>
-        <p>"Von der Beratung bis zur Anmeldung beim Netzbetreiber hat Ambiente Solar alles übernommen. Sehr empfehlenswert! Die Anlage produziert mehr als erwartet."</p>
-        <div class="au">
-          <div class="av">SK</div>
-          <div><div class="nm">Sandra K.</div><div class="lc">Wiesbaden · Januar 2025</div></div>
-        </div>
-      </div>
-      <div class="test">
-        <div class="stars">★★★★★</div>
-        <p>"Wir haben unsere 34 kWp Anlage mit Batteriespeicher über Ambiente Solar installieren lassen. Faire Preise, top Qualität und ein sehr kompetentes Team."</p>
-        <div class="au">
-          <div class="av">MH</div>
-          <div><div class="nm">Markus H.</div><div class="lc">Darmstadt · November 2024</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="social-grid">
-      <a class="social" href="https://g.page/r/CSzMrBTg2Et_EAE/review" target="_blank" rel="noopener">
-        <div class="ic">⭐</div>
-        <div class="ti">Google Bewertung</div>
-        <div class="ds">Bewerten Sie uns auf Google</div>
-        <div class="pill">Jetzt bewerten →</div>
+    <div class="review-grid">
+      <a class="review-btn" href="https://www.google.com/maps/search/Ambiente+Solar+Photovoltaik+Frankfurt" target="_blank" rel="noopener">
+        <span class="review-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </span>
+        <span class="review-info">
+          <span class="review-title">Google Bewertungen</span>
+          <span class="review-desc">Bewerten Sie uns auf Google</span>
+        </span>
+        <span class="review-arr">→</span>
       </a>
-      <a class="social alt" href="https://www.my-hammer.de/auftragnehmer/ambiente-solar" target="_blank" rel="noopener">
-        <div class="ic">🔨</div>
-        <div class="ti">MyHammer Profil</div>
-        <div class="ds">Unser Profil &amp; Bewertungen</div>
-        <div class="pill">Profil ansehen →</div>
+      <a class="review-btn" href="https://www.my-hammer.de/auftragnehmer/ambiente-solar" target="_blank" rel="noopener">
+        <span class="review-icon" style="background:#2DC84D">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 12l-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/>
+            <path d="M17.64 15L22 10.64"/>
+            <path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 5l-.34 3.57a2.98 2.98 0 0 1-.85 1.81l-.95.95 3.62 3.62.95-.95a2.98 2.98 0 0 1 1.81-.85L23 12l-2.3-2.3z"/>
+          </svg>
+        </span>
+        <span class="review-info">
+          <span class="review-title">MyHammer Profil</span>
+          <span class="review-desc">Unser Profil &amp; Bewertungen</span>
+        </span>
+        <span class="review-arr">→</span>
       </a>
-      <a class="social" href="https://www.instagram.com/ambiente_solar_montage" target="_blank" rel="noopener">
-        <div class="ic">📸</div>
-        <div class="ti">Instagram</div>
-        <div class="ds">@ambiente_solar_montage</div>
-        <img class="qr" src="164dfa40-7fc4-4511-a3d2-5548a7b80658" alt="QR Instagram">
-        <div class="pill">Folgen Sie uns →</div>
+      <a class="review-btn" href="https://www.instagram.com/ambiente_solar_montage?igsh=cGJvb25qb3AzYTA5&utm_source=qr" target="_blank" rel="noopener">
+        <span class="review-icon" style="background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/></svg>
+        </span>
+        <span class="review-info">
+          <span class="review-title">Instagram</span>
+          <span class="review-desc">@ambiente_solar_montage</span>
+        </span>
+        <span class="review-arr">→</span>
       </a>
     </div>
   </div>
@@ -1096,12 +1330,6 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="brand-mark"><img src="a45d1fe7-e28d-4ef3-9d48-87b3e2465bad" alt="Ambiente Solar"></div>
-        <div class="bn">AMBIENTE SOLAR</div>
-        <p>Ihr zuverlässiger Partner für Photovoltaik-Anlagen in Frankfurt am Main und Umgebung. Saubere Energie für eine bessere Zukunft.</p>
-        <div class="ust">USt-IdNr: DE 357020901</div>
-      </div>
       <div class="foot-col">
         <h4>Leistungen</h4>
         <ul>
@@ -1133,8 +1361,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
       </div>
     </div>
     <div class="foot-bot">
-      <span>© 2026 Ambiente Solar · Jhonatan Jaramillo Aguirre · Frankfurt am Main</span>
-      <span><a href="#" onclick="zeigeImpressum();return false">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="zeigeDatenschutz();return false">Datenschutz</a></span>
+      <span>© <span id="foot-year">2026</span> Ambiente Solar · Jhonatan Jaramillo Aguirre · Frankfurt am Main</span>
     </div>
   </div>
 </footer>
@@ -1156,40 +1383,66 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
 <!-- modals -->
 <div id="impressum-modal" class="modal">
   <div class="modal-card">
-    <button class="modal-x" onclick="document.getElementById('impressum-modal').classList.remove('show')">✕</button>
+    <button class="modal-x" aria-label="Schließen" onclick="document.getElementById('impressum-modal').classList.remove('show')">✕</button>
     <h2>Impressum</h2>
     <p><strong>Angaben gemäß § 5 TMG</strong></p>
     <p>Jhonatan Jaramillo Aguirre<br>Ambiente Solar<br>Mittelseestraße 32<br>60386 Frankfurt am Main</p>
     <p><strong>Kontakt</strong></p>
     <p>Telefon: +49 (0) 1786 337 520<br>E-Mail: info@ambiente-solar.de</p>
     <p><strong>Umsatzsteuer-Identifikationsnummer</strong></p>
-    <p>USt-IdNr: DE 357020901</p>
-    <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</strong></p>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE 357020901</p>
+    <p><strong>Berufsbezeichnung und berufsrechtliche Regelungen</strong></p>
+    <p>Elektrotechniker / Photovoltaik-Installateur. Zuständige Handwerkskammer: Handwerkskammer Frankfurt-Rhein-Main.</p>
+    <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong></p>
     <p>Jhonatan Jaramillo Aguirre, Mittelseestraße 32, 60386 Frankfurt am Main</p>
+    <p><strong>Streitschlichtung</strong></p>
+    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <strong>https://ec.europa.eu/consumers/odr</strong>. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
     <p><strong>Haftungsausschluss</strong></p>
-    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
+    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
   </div>
 </div>
 
 <div id="datenschutz-modal" class="modal">
   <div class="modal-card">
-    <button class="modal-x" onclick="document.getElementById('datenschutz-modal').classList.remove('show')">✕</button>
+    <button class="modal-x" aria-label="Schließen" onclick="document.getElementById('datenschutz-modal').classList.remove('show')">✕</button>
     <h2>Datenschutzerklärung</h2>
-    <p><strong>1. Datenschutz auf einen Blick</strong></p>
-    <p>Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten auf dieser Website auf. Verantwortlicher im Sinne der DSGVO ist Jhonatan Jaramillo Aguirre, Mittelseestraße 32, 60386 Frankfurt am Main, info@ambiente-solar.de.</p>
+    <p><strong>1. Verantwortlicher</strong></p>
+    <p>Jhonatan Jaramillo Aguirre, Ambiente Solar, Mittelseestraße 32, 60386 Frankfurt am Main, info@ambiente-solar.de, Tel.: +49 (0) 1786 337 520. Rechtsgrundlage für die Datenverarbeitung ist Art. 6 DSGVO.</p>
     <p><strong>2. Kontaktformular</strong></p>
-    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
-    <p><strong>3. Ihre Rechte</strong></p>
-    <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit Ihrer personenbezogenen Daten. Wenden Sie sich dazu an: info@ambiente-solar.de</p>
-    <p><strong>4. Hosting &amp; Cookies</strong></p>
-    <p>Diese Website verwendet keine Tracking-Cookies oder Analyse-Tools. Es werden ausschließlich technisch notwendige Daten verarbeitet. Das Hosting erfolgt über GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA).</p>
-    <p><strong>5. Beschwerderecht</strong></p>
-    <p>Sie haben das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren. Zuständig ist der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Gustav-Stresemann-Ring 1, 65189 Wiesbaden.</p>
+    <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben inklusive der von Ihnen angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO. Die Daten werden gelöscht, sobald sie für den Zweck ihrer Erhebung nicht mehr erforderlich sind.</p>
+    <p><strong>3. Google Fonts</strong></p>
+    <p>Diese Website verwendet Google Fonts (Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA). Beim Laden der Seite wird eine Verbindung zu Google-Servern hergestellt, dabei wird Ihre IP-Adresse übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einheitlicher Darstellung). Weitere Informationen: <strong>policies.google.com/privacy</strong>.</p>
+    <p><strong>4. Bildmaterial</strong></p>
+    <p>Die Projektfotos und -videos im Bereich "Projekte" wurden von Jhonatan Jaramillo Aguirre mit einer Drohne aufgenommen und sind urheberrechtlich geschützt. Die Illustrationen im Bereich "Leistungen" wurden mit KI-Bildgeneratoren (Google Gemini, OpenAI DALL-E) erstellt. Eine Weiterverwendung der Inhalte ohne ausdrückliche Genehmigung ist nicht gestattet.</p>
+    <p><strong>5. Hosting</strong></p>
+    <p>Das Hosting erfolgt über GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). GitHub kann dabei technische Zugriffsdaten (IP-Adresse, Zeitstempel) speichern. Datenschutzerklärung GitHub: <strong>docs.github.com/en/site-policy/privacy-policies</strong>.</p>
+    <p><strong>6. Cookies</strong></p>
+    <p>Diese Website verwendet keine Tracking-Cookies oder Analyse-Tools. Es werden ausschließlich technisch notwendige Daten verarbeitet.</p>
+    <p><strong>7. Ihre Rechte (Art. 15–22 DSGVO)</strong></p>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung. Wenden Sie sich dazu an: info@ambiente-solar.de</p>
+    <p><strong>8. Beschwerderecht</strong></p>
+    <p>Sie haben das Recht, sich bei der zuständigen Aufsichtsbehörde zu beschweren: Hessischer Beauftragter für Datenschutz und Informationsfreiheit, Gustav-Stresemann-Ring 1, 65189 Wiesbaden, <strong>www.datenschutz.hessen.de</strong>.</p>
   </div>
 </div>
 
 <script>
-  /* ===== forms ===== */
+  /* ===== WEBHOOK — setze echte URL wenn n8n bereit ist ===== */
+  const WEBHOOK_URL = "TODO_REPLACE_WITH_N8N_URL";
+
+  /* ===== Hilfsfunktionen für visuelle States ===== */
+  function setStatus(id, type, msg){
+    const el=document.getElementById(id);
+    if(!el) return;
+    const styles={
+      loading:'background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;border-radius:8px;padding:12px 16px;font-size:13px;margin-bottom:12px',
+      success:'background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:8px;padding:12px 16px;font-size:13px;margin-bottom:12px',
+      error:'background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:8px;padding:12px 16px;font-size:13px;margin-bottom:12px'
+    };
+    el.setAttribute('style',styles[type]||'');
+    el.textContent=msg;
+  }
+
+  /* ===== Formular-Navigation ===== */
   function zeigeFormular(typ){
     document.getElementById('kontakt-auswahl').style.display='none';
     document.getElementById('formular-angebot').style.display='none';
@@ -1201,42 +1454,103 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     document.getElementById('formular-angebot').style.display='none';
     document.getElementById('formular-konzept').style.display='none';
   }
-  function select(btn){
+
+  /* ===== Option-Auswahl (umbenannt von select/toggle → kein DOM-Konflikt) ===== */
+  function selectOpt(btn){
     const parent=btn.closest('.opts')||btn.closest('.tog');
     parent.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel','no'));
     btn.classList.add('sel');
   }
-  function toggle(btn,val){
+  function toggleOpt(btn,val){
     const parent=btn.closest('.tog');
     parent.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel','no'));
     btn.classList.add(val==='nein'?'no':'sel');
   }
-  function sendeKonzept(){alert('Vielen Dank! Ihr Solar-Konzept wird in Kürze an Sie übermittelt. ☀️')}
 
-  /* ===== modals ===== */
+  /* ===== Angebot-Formular senden ===== */
+  async function sendeAngebot(){
+    const vorname=document.getElementById('ang-vorname').value.trim();
+    const nachname=document.getElementById('ang-nachname').value.trim();
+    const email=document.getElementById('ang-email').value.trim();
+    const typ=document.getElementById('ang-typ').value;
+    const msg=document.getElementById('ang-msg').value.trim();
+    const ds=document.getElementById('ds1').checked;
+    if(!vorname||!email){setStatus('ang-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
+    if(!ds){setStatus('ang-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
+    const btn=document.getElementById('ang-submit');
+    btn.disabled=true;
+    setStatus('ang-status','loading','Wird gesendet…');
+    const payload={typ:'angebot',vorname,nachname,email,anlagentyp:typ,nachricht:msg};
+    if(!WEBHOOK_URL.includes('TODO')){
+      try{
+        await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        setStatus('ang-status','success','✓ Vielen Dank! Ich melde mich innerhalb von 1–2 Werktagen.');
+        btn.style.display='none';
+      }catch(e){
+        const sub='mailto:info@ambiente-solar.de?subject=Angebot%20anfragen&body='+encodeURIComponent('Name: '+vorname+' '+nachname+'\nE-Mail: '+email+'\nAnlagentyp: '+typ+'\nNachricht: '+msg);
+        setStatus('ang-status','error','Senden fehlgeschlagen. <a href="'+sub+'">Per E-Mail senden →</a>');
+      }
+    } else {
+      const sub='mailto:info@ambiente-solar.de?subject=Angebot%20anfragen&body='+encodeURIComponent('Name: '+vorname+' '+nachname+'\nE-Mail: '+email+'\nAnlagentyp: '+typ+'\nNachricht: '+msg);
+      window.location.href=sub;
+      setStatus('ang-status','success','✓ E-Mail-Programm geöffnet. Bitte senden Sie die vorbereitete E-Mail ab.');
+    }
+    btn.disabled=false;
+  }
+
+  /* ===== Solar-Konzept senden ===== */
+  async function sendeKonzept(){
+    const vorname=document.getElementById('kon-vorname').value.trim();
+    const email=document.getElementById('kon-email').value.trim();
+    const ds=document.getElementById('ds2').checked;
+    if(!vorname||!email){setStatus('kon-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
+    if(!ds){setStatus('kon-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
+    const antworten=[...document.querySelectorAll('#formular-konzept .opt.sel,.opt.no')].map(b=>b.textContent.trim());
+    const btn=document.getElementById('kon-submit');
+    btn.disabled=true;
+    setStatus('kon-status','loading','Wird gesendet…');
+    const payload={typ:'konzept',vorname,email,antworten};
+    if(!WEBHOOK_URL.includes('TODO')){
+      try{
+        await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        setStatus('kon-status','success','✓ Ihr Solar-Konzept wird in Kürze an Sie übermittelt.');
+        btn.style.display='none';
+      }catch(e){
+        const body='Name: '+vorname+'\nE-Mail: '+email+'\nAntworten: '+antworten.join(', ');
+        const sub='mailto:info@ambiente-solar.de?subject=Solar-Konzept&body='+encodeURIComponent(body);
+        setStatus('kon-status','error','Senden fehlgeschlagen. <a href="'+sub+'">Per E-Mail senden →</a>');
+      }
+    } else {
+      const body='Name: '+vorname+'\nE-Mail: '+email+'\nAntworten: '+antworten.join(', ');
+      const sub='mailto:info@ambiente-solar.de?subject=Solar-Konzept&body='+encodeURIComponent(body);
+      window.location.href=sub;
+      setStatus('kon-status','success','✓ E-Mail-Programm geöffnet. Bitte senden Sie die vorbereitete E-Mail ab.');
+    }
+    btn.disabled=false;
+  }
+
+  /* ===== Modals ===== */
   function zeigeImpressum(){document.getElementById('impressum-modal').classList.add('show')}
   function zeigeDatenschutz(){document.getElementById('datenschutz-modal').classList.add('show')}
   document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
 
-  /* ===== cookies ===== */
+  /* ===== Cookies ===== */
   try{if(localStorage.getItem('cookies-ok'))document.getElementById('cookie-banner').style.display='none';}catch(e){}
 
-  /* sun rays + clock */
+  /* ===== Sun Rays ===== */
   (function sunRays(){
     const c=document.getElementById('sun-rays'); if(!c) return;
-    const N=14;
+    const N=18;
     for(let i=0;i<N;i++){
       const r=document.createElement('div');
       r.className='ray';
       r.style.transform='rotate('+(i*(360/N))+'deg)';
-      r.style.animationDelay=(i*0.18)+'s';
+      r.style.animationDelay=(i*0.14)+'s';
       c.appendChild(r);
     }
-    const t=document.getElementById('dash-time');
-    if(t){const u=()=>{const d=new Date();t.textContent=d.toLocaleTimeString('de-DE')};u();setInterval(u,1000);}
   })();
 
-  /* ===== radar lines (drawn in SVG viewBox coords) ===== */
+  /* ===== Radar Lines ===== */
   (function drawRadarLines(){
     const VB_W=1180, VB_H=920, CX=590, CY=460;
     const g=document.getElementById('radar-lines');
@@ -1244,32 +1558,133 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     document.querySelectorAll('#radar .node').forEach(n=>{
       const x=parseFloat(n.dataset.x), y=parseFloat(n.dataset.y);
       const tx=(x/100)*VB_W, ty=(y/100)*VB_H;
-      // shorten the line so it doesn't pass over the center logo
       const dx=tx-CX, dy=ty-CY, len=Math.hypot(dx,dy);
-      const sx=CX + (dx/len)*78;  // start outside center disc
-      const sy=CY + (dy/len)*78;
-      const ex=tx - (dx/len)*8;   // stop just before card
-      const ey=ty - (dy/len)*8;
+      const sx=CX+(dx/len)*80, sy=CY+(dy/len)*80;
+      const ex=tx-(dx/len)*8,  ey=ty-(dy/len)*8;
       const ns='http://www.w3.org/2000/svg';
       const line=document.createElementNS(ns,'line');
       line.setAttribute('x1',sx);line.setAttribute('y1',sy);
       line.setAttribute('x2',ex);line.setAttribute('y2',ey);
       line.setAttribute('class','radar-line');
-      line.setAttribute('stroke-dasharray','2 4');
+      line.setAttribute('stroke-dasharray','3 5');
       g.appendChild(line);
       const dot=document.createElementNS(ns,'circle');
-      dot.setAttribute('cx',sx);dot.setAttribute('cy',sy);dot.setAttribute('r','3');
+      dot.setAttribute('cx',sx);dot.setAttribute('cy',sy);dot.setAttribute('r','4');
       dot.setAttribute('class','radar-line-dot');
       g.appendChild(dot);
     });
-    // place node DOMs
     document.querySelectorAll('#radar .node').forEach(n=>{
       n.style.left=n.dataset.x+'%';
       n.style.top=n.dataset.y+'%';
     });
   })();
+
+  /* ===== Split-Flap Partner (Fase 9) ===== */
+  (function splitFlap(){
+    const partners=[
+      {name:'AIKO Solar',      sub:'PV-Module'},
+      {name:'Trina Solar',     sub:'PV-Module'},
+      {name:'Huawei FusionSolar',sub:'Wechselrichter'},
+      {name:'SMA Solar',       sub:'Wechselrichter'},
+      {name:'Fronius',         sub:'Wechselrichter'}
+    ];
+    const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -.';
+    const flap=document.getElementById('splitflap');
+    const sub=document.getElementById('partner-sub');
+    if(!flap) return;
+    let idx=0;
+    function animateTo(target,onDone){
+      const letters=[...flap.querySelectorAll('.sf-char')];
+      let done=0;
+      letters.forEach((el,i)=>{
+        const ch=i<target.length?target[i].toUpperCase():' ';
+        let steps=0, max=12+Math.floor(Math.random()*8);
+        const iv=setInterval(()=>{
+          if(steps<max){el.textContent=chars[Math.floor(Math.random()*chars.length)];steps++;}
+          else{el.textContent=ch;clearInterval(iv);done++;if(done===letters.length&&onDone)onDone();}
+        },40+i*18);
+      });
+    }
+    function buildChars(n){
+      flap.innerHTML='';
+      const maxLen=Math.max(...partners.map(p=>p.name.length));
+      for(let i=0;i<maxLen;i++){
+        const s=document.createElement('span');
+        s.className='sf-char';
+        s.textContent=' ';
+        flap.appendChild(s);
+      }
+    }
+    function next(){
+      const p=partners[idx];
+      buildChars(p.name);
+      animateTo(p.name,()=>{
+        if(sub) sub.textContent=p.sub;
+        idx=(idx+1)%partners.length;
+        setTimeout(next,2800);
+      });
+    }
+    buildChars(partners[0].name);
+    next();
+  })();
+
+  /* ===== Footer Jahr ===== */
+  (function(){ const el=document.getElementById('foot-year'); if(el) el.textContent=new Date().getFullYear(); })();
+
+  /* ===== Lightbox ===== */
+  (function(){
+    function openLb(node){
+      const lb=document.getElementById('lb');
+      const media=document.getElementById('lb-media');
+      const title=document.getElementById('lb-title');
+      const sub=document.getElementById('lb-sub');
+      const kwp=node.querySelector('.kwp');
+      const loc=node.querySelector('.loc');
+      title.textContent=kwp?kwp.textContent:'';
+      sub.textContent=loc?loc.textContent:'';
+      media.innerHTML='';
+      const vid=node.querySelector('video source');
+      if(vid){
+        const v=document.createElement('video');
+        const nodeVid=node.querySelector('video');
+        v.src=vid.src; v.autoplay=true; v.muted=false; v.loop=true; v.controls=true;
+        if(nodeVid&&nodeVid.poster) v.poster=nodeVid.poster;
+        media.appendChild(v);
+      } else {
+        const src=node.querySelector('img');
+        const i=new Image(); i.src=src.src; i.alt=src.alt;
+        media.appendChild(i);
+      }
+      lb.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeLb(){
+      const lb=document.getElementById('lb');
+      lb.classList.remove('open');
+      document.body.style.overflow='';
+      const v=lb.querySelector('video');
+      if(v) v.pause();
+      setTimeout(()=>{document.getElementById('lb-media').innerHTML='';},320);
+    }
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+    window.openLb=openLb;
+    window.closeLb=closeLb;
+  })();
 </script>
 
-
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Projektbild">
+  <div class="lb-bg" onclick="closeLb()"></div>
+  <div class="lb-box">
+    <div class="lb-media" id="lb-media"></div>
+    <div class="lb-info">
+      <div>
+        <div class="lb-title" id="lb-title"></div>
+        <div class="lb-sub" id="lb-sub"></div>
+      </div>
+      <button class="lb-close" onclick="closeLb()" aria-label="Schließen">&#x2715;</button>
+    </div>
+  </div>
+</div>
 
 </body></html>

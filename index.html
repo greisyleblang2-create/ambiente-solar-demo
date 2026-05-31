@@ -931,6 +931,11 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
         <img src="fotos/fassade.jpg" alt="Fassadenmontage" loading="lazy">
         <div class="meta"><div class="kwp">Fassade</div><div class="loc">Südhessen · Fassadenmontage</div></div>
       </a>
+      <a class="node" data-x="36" data-y="42" href="#" onclick="openLb(this);return false">
+        <span class="pin"></span>
+        <video autoplay muted loop playsinline><source src="fotos/radar-rotterheide%20Neustadt%20(Wied).mp4" type="video/mp4"></video>
+        <div class="meta"><div class="kwp">Neuanlage</div><div class="loc">Neustadt (Wied) · Anlage</div></div>
+      </a>
 
     </div>
   </div>
@@ -1422,6 +1427,24 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
   /* ===== WEBHOOK — setze echte URL wenn n8n bereit ist ===== */
   const WEBHOOK_URL = "TODO_REPLACE_WITH_N8N_URL";
 
+  /* ===== Demo: Anfrage lokal speichern (Dashboard liest dies) ===== */
+  function saveToLocal(payload){
+    try{
+      const entry=Object.assign({
+        zeitstempel:new Date().toLocaleString('de-DE'),
+        status:'Neu',
+        nachname:payload.nachname||'',
+        telefon:payload.telefon||'',
+        anlagentyp:payload.anlagentyp||'',
+        nachricht:payload.nachricht||''
+      },payload);
+      if(Array.isArray(entry.antworten)) entry.antworten=JSON.stringify(entry.antworten);
+      const list=JSON.parse(localStorage.getItem('ambiente_leads')||'[]');
+      list.unshift(entry);
+      localStorage.setItem('ambiente_leads',JSON.stringify(list.slice(0,100)));
+    }catch(e){}
+  }
+
   /* ===== Hilfsfunktionen für visuelle States ===== */
   function setStatus(id, type, msg){
     const el=document.getElementById(id);
@@ -1475,6 +1498,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     btn.disabled=true;
     setStatus('ang-status','loading','Wird gesendet…');
     const payload={typ:'angebot',vorname,nachname,email,telefon:tel,anlagentyp:typ,nachricht:msg};
+    saveToLocal(payload);
     if(!WEBHOOK_URL.includes('TODO')){
       try{
         await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
@@ -1506,6 +1530,7 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     btn.disabled=true;
     setStatus('kon-status','loading','Wird gesendet…');
     const payload={typ:'konzept',vorname,nachname,email,telefon:tel,antworten};
+    saveToLocal(payload);
     if(!WEBHOOK_URL.includes('TODO')){
       try{
         await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});

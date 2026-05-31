@@ -147,6 +147,21 @@ body { background: #f4f4f5; }
     </div>
   </div>
 
+  <!-- ===== LOCAL DATA BANNER ===== -->
+  <div id="local-banner" class="hidden rounded-xl overflow-hidden fade-in" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+    <div class="px-5 py-3 flex items-center gap-3 flex-wrap">
+      <span class="text-lg">📲</span>
+      <div class="flex-1">
+        <p class="text-sm font-semibold" style="color:#166534;">Live Demo-Daten aus dem Kontaktformular</p>
+        <p class="text-xs" style="color:#4ade80;color:#15803d;">Jhonatan hat das Formular ausgefüllt — die Anfrage erscheint hier sofort, ohne Backend.</p>
+      </div>
+      <button onclick="clearLocal()" class="text-xs px-3 py-1.5 rounded-lg font-medium border transition"
+        style="background:#fef2f2;color:#b91c1c;border-color:#fecaca;">
+        Daten löschen ✕
+      </button>
+    </div>
+  </div>
+
   <!-- ===== SETUP GUIDE ===== -->
   <div id="setup-section" class="hidden bg-white rounded-xl shadow-sm overflow-hidden fade-in">
     <div class="px-5 py-3.5 border-b flex items-center justify-between" style="border-color:var(--border);">
@@ -431,9 +446,32 @@ function parseCSV(text) {
 }
 
 /* ===== Laden ===== */
+function getLocalLeads() {
+  try { return JSON.parse(localStorage.getItem('ambiente_leads') || '[]'); } catch(e) { return []; }
+}
+
+function clearLocal() {
+  if (!confirm('Alle lokal gespeicherten Demo-Anfragen löschen?')) return;
+  try { localStorage.removeItem('ambiente_leads'); } catch(e) {}
+  show('local-banner', false);
+  loadLeads();
+}
+
 async function loadLeads() {
   isDemoMode = false;
   document.getElementById('demo-badge').classList.add('hidden');
+  show('local-banner', false);
+
+  // Zuerst localStorage prüfen (Live Demo)
+  const localData = getLocalLeads();
+  if (localData.length > 0) {
+    allLeads = localData;
+    render(allLeads);
+    stats(allLeads);
+    show('leads-loading', false);
+    show('local-banner', true);
+    return;
+  }
 
   if (!SHEET_CSV || SHEET_CSV === 'HIER_EINTRAGEN') {
     document.getElementById('config-banner').classList.remove('hidden');
@@ -610,8 +648,17 @@ async function updateStatus(newStatus) {
   const lead = allLeads[currentIdx];
   if (!confirm(`Status von "${fullName(lead)}" ändern zu:\n"${newStatus}"?`)) return;
 
-  if (isDemoMode || WEBHOOK_UPDATE.includes('EINTRAGEN')) {
+  // Demo oder lokal: nur im Speicher + localStorage aktualisieren
+  if (isDemoMode || WEBHOOK_UPDATE.includes('EINTRAGEN') || getLocalLeads().length > 0) {
     allLeads[currentIdx].status = newStatus;
+    if (!isDemoMode && getLocalLeads().length > 0) {
+      try {
+        const list = getLocalLeads();
+        const hit = list.find(l => l.email === lead.email);
+        if (hit) hit.status = newStatus;
+        localStorage.setItem('ambiente_leads', JSON.stringify(list));
+      } catch(e) {}
+    }
     closeModal();
     showToast('Status aktualisiert' + (isDemoMode ? ' (Demo)' : ''));
     render(allLeads);

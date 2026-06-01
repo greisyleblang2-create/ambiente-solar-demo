@@ -1557,7 +1557,12 @@ footer{background:#000;color:rgba(255,255,255,.55);padding:90px 0 36px}
     const ds=document.getElementById('ds2').checked;
     if(!vorname||!email){setStatus('kon-status','error','Bitte Vorname und E-Mail ausfüllen.');return;}
     if(!ds){setStatus('kon-status','error','Bitte Datenschutzerklärung bestätigen.');return;}
-    const antworten=[...document.querySelectorAll('#formular-konzept .opt.sel,.opt.no')].map(b=>b.textContent.trim());
+    const antworten=[...document.querySelectorAll('#formular-konzept .kstep')].map(step=>{
+      const labelEl=step.querySelector('.kstep-l');
+      const label=labelEl?labelEl.textContent.replace(/^\s*\d+\s*/,'').trim():'';
+      const sel=step.querySelector('.opt.sel,.opt.no');
+      return sel?label+': '+sel.textContent.trim():null;
+    }).filter(Boolean);
     const btn=document.getElementById('kon-submit');
     btn.disabled=true;
     setStatus('kon-status','loading','Wird gesendet…');

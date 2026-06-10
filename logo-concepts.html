@@ -8,280 +8,239 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --offwhite:#F7F5F2;--beige:#EAE6DF;--greige:#D9D3C7;
-    --black:#1A1A1A;--bronze:#A67C52;--muted:#8a857d;
-  }
+  :root{--offwhite:#F7F5F2;--greige:#D9D3C7;--black:#1A1A1A;--bronze:#A67C52;--muted:#8a857d;}
   *{box-sizing:border-box;}
   html{-webkit-font-smoothing:antialiased;}
   body{margin:0;background:var(--offwhite);color:var(--black);
-    font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;
-    padding:80px 32px 120px;}
-  .sheet{max-width:920px;margin:0 auto;}
-  .brand{font-size:13px;letter-spacing:3px;text-transform:uppercase;
-    color:var(--muted);font-weight:600;margin-bottom:64px;}
-  .concept{padding:54px 0;border-top:1px solid var(--greige);}
-  .concept:first-of-type{border-top:none;}
-  .label{font-size:13px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--muted);font-weight:600;margin-bottom:30px;}
-  .label .n{color:var(--bronze);margin-right:10px;}
-  .row{display:flex;align-items:center;gap:52px;flex-wrap:wrap;}
-  .gridcell{flex:0 0 auto;}
-  .gridcell svg{width:148px;height:148px;display:block;}
-  .lockup{flex:1 1 340px;min-width:300px;}
-  .lockup svg{width:100%;max-width:460px;height:auto;display:block;}
-  @media(max-width:640px){
-    body{padding:56px 22px 90px;}
-    .row{gap:34px;}
-    .gridcell svg{width:120px;height:120px;}
-  }
+    font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;padding:80px 32px 120px;}
+  .sheet{max-width:860px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:56px;}
+  .v{padding:50px 0;border-top:1px solid var(--greige);}
+  .v:first-of-type{border-top:none;}
+  .t{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:26px;}
+  .t .n{color:var(--bronze);margin-right:10px;}
+  svg.logo{width:100%;max-width:480px;height:auto;display:block;}
+  @media(max-width:600px){body{padding:54px 22px 90px;}}
 </style>
 </head>
 <body>
 <div class="sheet">
   <div class="brand">Leblang Automatisierung · Logo-Konzepte</div>
 
-  <!-- 1 — Wordmark + Workflow -->
-  <section class="concept">
-    <div class="label"><span class="n">01</span>Wordmark + Workflow-Icon</div>
-    <div class="row">
-      <div class="gridcell">
-        <svg viewBox="0 0 120 120">
-          <rect x="12" y="12" width="96" height="96" fill="none" stroke="#D9D3C7" stroke-width="1"/>
-          <line x1="60" y1="12" x2="60" y2="108" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <line x1="12" y1="60" x2="108" y2="60" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <g transform="translate(16,16)" fill="none" stroke="#1A1A1A" stroke-width="3.5">
-            <circle cx="14" cy="44" r="8" fill="#F7F5F2"/>
-            <line x1="22" y1="44" x2="38" y2="44" stroke-width="3"/>
-            <circle cx="48" cy="44" r="10" fill="#F7F5F2"/>
-            <line x1="57" y1="40" x2="72" y2="24" stroke-width="3"/>
-            <line x1="57" y1="48" x2="72" y2="64" stroke-width="3"/>
-            <circle cx="78" cy="20" r="7" fill="#F7F5F2"/>
-            <circle cx="78" cy="68" r="7" fill="#F7F5F2"/>
-            <circle cx="48" cy="44" r="3.6" fill="#A67C52" stroke="none"/>
-          </g>
-        </svg>
-      </div>
-      <div class="lockup">
-        <svg viewBox="0 0 480 120">
-          <g transform="translate(6,16)" fill="none" stroke="#1A1A1A" stroke-width="3.5">
-            <circle cx="14" cy="44" r="8" fill="#F7F5F2"/>
-            <line x1="22" y1="44" x2="38" y2="44" stroke-width="3"/>
-            <circle cx="48" cy="44" r="10" fill="#F7F5F2"/>
-            <line x1="57" y1="40" x2="72" y2="24" stroke-width="3"/>
-            <line x1="57" y1="48" x2="72" y2="64" stroke-width="3"/>
-            <circle cx="78" cy="20" r="7" fill="#F7F5F2"/>
-            <circle cx="78" cy="68" r="7" fill="#F7F5F2"/>
-            <circle cx="48" cy="44" r="3.6" fill="#A67C52" stroke="none"/>
-          </g>
-          <text x="128" y="54" font-family="Inter" font-weight="600" font-size="40" letter-spacing="-1.2" fill="#1A1A1A">Leblang</text>
-          <text x="130" y="80" font-family="Inter" font-weight="500" font-size="13" letter-spacing="5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
-          <rect x="130" y="90" width="36" height="2.5" rx="1.25" fill="#A67C52"/>
-        </svg>
-      </div>
-    </div>
+  <!-- 01 -->
+  <section class="v">
+    <div class="t"><span class="n">01</span>Wordmark + Workflow</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,22)" fill="none" stroke="#1A1A1A" stroke-width="3.5">
+        <circle cx="8" cy="42" r="8" fill="#F7F5F2"/>
+        <line x1="16" y1="42" x2="34" y2="42" stroke-width="3"/>
+        <circle cx="44" cy="42" r="10" fill="#F7F5F2"/>
+        <line x1="53" y1="38" x2="68" y2="22" stroke-width="3"/>
+        <line x1="53" y1="46" x2="68" y2="62" stroke-width="3"/>
+        <circle cx="74" cy="18" r="7" fill="#F7F5F2"/>
+        <circle cx="74" cy="66" r="7" fill="#F7F5F2"/>
+        <circle cx="44" cy="42" r="3.6" fill="#A67C52" stroke="none"/>
+      </g>
+      <text x="130" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="132" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="132" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="132" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
   </section>
 
-  <!-- 2 — Wordmark + Interlock/Dovetail -->
-  <section class="concept">
-    <div class="label"><span class="n">02</span>Wordmark + Interlock / Dovetail</div>
-    <div class="row">
-      <div class="gridcell">
-        <svg viewBox="0 0 120 120">
-          <rect x="12" y="12" width="96" height="96" fill="none" stroke="#D9D3C7" stroke-width="1"/>
-          <line x1="60" y1="12" x2="60" y2="108" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <line x1="12" y1="60" x2="108" y2="60" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <g transform="translate(16,16)">
-            <rect x="18" y="18" width="52" height="52" rx="12" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <path d="M44 18 V34 L54 39 V49 L44 54 V70" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="49" cy="44" r="3.6" fill="#A67C52"/>
-          </g>
-        </svg>
-      </div>
-      <div class="lockup">
-        <svg viewBox="0 0 480 120">
-          <g transform="translate(6,16)">
-            <rect x="18" y="18" width="52" height="52" rx="12" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <path d="M44 18 V34 L54 39 V49 L44 54 V70" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="49" cy="44" r="3.6" fill="#A67C52"/>
-          </g>
-          <text x="128" y="54" font-family="Inter" font-weight="600" font-size="40" letter-spacing="-1.2" fill="#1A1A1A">Leblang</text>
-          <text x="130" y="80" font-family="Inter" font-weight="500" font-size="13" letter-spacing="5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
-          <rect x="130" y="90" width="36" height="2.5" rx="1.25" fill="#A67C52"/>
-        </svg>
-      </div>
-    </div>
+  <!-- 02 -->
+  <section class="v">
+    <div class="t"><span class="n">02</span>Wordmark + Interlock / Dovetail</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,22)">
+        <rect x="16" y="16" width="52" height="52" rx="12" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
+        <path d="M42 16 V32 L51 37 V47 L42 52 V68" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="47" cy="42" r="3.4" fill="#A67C52"/>
+      </g>
+      <text x="130" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="132" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="132" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="132" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
   </section>
 
-  <!-- 3 — Wordmark + Zahnrad mit Prozesspunkten -->
-  <section class="concept">
-    <div class="label"><span class="n">03</span>Wordmark + Zahnrad mit Prozesspunkten</div>
-    <div class="row">
-      <div class="gridcell">
-        <svg viewBox="0 0 120 120">
-          <rect x="12" y="12" width="96" height="96" fill="none" stroke="#D9D3C7" stroke-width="1"/>
-          <line x1="60" y1="12" x2="60" y2="108" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <g transform="translate(16,12) scale(0.96)">
-            <g fill="#1A1A1A">
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(0 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(45 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(90 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(135 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(180 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(225 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(270 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(315 44 30)"/>
-            </g>
-            <circle cx="44" cy="30" r="15" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <circle cx="44" cy="30" r="4.5" fill="#A67C52"/>
-            <line x1="44" y1="46" x2="44" y2="62" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <line x1="44" y1="62" x2="20" y2="77" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <line x1="44" y1="62" x2="44" y2="77" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <line x1="44" y1="62" x2="68" y2="77" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <circle cx="20" cy="84" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <circle cx="44" cy="84" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <circle cx="68" cy="84" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-          </g>
-        </svg>
-      </div>
-      <div class="lockup">
-        <svg viewBox="0 0 480 120">
-          <g transform="translate(2,8) scale(0.96)">
-            <g fill="#1A1A1A">
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(0 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(45 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(90 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(135 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(180 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(225 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(270 44 30)"/>
-              <rect x="41.5" y="8" width="5" height="8" rx="2" transform="rotate(315 44 30)"/>
-            </g>
-            <circle cx="44" cy="30" r="15" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <circle cx="44" cy="30" r="4.5" fill="#A67C52"/>
-            <line x1="44" y1="46" x2="44" y2="62" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <line x1="44" y1="62" x2="20" y2="77" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <line x1="44" y1="62" x2="44" y2="77" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <line x1="44" y1="62" x2="68" y2="77" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
-            <circle cx="20" cy="84" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <circle cx="44" cy="84" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-            <circle cx="68" cy="84" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
-          </g>
-          <text x="120" y="54" font-family="Inter" font-weight="600" font-size="40" letter-spacing="-1.2" fill="#1A1A1A">Leblang</text>
-          <text x="122" y="80" font-family="Inter" font-weight="500" font-size="13" letter-spacing="5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
-          <rect x="122" y="90" width="36" height="2.5" rx="1.25" fill="#A67C52"/>
-        </svg>
-      </div>
-    </div>
+  <!-- 03 -->
+  <section class="v">
+    <div class="t"><span class="n">03</span>Wordmark + Zahnrad mit Prozesspunkten</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,14)">
+        <g fill="#1A1A1A">
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(0 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(45 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(90 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(135 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(180 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(225 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(270 38 24)"/>
+          <rect x="35.5" y="3" width="5" height="8" rx="2" transform="rotate(315 38 24)"/>
+        </g>
+        <circle cx="38" cy="24" r="13" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
+        <circle cx="38" cy="24" r="4" fill="#A67C52"/>
+        <line x1="38" y1="37" x2="38" y2="52" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <line x1="38" y1="52" x2="16" y2="67" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <line x1="38" y1="52" x2="38" y2="67" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <line x1="38" y1="52" x2="60" y2="67" stroke="#1A1A1A" stroke-width="2.5" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <circle cx="16" cy="74" r="6.5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
+        <circle cx="38" cy="74" r="6.5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
+        <circle cx="60" cy="74" r="6.5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5"/>
+      </g>
+      <text x="124" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="126" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="126" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="126" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
   </section>
 
-  <!-- 4 — LA-Monogramm + Workflow -->
-  <section class="concept">
-    <div class="label"><span class="n">04</span>LA-Monogramm + Workflow</div>
-    <div class="row">
-      <div class="gridcell">
-        <svg viewBox="0 0 120 120">
-          <rect x="12" y="12" width="96" height="96" fill="none" stroke="#D9D3C7" stroke-width="1"/>
-          <line x1="60" y1="12" x2="60" y2="108" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <line x1="12" y1="60" x2="108" y2="60" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <g transform="translate(16,16)">
-            <path d="M18 16 V60 H44 L60 16 L78 60" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="18" cy="16" r="5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3"/>
-            <circle cx="78" cy="60" r="5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3"/>
-            <circle cx="60" cy="16" r="5.5" fill="#A67C52"/>
-          </g>
-        </svg>
-      </div>
-      <div class="lockup">
-        <svg viewBox="0 0 480 120">
-          <g transform="translate(4,16)">
-            <path d="M18 16 V60 H44 L60 16 L78 60" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="18" cy="16" r="5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3"/>
-            <circle cx="78" cy="60" r="5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3"/>
-            <circle cx="60" cy="16" r="5.5" fill="#A67C52"/>
-          </g>
-          <text x="128" y="54" font-family="Inter" font-weight="600" font-size="40" letter-spacing="-1.2" fill="#1A1A1A">Leblang</text>
-          <text x="130" y="80" font-family="Inter" font-weight="500" font-size="13" letter-spacing="5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
-          <rect x="130" y="90" width="36" height="2.5" rx="1.25" fill="#A67C52"/>
-        </svg>
-      </div>
-    </div>
+  <!-- 04 -->
+  <section class="v">
+    <div class="t"><span class="n">04</span>Wordmark + Hexagon-Netzwerk</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,16)">
+        <path d="M40 20 L59.05 31 L59.05 53 L40 64 L20.95 53 L20.95 31 Z" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round"/>
+        <g fill="#1A1A1A">
+          <circle cx="40" cy="20" r="3.4"/>
+          <circle cx="59.05" cy="31" r="3.4"/>
+          <circle cx="59.05" cy="53" r="3.4"/>
+          <circle cx="40" cy="64" r="3.4"/>
+          <circle cx="20.95" cy="53" r="3.4"/>
+          <circle cx="20.95" cy="31" r="3.4"/>
+        </g>
+        <circle cx="40" cy="42" r="5" fill="#A67C52"/>
+      </g>
+      <text x="122" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="124" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="124" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="124" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
   </section>
 
-  <!-- 5 — LA-Monogramm + Dovetail -->
-  <section class="concept">
-    <div class="label"><span class="n">05</span>LA-Monogramm + Dovetail</div>
-    <div class="row">
-      <div class="gridcell">
-        <svg viewBox="0 0 120 120">
-          <rect x="12" y="12" width="96" height="96" fill="none" stroke="#D9D3C7" stroke-width="1"/>
-          <line x1="60" y1="12" x2="60" y2="108" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <line x1="12" y1="60" x2="108" y2="60" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <g transform="translate(14,16)">
-            <path d="M18 16 V60 H40" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 60 L66 16 L82 60" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M38 50 L52 50 L47 57 L52 64 L38 64 L43 57 Z" fill="#A67C52"/>
-          </g>
-        </svg>
-      </div>
-      <div class="lockup">
-        <svg viewBox="0 0 480 120">
-          <g transform="translate(2,16)">
-            <path d="M18 16 V60 H40" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 60 L66 16 L82 60" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M38 50 L52 50 L47 57 L52 64 L38 64 L43 57 Z" fill="#A67C52"/>
-          </g>
-          <text x="128" y="54" font-family="Inter" font-weight="600" font-size="40" letter-spacing="-1.2" fill="#1A1A1A">Leblang</text>
-          <text x="130" y="80" font-family="Inter" font-weight="500" font-size="13" letter-spacing="5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
-          <rect x="130" y="90" width="36" height="2.5" rx="1.25" fill="#A67C52"/>
-        </svg>
-      </div>
-    </div>
+  <!-- 05 -->
+  <section class="v">
+    <div class="t"><span class="n">05</span>Wordmark + Zahnrad + Module</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,16)">
+        <g fill="#1A1A1A">
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(0 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(45 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(90 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(135 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(180 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(225 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(270 16 40)"/>
+          <rect x="13.5" y="23" width="5" height="7" rx="2" transform="rotate(315 16 40)"/>
+        </g>
+        <circle cx="16" cy="40" r="10" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.2"/>
+        <circle cx="16" cy="40" r="3.4" fill="#A67C52"/>
+        <line x1="26" y1="40" x2="38" y2="40" stroke="#1A1A1A" stroke-width="2.5"/>
+        <g fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3">
+          <rect x="38" y="12" width="42" height="16" rx="4"/>
+          <rect x="38" y="33" width="42" height="16" rx="4"/>
+          <rect x="38" y="54" width="42" height="16" rx="4"/>
+        </g>
+        <g fill="#1A1A1A">
+          <circle cx="46" cy="20" r="2.2"/><circle cx="46" cy="41" r="2.2"/><circle cx="46" cy="62" r="2.2"/>
+        </g>
+        <g stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round">
+          <line x1="64" y1="17" x2="64" y2="23"/><line x1="70" y1="17" x2="70" y2="23"/>
+          <line x1="64" y1="38" x2="64" y2="44"/><line x1="70" y1="38" x2="70" y2="44"/>
+          <line x1="64" y1="59" x2="64" y2="65"/><line x1="70" y1="59" x2="70" y2="65"/>
+        </g>
+      </g>
+      <text x="130" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="132" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="132" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="132" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
   </section>
 
-  <!-- 6 — Eigenständiges Premium-Symbol + Wordmark -->
-  <section class="concept">
-    <div class="label"><span class="n">06</span>Eigenständiges Premium-Symbol + Wordmark</div>
-    <div class="row">
-      <div class="gridcell">
-        <svg viewBox="0 0 120 120">
-          <rect x="12" y="12" width="96" height="96" fill="none" stroke="#D9D3C7" stroke-width="1"/>
-          <line x1="60" y1="12" x2="60" y2="108" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <line x1="12" y1="60" x2="108" y2="60" stroke="#D9D3C7" stroke-width="1" opacity="0.5"/>
-          <g transform="translate(16,16)">
-            <path d="M44 20 L64.78 32 L64.78 56 L44 68 L23.22 56 L23.22 32 Z" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round"/>
-            <g fill="#1A1A1A">
-              <circle cx="44" cy="20" r="3.6"/>
-              <circle cx="64.78" cy="32" r="3.6"/>
-              <circle cx="64.78" cy="56" r="3.6"/>
-              <circle cx="44" cy="68" r="3.6"/>
-              <circle cx="23.22" cy="56" r="3.6"/>
-              <circle cx="23.22" cy="32" r="3.6"/>
-            </g>
-            <circle cx="44" cy="44" r="5.5" fill="#A67C52"/>
-          </g>
-        </svg>
-      </div>
-      <div class="lockup">
-        <svg viewBox="0 0 480 120">
-          <g transform="translate(6,16)">
-            <path d="M44 20 L64.78 32 L64.78 56 L44 68 L23.22 56 L23.22 32 Z" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round"/>
-            <g fill="#1A1A1A">
-              <circle cx="44" cy="20" r="3.6"/>
-              <circle cx="64.78" cy="32" r="3.6"/>
-              <circle cx="64.78" cy="56" r="3.6"/>
-              <circle cx="44" cy="68" r="3.6"/>
-              <circle cx="23.22" cy="56" r="3.6"/>
-              <circle cx="23.22" cy="32" r="3.6"/>
-            </g>
-            <circle cx="44" cy="44" r="5.5" fill="#A67C52"/>
-          </g>
-          <text x="128" y="54" font-family="Inter" font-weight="600" font-size="40" letter-spacing="-1.2" fill="#1A1A1A">Leblang</text>
-          <text x="130" y="80" font-family="Inter" font-weight="500" font-size="13" letter-spacing="5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
-          <rect x="130" y="90" width="36" height="2.5" rx="1.25" fill="#A67C52"/>
-        </svg>
-      </div>
-    </div>
+  <!-- 06 -->
+  <section class="v">
+    <div class="t"><span class="n">06</span>Wordmark + Workflow &amp; Interlock</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,20)">
+        <circle cx="6" cy="42" r="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.2"/>
+        <line x1="13" y1="42" x2="24" y2="42" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="24" y="28" width="28" height="28" rx="7" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.2"/>
+        <path d="M42 28 V37 L48 40.5 V47 L42 50 V56" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="46" cy="42" r="2.8" fill="#A67C52"/>
+        <line x1="52" y1="38" x2="68" y2="24" stroke="#1A1A1A" stroke-width="3"/>
+        <line x1="52" y1="46" x2="68" y2="60" stroke="#1A1A1A" stroke-width="3"/>
+        <circle cx="74" cy="20" r="6.5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.2"/>
+        <circle cx="74" cy="64" r="6.5" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.2"/>
+      </g>
+      <text x="130" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="132" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="132" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="132" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
+  </section>
+
+  <!-- 07 -->
+  <section class="v">
+    <div class="t"><span class="n">07</span>Wordmark + Interlock &amp; Hexagon</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,16)">
+        <path d="M40 20 L59.05 31 L59.05 53 L40 64 L20.95 53 L20.95 31 Z" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M40 20 V31 L48 35 V49 L40 53 V64" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <g fill="#1A1A1A">
+          <circle cx="59.05" cy="31" r="3.2"/>
+          <circle cx="59.05" cy="53" r="3.2"/>
+          <circle cx="20.95" cy="53" r="3.2"/>
+          <circle cx="20.95" cy="31" r="3.2"/>
+        </g>
+        <circle cx="44" cy="42" r="4" fill="#A67C52"/>
+      </g>
+      <text x="122" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="124" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="124" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="124" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
+  </section>
+
+  <!-- 08 -->
+  <section class="v">
+    <div class="t"><span class="n">08</span>Wordmark + Prozesspunkte &amp; Module</div>
+    <svg class="logo" viewBox="0 0 430 132">
+      <g transform="translate(8,16)">
+        <g fill="#1A1A1A">
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(0 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(45 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(90 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(135 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(180 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(225 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(270 18 42)"/>
+          <rect x="15.5" y="25" width="5" height="7" rx="2" transform="rotate(315 18 42)"/>
+        </g>
+        <circle cx="18" cy="42" r="10" fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3.2"/>
+        <circle cx="18" cy="42" r="3.4" fill="#A67C52"/>
+        <line x1="28" y1="42" x2="40" y2="21" stroke="#1A1A1A" stroke-width="2.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <line x1="28" y1="42" x2="40" y2="42" stroke="#1A1A1A" stroke-width="2.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <line x1="28" y1="42" x2="40" y2="61" stroke="#1A1A1A" stroke-width="2.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/>
+        <g fill="#F7F5F2" stroke="#1A1A1A" stroke-width="3">
+          <rect x="40" y="13" width="40" height="16" rx="4"/>
+          <rect x="40" y="34" width="40" height="16" rx="4"/>
+          <rect x="40" y="55" width="40" height="16" rx="4"/>
+        </g>
+        <g fill="#1A1A1A">
+          <circle cx="48" cy="21" r="2.2"/><circle cx="48" cy="42" r="2.2"/><circle cx="48" cy="63" r="2.2"/>
+        </g>
+        <g stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round">
+          <line x1="66" y1="18" x2="66" y2="24"/><line x1="72" y1="18" x2="72" y2="24"/>
+          <line x1="66" y1="39" x2="66" y2="45"/><line x1="72" y1="39" x2="72" y2="45"/>
+          <line x1="66" y1="60" x2="66" y2="66"/><line x1="72" y1="60" x2="72" y2="66"/>
+        </g>
+      </g>
+      <text x="130" y="44" font-family="Inter" font-weight="600" font-size="36" letter-spacing="-1" fill="#1A1A1A">Leblang</text>
+      <text x="132" y="66" font-family="Inter" font-weight="500" font-size="12" letter-spacing="4.5" fill="#1A1A1A" fill-opacity="0.5">AUTOMATISIERUNG</text>
+      <rect x="132" y="76" width="260" height="2.5" rx="1.25" fill="#A67C52"/>
+      <text x="132" y="100" font-family="Inter" font-weight="400" font-size="13.5" fill="#1A1A1A" fill-opacity="0.66">Prozesse automatisieren. Zeit gewinnen.</text>
+    </svg>
   </section>
 
 </div>

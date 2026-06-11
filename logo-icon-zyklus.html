@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leblang Automatisierung — Zyklus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--offwhite:#F7F5F2;--black:#1A1A1A;--bronze:#A67C52;--muted:#a99f8d;}
+  *{box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--offwhite);color:var(--black);
+    font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;padding:90px 40px 130px;}
+  .sheet{max-width:680px;margin:0 auto;}
+  .v{padding:56px 0;border-top:1px solid #e4ded3;}
+  .v:first-of-type{border-top:none;}
+  .num{font-size:12px;letter-spacing:2.5px;color:var(--muted);font-weight:600;margin-bottom:30px;}
+  .logo{display:inline-block;text-align:left;}
+  .row{display:flex;align-items:center;gap:16px;}
+  .icon{flex:none;width:78px;height:78px;transform:translateY(-8px);}
+  .icon svg{display:block;width:100%;height:100%;}
+  .mark{display:inline-block;}
+  .leblang{margin:0;font-size:44px;font-weight:600;letter-spacing:-0.5px;line-height:1.04;color:var(--bronze);}
+  .autom{margin:0;font-size:44px;font-weight:600;letter-spacing:-0.5px;line-height:1.04;color:var(--black);}
+  .rule{width:100%;height:3px;border-radius:1.5px;background:var(--bronze);margin:14px 0 0 0;}
+  .claim{margin:14px 0 0 94px;font-size:18px;font-weight:400;color:var(--black);opacity:0.65;}
+  @media(max-width:560px){
+    body{padding:54px 22px 90px;}
+    .row{gap:12px;}
+    .icon{width:58px;height:58px;transform:translateY(-6px);}
+    .leblang,.autom{font-size:32px;}
+    .claim{margin-left:70px;font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <section class="v">
+    <div class="num">01 · ZYKLUS</div>
+    <div class="logo">
+      <div class="row">
+        <div class="icon">
+          <svg viewBox="0 0 100 100" aria-label="Icon 01">
+            <path d="M23.4 45.3 A27 27 0 0 1 76.6 45.3" fill="none" stroke="#1A1A1A" stroke-width="9" stroke-linecap="round"/>
+            <polygon points="71,46 83,46 77,56.5" fill="#1A1A1A"/>
+            <path d="M76.6 54.7 A27 27 0 0 1 23.4 54.7" fill="none" stroke="#A67C52" stroke-width="9" stroke-linecap="round"/>
+            <polygon points="17,54 29,54 23,43.5" fill="#A67C52"/>
+          </svg>
+        </div>
+        <div class="mark">
+          <p class="leblang">Leblang</p>
+          <p class="autom">Automatisierung</p>
+          <div class="rule"></div>
+        </div>
+      </div>
+      <p class="claim">Prozesse automatisieren. Zeit gewinnen.</p>
+    </div>
+  </section>
+
+  <section class="v">
+    <div class="num">02 · ZYKLUS · SCHLANK</div>
+    <div class="logo">
+      <div class="row">
+        <div class="icon">
+          <svg viewBox="0 0 100 100" aria-label="Icon 02">
+            <path d="M21.4 45 A29 29 0 0 1 78.6 45" fill="none" stroke="#1A1A1A" stroke-width="6.5" stroke-linecap="round"/>
+            <polygon points="73.5,45.5 84.5,45.5 79,56" fill="#1A1A1A"/>
+            <path d="M78.6 55 A29 29 0 0 1 21.4 55" fill="none" stroke="#A67C52" stroke-width="6.5" stroke-linecap="round"/>
+            <polygon points="15.5,54.5 26.5,54.5 21,44" fill="#A67C52"/>
+          </svg>
+        </div>
+        <div class="mark">
+          <p class="leblang">Leblang</p>
+          <p class="autom">Automatisierung</p>
+          <div class="rule"></div>
+        </div>
+      </div>
+      <p class="claim">Prozesse automatisieren. Zeit gewinnen.</p>
+    </div>
+  </section>
+
+  <section class="v">
+    <div class="num">03 · ZYKLUS · MIT KERN</div>
+    <div class="logo">
+      <div class="row">
+        <div class="icon">
+          <svg viewBox="0 0 100 100" aria-label="Icon 03">
+            <path d="M23.4 45.3 A27 27 0 0 1 76.6 45.3" fill="none" stroke="#1A1A1A" stroke-width="9" stroke-linecap="round"/>
+            <polygon points="71,46 83,46 77,56.5" fill="#1A1A1A"/>
+            <path d="M76.6 54.7 A27 27 0 0 1 23.4 54.7" fill="none" stroke="#A67C52" stroke-width="9" stroke-linecap="round"/>
+            <polygon points="17,54 29,54 23,43.5" fill="#A67C52"/>
+            <circle cx="50" cy="50" r="5" fill="#A67C52"/>
+          </svg>
+        </div>
+        <div class="mark">
+          <p class="leblang">Leblang</p>
+          <p class="autom">Automatisierung</p>
+          <div class="rule"></div>
+        </div>
+      </div>
+      <p class="claim">Prozesse automatisieren. Zeit gewinnen.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

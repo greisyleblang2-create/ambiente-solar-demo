@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leblang Automatisierung — Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--offwhite:#F7F5F2;--black:#1A1A1A;--bronze:#A67C52;}
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--offwhite);color:var(--black);
+    font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;
+    display:flex;align-items:center;justify-content:center;padding:48px;}
+  .logo{width:100%;max-width:620px;}
+  .logo svg{display:block;width:100%;height:auto;}
+  text{font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;}
+</style>
+</head>
+<body>
+  <div class="logo">
+    <svg viewBox="0 0 500 160" role="img" aria-label="Leblang Automatisierung">
+
+      <!-- Kästchen (schwarz) -->
+      <g fill="#F7F5F2" stroke="#1A1A1A" stroke-width="5">
+        <rect x="28" y="18"  width="48" height="24" rx="7"/>
+        <rect x="28" y="61"  width="48" height="24" rx="7"/>
+        <rect x="28" y="104" width="48" height="24" rx="7"/>
+      </g>
+
+      <!-- Pfeil-Faden (bronze) – durchgehend gleiche Stärke, mit Abstand zu den Kästchen -->
+      <g stroke="#A67C52" stroke-width="4" fill="none" stroke-linecap="round">
+        <line x1="6" y1="30" x2="15" y2="30"/>
+        <path d="M80 30 A21.5 21.5 0 0 1 80 73"/>
+        <path d="M24 73 A21.5 21.5 0 0 0 24 116"/>
+        <line x1="80" y1="116" x2="479" y2="116"/>
+      </g>
+
+      <!-- Pfeilspitzen (nur Eingang + Ausgang, gleiche Größe) -->
+      <g fill="#A67C52">
+        <polygon points="15,25.5 15,34.5 24,30"/>
+        <polygon points="479,111.5 479,120.5 488,116"/>
+      </g>
+
+      <!-- Wortmarke -->
+      <text x="116" y="50" font-size="44" font-weight="600" letter-spacing="0.5" fill="#A67C52">LEBLANG</text>
+      <text x="116" y="96" font-size="44" font-weight="600" fill="#1A1A1A" textLength="372" lengthAdjust="spacing">Automatisierung</text>
+      <text x="116" y="140" font-size="18" font-weight="400" fill="#1A1A1A" fill-opacity="0.65">Prozesse automatisieren. Zeit gewinnen.</text>
+
+    </svg>
+  </div>
+</body>
+</html>

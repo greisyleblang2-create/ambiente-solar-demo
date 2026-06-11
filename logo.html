@@ -15,42 +15,40 @@
   body{margin:0;background:var(--offwhite);color:var(--black);
     font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;
     display:flex;align-items:center;justify-content:center;padding:48px;}
-  .logo{width:100%;max-width:600px;}
+  .logo{width:100%;max-width:620px;}
   .logo svg{display:block;width:100%;height:auto;}
   text{font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;}
 </style>
 </head>
 <body>
   <div class="logo">
-    <svg viewBox="0 0 480 146" role="img" aria-label="Leblang Automatisierung">
+    <svg viewBox="0 0 500 160" role="img" aria-label="Leblang Automatisierung">
 
       <!-- Kästchen (schwarz) -->
       <g fill="#F7F5F2" stroke="#1A1A1A" stroke-width="5">
-        <rect x="20" y="30" width="48" height="19" rx="6"/>
-        <rect x="20" y="62" width="48" height="19" rx="6"/>
-        <rect x="20" y="94" width="48" height="19" rx="6"/>
+        <rect x="28" y="18"  width="48" height="24" rx="7"/>
+        <rect x="28" y="61"  width="48" height="24" rx="7"/>
+        <rect x="28" y="104" width="48" height="24" rx="7"/>
       </g>
 
-      <!-- Pfeil-Faden (bronze) -->
-      <g stroke="#A67C52" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="2" y1="39.5" x2="12" y2="39.5"/>
-        <path d="M68 39.5 C85 39.5 85 71.5 74 71.5"/>
-        <path d="M20 71.5 C3 71.5 3 103.5 14 103.5"/>
-        <line x1="68" y1="103.5" x2="458" y2="103.5"/>
+      <!-- Pfeil-Faden (bronze) – durchgehend gleiche Stärke -->
+      <g stroke="#A67C52" stroke-width="4" fill="none" stroke-linecap="round">
+        <line x1="6" y1="30" x2="18" y2="30"/>
+        <path d="M76 30 A21.5 21.5 0 0 1 76 73"/>
+        <path d="M28 73 A21.5 21.5 0 0 0 28 116"/>
+        <line x1="76" y1="116" x2="475" y2="116"/>
       </g>
 
-      <!-- Pfeilspitzen (bronze) -->
+      <!-- Pfeilspitzen (nur Eingang + Ausgang, gleiche Größe) -->
       <g fill="#A67C52">
-        <polygon points="12,35 12,44 19,39.5"/>
-        <polygon points="74,67 74,76 66,71.5"/>
-        <polygon points="14,99 14,108 22,103.5"/>
-        <polygon points="458,97.5 458,109.5 470,103.5"/>
+        <polygon points="18,25.5 18,34.5 27,30"/>
+        <polygon points="475,111.5 475,120.5 484,116"/>
       </g>
 
       <!-- Wortmarke -->
-      <text x="100" y="46" font-size="44" font-weight="600" letter-spacing="-0.5" fill="#A67C52">Leblang</text>
-      <text x="100" y="92" font-size="44" font-weight="600" fill="#1A1A1A" textLength="370" lengthAdjust="spacing">Automatisierung</text>
-      <text x="100" y="127" font-size="18" font-weight="400" fill="#1A1A1A" fill-opacity="0.65">Prozesse automatisieren. Zeit gewinnen.</text>
+      <text x="112" y="50" font-size="44" font-weight="600" letter-spacing="0.5" fill="#A67C52">LEBLANG</text>
+      <text x="112" y="96" font-size="44" font-weight="600" fill="#1A1A1A" textLength="372" lengthAdjust="spacing">Automatisierung</text>
+      <text x="112" y="140" font-size="18" font-weight="400" fill="#1A1A1A" fill-opacity="0.65">Prozesse automatisieren. Zeit gewinnen.</text>
 
     </svg>
   </div>

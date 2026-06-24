@@ -15,40 +15,39 @@
   body{margin:0;background:var(--offwhite);color:var(--black);
     font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;
     display:flex;align-items:center;justify-content:center;padding:48px;}
-  .logo{width:100%;max-width:620px;}
+  .logo{width:100%;max-width:600px;}
   .logo svg{display:block;width:100%;height:auto;}
   text{font-family:"Inter",-apple-system,Segoe UI,Arial,sans-serif;}
 </style>
 </head>
 <body>
   <div class="logo">
-    <svg viewBox="0 0 500 160" role="img" aria-label="Leblang Automatisierung">
+    <svg viewBox="0 0 484 158" role="img" aria-label="Leblang Automatisierung">
 
-      <!-- Kästchen (schwarz) -->
-      <g fill="#F7F5F2" stroke="#1A1A1A" stroke-width="5">
-        <rect x="28" y="18"  width="48" height="24" rx="7"/>
-        <rect x="28" y="61"  width="48" height="24" rx="7"/>
-        <rect x="28" y="104" width="48" height="24" rx="7"/>
+      <!-- Kästchen (schwarz, dünnere Umrandung) -->
+      <g fill="#F7F5F2" stroke="#1A1A1A" stroke-width="4">
+        <rect x="28" y="18"    width="40" height="22" rx="6"/>
+        <rect x="28" y="61.5"  width="40" height="22" rx="6"/>
+        <rect x="28" y="105"   width="40" height="22" rx="6"/>
       </g>
 
-      <!-- Pfeil-Faden (bronze) – durchgehend gleiche Stärke, mit Abstand zu den Kästchen -->
-      <g stroke="#A67C52" stroke-width="4" fill="none" stroke-linecap="round">
-        <line x1="6" y1="30" x2="15" y2="30"/>
-        <path d="M80 30 A21.5 21.5 0 0 1 80 73"/>
-        <path d="M24 73 A21.5 21.5 0 0 0 24 116"/>
-        <line x1="80" y1="116" x2="479" y2="116"/>
+      <!-- Pfeil-Faden (bronze) – Eingang nur als Linie, Abstand zu den Kästchen -->
+      <g stroke="#A67C52" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <line x1="6" y1="29" x2="24.5" y2="29"/>
+        <path d="M71.5 29 A13 21.75 0 0 1 71.5 72.5"/>
+        <path d="M24.5 72.5 A13 21.75 0 0 0 24.5 116"/>
+        <line x1="71.5" y1="116" x2="461" y2="116"/>
       </g>
 
-      <!-- Pfeilspitzen (nur Eingang + Ausgang, gleiche Größe) -->
+      <!-- Pfeilspitze (nur Ausgang) -->
       <g fill="#A67C52">
-        <polygon points="15,25.5 15,34.5 24,30"/>
-        <polygon points="479,111.5 479,120.5 488,116"/>
+        <polygon points="461,111.5 461,120.5 470,116"/>
       </g>
 
       <!-- Wortmarke -->
-      <text x="116" y="50" font-size="44" font-weight="600" letter-spacing="0.5" fill="#A67C52">LEBLANG</text>
-      <text x="116" y="96" font-size="44" font-weight="600" fill="#1A1A1A" textLength="372" lengthAdjust="spacing">Automatisierung</text>
-      <text x="116" y="140" font-size="18" font-weight="400" fill="#1A1A1A" fill-opacity="0.65">Prozesse automatisieren. Zeit gewinnen.</text>
+      <text x="98" y="50" font-size="44" font-weight="600" letter-spacing="0.5" fill="#A67C52">LEBLANG</text>
+      <text x="98" y="96" font-size="44" font-weight="600" fill="#1A1A1A" textLength="372" lengthAdjust="spacing">Automatisierung</text>
+      <text x="98" y="140" font-size="18" font-weight="400" fill="#1A1A1A" fill-opacity="0.65">Prozesse automatisieren. Zeit gewinnen.</text>
 
     </svg>
   </div>

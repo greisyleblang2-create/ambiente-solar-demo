@@ -1,0 +1,113 @@
+name: Bilder und Videos verkleinern
+
+# workflow_dispatch: fuer den einmaligen Durchlauf ueber den Bestand.
+# push: greift, wenn jemand neue Dateien ins Repo legt - etwa Handyfotos
+# direkt von der Baustelle.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'fotos/**.jpg'
+      - 'fotos/**.jpeg'
+      - 'fotos/**.png'
+      - 'fotos/**.mp4'
+
+permissions:
+  contents: write
+
+jobs:
+  verkleinern:
+    # Nicht auf den eigenen Commit reagieren, sonst laeuft das im Kreis.
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install --quiet Pillow
+
+      - name: ffmpeg sicherstellen
+        run: which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Bilder verkleinern
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageOps
+          import os, glob
+
+          # Zielgroessen aus dem Layout: Lightbox ist 880 px breit, Service-Bilder
+          # sitzen in einem nur 180 px hohen Container ohne Lightbox.
+          ZIELE    = {'hero-ki.jpg': (1400, 78)}
+          KI       = (900, 76)
+          STANDARD = (1600, 76)
+
+          zeilen = []
+          for pfad in sorted(glob.glob('fotos/**/*', recursive=True)):
+              if not os.path.isfile(pfad):
+                  continue
+              if os.path.splitext(pfad)[1].lower() not in ('.jpg', '.jpeg'):
+                  continue
+
+              name = os.path.basename(pfad)
+              kante, quali = ZIELE.get(name, KI if name.endswith('-ki.jpg') else STANDARD)
+
+              alt = os.path.getsize(pfad)
+              im = Image.open(pfad)
+              if max(im.size) <= kante and alt <= 400 * 1024:
+                  continue
+
+              # Ausrichtung anwenden, BEVOR die EXIF-Daten wegfallen, sonst
+              # liegen Hochformat-Fotos hinterher quer.
+              im = ImageOps.exif_transpose(im).convert('RGB')
+              im.thumbnail((kante, kante), Image.LANCZOS)
+              im.save(pfad, 'JPEG', quality=quali, optimize=True, progressive=True)
+              zeilen.append(f"  {name}: {alt/1024/1024:.2f} MB -> {os.path.getsize(pfad)/1024:.0f} KB")
+
+          print("\n".join(zeilen) if zeilen else "  Bilder: nichts zu tun.")
+          PY
+
+      - name: Videos verkleinern
+        run: |
+          gesamt_alt=0; gesamt_neu=0
+          shopt -s nullglob
+          for f in fotos/*.mp4; do
+            alt=$(stat -c%s "$f")
+            tmp="${f%.mp4}.tmp.mp4"
+
+            # -an entfernt die Tonspur: die Videos laufen ohnehin muted.
+            # crf 28 ist bewusst moderat - die Dateien sind bereits komprimiert,
+            # jede erneute Kodierung kostet Qualitaet, und in der Lightbox werden
+            # sie mit 880 px angezeigt.
+            ffmpeg -nostdin -loglevel error -y -i "$f" \
+                   -c:v libx264 -crf 28 -preset slow -an \
+                   -movflags +faststart "$tmp"
+
+            neu=$(stat -c%s "$tmp")
+            if [ "$neu" -lt "$alt" ]; then
+              mv "$tmp" "$f"
+              echo "  $(basename "$f"): $((alt/1024/1024)) MB -> $((neu/1024/1024)) MB"
+            else
+              rm -f "$tmp"
+              echo "  $(basename "$f"): unveraendert (neu waere groesser)"
+              neu=$alt
+            fi
+            gesamt_alt=$((gesamt_alt+alt)); gesamt_neu=$((gesamt_neu+neu))
+          done
+          if [ "$gesamt_alt" -gt 0 ]; then
+            echo "  SUMME: $((gesamt_alt/1024/1024)) MB -> $((gesamt_neu/1024/1024)) MB"
+          fi
+
+      - name: Ergebnis zurueckschreiben
+        run: |
+          if [ -n "$(git status --porcelain fotos/)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add fotos/
+            git commit -m "Medien automatisch verkleinert [skip ci]"
+            git push
+          else
+            echo "Keine Aenderung noetig."
+          fi

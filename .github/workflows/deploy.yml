@@ -1,0 +1,52 @@
+name: Deploy zu United Domains
+
+# Nur bei push auf main. NIEMALS pull_request: das Repository ist oeffentlich,
+# ueber einen Fork koennte sonst ein fremder Workflow die Zugangsdaten auslesen.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Zwei Deploys gleichzeitig wuerden sich gegenseitig ueberschreiben.
+concurrency:
+  group: deploy-produktion
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: lftp installieren
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Auf den Server laden
+        env:
+          SERVER: ${{ secrets.FTP_SERVER }}
+          BENUTZER: ${{ secrets.FTP_USERNAME }}
+          PASSWORT: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          # Bewusst KEIN Spiegeln des ganzen Repos und KEIN --delete:
+          # die radar-*.mp4 liegen nur auf dem Server und muessen dort bleiben.
+          # Es geht ausschliesslich hoch, was unten aufgezaehlt ist.
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
+            set net:timeout 20;
+            open -u '$BENUTZER','$PASSWORT' sftp://$SERVER;
+            cd /Hauptverzeichnis;
+            put -O . index.html;
+            put -O . .htaccess;
+            put -O . robots.txt;
+            put -O . sitemap.xml;
+            mirror --reverse --verbose --no-perms fotos ./fotos;
+            mirror --reverse --verbose --no-perms fonts ./fonts;
+            bye
+          "
+
+      - name: Erreichbarkeit pruefen
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://ambiente-solar.de/)
+          echo "Startseite antwortet mit HTTP $code"
+          test "$code" = "200"

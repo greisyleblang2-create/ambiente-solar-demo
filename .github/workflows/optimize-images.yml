@@ -1,0 +1,71 @@
+name: Bilder automatisch verkleinern
+
+# Greift, wenn jemand neue Fotos ins Repo legt - etwa Handyfotos direkt von der
+# Baustelle. Verhindert, dass wieder 4000-px-Dateien auf der Seite landen.
+on:
+  push:
+    paths:
+      - 'fotos/**.jpg'
+      - 'fotos/**.jpeg'
+      - 'fotos/**.png'
+
+permissions:
+  contents: write
+
+jobs:
+  verkleinern:
+    # Nicht auf den eigenen Commit reagieren, sonst laeuft das im Kreis.
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install --quiet Pillow
+
+      - name: Zu grosse Bilder verkleinern
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageOps
+          import os, glob
+
+          MAXKANTE, QUALI = 1600, 76
+          geaendert = []
+
+          for pfad in sorted(glob.glob('fotos/**/*', recursive=True)):
+              if not os.path.isfile(pfad):
+                  continue
+              if os.path.splitext(pfad)[1].lower() not in ('.jpg', '.jpeg'):
+                  continue
+
+              alt = os.path.getsize(pfad)
+              im = Image.open(pfad)
+              if max(im.size) <= MAXKANTE and alt <= 400 * 1024:
+                  continue
+
+              # Ausrichtung anwenden, BEVOR die EXIF-Daten wegfallen,
+              # sonst liegen Hochformat-Fotos hinterher quer.
+              im = ImageOps.exif_transpose(im).convert('RGB')
+              im.thumbnail((MAXKANTE, MAXKANTE), Image.LANCZOS)
+              im.save(pfad, 'JPEG', quality=QUALI, optimize=True, progressive=True)
+
+              neu = os.path.getsize(pfad)
+              geaendert.append(f"{pfad}: {alt/1024/1024:.2f} MB -> {neu/1024:.0f} KB")
+
+          print("\n".join(geaendert) if geaendert else "Nichts zu tun.")
+          PY
+
+      - name: Ergebnis zurueckschreiben
+        run: |
+          if [ -n "$(git status --porcelain fotos/)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add fotos/
+            git commit -m "Bilder automatisch verkleinert [skip ci]"
+            git push
+          else
+            echo "Keine Aenderung noetig."
+          fi

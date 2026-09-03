@@ -14,8 +14,8 @@ No build system. All deliverables are standalone static HTML files — open dire
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Production demo website v2 (1,837 lines; this is the canonical version) |
-| `demo-website-v2.html` | Identical copy of `index.html` kept as backup |
+| `index.html` | Production website — the canonical version, deployed to ambiente-solar.de |
+| `demo-website-v2.html` | Older draft — **not** identical to `index.html`, do not treat as a backup |
 | `dashboard.html` | CRM dashboard prototype — Tailwind CSS via CDN, pure JS |
 | `Budget_Szenarien_Jhonatan.html` | Printable budget comparison document |
 | `Angebotsvorlage_Jhonatan_Solartechnik.md` | Quote template (Markdown) |
@@ -25,6 +25,21 @@ No build system. All deliverables are standalone static HTML files — open dire
 | `Automatisierung_Erklaerung_Uebersicht.md` | Plain-language explanation of the automation system |
 
 `Backup Webseite Hauptverzeichnis/` and `Hauptverzeichnis/` contain the old WordPress site backup — excluded from git, do not modify.
+
+## Source of Truth
+
+**The repository is the source of truth. Never edit files directly on the server.**
+
+This was violated once: the Google Apps Script integration, the mobile hamburger menu
+and the responsive CSS fixes were made directly on the live server and never committed.
+The repo silently fell a full work session behind, and `index.html` still carried a dead
+`WEBHOOK_URL = "TODO_REPLACE_WITH_N8N_URL"` placeholder. Deploying from the repo at that
+point would have replaced the working lead pipeline with that placeholder and every
+customer enquiry would have been lost.
+
+Since then a GitHub Action (`.github/workflows/deploy.yml`) uploads to United Domains on
+every push to `main`. It deliberately does **not** delete remote files — the `radar-*.mp4`
+videos live only on the server (they are in `.gitignore`) and must survive every deploy.
 
 ## Viewing Files
 

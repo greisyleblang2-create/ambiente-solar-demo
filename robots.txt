@@ -1,0 +1,9 @@
+# Ambiente Solar - ambiente-solar.de
+
+User-agent: *
+Allow: /
+
+# Interne Arbeitsansicht, gehoert nicht in die Suche
+Disallow: /dashboard.html
+
+Sitemap: https://ambiente-solar.de/sitemap.xml
